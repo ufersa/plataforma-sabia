@@ -133,7 +133,7 @@ const prepareTechnology = (technology, shouldRedefine = true) => {
  * @param {boolean} options.updateObject Updates object instead of replacing
  */
 const saveIndex = async (data, options = {}) => {
-	const { saveObjects, saveObject, partialUpdateObject } = initIndex('technology.indexName');
+	const { saveObjects, saveObject, partialUpdateObject } = initIndex('technology');
 
 	if (options.saveMany) {
 		const technologies = await data.map((technology) => prepareTechnology(technology));

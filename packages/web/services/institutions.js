@@ -19,6 +19,21 @@ export const getInstitutions = async (options = {}) => {
 };
 
 /**
+ * Fetches an institution.
+ *
+ * @param {number|string} id The id or initials of the institution to retrieve.
+ */
+export const getInstitution = async (id) => {
+	const response = await apiGet(`institutions/${id}`);
+
+	if (response.status !== 200) {
+		return null;
+	}
+
+	return response.data;
+};
+
+/**
  * Creates a new institutions with the provided data.
  *
  * @param {object} payload Institution data.

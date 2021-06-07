@@ -64,7 +64,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 						<TableWrapper>
 							<thead>
 								<tr>
-									<th>Descricao</th>
+									<th>Descrição</th>
 									<th>Tipo</th>
 									<th>Qtde</th>
 									<th>Valor</th>
@@ -81,7 +81,7 @@ const Costs = ({ title, data, totalColor, containerHeight }) => {
 											<td>{item.quantity}</td>
 											<td>{item.value}</td>
 											<td>{item.measure_unit}</td>
-											<td>{formatMoney(item.total)}</td>
+											<PriceData>{formatMoney(item.total)}</PriceData>
 										</tr>
 									))}
 							</tbody>
@@ -144,6 +144,7 @@ const TableWrapper = styled.table`
 		width: 100%;
 		color: ${colors.black};
 		overflow: scroll;
+		font-size: 1.2rem;
 
 		th,
 		td {
@@ -165,10 +166,14 @@ const TableWrapper = styled.table`
 			}
 
 			th {
-				font-weight: 500;
+				font-weight: bold;
 			}
 		}
 	`}
+`;
+
+const PriceData = styled.td`
+	white-space: nowrap;
 `;
 
 const switchTotalColor = (color, colors) => {

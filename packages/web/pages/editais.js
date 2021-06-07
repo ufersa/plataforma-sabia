@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
+import useTranslation from 'next-translate/useTranslation';
 import {
 	Intro,
 	ListItems,
@@ -9,6 +10,7 @@ import {
 } from '../components/LandingPage';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../utils/algoliaHelper';
 import { algoliaDefaultConfig } from '../components/Algolia/provider';
+import Head from '../components/head';
 
 const searchComponents = {
 	sortBy: {
@@ -31,6 +33,8 @@ const searchComponents = {
 };
 
 const AnnouncementsPage = ({ initialSearchState, resultsState }) => {
+	const { t } = useTranslation(['pages']);
+
 	const [searchState, setSearchState] = useState(initialSearchState);
 
 	const onSearchStateChange = (newSearchState) => {
@@ -40,6 +44,11 @@ const AnnouncementsPage = ({ initialSearchState, resultsState }) => {
 
 	return (
 		<>
+			<Head
+				title={t('pages:announcements.title')}
+				description={t('pages:announcements.description')}
+				keywords={t('pages:announcements.keywords')}
+			/>
 			<Intro
 				title="Encontre editais mais recentes"
 				subtitle="Aqui você pode indicar novos editais publicados e realizar buscas nos registros mais atuais de incentivo à pesquisa e inovação. Quem sabe você encontra aquele investimento que precisa, hein?"
@@ -82,7 +91,6 @@ AnnouncementsPage.getInitialProps = async ({ asPath }) => {
 		searchComponents,
 	});
 	return {
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
 		initialSearchState,
 		resultsState,
 	};

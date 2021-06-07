@@ -35,6 +35,16 @@ class Idea extends Model {
 		return query;
 	}
 
+	static scopePopulateForAlgolia(query, id) {
+		if (id) {
+			query.where({ id });
+		}
+
+		query.with('keywords').with('user');
+
+		return query;
+	}
+
 	static get computed() {
 		return ['objectID'];
 	}

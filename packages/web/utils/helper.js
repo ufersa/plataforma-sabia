@@ -1,5 +1,5 @@
 import get from 'lodash.get';
-import { MEASURE_UNIT as measureUnitEnum } from './enums/api.enum';
+import { MEASURE_UNIT as measureUnitEnum, ROLES as rolesEnum } from './enums/api.enum';
 
 /**
  * Calculates the distance between two provided dates (e.g.: "Five days ago")
@@ -408,3 +408,12 @@ export const stripHTML = (html, trim = true) => {
 
 	return noTagsHtml;
 };
+
+/**
+ * Returns owner user of a given technology
+ *
+ * @param {object} technology The technology
+ * @returns {object} The owner user
+ */
+export const getTechnologyOwner = (technology) =>
+	technology.users?.find((user) => user?.pivot?.role === rolesEnum.OWNER);

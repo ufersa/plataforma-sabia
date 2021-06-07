@@ -374,7 +374,6 @@ NewServicePage.getInitialProps = async () => {
 
 	return {
 		keywordTerms,
-		namespacesRequired: ['common', 'error'],
 	};
 };
 

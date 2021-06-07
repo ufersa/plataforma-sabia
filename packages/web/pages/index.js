@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
-
+import Head from '../components/head';
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
-import { getServices } from '../services';
-import { apiPost, apiPut } from '../services/api';
-import { getTechnologies } from '../services/technology';
+import { internal as internalPages } from '../utils/consts/pages';
+import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
 	const { colors } = useTheme();
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'pages']);
 	const { openModal } = useModal();
 
 	useEffect(() => {
@@ -27,10 +26,15 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 
 	return (
 		<>
-			<Hero />
+			<Head
+				title={t('pages:home.title')}
+				description={t('pages:home.description')}
+				keywords={t('pages:home.keywords')}
+			/>
+			<Hero heroImage={heroImage} />
 			<ButtonsWrapper>
 				<ButtonsContainer>
-					<Link href="/announcements" passHref>
+					<Link href={internalPages.announcements} passHref>
 						<RectangularButton
 							as="a"
 							variant="backgroundImage"
@@ -40,7 +44,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 							Banco de editais
 						</RectangularButton>
 					</Link>
-					<Link href="/ideas" passHref>
+					<Link href={internalPages.ideas} passHref>
 						<RectangularButton
 							as="a"
 							variant="backgroundImage"
@@ -50,7 +54,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services }) => {
 							Banco de ideias
 						</RectangularButton>
 					</Link>
-					<Link href="/researchers" passHref>
+					<Link href={internalPages.researchers} passHref>
 						<RectangularButton
 							// as="a"
 							variant="backgroundImage"
@@ -131,12 +135,15 @@ Home.getInitialProps = async ({ req }) => {
 		order: 'DESC',
 	});
 
+	const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+	const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
+
 	return {
 		emailConfirmation,
 		changeEmail,
 		technologies,
 		services,
-		namespacesRequired: ['common', 'search', 'card', 'helper'],
+		heroImage: `/hero/${heroImgs[heroIndexImg]}`,
 	};
 };
 
@@ -145,6 +152,7 @@ Home.propTypes = {
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
+	heroImage: PropTypes.string.isRequired,
 };
 
 Home.defaultProps = {

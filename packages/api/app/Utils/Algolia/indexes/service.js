@@ -57,7 +57,7 @@ const prepareService = (service, shouldRedefine = true) => {
  * @param {boolean} options.updateObject Updates object instead of replacing
  */
 const saveIndex = async (data, options = {}) => {
-	const { saveObjects, saveObject, partialUpdateObject } = initIndex('service.indexName');
+	const { saveObjects, saveObject, partialUpdateObject } = initIndex('service');
 
 	if (options.saveMany) {
 		const services = await data.map((idea) => prepareService(idea));

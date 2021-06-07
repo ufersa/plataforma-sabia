@@ -34,7 +34,6 @@ CurateTechnologyPage.getInitialProps = async (ctx) => {
 	});
 
 	return {
-		namespacesRequired: ['helper', 'account', 'profile', 'error'],
 		technology: technologies[0],
 	};
 };

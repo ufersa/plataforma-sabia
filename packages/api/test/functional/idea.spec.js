@@ -1,4 +1,4 @@
-const { trait, test } = use('Test/Suite')('Idea');
+const { trait, test, beforeEach } = use('Test/Suite')('Idea');
 const AlgoliaSearch = use('App/Services/AlgoliaSearch');
 const Idea = use('App/Models/Idea');
 const Taxonomy = use('App/Models/Taxonomy');
@@ -9,6 +9,10 @@ const { createUser } = require('../utils/Suts');
 trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
+
+beforeEach(async () => {
+	await AlgoliaSearch.sandbox.reset();
+});
 
 test('GET /ideas returns all ideas', async ({ client }) => {
 	const response = await client.get('/ideas').end();
@@ -57,7 +61,7 @@ test('POST /ideas creates a new idea', async ({ client, assert }) => {
 	response.assertJSONSubset({ ...ideaCreated.toJSON(), ...keywordTerms.rows });
 	assert.equal(user.id, ideaCreated.user_id);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaCreated.toJSON()).calledOnce);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.calledOnce);
 });
 
 test('PUT /ideas/:id returns an error if the user is not authorized', async ({ client }) => {
@@ -132,7 +136,7 @@ test('PUT /ideas/:id updates an idea', async ({ client, assert }) => {
 	assert.equal(payload.title, ideaUpdated.title);
 	assert.equal(payload.description, ideaUpdated.description);
 	assert.isTrue(AlgoliaSearch.initIndex.called);
-	assert.isTrue(AlgoliaSearch.initIndex().saveObject.withArgs(ideaUpdated.toJSON()).calledOnce);
+	assert.isTrue(AlgoliaSearch.initIndex().saveObject.calledOnce);
 });
 
 test('DELETE /ideas/:id returns an error if the user is not authorized', async ({ client }) => {

@@ -36,7 +36,7 @@ const prepareInstitution = (institution) => {
  * @param {boolean} options.saveMany Save too many objects or just one
  */
 const saveIndex = async (data, options = {}) => {
-	const { saveObjects, saveObject } = initIndex('institution.indexName');
+	const { saveObjects, saveObject } = initIndex('institution');
 
 	if (options.saveMany) {
 		const institutions = await data.map((institution) => prepareInstitution(institution));

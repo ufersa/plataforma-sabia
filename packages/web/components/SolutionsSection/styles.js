@@ -8,11 +8,15 @@ const cardsGridStyles = css`
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		padding: 0 2rem;
 	}
+
+	.ais-Hits-item {
+		display: flex;
+	}
 `;
 
 // eslint-disable-next-line import/prefer-default-export
 export const CardsWrapper = styled.div`
-	${({ overwriteAlgoliaStyles }) => css`
+	${({ overwriteAlgoliaStyles, algoliaCustomCss }) => css`
 		${!overwriteAlgoliaStyles
 			? cardsGridStyles
 			: css`
@@ -20,5 +24,7 @@ export const CardsWrapper = styled.div`
 						${cardsGridStyles};
 					}
 			  `};
+
+		${!!algoliaCustomCss && algoliaCustomCss};
 	`}
 `;

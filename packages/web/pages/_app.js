@@ -13,7 +13,6 @@ import { UserProvider } from '../components/User';
 import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
-import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
@@ -69,23 +68,62 @@ export class SabiaApp extends App {
 					/>
 				</Head>
 				<ThemeProvider>
-					<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
+					{config.LOAD_ANALYTICS && (
+						<>
+							<script
+								async
+								src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY"
+							/>
+							<script
+								dangerouslySetInnerHTML={{
+									__html: `window.dataLayer = window.dataLayer || [];
+								function gtag(){dataLayer.push(arguments);}
+								gtag('js', new Date());
 
-						gtag('config', 'G-QZWK6JMHSY', {
-							page_path: window.location.pathname,
-						});
-					`,
-						}}
-					/>
+								gtag('config', 'G-QZWK6JMHSY', {
+									page_path: window.location.pathname,
+								});`,
+								}}
+							/>
+						</>
+					)}
+
+					{config.LOAD_HOTJAR && (
+						<script
+							dangerouslySetInnerHTML={{
+								__html: `
+									(function(h,o,t,j,a,r){
+										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+										h._hjSettings={hjid:2331648,hjsv:6};
+										a=o.getElementsByTagName('head')[0];
+										r=o.createElement('script');r.async=1;
+										r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+										a.appendChild(r);
+									})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+								`,
+							}}
+						/>
+					)}
+
+					{config.LOAD_SMARTSUP && (
+						<script
+							type="text/javascript"
+							dangerouslySetInnerHTML={{
+								__html: `var _smartsupp = _smartsupp || {};
+									_smartsupp.key = '${config.SMARTSUP_KEY}';
+									window.smartsupp||(function(d) {
+										var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+										s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+										c.type='text/javascript';c.charset='utf-8';c.async=true;
+										c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+									})(document);`,
+							}}
+						/>
+					)}
+
 					<script
 						key="script/pre-init"
 						type="application/javascript"
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
 					/>
 					<GlobalStyle />
@@ -111,4 +149,4 @@ export class SabiaApp extends App {
 	}
 }
 
-export default appWithTranslation(withRouter(SabiaApp));
+export default withRouter(SabiaApp);

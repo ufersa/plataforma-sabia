@@ -4,7 +4,6 @@ class ForgotPassword extends BaseValidator {
 	get rules() {
 		return {
 			email: 'required|email',
-			scope: 'string',
 		};
 	}
 }

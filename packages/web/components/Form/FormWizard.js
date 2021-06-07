@@ -14,6 +14,7 @@ import {
 } from '../CurateTechnology/History/styles';
 import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
 import { SafeHtml } from '../SafeHtml';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const FormWizardContainer = styled.div``;
 
@@ -272,7 +273,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		if (isPublished || showLink) {
 			return (
 				<StepItem completed={index <= currentStepIndex} key={step.slug}>
-					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
+					<Link
+						href={`${internalPages.editTechnology.replace(
+							':id',
+							data?.technology?.id,
+						)}${step.slug}`}
+					>
 						<div>
 							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
 							<StepLabel>{step.label}</StepLabel>

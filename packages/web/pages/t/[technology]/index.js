@@ -9,12 +9,18 @@ import {
 	getTechnology,
 	getTechnologyCosts,
 	getAttachments,
+	getCNPQAreas,
 } from '../../../services';
 
 const Technology = ({ technology }) => {
 	return (
 		<>
-			<Head title={technology.title} />
+			<Head
+				title={technology.title}
+				description={technology.description}
+				keywords={technology.keywords.map((keyword) => String(keyword.term).trim())}
+				ogImage={technology.thumbnail?.url}
+			/>
 			<Search />
 			<TechnologyProvider technology={technology}>
 				<Wrapper>
@@ -77,12 +83,20 @@ Technology.getInitialProps = async ({ query, res }) => {
 			technology.attachments = await getAttachments(technology.id, { normalize: true });
 		};
 
-		await Promise.all([getTerms(), getCosts(), getTechnologyAttachments()]);
+		const getTechnologyKnowledgeAreas = async () => {
+			technology.knowledgeAreas = await getCNPQAreas(technology.knowledge_area_id);
+		};
+
+		await Promise.all([
+			getTerms(),
+			getCosts(),
+			getTechnologyAttachments(),
+			getTechnologyKnowledgeAreas(),
+		]);
 	}
 
 	return {
 		technology,
-		namespacesRequired: ['common', 'card', 'home-page'],
 	};
 };
 

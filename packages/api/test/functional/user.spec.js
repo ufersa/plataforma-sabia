@@ -437,7 +437,6 @@ test('POST /user/change-email failed to try to change the email to an already re
 		.post('/user/change-email')
 		.send({
 			email: user2.email,
-			scope: 'web',
 		})
 		.loginVia(user1, 'jwt')
 		.end();
@@ -469,7 +468,6 @@ test('POST /user/change-email the email does not change until the new email is c
 		.post('/user/change-email')
 		.send({
 			email: newEmail,
-			scope: 'web',
 		})
 		.loginVia(user, 'jwt')
 		.end();
@@ -502,7 +500,6 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 		.post('/user/change-email')
 		.send({
 			email: newEmail,
-			scope: 'web',
 		})
 		.loginVia(loggedUser, 'jwt')
 		.end();
@@ -525,8 +522,8 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 	const responsePUT = await client
 		.put('/user/change-email')
 		.send({
+			email: checkUser.email,
 			token,
-			scope: 'web',
 		})
 		.loginVia(checkUser, 'jwt')
 		.end();

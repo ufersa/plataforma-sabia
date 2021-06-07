@@ -32,7 +32,7 @@ exports[`Protected component should not render children if user is logged in and
     data-testid="notAuthorized"
   >
     <h1>
-      error:notAuthorized
+      Você não possui autorização para acessar este conteúdo
     </h1>
   </div>
 </div>
@@ -70,7 +70,7 @@ exports[`Protected component should redirect to another page when user is not lo
     data-testid="notAuthorized"
   >
     <h1>
-      error:notAuthorized
+      Você não possui autorização para acessar este conteúdo
     </h1>
   </div>
 </div>
@@ -124,7 +124,7 @@ exports[`Protected component should return only the inline message when onlyUnau
     data-testid="notAuthorized"
   >
     <h1>
-      error:notAuthorized
+      Você não possui autorização para acessar este conteúdo
     </h1>
   </div>
 </div>
@@ -490,7 +490,7 @@ exports[`Protected component should return the login modal if user is not logged
           <div
             class="c5"
           >
-            common:alreadyRegistered?
+            Já tem cadastro?
           </div>
           <div
             class="c6"
@@ -531,7 +531,7 @@ exports[`Protected component should return the login modal if user is not logged
           <p
             class="c9"
           >
-            common:signInToContinue
+            Faça login ou crie uma conta para continuar
           </p>
           <div
             class="c10"
@@ -543,12 +543,12 @@ exports[`Protected component should return the login modal if user is not logged
               title=""
               type="submit"
             >
-              common:login
+              Entrar
             </button>
             <a
               class="c12"
             >
-              common:forgotPassword
+              Esqueci minha senha
             </a>
           </div>
         </form>
@@ -558,7 +558,7 @@ exports[`Protected component should return the login modal if user is not logged
           <div
             class="c5"
           >
-            common:areYouNewHere?
+            Você é novo aqui?
           </div>
           <button
             class="c11"
@@ -567,8 +567,14 @@ exports[`Protected component should return the login modal if user is not logged
             title=""
             type="button"
           >
-            common:registerYourUser
+            CADASTRE SEU USUÁRIO
           </button>
+          <a
+            class="c12"
+            href="/auth/confirm-account"
+          >
+            Confirmar conta
+          </a>
         </div>
       </div>
     </div>
@@ -578,7 +584,7 @@ exports[`Protected component should return the login modal if user is not logged
     data-testid="notAuthorized"
   >
     <h1>
-      error:notAuthorized
+      Você não possui autorização para acessar este conteúdo
     </h1>
   </div>
 </div>
@@ -849,7 +855,7 @@ exports[`Protected component should show an inline login when inline props was p
         <div
           class="c3"
         >
-          common:alreadyRegistered?
+          Já tem cadastro?
         </div>
         <div
           class="c4"
@@ -900,12 +906,12 @@ exports[`Protected component should show an inline login when inline props was p
             title=""
             type="submit"
           >
-            common:login
+            Entrar
           </button>
           <a
             class="c10"
           >
-            common:forgotPassword
+            Esqueci minha senha
           </a>
         </div>
       </form>
@@ -915,7 +921,7 @@ exports[`Protected component should show an inline login when inline props was p
         <div
           class="c3"
         >
-          common:areYouNewHere?
+          Você é novo aqui?
         </div>
         <button
           class="c9"
@@ -924,8 +930,14 @@ exports[`Protected component should show an inline login when inline props was p
           title=""
           type="button"
         >
-          common:registerYourUser
+          CADASTRE SEU USUÁRIO
         </button>
+        <a
+          class="c10"
+          href="/auth/confirm-account"
+        >
+          Confirmar conta
+        </a>
       </div>
     </div>
   </div>

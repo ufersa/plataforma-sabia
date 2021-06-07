@@ -21,7 +21,15 @@ const ResponsibleForm = ({ record, resource, save }) => {
 		<SimpleForm record={newRecord} resource={resource} save={save}>
 			<ArrayInput label="labels.responsibles" source="users">
 				<SimpleFormIterator>
-					<ReferenceInput label="" source="id" reference="users" perPage={100} fullWidth>
+					<ReferenceInput
+						label=""
+						source="id"
+						reference="users"
+						/** The solution is temporary, not permanent. */
+						perPage={250}
+						sort={{ field: 'first_name', order: 'ASC' }}
+						fullWidth
+					>
 						<SelectInput optionText="full_name" fullWidth />
 					</ReferenceInput>
 					<SelectInput source="role" fullWidth choices={statuses.roles} />

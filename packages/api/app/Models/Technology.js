@@ -65,6 +65,7 @@ class Technology extends Model {
 
 		if (params.embed) {
 			query.includeTaxonomy();
+			query.includeInstitution();
 		}
 
 		if (filters.status) {
@@ -81,6 +82,10 @@ class Technology extends Model {
 
 	static async scopeIncludeTaxonomy(query) {
 		query.with('terms.taxonomy');
+	}
+
+	static async scopeIncludeInstitution(query) {
+		query.with('users.institution');
 	}
 
 	/**
@@ -202,6 +207,10 @@ class Technology extends Model {
 
 	knowledgeArea() {
 		return this.belongsTo('App/Models/KnowledgeArea', 'knowledge_area_id', 'knowledge_area_id');
+	}
+
+	locations() {
+		return this.belongsToMany('App/Models/Location').pivotTable('technology_location');
 	}
 
 	async getOwner() {

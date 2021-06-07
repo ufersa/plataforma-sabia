@@ -29,6 +29,7 @@ module.exports = {
 	|
 	*/
 	appKey: Env.getOrFail('APP_KEY'),
+	appEnv: Env.getOrFail('APP_ENV'),
 
 	http: {
 		/*
@@ -244,5 +245,15 @@ module.exports = {
 	github: {
 		user: 'ufersa',
 		repository: 'plataforma-sabia',
+	},
+
+	token: {
+		// Verification token lifetime in days
+		ttl: 3,
+		// Token value range
+		range: {
+			min: 100000,
+			max: 999999,
+		},
 	},
 };

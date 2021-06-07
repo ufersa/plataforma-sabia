@@ -24,7 +24,7 @@ const items = [
 		description:
 			'Encontre aqui os editais mais atuais de incentivo à pesquisa e inovação. Quem sabe você encontra aquele investimento que precisa, hein?',
 		link: {
-			href: '/announcements',
+			href: '/editais',
 			label: 'Ver  editais',
 		},
 		buttonDisabled: false,
@@ -45,7 +45,7 @@ const items = [
 		description:
 			'Procurou e não encontrou a tecnologia que você precisa? Não se preocupe. Sugirá ideias para os pesquisadores desenvolverem novas tecnologias.',
 		link: {
-			href: '/ideas',
+			href: '/ideias',
 			label: 'Ver  ideias',
 		},
 		buttonDisabled: false,

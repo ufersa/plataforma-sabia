@@ -1,44 +1,54 @@
 import React from 'react';
 import Link from 'next/link';
 import styled, { css, useTheme } from 'styled-components';
-
+import useTranslation from 'next-translate/useTranslation';
 import { RectangularButton } from '../../components/Button';
 import { Title } from '../../components/Common';
+import Head from '../../components/head';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const NewSolutionPage = () => {
 	const { colors } = useTheme();
+	const { t } = useTranslation(['pages']);
 
 	return (
-		<Wrapper>
-			<Container>
-				<Title color={colors.black}>Que tipo de solução você irá cadastrar?</Title>
+		<>
+			<Head
+				title={t('pages:solution.new.title')}
+				description={t('pages:solution.new.description')}
+				keywords={t('pages:solution.new.keywords')}
+			/>
+			<Wrapper>
+				<Container>
+					<Title color={colors.black}>Que tipo de solução você irá cadastrar?</Title>
 
-				<RegisterType>
-					<Link href="/technology/new" passHref>
-						<RectangularButton
-							as="a"
-							variant="backgroundImage"
-							backgroundUrl="/buttons/agro-machine.png"
-							colorVariant="orange"
-							fullWidth
-						>
-							Tecnologias
-						</RectangularButton>
-					</Link>
-					<Link href="/service/new" passHref>
-						<RectangularButton
-							as="a"
-							variant="backgroundImage"
-							backgroundUrl="/buttons/hand-holding-earth.png"
-							colorVariant="green"
-							fullWidth
-						>
-							Serviços
-						</RectangularButton>
-					</Link>
-				</RegisterType>
-			</Container>
-		</Wrapper>
+					<RegisterType>
+						<Link href={internalPages.newTechnology} passHref>
+							<RectangularButton
+								as="a"
+								variant="backgroundImage"
+								backgroundUrl="/buttons/agro-machine.png"
+								colorVariant="orange"
+								fullWidth
+							>
+								Tecnologias
+							</RectangularButton>
+						</Link>
+						<Link href={internalPages.newService} passHref>
+							<RectangularButton
+								as="a"
+								variant="backgroundImage"
+								backgroundUrl="/buttons/hand-holding-earth.png"
+								colorVariant="green"
+								fullWidth
+							>
+								Serviços
+							</RectangularButton>
+						</Link>
+					</RegisterType>
+				</Container>
+			</Wrapper>
+		</>
 	);
 };
 

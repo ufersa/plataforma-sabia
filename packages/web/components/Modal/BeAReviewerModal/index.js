@@ -12,6 +12,7 @@ import { getTaxonomyTerms, requestToBeReviewer } from '../../../services';
 import { theme } from '../../../styles';
 import { mapArrayOfObjectToSelect } from '../../../utils/helper';
 import { useAuth, useModal } from '../../../hooks';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import * as S from './styles';
 
 const customSelectStyles = {
@@ -294,7 +295,7 @@ const BeAReviewerModal = ({ closeModal }) => {
 						direitos de terceiros, ao próprio serviço disponibilizado pela plataforma e
 						à Administração Pública, com responsabilização civil contratual e/ou
 						extracontratual, e adoção das medidas penais aplicáveis ao caso, conforme os{' '}
-						<Link href="/terms-of-use">
+						<Link href={internalPages.termsOfUse}>
 							<a target="_blank" rel="noreferrer">
 								Termos e Condições de Uso
 							</a>

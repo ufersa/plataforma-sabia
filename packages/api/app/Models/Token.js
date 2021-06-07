@@ -2,6 +2,9 @@
 const Model = use('Model');
 const dayjs = require('dayjs');
 
+const Config = use('Config');
+const { ttl, range } = Config.get('app.token');
+
 class Token extends Model {
 	/**
 	 * A token is always associated with a user.
@@ -31,8 +34,11 @@ class Token extends Model {
 		return Boolean(this.is_revoked);
 	}
 
-	static getTokenObjectFor(token, type) {
+	static getTokenObjectFor(email, token, type) {
 		return this.query()
+			.whereHas('user', (builder) => {
+				builder.where({ email });
+			})
 			.where({
 				token,
 				type,
@@ -42,10 +48,38 @@ class Token extends Model {
 				'created_at',
 				'>=',
 				dayjs()
-					.subtract(24, 'hour')
+					.subtract(ttl, 'days')
 					.format('YYYY-MM-DD HH:mm:ss'),
 			)
 			.first();
+	}
+
+	static getByCode(generatedCode) {
+		return this.query()
+			.where({
+				token: generatedCode,
+			})
+			.where(
+				'created_at',
+				'>=',
+				dayjs()
+					.subtract(ttl, 'days')
+					.format('YYYY-MM-DD HH:mm:ss'),
+			)
+			.first();
+	}
+
+	static async generateUniqueTokenCode() {
+		const { min, max } = range;
+
+		// eslint-disable-next-line no-constant-condition
+		while (true) {
+			const generatedCode = Math.floor(Math.random() * (max - min + 1)) + min;
+			// eslint-disable-next-line no-await-in-loop
+			if (!(await this.getByCode(generatedCode))) {
+				return generatedCode;
+			}
+		}
 	}
 }
 

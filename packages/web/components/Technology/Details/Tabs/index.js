@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { resetIdCounter } from 'react-tabs';
 import * as Layout from '../../../Common/Layout';
 import { Tab, TabList, TabPanel, Tabs as Container } from '../../../Tab';
 import About from './About';
@@ -15,9 +14,9 @@ const Tabs = () => {
 	const tabs = [
 		{ slug: 'about', label: 'Sobre a Tecnologia', component: About },
 		{ slug: 'description', label: 'Caracterização', component: Description },
-		{ slug: 'geolocation', label: 'Georeferenciamento', component: GeoLocation },
+		{ slug: 'geolocation', label: 'Mapas', component: GeoLocation },
 		{ slug: 'costs', label: 'Custos e Financiamento', component: Costs },
-		{ slug: 'review', label: 'Relatos de Experiência', component: Review },
+		{ slug: 'review', label: 'Avaliação', component: Review },
 		{ slug: 'attachments', label: 'Documentos', component: Attachments },
 		{ slug: 'faq', label: 'Perguntas e Respostas', component: FAQ },
 	];
@@ -39,13 +38,6 @@ const Tabs = () => {
 			))}
 		</StyledTabs>
 	);
-};
-
-/**
- * This isn't Next.JS getInitialProps
- */
-Tabs.getInitialProps = () => {
-	resetIdCounter();
 };
 
 export const Row = styled(Layout.Row)`

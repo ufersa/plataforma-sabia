@@ -9,6 +9,7 @@ import { InputField } from '../../Form';
 import { getOrder } from '../../../services';
 import Loading from '../../Loading';
 import { getFundingLabelText, getUseLabelText } from '../../../utils/technologyOrders';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const TechnologyOrderDetailsModal = ({ closeModal, id }) => {
 	const { data: order, isValidating } = useSwr(
@@ -42,7 +43,13 @@ const TechnologyOrderDetailsModal = ({ closeModal, id }) => {
 							Uso da tecnologia: <span>{getUseLabelText(order?.use)}</span>
 						</p>
 
-						<Link href={`/t/${order.technology?.slug}`} passHref>
+						<Link
+							href={internalPages.technologyDetails.replace(
+								':slug',
+								order.technology?.slug,
+							)}
+							passHref
+						>
 							<RectangularButton
 								as="a"
 								onClick={closeModal}
