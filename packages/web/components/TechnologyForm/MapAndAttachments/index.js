@@ -486,7 +486,7 @@ const MapAndAttachments = ({ form, data }) => {
 							</UploadBox>
 						)}
 					</Dropzone>
-					<UploadedImages>
+					<UploadedImages data-cy="uploaded-images">
 						<Controller
 							as={ImagesPreview}
 							name="thumbnail_id"
