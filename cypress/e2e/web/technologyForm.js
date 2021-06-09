@@ -56,7 +56,7 @@ describe('technology input form help', () => {
 
 describe('creating/editing technology', () => {
 	beforeEach(() => {
-		cy.authenticate().visit('/technology/new');
+		cy.authenticate();
 		cy.intercept('GET', '/user/me', { fixture: 'user' });
 	});
 
@@ -66,6 +66,8 @@ describe('creating/editing technology', () => {
 	});
 
 	it('filling all fields creates an technology', () => {
+		cy.visit('/technology/new');
+
 		cy.fixture('technology.json').then((technologyData) => {
 			cy.get('input[name=title]').type(technologyData.title);
 			cy.get('textarea[name=description]').type(technologyData.description);
@@ -231,5 +233,66 @@ describe('creating/editing technology', () => {
 		}
 
 		cy.findByText(/sua tecnologia foi cadastrada/i).should('be.visible');
+	});
+
+	it.only('should be able to upload images and set a thumbnail', () => {
+		Cypress.config('scrollBehavior', 'center');
+		cy.visit('/user/my-account/technologies');
+
+		cy.get('[data-name="Status"]')
+			.children()
+			.contains(/publicada/i)
+			.parent()
+			.parent()
+			.find('[data-name="id"]')
+			.as('publishedTechnologyId');
+
+		cy.get('@publishedTechnologyId').then((id) => {
+			const technologyId = id.text();
+			cy.visit(`/technology/${technologyId}/edit/map-and-attachments`);
+
+			cy.get('[data-cy="uploaded-images"]').as('uploadedImages');
+
+			cy.get('input[accept="image/*"]').attachFile(['image-one.jpg', 'image-two.jpg']);
+
+			cy.get('@uploadedImages')
+				.children()
+				.should('have.length', 2);
+
+			cy.get('@uploadedImages')
+				.children()
+				.first()
+				.find('input[type="radio"]')
+				.should('be.checked');
+
+			cy.get('@uploadedImages')
+				.children()
+				.eq(1)
+				.find('input[type="radio"]')
+				.should('not.be.checked');
+
+			cy.findByRole('button', { name: /salvar e continuar/i }).click();
+
+			cy.url().should('contain', '/edit/review');
+			cy.findByRole('button', { name: /voltar/i }).click();
+
+			cy.get('@uploadedImages')
+				.children()
+				.should('have.length', 2);
+
+			cy.findAllByRole('radio', { name: /usar como capa/i })
+				.eq(1)
+				.click({ force: true });
+
+			cy.findByRole('button', { name: /salvar e continuar/i }).click();
+			cy.url().should('contain', '/edit/review');
+
+			cy.visit(`/t/${technologyId}`);
+
+			cy.get('.slick-active.slick-current')
+				.findByRole('img')
+				.should('have.attr', 'src')
+				.and('match', /image-two(?:-\d*)?.jpg/);
+		});
 	});
 });
