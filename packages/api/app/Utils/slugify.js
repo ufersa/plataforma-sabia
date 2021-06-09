@@ -1,5 +1,7 @@
 const slugify = require('slugify');
 
+const Database = use('Database');
+
 const incrementSlugSuffix = (oldSlug) => {
 	const slugSplitted = oldSlug.split('-');
 	const lastElementIndex = slugSplitted.length - 1;
@@ -30,7 +32,17 @@ const createUniqueSlug = async (model, propertyToBeSlugfied, slugColumn = 'slug'
 	return slug;
 };
 
+const createTermSlug = async (term, taxonomy_id) => {
+	const slug = slugify(term, { lower: true, remove: /[*+~.()'"!:@]/g });
+	const taxonomy = await Database.table('taxonomies')
+		.where({ id: taxonomy_id })
+		.first();
+	const taxonomyPrefix = taxonomy.taxonomy.toLowerCase();
+	return `${taxonomyPrefix}-${slug}`;
+};
+
 module.exports = {
 	createUniqueSlug,
 	incrementSlugSuffix,
+	createTermSlug,
 };

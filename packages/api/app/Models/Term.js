@@ -2,7 +2,7 @@
 const Model = use('Model');
 const CE = require('@adonisjs/lucid/src/Exceptions');
 const GE = require('@adonisjs/generic-exceptions');
-const { createUniqueSlug } = require('../Utils/slugify');
+const { createTermSlug } = require('../Utils/slugify');
 
 class Term extends Model {
 	static boot() {
@@ -16,7 +16,10 @@ class Term extends Model {
 		this.addHook('beforeCreate', async (termInstance) => {
 			if (!termInstance.$attributes.slug) {
 				// eslint-disable-next-line no-param-reassign
-				termInstance.slug = await createUniqueSlug(this, termInstance.$attributes.term);
+				termInstance.slug = await createTermSlug(
+					termInstance.$attributes.term,
+					termInstance.$attributes.taxonomy_id,
+				);
 			}
 		});
 	}
