@@ -41,7 +41,7 @@ const ImagesPreview = ({ previewedImgFiles, value, onChange, deleteAttachment })
 					name="thumbnail_id"
 					value={element.id}
 					checked={value === element.id}
-					onChange={() => onChange(Number(element.id))}
+					onChange={() => onChange(element.id)}
 				/>
 				{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 				<label htmlFor={element.url}>
