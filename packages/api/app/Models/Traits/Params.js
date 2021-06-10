@@ -67,7 +67,17 @@ class Params {
 		const listOrderBy = {
 			technologies: ['id', 'title', 'slug', 'likes', 'created_at'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
-			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
+			users: [
+				'id',
+				'first_name',
+				'last_name',
+				'email',
+				'created_at',
+				'updated_at',
+				'institution_id',
+				'status',
+				'role_id',
+			],
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
