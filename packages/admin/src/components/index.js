@@ -16,6 +16,7 @@ import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
 import UploadInput from './UploadInput';
 import ResendConfirmationEmail from './User/ResendConfirmationEmail';
 import ButtonDeleteUpload from './ButtonDeleteUpload';
+import ButtonSetThumbnail from './ButtonSetThumbnail';
 import statuses from './StatusForm/statuses';
 import StatusField from './StatusField';
 import BooleanNumField from './BooleanNumField';
@@ -40,6 +41,7 @@ export {
 	UploadInput,
 	ResendConfirmationEmail,
 	ButtonDeleteUpload,
+	ButtonSetThumbnail,
 	statuses,
 	StatusField,
 	BooleanNumField,

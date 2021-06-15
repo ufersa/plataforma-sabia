@@ -154,6 +154,9 @@ const ptBr = {
 				historic: 'Histórico',
 				assessment: 'Avaliações',
 			},
+			buttons: {
+				thumbnail: 'Principal',
+			},
 		},
 		services: {
 			name: 'Serviços',
@@ -290,6 +293,7 @@ const ptBr = {
 		notification: {
 			send_email_sucess: 'Email enviado com sucesso',
 			delete_sucess: 'Excluído com sucesso',
+			thumbnail_defined: 'Imagem principal definida com sucesso',
 		},
 	},
 };
@@ -337,7 +341,12 @@ const en = {
 		region: 'Region',
 	},
 	resources: {
-		technologies: { name: 'Technologies' },
+		technologies: {
+			name: 'Technologies',
+			buttons: {
+				thumbnail: 'Main',
+			},
+		},
 		services: { name: 'Services' },
 		terms: { name: 'Terms' },
 		taxonomies: { name: 'Taxonomies' },
@@ -354,6 +363,7 @@ const en = {
 		notification: {
 			send_email_sucess: 'Email successfully sent',
 			delete_sucess: 'Successfully deleted',
+			thumbnail_defined: 'Thumbnail successfully defined',
 		},
 	},
 };
