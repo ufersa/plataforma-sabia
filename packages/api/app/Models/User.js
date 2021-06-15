@@ -393,6 +393,22 @@ class User extends Model {
 			});
 		}
 
+		if (filters.initials) {
+			query.whereHas('institution', (builder) => {
+				builder.where('initials', 'LIKE', `%${filters.initials}%`);
+			});
+		}
+
+		if (filters.role) {
+			query.whereHas('role', (builder) => {
+				builder.where('role', 'LIKE', `%${filters.role}%`);
+			});
+		}
+
+		if (filters.status) {
+			query.where('status', 'LIKE', `%${filters.status}%`);
+		}
+
 		if (filters.keyword) {
 			query.whereHas('technologies.terms', (builder) => {
 				builder.where('term', 'LIKE', `%${filters.keyword}%`);

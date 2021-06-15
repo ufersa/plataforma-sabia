@@ -2,6 +2,7 @@ import AppBar from './AppBar';
 import ChipField from './ChipField';
 import TechnologyFilterBar from './Technology/TechnologyFilterBar';
 import ServiceFilterBar from './Service/ServiceFilterBar';
+import UserFilterBar from './User/UserFilterBar';
 import Layout from './Layout';
 import LocaleSwitcher from './LocaleSwitcher';
 import Menu from './Menu';
@@ -25,6 +26,7 @@ export {
 	ChipField,
 	TechnologyFilterBar,
 	ServiceFilterBar,
+	UserFilterBar,
 	Layout,
 	LocaleSwitcher,
 	Menu,
