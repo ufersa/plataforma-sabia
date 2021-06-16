@@ -15,7 +15,7 @@ const MapContainer = ({ markers }) => {
 	return (
 		<GoogleMap
 			google={google}
-			zoom={7}
+			zoom={5}
 			initialCenter={{
 				lat: -6.780127,
 				lng: -36.702823,
