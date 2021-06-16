@@ -12,3 +12,4 @@ export * from './technologyOrders';
 export * from './chat';
 export * from './service';
 export * from './messages';
+export * from './locations';
