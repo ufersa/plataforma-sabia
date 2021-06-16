@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import useTechnology from '../../../../hooks/useTechnology';
 import * as Layout from '../../../Common/Layout';
 import GoogleMaps, { getMarkerIconByTerm } from '../../../GoogleMaps';
-import TechonologyEnums from '../../../../utils/enums/technology.enums';
+import { LOCATIONS as technologyLocationsEnum } from '../../../../utils/enums/technology.enums';
 import CheckBoxField from '../../../Form/CheckBoxField';
 import { Protected } from '../../../Authorization';
 
-const Geolocation = ({ rawTerms, stacked }) => {
+const Geolocation = ({ stacked }) => {
 	const { technology } = useTechnology();
 	const [markerFilters, setMarkerFilters] = useState([
-		TechonologyEnums.WHO_DEVELOP,
-		TechonologyEnums.WHERE_CAN_BE_APPLIED,
-		TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+		technologyLocationsEnum.WHO_DEVELOP,
+		technologyLocationsEnum.WHERE_CAN_BE_APPLIED,
+		technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
 	]);
 
 	const handleMarkerFilterChange = (value) => {
@@ -28,30 +28,21 @@ const Geolocation = ({ rawTerms, stacked }) => {
 		setMarkerFilters(previousMarkerFilters);
 	};
 
-	const parseTermMetaIntoMarker = (term) => {
-		const marker = { type: term.term };
-		term.metas.forEach(({ meta_key, meta_value }) => {
-			marker[meta_key] = meta_value;
-		});
-		return marker;
-	};
-
 	const getMarkers = () => {
-		const terms = technology?.terms || rawTerms;
+		const { locations } = technology;
 
-		if (!terms) {
+		if (!locations) {
 			return null;
 		}
 
-		return terms
-			.filter(
-				({ term }) =>
-					[
-						TechonologyEnums.WHO_DEVELOP,
-						TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
-					].includes(term) && markerFilters.includes(term),
-			)
-			.map(parseTermMetaIntoMarker);
+		return locations
+			.filter((location) => markerFilters.includes(location.pivot.location_type))
+			.map((location) => ({
+				type: location.pivot.location_type,
+				description: location.pivot.location_type,
+				latitude: location.lat,
+				longitude: location.lng,
+			}));
 	};
 
 	return (
@@ -68,12 +59,12 @@ const Geolocation = ({ rawTerms, stacked }) => {
 							<Row>
 								<Layout.Column flex align="center">
 									<CheckBoxField
-										name={TechonologyEnums.WHO_DEVELOP}
+										name={technologyLocationsEnum.WHO_DEVELOP}
 										label={
 											<Row align="center" justify="center" mb={0}>
 												<Icon
 													src={getMarkerIconByTerm.get(
-														TechonologyEnums.WHO_DEVELOP,
+														technologyLocationsEnum.WHO_DEVELOP,
 													)}
 													size={32}
 												/>
@@ -81,21 +72,25 @@ const Geolocation = ({ rawTerms, stacked }) => {
 											</Row>
 										}
 										onChange={() =>
-											handleMarkerFilterChange(TechonologyEnums.WHO_DEVELOP)
+											handleMarkerFilterChange(
+												technologyLocationsEnum.WHO_DEVELOP,
+											)
 										}
-										value={markerFilters.includes(TechonologyEnums.WHO_DEVELOP)}
+										value={markerFilters.includes(
+											technologyLocationsEnum.WHO_DEVELOP,
+										)}
 									/>
 								</Layout.Column>
 							</Row>
 							<Row>
 								<Layout.Column flex align="center">
 									<CheckBoxField
-										name={TechonologyEnums.WHERE_CAN_BE_APPLIED}
+										name={technologyLocationsEnum.WHERE_CAN_BE_APPLIED}
 										label={
 											<Row align="center" justify="center" mb={0}>
 												<Icon
 													src={getMarkerIconByTerm.get(
-														TechonologyEnums.WHERE_CAN_BE_APPLIED,
+														technologyLocationsEnum.WHERE_CAN_BE_APPLIED,
 													)}
 													size={32}
 												/>
@@ -104,11 +99,11 @@ const Geolocation = ({ rawTerms, stacked }) => {
 										}
 										onChange={() =>
 											handleMarkerFilterChange(
-												TechonologyEnums.WHERE_CAN_BE_APPLIED,
+												technologyLocationsEnum.WHERE_CAN_BE_APPLIED,
 											)
 										}
 										value={markerFilters.includes(
-											TechonologyEnums.WHERE_CAN_BE_APPLIED,
+											technologyLocationsEnum.WHERE_CAN_BE_APPLIED,
 										)}
 									/>
 								</Layout.Column>
@@ -116,12 +111,12 @@ const Geolocation = ({ rawTerms, stacked }) => {
 							<Row>
 								<Layout.Column flex align="center">
 									<CheckBoxField
-										name={TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED}
+										name={technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED}
 										label={
 											<Row align="center" justify="center" mb={0}>
 												<Icon
 													src={getMarkerIconByTerm.get(
-														TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+														technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
 													)}
 													size={32}
 												/>
@@ -130,11 +125,11 @@ const Geolocation = ({ rawTerms, stacked }) => {
 										}
 										onChange={() =>
 											handleMarkerFilterChange(
-												TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+												technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
 											)
 										}
 										value={markerFilters.includes(
-											TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED,
+											technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
 										)}
 									/>
 								</Layout.Column>
