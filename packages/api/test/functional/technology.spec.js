@@ -26,6 +26,7 @@ const {
 	technologyStatuses,
 	reviewerStatuses,
 	reviewerTechnologyHistoryStatuses,
+	technologyLocationsTypes,
 } = require('../../app/Utils');
 const { prepareTechnology } = require('../../app/Utils/Algolia/indexes/technology');
 const { defaultParams } = require('./params.spec');
@@ -813,7 +814,10 @@ test('POST /technologies/:id/locations unauthorized user trying associates locat
 		city_id: city.id,
 	});
 
-	const locations = locationsInsts.map((location) => location.id);
+	const locations = locationsInsts.map((location) => ({
+		location_id: location.id,
+		location_type: technologyLocationsTypes.WHERE_IS_ALREADY_IMPLEMENTED,
+	}));
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/locations`)
 		.loginVia(loggedUser, 'jwt')
@@ -841,7 +845,10 @@ test('POST /technologies/:id/locations associates locations with own technology.
 		city_id: city.id,
 	});
 
-	const locations = locationsInsts.map((location) => location.id);
+	const locations = locationsInsts.map((location) => ({
+		location_id: location.id,
+		location_type: technologyLocationsTypes.WHERE_IS_ALREADY_IMPLEMENTED,
+	}));
 	const response = await client
 		.post(`/technologies/${newTechnology.id}/locations`)
 		.loginVia(loggedUser, 'jwt')

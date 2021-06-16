@@ -769,9 +769,22 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *      "Authorization": "Bearer <token>"
  *    }
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
- * @apiParam {String[]|Number[]} locations Loction Array, location IDs
+ * @apiParam {Object[]} locations Loction Array
+ * @apiParam {Number} locations.location_id Location ID, should be exists in Locations schema
+ * @apiParam {String="where_is_already_implemented","who_develop"} locations.location_type Loction Type
  * @apiParamExample  {json} Request sample:
- * 	"locations":[1,2,3,4]
+ * {
+ *	"locations": [
+ *		{
+ *			"location_id":1,
+ *			"location_type": "who_develop"
+ *		},
+ *		{
+ *			"location_id":2,
+ *			"location_type": "where_is_already_implemented"
+ *    }
+ *	]
+ * }
  * @apiSuccess {Object[]} locations Locaction Collection
  * @apiSuccess {Number} locations.id location ID.
  * @apiSuccess {String} locations.place_id location google place ID.
@@ -795,21 +808,8 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *     "updated_at": "2021-05-29 15:45:15",
  *     "pivot": {
  *       "location_id": 1,
- *       "technology_id": 1
- *     }
- *   },
- *   {
- *     "id": 3,
- *     "place_id": "5e8f46b0b4bf19dddfef28e08cf61cdabc690947",
- *     "address": "982 Artor Pass",
- *     "city_id": 1100122,
- *     "lat": "-71.25248",
- *     "lng": "-79.12979",
- *     "created_at": "2021-05-29 15:45:15",
- *     "updated_at": "2021-05-29 15:45:15",
- *     "pivot": {
- *       "location_id": 3,
- *       "technology_id": 1
+ *       "technology_id": 1,
+ *       "location_type": "where_is_already_implemented"
  *     }
  *   },
  *   {
@@ -823,21 +823,23 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *     "updated_at": "2021-05-29 15:45:15",
  *     "pivot": {
  *       "location_id": 2,
- *       "technology_id": 1
+ *       "technology_id": 1,
+ *       "location_type": "who_develop"
  *     }
  *   },
  *   {
- *     "id": 4,
- *     "place_id": "7e87099646184a3c82d69f345a373b7af50850f8",
- *     "address": "1923 Ohugab Point",
- *     "city_id": 1100205,
- *     "lat": "30.42617",
- *     "lng": "-148.35236",
+ *     "id": 3,
+ *     "place_id": "5e8f46b0b4bf19dddfef28e08cf61cdabc690947",
+ *     "address": "982 Artor Pass",
+ *     "city_id": 1100122,
+ *     "lat": "-71.25248",
+ *     "lng": "-79.12979",
  *     "created_at": "2021-05-29 15:45:15",
  *     "updated_at": "2021-05-29 15:45:15",
  *     "pivot": {
- *       "location_id": 4,
- *       "technology_id": 1
+ *       "location_id": 3,
+ *       "technology_id": 1,
+ *       "location_type": "where_is_already_implemented"
  *     }
  *   }
  *  ]
@@ -883,7 +885,21 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *   			]
  * 			}
  *		}
- * @apiErrorExample {json} Validation Error: The locations.[index] should exist in locations
+ * @apiErrorExample {json} Validation Error: The locations.[index].location_id should exist in locations
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ *    		"error": {
+ *        		"error_code": "VALIDATION_ERROR",
+ *        		"message": [
+ *            		{
+ *                		"message": "The locations.0.location_id should exist in locations.",
+ *                		"field": "locations.0.location_id",
+ *                		"validation": "exists"
+ *            		}
+ *        		]
+ *   		}
+ *		}
+ * @apiErrorExample {json} Validation Error: The locations.[index].location_type should fall within defined values of (where_is_already_implemented,who_develop)."
  *    HTTP/1.1 400 Bad Request
  *		{
  *    		"error": {
@@ -891,8 +907,8 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *        		"message": [
  *            		{
  *                		"message": "The locations.0 should exist in locations.",
- *                		"field": "locations.0",
- *                		"validation": "exists"
+ *                		"field": "locations.0.location_type",
+ *                		"validation": "in"
  *            		}
  *        		]
  *   		}

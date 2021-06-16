@@ -172,6 +172,11 @@ const ordersTypes = {
 	TECHNOLOGY: 'technology',
 };
 
+const technologyLocationsTypes = {
+	WHERE_IS_ALREADY_IMPLEMENTED: 'where_is_already_implemented',
+	WHO_DEVELOP: 'who_develop',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -195,4 +200,5 @@ module.exports = {
 	reviewerTechnologyHistoryStatuses,
 	costsMeasureUnit,
 	ordersTypes,
+	technologyLocationsTypes,
 };
