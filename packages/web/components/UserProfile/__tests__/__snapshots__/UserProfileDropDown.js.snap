@@ -52,6 +52,8 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
 
 .c2 svg {
   margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .c2:hover {
@@ -115,6 +117,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"
@@ -136,6 +139,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"
@@ -164,6 +168,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="20"
             width="24"
@@ -185,6 +190,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"
@@ -206,6 +212,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"
@@ -234,6 +241,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             viewBox="0 0 24 24"
@@ -291,6 +299,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"
@@ -319,6 +328,7 @@ exports[`UserProfileDropDown it renders as expected if visible is true 1`] = `
           class="c2"
         >
           <svg
+            color="hsl(166, 100%, 34%)"
             fill="none"
             height="24"
             width="24"

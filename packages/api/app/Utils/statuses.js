@@ -175,6 +175,7 @@ const ordersTypes = {
 const technologyLocationsTypes = {
 	WHERE_IS_ALREADY_IMPLEMENTED: 'where_is_already_implemented',
 	WHO_DEVELOP: 'who_develop',
+	WHERE_CAN_BE_APPLIED: 'where_can_be_applied',
 };
 
 module.exports = {

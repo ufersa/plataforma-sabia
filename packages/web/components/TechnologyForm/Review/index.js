@@ -27,6 +27,7 @@ import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
 import { internal as internalPages } from '../../../utils/consts/pages';
 import RadioField from '../../Form/RadioField';
+import { TechnologyProvider } from '../../Technology';
 
 const Editor = dynamic(() => import('../../Editor'), {
 	ssr: false,
@@ -276,7 +277,9 @@ const Review = ({ data: { technology }, form }) => {
 					</Section>
 
 					<Section title="Mapas" color="lightGray" hideWhenIsEmpty={false}>
-						<GeoLocation rawTerms={technology?.rawTerms} stacked />
+						<TechnologyProvider technology={technology}>
+							<GeoLocation stacked />
+						</TechnologyProvider>
 					</Section>
 
 					<Section title="Responsáveis" color="lightGray" hideWhenIsEmpty={false}>

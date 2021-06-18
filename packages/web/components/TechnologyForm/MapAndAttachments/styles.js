@@ -104,6 +104,7 @@ export const IconRow = styled.div`
 			padding: 0;
 			margin-right: 1rem;
 			display: flex;
+			align-items: center;
 		}
 
 		align-items: ${alignItems || 'center'};
