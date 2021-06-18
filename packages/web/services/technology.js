@@ -508,3 +508,27 @@ export const getTechnologyRevisionHistory = async (id, options) => {
 
 	return response.data;
 };
+
+/**
+ * Updates technology locations
+ *
+ * @param {string|number} id The technology id
+ * @param {Array} locationIds The locations model ids
+ * @returns {object} The updated technology
+ */
+export const updateTechnologyLocations = async (id, locationIds) => {
+	if (!id) {
+		throw new Error('Missing parameter `id` at updateTechnologyLocations.');
+	}
+	if (!locationIds) {
+		throw new Error('Missing parameter `locationIds` at updateTechnologyLocations.');
+	}
+
+	const response = await apiPost(`technologies/${id}/locations`, { locations: locationIds });
+
+	if (response.status !== 200 || response.status !== 201) {
+		return { error: true, messages: response.data?.error?.message || [] };
+	}
+
+	return response.data;
+};
