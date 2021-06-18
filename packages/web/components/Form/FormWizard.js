@@ -256,7 +256,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		}
 
 		if (currentStepSlug === 'map-and-attachments') {
-			const whoDevelop = formattedData.locations?.[technologyLocationsEnum.WHO_DEVELOP].map(
+			const whoDevelop = formattedData.locations?.[technologyLocationsEnum.WHO_DEVELOP]?.map(
 				(location) => ({
 					location_id: location,
 					location_type: technologyLocationsEnum.WHO_DEVELOP,
@@ -264,7 +264,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			);
 			const whereIsImplemented = formattedData.locations?.[
 				technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED
-			].map((location) => ({
+			]?.map((location) => ({
 				location_id: location,
 				location_type: technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
 			}));
