@@ -12,7 +12,10 @@ import {
 	CommentContent,
 	CommentText,
 } from '../CurateTechnology/History/styles';
-import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
+import {
+	STATUS as statusEnum,
+	LOCATIONS as technologyLocationsEnum,
+} from '../../utils/enums/technology.enums';
 import { SafeHtml } from '../SafeHtml';
 import { internal as internalPages } from '../../utils/consts/pages';
 
@@ -250,6 +253,23 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			const filteredAreas = formattedData.knowledge_area_id.filter(Boolean);
 			formattedData.knowledge_area_id = filteredAreas[filteredAreas.length - 1].value;
 			formattedData.type = formattedData.type.value;
+		}
+
+		if (currentStepSlug === 'map-and-attachments') {
+			const whoDevelop = formattedData.locations?.[technologyLocationsEnum.WHO_DEVELOP].map(
+				(location) => ({
+					location_id: location,
+					location_type: technologyLocationsEnum.WHO_DEVELOP,
+				}),
+			);
+			const whereIsImplemented = formattedData.locations?.[
+				technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED
+			].map((location) => ({
+				location_id: location,
+				location_type: technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
+			}));
+
+			formattedData.locations = [...(whoDevelop || []), ...(whereIsImplemented || [])];
 		}
 
 		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
