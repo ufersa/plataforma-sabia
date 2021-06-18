@@ -161,7 +161,7 @@ const MapAndAttachments = ({ form, data }) => {
 			}
 		} catch (error) {
 			setUploadError(
-				'Ocorreu um error ao fazer o upload, verifique se você seguiu as instruções corretamente, verificando o tipo de arquivo e o tamanho dele',
+				'Ocorreu um error ao fazer o upload, verifique se você seguiu as instruções corretamente, checando o tipo de arquivo e o tamanho dele',
 			);
 		}
 	};
