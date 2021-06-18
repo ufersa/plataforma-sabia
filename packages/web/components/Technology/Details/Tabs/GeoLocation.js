@@ -29,9 +29,9 @@ const Geolocation = ({ stacked }) => {
 	};
 
 	const getMarkers = () => {
-		const { locations } = technology;
+		const { locations = [] } = technology || {};
 
-		if (!locations) {
+		if (!locations?.length) {
 			return null;
 		}
 
@@ -174,12 +174,10 @@ export const GoogleMapWrapper = styled.div`
 `;
 
 Geolocation.propTypes = {
-	rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
 	stacked: PropTypes.bool,
 };
 
 Geolocation.defaultProps = {
-	rawTerms: null,
 	stacked: false,
 };
 
