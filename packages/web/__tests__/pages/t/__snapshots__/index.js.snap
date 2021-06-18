@@ -746,6 +746,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c46 {
@@ -773,6 +777,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c37 {
@@ -2285,6 +2293,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c46 {
@@ -2312,6 +2324,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c37 {

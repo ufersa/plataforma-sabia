@@ -50,6 +50,8 @@ exports[`it renders Profile page and empty Specialties 1`] = `
 
 .c4 svg {
   margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .c4:hover {
@@ -411,6 +413,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -430,6 +433,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -456,6 +460,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="20"
           width="24"
@@ -475,6 +480,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -499,6 +505,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -525,6 +532,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           viewBox="0 0 24 24"
@@ -580,6 +588,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -606,6 +615,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -637,6 +647,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -656,6 +667,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -675,10 +687,12 @@ exports[`it renders Profile page and empty Specialties 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="currentColor"
           height="1em"
           stroke="hsla(0, 0%, 52%)"
           stroke-width="1.5"
+          style="color: rgb(133, 133, 133);"
           viewBox="0 0 1024 1024"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -976,6 +990,8 @@ exports[`it renders Profile page correctly 1`] = `
 
 .c4 svg {
   margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .c4:hover {
@@ -1422,6 +1438,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1441,6 +1458,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1467,6 +1485,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="20"
           width="24"
@@ -1486,6 +1505,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1510,6 +1530,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1536,6 +1557,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           viewBox="0 0 24 24"
@@ -1591,6 +1613,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1617,6 +1640,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1648,6 +1672,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1667,6 +1692,7 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1686,10 +1712,12 @@ exports[`it renders Profile page correctly 1`] = `
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="currentColor"
           height="1em"
           stroke="hsla(0, 0%, 52%)"
           stroke-width="1.5"
+          style="color: rgb(133, 133, 133);"
           viewBox="0 0 1024 1024"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
