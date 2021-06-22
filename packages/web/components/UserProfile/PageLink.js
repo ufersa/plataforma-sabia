@@ -40,6 +40,8 @@ const SectionLink = styled.a`
 
 		svg {
 			margin-right: 1rem;
+			width: 2.4rem;
+			height: 2.4rem;
 		}
 
 		:hover {

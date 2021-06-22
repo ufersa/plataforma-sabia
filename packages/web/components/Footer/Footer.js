@@ -163,7 +163,7 @@ const Footer = ({ isAbout }) => (
 							</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
-							<Link href={internalPages.courses}>Cursos</Link>
+							<Link href={socialMediaPages.courses}>Cursos</Link>
 						</SiteInfoListItem>
 						<SiteInfoListItem>
 							<Link

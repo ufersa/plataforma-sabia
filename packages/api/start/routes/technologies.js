@@ -771,7 +771,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  * @apiParam (Route Param) {Number} id Mandatory Technology ID
  * @apiParam {Object[]} locations Loction Array
  * @apiParam {Number} locations.location_id Location ID, should be exists in Locations schema
- * @apiParam {String="where_is_already_implemented","who_develop"} locations.location_type Loction Type
+ * @apiParam {String="where_is_already_implemented","who_develop", "where_can_be_applied"} locations.location_type Loction Type
  * @apiParamExample  {json} Request sample:
  * {
  *	"locations": [
@@ -899,7 +899,7 @@ Route.post('technologies/:id/terms', 'TechnologyController.associateTechnologyTe
  *        		]
  *   		}
  *		}
- * @apiErrorExample {json} Validation Error: The locations.[index].location_type should fall within defined values of (where_is_already_implemented,who_develop)."
+ * @apiErrorExample {json} Validation Error: The locations.[index].location_type should fall within defined values of (where_is_already_implemented,who_develop,where_can_be_applied)."
  *    HTTP/1.1 400 Bad Request
  *		{
  *    		"error": {

@@ -55,6 +55,7 @@ const UserProfile = () => {
 						>
 							<page.icon
 								stroke={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
+								color={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
 								strokeWidth={isCurrentPage(page) ? 2.5 : 1.5}
 							/>
 							{page.title}
