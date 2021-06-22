@@ -56,17 +56,15 @@ test('POST /locations trying to creat a new location with invalid city', async (
 	);
 });
 
-test('POST /locations trying to creat a new location with non unique place_id', async ({
-	client,
-}) => {
+test('POST /locations gets a existent location passing your place_id', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
 	const city = await City.first();
-	const locationWithPlaceId = await Factory.model('App/Models/Location').create({
+	const existentLocation = await Factory.model('App/Models/Location').create({
+		place_id: 'ChIJvVKrU2wHugcRbrBuRzXZaE8',
 		city_id: city.id,
 	});
 	const locationData = await Factory.model('App/Models/Location').make({
-		place_id: locationWithPlaceId.place_id,
-		city_id: city.id,
+		place_id: existentLocation.place_id,
 	});
 
 	const response = await client
@@ -77,15 +75,10 @@ test('POST /locations trying to creat a new location with non unique place_id', 
 		})
 		.end();
 
-	response.assertStatus(400);
-	response.assertJSONSubset(
-		errorPayload('VALIDATION_ERROR', [
-			{
-				field: 'place_id',
-				validation: 'unique',
-			},
-		]),
-	);
+	await existentLocation.load('city');
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ location: { ...existentLocation.toJSON() } });
 });
 
 test('POST /locations creates a new location', async ({ client }) => {
@@ -106,7 +99,7 @@ test('POST /locations creates a new location', async ({ client }) => {
 	const locationCreated = await Location.findOrFail(response.body.location.id);
 	await locationCreated.load('city');
 
-	response.assertStatus(201);
+	response.assertStatus(200);
 	response.assertJSONSubset({ location: { ...locationCreated.toJSON() } });
 });
 
