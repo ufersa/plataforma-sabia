@@ -17,7 +17,7 @@ const authProvider = {
 
 		const url = `${apiUrl}/user/me`;
 		return httpClient(url).then(({ json }) => {
-			if (json.role_id !== 5) {
+			if (json.role.role !== 'ADMIN') {
 				return Promise.reject();
 			}
 			return Promise.resolve();
