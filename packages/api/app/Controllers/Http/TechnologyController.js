@@ -469,7 +469,7 @@ class TechnologyController {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeLocations(trx, locations, technology);
+			await this.syncronizeLocations(trx, locations, technology, true);
 
 			await commit();
 		} catch (error) {

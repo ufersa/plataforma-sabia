@@ -177,19 +177,9 @@ const MapAndAttachments = ({ form, data }) => {
 		}
 	};
 
-	const deleteCollectionLocation = async (collection, index) => {
-		const locationToDelete = collection.find((_, innerIndex) => index === innerIndex);
-		const response = await deleteLocation(locationToDelete.id);
-
-		if (response.error) {
-			toast.error(response.messages?.[0]?.message);
-		}
-	};
-
 	const deleteFromCollection = async (index, collection) => {
 		if (collection === 'whoDevelop') {
 			setWhoDevelop((prevState) => prevState.filter((_, innerIndex) => index !== innerIndex));
-			deleteCollectionLocation(whoDevelop, index);
 			return;
 		}
 
@@ -197,7 +187,6 @@ const MapAndAttachments = ({ form, data }) => {
 			setWhereIsAlreadyImplemented((prevState) =>
 				prevState.filter((_, innerIndex) => index !== innerIndex),
 			);
-			deleteCollectionLocation(whereIsAlreadyImplemented, index);
 		}
 	};
 
