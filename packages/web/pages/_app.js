@@ -23,7 +23,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', (url) => {
 	NProgress.done();
-	if (['staging', 'production'].includes(config.APP_ENV)) {
+	if (['production'].includes(config.APP_ENV)) {
 		pageview(url);
 	}
 });
