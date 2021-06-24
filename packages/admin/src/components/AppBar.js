@@ -31,11 +31,11 @@ const useStyles = makeStyles({
 
 const AppBar = (props) => {
 	const classes = useStyles();
-	const isSmall = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+	const isBigger = useMediaQuery((theme) => theme.breakpoints.up('sm'));
 	return (
 		// eslint-disable-next-line react/jsx-props-no-spreading
 		<AppBarRA {...props} className={classes.AppBarRA}>
-			{isSmall ? (
+			{isBigger ? (
 				<img
 					src="/images/logo-sabia.png"
 					title="Plataforma Sabiá - ADMIN"
