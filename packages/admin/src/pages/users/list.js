@@ -37,9 +37,9 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 				<ReferenceField source="role_id" reference="roles">
 					<TextField source="role" />
 				</ReferenceField>
-				<ResendConfirmationEmail />
-				<EditButton />
-				<DeleteWithConfirmButton />
+				<ResendConfirmationEmail style={{ color: '#3498DB' }} />
+				<EditButton label="" variant="contained" color="primary" />
+				<DeleteWithConfirmButton label="" variant="contained" color="default" />
 			</Datagrid>
 		</List>
 	);

@@ -12,7 +12,7 @@ const Menu = ({ onMenuClick, logout }) => {
 	const resources = useSelector(getResources);
 	const translate = useTranslate();
 	return (
-		<div style={{ marginTop: 20 }}>
+		<div>
 			{resources.map((resource) => (
 				<MenuItemLink
 					key={resource.name}

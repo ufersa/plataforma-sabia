@@ -32,8 +32,8 @@ const AnnouncementsList = ({ basePath, resource, hasCreate, hasEdit, hasList, ha
 				<ReferenceField source="user_id" reference="users">
 					<TextField source="email" />
 				</ReferenceField>
-				<EditButton />
-				<DeleteWithConfirmButton />
+				<EditButton label="" variant="contained" color="primary" />
+				<DeleteWithConfirmButton label="" variant="contained" color="default" />
 			</Datagrid>
 		</List>
 	);
