@@ -6,6 +6,7 @@ import i18nProvider from './providers/i18nProvider';
 
 import { LoginPage } from './components/Auth';
 import Layout from './components/Layout';
+import sabiaTheme from './components/Theme';
 import routes from './routes';
 
 import { TechnologiesList, TechnologiesCreate, TechnologiesEdit } from './pages/technologies';
@@ -33,6 +34,7 @@ const App = () => {
 			dataProvider={dataProvider}
 			i18nProvider={i18nProvider}
 			layout={Layout}
+			theme={sabiaTheme}
 			customRoutes={routes}
 		>
 			<Resource

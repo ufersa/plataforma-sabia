@@ -8,6 +8,7 @@ import {
 	ReferenceField,
 	SingleFieldList,
 	DateField,
+	DeleteWithConfirmButton,
 } from 'react-admin';
 import { ChipField, ReferenceArrayField, UrlLattes, StatusField } from '../../components';
 
@@ -36,7 +37,8 @@ const ReviewersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasSho
 			</ReferenceArrayField>
 			<DateField showTime source="created_at" />
 			<DateField showTime source="updated_at" />
-			<EditButton />
+			<EditButton label="" variant="contained" color="primary" />
+			<DeleteWithConfirmButton label="" variant="contained" color="default" />
 		</Datagrid>
 	</List>
 );

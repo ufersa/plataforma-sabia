@@ -25,7 +25,7 @@ const ResendConfirmationEmail = ({ record }) => {
 
 	if (record?.status === 'verified') return <span />;
 	return (
-		<Button variant="outlined" onClick={handleSubmit}>
+		<Button variant="contained" color="default" onClick={handleSubmit}>
 			{translate('labels.resend_token')}
 		</Button>
 	);
