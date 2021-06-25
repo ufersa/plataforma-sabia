@@ -53,7 +53,7 @@ jobs:
         if: steps.lerna_dependencies_cache.outputs.cache-hit != 'true'
         run: npm install
 
-      - name: ESLint
+      - name: Run ESLint
         uses: reviewdog/action-eslint@v1
         with:
           fail_on_error: true
@@ -68,7 +68,7 @@ jobs:
         with:
           paths: packages/api
 
-      - name: API tests
+      - name: Run API tests
         if: steps.changed-api.outputs.changed == 'true'
         working-directory: packages/api
         run: npm run coverage
@@ -85,12 +85,12 @@ jobs:
         with:
           paths: packages/web
 
-      - name: WEB tests
+      - name: Run WEB tests
         if: steps.changed-web.outputs.changed == 'true'
         working-directory: packages/web
         run: npm run jest:ci
 
-      - name: Cypress tests
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v2
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
@@ -105,7 +105,7 @@ jobs:
         if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         run: npm run merge-coverage
 
-      - name: Coveralls
+      - name: Run Coveralls
         if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         uses: coverallsapp/github-action@master
         with:
