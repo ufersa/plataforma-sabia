@@ -66,7 +66,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: ./packages/admin/Dockerfile
+          file: ./packages/admin/docker/Dockerfile
           tags: plataformasabia/admin:${{ github.sha }}
 
       - name: Set up QEMU
@@ -86,7 +86,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: ./packages/web/Dockerfile
+          file: ./packages/web/docker/Dockerfile
           tags: plataformasabia/web:${{ github.sha }}
 
       - name: Set up QEMU
@@ -106,7 +106,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: ./packages/api/Dockerfile
+          file: ./packages/api/docker/Dockerfile
           tags: plataformasabia/api:${{ github.sha }}
       - name: executing remote ssh commands using ssh key on vps_2
 
