@@ -13,8 +13,7 @@
     "jest:visual": "APP_ENV=testing NODE_ICU_DATA=node_modules/full-icu jest -c tests/visual/jest.config.js",
     "jest:visual:update": "APP_ENV=testing npm run jest:visual -- --updateSnapshot",
     "test:visual": "APP_ENV=testing start-server-and-test storybook http-get://localhost:9009 jest:visual",
-    "test": "APP_ENV=testing npm run jest && npm run test:visual",
-    "coverage:report": "nyc report"
+    "test": "APP_ENV=testing npm run jest && npm run test:visual"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^25.0.0",
