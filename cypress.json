@@ -8,8 +8,5 @@
   "pageLoadTimeout": 60000,
   "requestTimeout": 30000,
   "responseTimeout": 30000,
-  "retries": {
-    "runMode": 3,
-    "openMode": 3
-  }
+  "retries": 3
 }
