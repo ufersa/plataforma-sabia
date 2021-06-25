@@ -45,8 +45,7 @@ jobs:
         id: lerna_dependencies_cache
         with:
           path: |
-            node_modules
-            */*/node_modules
+            **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Restore Cypress binary from cache
