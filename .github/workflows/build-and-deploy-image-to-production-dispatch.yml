@@ -36,9 +36,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd packages/api && npm install && cp .env.testing .env && npm run test
-      - run: cd packages/web && npm install && npm run jest:ci
-      - run: cd packages/api && npm run migration:refresh && npm run seed
+
+      - name: Setup API and run tests
+        run: |
+          cd packages/api 
+          cp .env.testing .env
+          npm install
+          npm run test
+          npm run migration:refresh -- --seed
+      
+      - name: Setup WEB and run tests
+        run: |
+          cd packages/web
+          npm install
+          npm run jest:ci
 
       - name: Running the cypress tests
         uses: cypress-io/github-action@v1
