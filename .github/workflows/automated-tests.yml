@@ -90,8 +90,7 @@ jobs:
       matrix:
         node-version: [14.x]
         os: ["ubuntu-latest"]
-        # run 3 copies of the current job in parallel
-        containers: [1, 2, 3]
+        containers: [1, 2]
     services:
       plataforma-sabia-redis:
         image: redis
