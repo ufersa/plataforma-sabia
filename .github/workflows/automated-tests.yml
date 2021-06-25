@@ -3,6 +3,7 @@ on: [pull_request]
 name: CI
 jobs:
   tests:
+    name: WEB and API tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -84,7 +85,7 @@ jobs:
         with:
           github-token: ${{ secrets.github_token  }}
   cypress:
-    name: Cypress run
+    name: E2E tests
     runs-on: ${{ matrix.os }}
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -100,6 +101,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Setup API environments
+        working-directory: packages/api
+        run: cp .env.testing .env
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
