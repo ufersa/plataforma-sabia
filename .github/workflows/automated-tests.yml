@@ -62,14 +62,7 @@ jobs:
         working-directory: packages/api
         run: cp .env.testing .env
 
-      - name: Check API changes
-        uses: marceloprado/has-changed-path@v1
-        id: changed-api
-        with:
-          paths: packages/api
-
       - name: Run API tests
-        if: steps.changed-api.outputs.changed == 'true'
         working-directory: packages/api
         run: npm run coverage
 
@@ -79,14 +72,7 @@ jobs:
           npm run migration:refresh
           npm run seed
 
-      - name: Check WEB changes
-        uses: marceloprado/has-changed-path@v1
-        id: changed-web
-        with:
-          paths: packages/web
-
       - name: Run WEB tests
-        if: steps.changed-web.outputs.changed == 'true'
         working-directory: packages/web
         run: npm run jest:ci
 
@@ -102,11 +88,9 @@ jobs:
           record: true
 
       - name: Prepare coverages
-        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         run: npm run merge-coverage
 
       - name: Run Coveralls
-        if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token  }}
