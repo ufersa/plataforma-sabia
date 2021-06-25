@@ -93,8 +93,10 @@ class ExceptionHandler extends BaseExceptionHandler {
 			try {
 				const eventId = await Sentry.captureException(error);
 				await Slack.notifyError(error, eventId, request);
-				// eslint-disable-next-line no-empty
-			} catch (err) {}
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.error(err);
+			}
 		}
 	}
 }
