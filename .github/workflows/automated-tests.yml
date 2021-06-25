@@ -76,16 +76,16 @@ jobs:
         working-directory: packages/web
         run: npm run jest:ci
 
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v2
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        with:
-          command: npm run test:e2e:coverage
-          browser: chrome
-          headless: true
-          record: true
+      # - name: Run Cypress tests
+      #   uses: cypress-io/github-action@v2
+      #   env:
+      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #   with:
+      #     command: npm run test:e2e:coverage
+      #     browser: chrome
+      #     headless: true
+      #     record: true
 
       - name: Generate LCOV report for packages
         run: npm run coverage:report
