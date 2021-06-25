@@ -15,6 +15,7 @@ module.exports = {
 		'server.js',
 		'stories.js',
 		'test.js',
+		'i18n.js',
 	],
 	moduleDirectories: ['node_modules', 'tests'],
 	watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
