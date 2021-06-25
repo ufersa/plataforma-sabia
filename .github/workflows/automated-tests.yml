@@ -40,21 +40,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Restore Lerna from cache
+      - name: Restore Lerna dependencies from cache
         uses: actions/cache@v2
         id: lerna_dependencies_cache
         with:
           path: |
+            ~/.cache/Cypress
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Restore Cypress binary from cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('package.json') }} # or **/package.json
-          restore-keys: |
-            cypress-${{ runner.os }}-cypress-
 
       - name: Install dependencies
         if: steps.lerna_dependencies_cache.outputs.cache-hit != 'true'
