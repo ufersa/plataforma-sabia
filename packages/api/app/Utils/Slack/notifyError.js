@@ -1,6 +1,6 @@
 const Config = use('Config');
 const dayjs = require('dayjs');
-const https = require('https');
+const fetch = require('node-fetch');
 
 const getNewIssueUrl = (error, sentryReportId, request) => {
 	const { user, repository } = Config.get('app.github');
@@ -14,11 +14,11 @@ const getNewIssueUrl = (error, sentryReportId, request) => {
 		'```',
 		'### Request:',
 		'```json',
-		JSON.stringify(request),
+		JSON.stringify(request.all()),
 		'```',
 	].join('\n');
 
-	url.searchParams.set('title', error.message);
+	url.searchParams.set('title', JSON.stringify(error.message));
 	url.searchParams.set('labels', 'bug,API');
 	url.searchParams.set('body', body);
 
@@ -100,15 +100,13 @@ const notify = async (error, sentryReportId = '', request = {}) => {
 		actionUrl,
 	});
 
-	const req = https.request({
+	await fetch(`https://hooks.slack.com/services/${Config.get('slack.notify_path')}`, {
 		method: 'POST',
-		hostname: 'hooks.slack.com',
-		path: `/services/${Config.get('slack.notify_path')}`,
-		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(payload),
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
-
-	req.write(JSON.stringify(payload));
-	req.end();
 
 	return true;
 };

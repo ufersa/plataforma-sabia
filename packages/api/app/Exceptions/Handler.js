@@ -90,8 +90,13 @@ class ExceptionHandler extends BaseExceptionHandler {
 
 	async report(error, { request }) {
 		if (Env.get('APP_ENV') === 'production') {
-			const eventId = await Sentry.captureException(error);
-			await Slack.notifyError(error, eventId, request);
+			try {
+				const eventId = await Sentry.captureException(error);
+				await Slack.notifyError(error, eventId, request);
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.error(err);
+			}
 		}
 	}
 }

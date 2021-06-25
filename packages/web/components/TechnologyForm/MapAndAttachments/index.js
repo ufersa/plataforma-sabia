@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { Controller } from 'react-hook-form';
 import { upload, deleteUpload } from '../../../services/uploads';
-import { createLocation, deleteLocation } from '../../../services';
+import { createLocation } from '../../../services';
 import { InputField, SelectField, InputHiddenField, HelpModal } from '../../Form';
 import {
 	UploadedImages,
