@@ -44,8 +44,11 @@ class UserController {
 	 * GET users
 	 */
 	async index({ request }) {
+		const filters = request.all();
+
 		return User.query()
 			.with('permissions', (builder) => builder.select('id'))
+			.withResearcherFilters(filters)
 			.withParams(request);
 	}
 

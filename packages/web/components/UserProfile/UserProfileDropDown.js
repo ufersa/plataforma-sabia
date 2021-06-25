@@ -42,7 +42,11 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 									onClick={toggleVisible}
 									notification={page?.notification}
 								>
-									<page.icon stroke={colors.secondary} strokeWidth={1.5} />
+									<page.icon
+										color={colors.secondary}
+										stroke={colors.secondary}
+										strokeWidth={1.5}
+									/>
 									{page.title}
 								</PageLink>
 							</li>

@@ -14,7 +14,7 @@ import {
 	UrlField,
 	DateField,
 } from 'react-admin';
-import { UploadInput, ButtonDeleteUpload } from '../../../components';
+import { UploadInput, ButtonDeleteUpload, ButtonSetThumbnail } from '../../../components';
 
 const useStyles = makeStyles({
 	img: {
@@ -60,7 +60,12 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 			return (
 				<Card key={id} className={classes.cardStyle}>
 					<CardContent>
-						<ButtonDeleteUpload record={{ id }} />
+						#{id} <ButtonDeleteUpload record={{ id }} />
+						{record.thumbnail_id !== id && (
+							<>
+								<ButtonSetThumbnail record={record} thumbnail_id={id} />
+							</>
+						)}
 						<ImageField
 							record={{ url }}
 							source="url"
@@ -75,6 +80,7 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 
 	const newRecord = {
 		id: record.id,
+		thumbnail_id: record.thumbnail_id,
 		images: data.filter(({ filename }) => !filename.match(/.pdf/g)),
 		pdfs: data.filter(({ filename }) => filename.match(/.pdf/g)),
 	};
@@ -97,7 +103,7 @@ const AttachmentsForm = ({ record, resource, basePath }) => {
 	);
 };
 AttachmentsForm.propTypes = {
-	record: PropTypes.shape({ id: PropTypes.number }),
+	record: PropTypes.shape({ id: PropTypes.number, thumbnail_id: PropTypes.number }),
 	resource: PropTypes.string,
 	basePath: PropTypes.string,
 };

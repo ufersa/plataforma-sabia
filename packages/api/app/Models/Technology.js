@@ -210,7 +210,9 @@ class Technology extends Model {
 	}
 
 	locations() {
-		return this.belongsToMany('App/Models/Location').pivotTable('technology_location');
+		return this.belongsToMany('App/Models/Location')
+			.pivotTable('technology_location')
+			.withPivot(['location_type']);
 	}
 
 	async getOwner() {

@@ -2,6 +2,7 @@ import AppBar from './AppBar';
 import ChipField from './ChipField';
 import TechnologyFilterBar from './Technology/TechnologyFilterBar';
 import ServiceFilterBar from './Service/ServiceFilterBar';
+import UserFilterBar from './User/UserFilterBar';
 import Layout from './Layout';
 import LocaleSwitcher from './LocaleSwitcher';
 import Menu from './Menu';
@@ -15,6 +16,7 @@ import KnowledgeAreaInput from './Technology/KnowledgeAreaInput';
 import UploadInput from './UploadInput';
 import ResendConfirmationEmail from './User/ResendConfirmationEmail';
 import ButtonDeleteUpload from './ButtonDeleteUpload';
+import ButtonSetThumbnail from './ButtonSetThumbnail';
 import statuses from './StatusForm/statuses';
 import StatusField from './StatusField';
 import BooleanNumField from './BooleanNumField';
@@ -25,6 +27,7 @@ export {
 	ChipField,
 	TechnologyFilterBar,
 	ServiceFilterBar,
+	UserFilterBar,
 	Layout,
 	LocaleSwitcher,
 	Menu,
@@ -38,6 +41,7 @@ export {
 	UploadInput,
 	ResendConfirmationEmail,
 	ButtonDeleteUpload,
+	ButtonSetThumbnail,
 	statuses,
 	StatusField,
 	BooleanNumField,

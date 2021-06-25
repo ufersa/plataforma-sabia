@@ -290,7 +290,24 @@ class TechnologyController {
 			await technology.locations().detach(null, null, trx);
 		}
 
-		await technology.locations().attach(locations, null, trx);
+		const locationsMap = locations.reduce(
+			(obj, currentLocation) => {
+				const { location_id, location_type } = currentLocation;
+				obj.ids.push(location_id);
+				obj.locations[location_id] = location_type;
+				return obj;
+			},
+			{ ids: [], locations: {} },
+		);
+
+		await technology.locations().attach(
+			locationsMap.ids,
+			(row) => {
+				// eslint-disable-next-line no-param-reassign
+				row.location_type = locationsMap.locations[row.location_id];
+			},
+			trx,
+		);
 	}
 
 	/**
@@ -452,7 +469,7 @@ class TechnologyController {
 			const { init, commit } = getTransaction();
 			trx = await init();
 
-			await this.syncronizeLocations(trx, locations, technology);
+			await this.syncronizeLocations(trx, locations, technology, true);
 
 			await commit();
 		} catch (error) {

@@ -34,7 +34,7 @@ const ImagesCarousel = ({ settings }) => {
 
 				return acc;
 			},
-			[images[thumbnailIndex]],
+			[images[thumbnailIndex !== -1 ? thumbnailIndex : 0]],
 		);
 	}, [technology]);
 

@@ -36,11 +36,15 @@ class LocationController {
 	async store({ request, response }) {
 		const data = request.only(this.fields);
 
-		const location = await Location.create(data);
+		let location = await Location.findBy('place_id', data.place_id);
+
+		if (!location) {
+			location = await Location.create(data);
+		}
 
 		await location.load('city');
 
-		return response.status(201).send({ location });
+		return response.status(200).send({ location });
 	}
 
 	/**

@@ -145,7 +145,31 @@ test('POST /terms trying save a term in a inexistent taxonomy.', async ({ client
 	);
 });
 
-test('POST /terms create/save a new Term.', async ({ client }) => {
+test('POST /terms does not save a duplicate taxonomy term.', async ({ client }) => {
+	const { user: loggedUser } = await createUser();
+
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+
+	await testTaxonomy.terms().create({
+		term: 'test term',
+	});
+
+	const response = await client
+		.post('/terms')
+		.send({
+			term: 'test term',
+			taxonomy: testTaxonomy.id,
+		})
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload(errors.UNIQUE_TERM_ERROR, antl('error.term.uniqueTermError')),
+	);
+});
+
+test('POST /terms create/save a new Term.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser({
 		append: { role: roles.RESEARCHER },
 	});
@@ -162,6 +186,7 @@ test('POST /terms create/save a new Term.', async ({ client }) => {
 
 	response.assertStatus(200);
 	response.body.parent_id = null;
+	assert.equal(termCreated.slug, 'keywords-test-term');
 	response.assertJSONSubset(termCreated.toJSON());
 });
 
@@ -508,7 +533,8 @@ test('DELETE /terms/:id Delete a Term with id.', async ({ client }) => {
 });
 
 test('DELETE /terms/ Delete batch terms.', async ({ client, assert }) => {
-	let list_ids = await Term.createMany([
+	const testTaxonomy = await Taxonomy.create(taxonomy);
+	let list_ids = await testTaxonomy.terms().createMany([
 		{
 			term: 'test term1',
 		},

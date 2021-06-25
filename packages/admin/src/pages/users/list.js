@@ -7,8 +7,11 @@ import {
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
+	Pagination,
 } from 'react-admin';
-import { ResendConfirmationEmail, StatusField } from '../../components';
+import { ResendConfirmationEmail, StatusField, UserFilterBar } from '../../components';
+
+const UserPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 75, 100]} />;
 
 const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => {
 	return (
@@ -19,22 +22,24 @@ const UsersList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			hasEdit={hasEdit}
 			hasList={hasList}
 			hasShow={hasShow}
-			perPage={25}
+			perPage={100}
+			filters={<UserFilterBar />}
+			pagination={<UserPagination />}
 		>
 			<Datagrid>
-				<TextField source="id" />
 				<TextField source="email" />
 				<StatusField source="Status" />
-				<TextField source="full_name" />
+				<TextField source="first_name" />
+				<TextField source="last_name" />
 				<ReferenceField source="institution_id" reference="institutions">
 					<TextField source="initials" />
 				</ReferenceField>
 				<ReferenceField source="role_id" reference="roles">
 					<TextField source="role" />
 				</ReferenceField>
-				<ResendConfirmationEmail />
-				<EditButton />
-				<DeleteWithConfirmButton />
+				<ResendConfirmationEmail style={{ color: '#3498DB' }} />
+				<EditButton label="" variant="contained" color="primary" />
+				<DeleteWithConfirmButton label="" variant="contained" color="default" />
 			</Datagrid>
 		</List>
 	);

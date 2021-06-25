@@ -2,8 +2,8 @@
 const { test, trait } = use('Test/Suite')('Slugify');
 const { createUniqueSlug, incrementSlugSuffix } = require('../../app/Utils/slugify');
 
-const Term = use('App/Models/Term');
 const Technology = use('App/Models/Technology');
+const Taxonomy = use('App/Models/Taxonomy');
 
 trait('DatabaseTransactions');
 
@@ -62,21 +62,20 @@ test('add the first suffix when does not have suffix', async ({ assert }) => {
 	assert.equal(mySlugWithouSuffix, 'new-slug-1');
 });
 
-test('tests unique slugs in multiple term creation', async ({ assert }) => {
-	const terms = [];
-
-	for (let i = 0; i < 20; i += 1) {
-		terms.push({
-			term: 'Test Term',
-		});
-	}
-	const termInstances = await Term.createMany(terms);
-
-	assert.equal(termInstances[0].slug, 'test-term');
-
-	termInstances.forEach((term, index) => {
-		if (index > 0) assert.equal(term.slug, `test-term-${index}`);
+test('tests create unique term slug by taxonomy', async ({ assert }) => {
+	const taxonomy1 = await Taxonomy.create({
+		taxonomy: 'taxonomy1',
+		description: 'taxonomy1 description',
 	});
+	const taxonomy2 = await Taxonomy.create({
+		taxonomy: 'taxonomy2',
+		description: 'taxonomy2 description',
+	});
+	const testTerm1 = await taxonomy1.terms().create({ term: 'Test term' });
+	const testTerm2 = await taxonomy2.terms().create({ term: 'Test term' });
+
+	assert.equal(testTerm1.slug, 'taxonomy1-test-term');
+	assert.equal(testTerm2.slug, 'taxonomy2-test-term');
 });
 
 test('tests unique slugs in multiple technology creation', async ({ assert }) => {
