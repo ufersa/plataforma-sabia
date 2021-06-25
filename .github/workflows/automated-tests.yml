@@ -46,7 +46,6 @@ jobs:
         id: project_dependencies_cache
         with:
           path: |
-            ~/.cache/Cypress
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
