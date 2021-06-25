@@ -12,6 +12,7 @@
     "test:unit": "node ace test unit",
     "test:functional": "node ace test functional",
     "coverage": "nyc npm run test",
+    "coverage:report": "nyc report",
     "algolia:index": "node ace algolia:index --override --log --settings",
     "migration:run": "node ace migration:run",
     "migration:refresh": "node ace migration:refresh",

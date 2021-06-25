@@ -87,6 +87,9 @@ jobs:
           headless: true
           record: true
 
+      - name: Generate LCOV report for packages
+        run: npm run coverage:report
+
       - name: Run Coveralls for API
         uses: coverallsapp/github-action@master
         with:
