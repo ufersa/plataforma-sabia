@@ -87,10 +87,16 @@ jobs:
           headless: true
           record: true
 
-      - name: Prepare coverages
-        run: npm run merge-coverage
-
-      - name: Run Coveralls
+      - name: Run Coveralls for API
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token  }}
+          flag-name: API
+          base-path: packages/api
+
+      - name: Run Coveralls for WEB
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token  }}
+          flag-name: WEB
+          base-path: packages/web
