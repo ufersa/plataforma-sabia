@@ -131,6 +131,3 @@ jobs:
         with:
           command: npm run test:e2e:run
           browser: chrome
-          headless: true
-          record: true
-          parallel: true
