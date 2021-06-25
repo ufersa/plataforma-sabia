@@ -67,12 +67,6 @@ jobs:
         working-directory: packages/api
         run: npm run coverage
 
-      - name: Prepare API for e2e tests
-        working-directory: packages/api
-        run: |
-          npm run migration:refresh
-          npm run seed
-
       - name: Run WEB tests
         working-directory: packages/web
         run: npm run jest:ci
@@ -122,9 +116,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup API environments
+      - name: Prepare API for e2e tests
         working-directory: packages/api
-        run: cp .env.testing .env
+        run: |
+          cp .env.testing .env
+          npm run migration:refresh
+          npm run seed
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v2
