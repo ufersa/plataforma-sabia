@@ -40,7 +40,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Cache
       - name: Restore Lerna from cache
         uses: actions/cache@v2
         id: lerna_dependencies_cache
@@ -68,13 +67,11 @@ jobs:
         if: steps.lerna_dependencies_cache.outputs.cache-hit != 'true'
         run: npm install
 
-      # ESLint
       - name: ESLint
         uses: reviewdog/action-eslint@v1
         with:
           fail_on_error: true
 
-      # API
       - name: Setup API environments
         working-directory: packages/api
         run: cp .env.testing .env
@@ -96,7 +93,6 @@ jobs:
           npm run migration:refresh
           npm run seed
 
-      # WEB
       - name: Check WEB changes
         uses: marceloprado/has-changed-path@v1
         id: changed-web
@@ -108,7 +104,6 @@ jobs:
         working-directory: packages/web
         run: npm run jest:ci
 
-      # Cypress
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         env:
@@ -120,7 +115,6 @@ jobs:
           headless: true
           record: true
 
-      # Coveralls
       - name: Prepare coverages
         if: steps.changed-api.outputs.changed == 'true' && steps.changed-web.outputs.changed == 'true'
         run: npm run merge-coverage
