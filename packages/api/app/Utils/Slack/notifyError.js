@@ -14,7 +14,7 @@ const getNewIssueUrl = (error, sentryReportId, request) => {
 		'```',
 		'### Request:',
 		'```json',
-		JSON.stringify(request),
+		JSON.stringify(request.all()),
 		'```',
 	].join('\n');
 
@@ -101,9 +101,11 @@ const notify = async (error, sentryReportId = '', request = {}) => {
 	});
 
 	await fetch(`https://hooks.slack.com/services/${Config.get('slack.notify_path')}`, {
-		method: 'post',
+		method: 'POST',
 		body: JSON.stringify(payload),
-		headers: { 'Content-Type': 'application/json' },
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
 
 	return true;
