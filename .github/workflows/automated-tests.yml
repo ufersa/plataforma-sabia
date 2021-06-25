@@ -87,16 +87,10 @@ jobs:
       #     headless: true
       #     record: true
 
-      - name: Run Coveralls for API
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token  }}
-          flag-name: API
-          path-to-lcov: ./packages/api/coverage/lcov.info
+      - name: Prepare coverages
+        run: npm run merge-coverage
 
-      - name: Run Coveralls for WEB
+      - name: Run Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token  }}
-          flag-name: WEB
-          path-to-lcov: ./packages/web/coverage/lcov.info
