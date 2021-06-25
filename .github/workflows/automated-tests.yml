@@ -129,9 +129,9 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          parallel: true
         with:
           command: npm run test:e2e:run
           browser: chrome
           headless: true
           record: true
+          parallel: true
