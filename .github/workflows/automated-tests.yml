@@ -1,6 +1,6 @@
 on: [pull_request]
 
-name: Sabia Platform - Automated tests workflow
+name: CI
 jobs:
   tests:
     runs-on: ${{ matrix.os }}
