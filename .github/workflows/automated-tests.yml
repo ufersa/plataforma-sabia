@@ -120,6 +120,7 @@ jobs:
         working-directory: packages/api
         run: |
           cp .env.testing .env
+          npm ci
           npm run migration:refresh
           npm run seed
 
