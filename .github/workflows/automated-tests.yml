@@ -86,6 +86,7 @@ jobs:
           browser: chrome
           headless: true
           record: true
+          install: false
 
       - name: Prepare coverages
         run: npm run merge-coverage
