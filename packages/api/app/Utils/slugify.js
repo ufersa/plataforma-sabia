@@ -16,8 +16,17 @@ const incrementSlugSuffix = (oldSlug) => {
 	return slugSplitted.join('-');
 };
 
-const createUniqueSlug = async (model, propertyToBeSlugfied, slugColumn = 'slug') => {
-	const slug = slugify(propertyToBeSlugfied, { lower: true, remove: /[*+~.()'"!:@]/g });
+const createUniqueSlug = async (
+	model,
+	propertyToBeSlugfied,
+	slugColumn = 'slug',
+	replacement = '-',
+) => {
+	const slug = slugify(propertyToBeSlugfied, {
+		replacement,
+		lower: true,
+		remove: /[*+~.()'"!:@]/g,
+	});
 
 	const slugStoredPreviously = await model
 		.query()
