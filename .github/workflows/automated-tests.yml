@@ -134,7 +134,7 @@ jobs:
         run: |
           cd packages/web
           ls -la
-          unzip web_coverage.zip -d .
+          unzip coverage.zip -d .
           ls -la
   # cypress:
   #   name: E2E tests
