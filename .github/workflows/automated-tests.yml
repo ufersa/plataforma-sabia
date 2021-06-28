@@ -118,6 +118,11 @@ jobs:
           retention-days: 2
   show:
     needs: web
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os: ["ubuntu-latest"]
     steps:
       - uses: actions/checkout@v2
 
