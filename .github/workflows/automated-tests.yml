@@ -36,12 +36,16 @@ jobs:
         working-directory: packages/web
         run: npm run jest:ci
 
+      - name: Zip coverage data
+        working-directory: packages/web
+        run: zip coverage.zip ./coverage/ 
+
       - name: Upload coverage data
         uses: actions/upload-artifact@v2
         with:
           name: web_coverage
           path: |
-            **/web/coverage/
+            **/web/coverage.zip
           retention-days: 2
   api: 
     name: API tests
@@ -101,12 +105,16 @@ jobs:
         working-directory: packages/api
         run: npm run coverage
 
+      - name: Zip coverage data
+        working-directory: packages/api
+        run: zip coverage.zip ./.nyc_output 
+
       - name: Upload coverage data
         uses: actions/upload-artifact@v2
         with:
           name: api_coverage
           path: |
-            **/api/.nyc_output/
+            **/api/coverage.zip
           retention-days: 2
   # cypress:
   #   name: E2E tests
