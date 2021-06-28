@@ -38,7 +38,7 @@ jobs:
 
       - name: Zip coverage data
         working-directory: packages/web
-        run: zip coverage.zip ./coverage/ 
+        run: zip -r coverage.zip ./coverage/ 
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v2
@@ -107,7 +107,7 @@ jobs:
 
       - name: Zip coverage data
         working-directory: packages/api
-        run: zip coverage.zip ./.nyc_output 
+        run: zip -r coverage.zip ./.nyc_output 
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v2
