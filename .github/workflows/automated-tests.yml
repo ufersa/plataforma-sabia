@@ -35,6 +35,13 @@ jobs:
       - name: Run WEB tests
         working-directory: packages/web
         run: npm run jest:ci
+
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v2
+        with:
+          name: web_coverage
+          path: |
+            **/web/coverage/
   api: 
     name: API tests
     runs-on: ${{ matrix.os }}
@@ -42,6 +49,7 @@ jobs:
       matrix:
         node-version: [14.x]
         os: ["ubuntu-latest"]
+
     services:
       plataforma-sabia-redis:
         image: redis
@@ -91,6 +99,13 @@ jobs:
       - name: Run API tests
         working-directory: packages/api
         run: npm run coverage
+
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v2
+        with:
+          name: api_coverage
+          path: |
+            **/api/.nyc_output/
   # cypress:
   #   name: E2E tests
   #   runs-on: ${{ matrix.os }}
