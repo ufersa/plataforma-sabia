@@ -40,12 +40,15 @@ jobs:
         working-directory: packages/web
         run: zip -r coverage.zip ./coverage/ 
 
+      - name: Change to package directory
+        run: cd packages/web
+
       - name: Upload coverage data
         uses: actions/upload-artifact@v2
         with:
           name: web_coverage
           path: |
-            **/web/coverage.zip
+            ./coverage.zip
           retention-days: 2
   api: 
     name: API tests
