@@ -116,6 +116,19 @@ jobs:
           path: |
             **/api/coverage.zip
           retention-days: 2
+  show:
+    needs: web
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: web_coverage
+      
+      - name: Display structure
+        run: |
+          cd packages/web
+          ls -la
   # cypress:
   #   name: E2E tests
   #   runs-on: ${{ matrix.os }}
