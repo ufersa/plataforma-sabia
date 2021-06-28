@@ -136,6 +136,8 @@ jobs:
           ls -la
           unzip coverage.zip -d .
           ls -la
+          cd coverage
+          ls -la
   # cypress:
   #   name: E2E tests
   #   runs-on: ${{ matrix.os }}
