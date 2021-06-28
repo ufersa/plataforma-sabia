@@ -42,6 +42,7 @@ jobs:
           name: web_coverage
           path: |
             **/web/coverage/
+          retention-days: 2
   api: 
     name: API tests
     runs-on: ${{ matrix.os }}
@@ -106,6 +107,7 @@ jobs:
           name: api_coverage
           path: |
             **/api/.nyc_output/
+          retention-days: 2
   # cypress:
   #   name: E2E tests
   #   runs-on: ${{ matrix.os }}
