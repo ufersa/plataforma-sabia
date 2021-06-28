@@ -41,11 +41,11 @@ jobs:
         run: zip -r coverage.zip ./coverage/ 
 
       - name: Upload coverage data
-        working-directory: packages/web
         uses: actions/upload-artifact@v2
         with:
           name: web_coverage
-          path: ./coverage.zip
+          path: |
+            **/web/coverage.zip
           retention-days: 2
   api: 
     name: API tests
@@ -110,11 +110,11 @@ jobs:
         run: zip -r coverage.zip ./.nyc_output 
 
       - name: Upload coverage data
-        working-directory: packages/api
         uses: actions/upload-artifact@v2
         with:
           name: api_coverage
-          path: ./coverage.zip
+          path: |
+            **/api/coverage.zip
           retention-days: 2
   # cypress:
   #   name: E2E tests
