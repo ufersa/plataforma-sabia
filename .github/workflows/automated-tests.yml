@@ -41,8 +41,8 @@ jobs:
         run: zip -r coverage.zip ./coverage/ 
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v2
         working-directory: packages/web
+        uses: actions/upload-artifact@v2
         with:
           name: web_coverage
           path: ./coverage.zip
@@ -110,8 +110,8 @@ jobs:
         run: zip -r coverage.zip ./.nyc_output 
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@v2
         working-directory: packages/api
+        uses: actions/upload-artifact@v2
         with:
           name: api_coverage
           path: ./coverage.zip
