@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Restore web dependencies from cache
+      - name: Restore dependencies from cache
         uses: actions/cache@v2
         id: web_dependencies_cache
         with:
@@ -30,6 +30,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.web_dependencies_cache.outputs.cache-hit != 'true'
+        working-directory: packages/web
         run: npm install
 
       - name: Run WEB tests
@@ -73,7 +74,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Restore api dependencies from cache
+      - name: Restore dependencies from cache
         uses: actions/cache@v2
         id: api_dependencies_cache
         with:
@@ -83,6 +84,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.api_dependencies_cache.outputs.cache-hit != 'true'
+        working-directory: packages/api
         run: npm install
 
       - name: Setup API environments
