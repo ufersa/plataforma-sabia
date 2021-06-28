@@ -1,6 +1,30 @@
 on: [pull_request]
 
 name: CI
+
+anchors:
+  redis_service: &redis_service
+    redis:
+      image: redis
+      ports:
+        - 6379:6379
+      options: >-
+        --health-cmd "redis-cli ping"
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+
+    mysql_service: &mysql_service
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: sabia_testing
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
 jobs:
   web:
     name: WEB tests
@@ -42,26 +66,8 @@ jobs:
         node-version: [14.x]
         os: ["ubuntu-latest"]
     services:
-      plataforma-sabia-redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-      plataforma-sabia-mysql:
-        image: mysql
-        env:
-          MYSQL_ROOT_PASSWORD: ""
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_DATABASE: sabia_testing
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
+      <<: *redis_service
+      <<: *mysql_service
     steps:
       - uses: actions/checkout@v2
 
