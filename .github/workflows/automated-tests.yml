@@ -152,12 +152,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Prepare API for e2e tests
-        working-directory: packages/api
-        run: |
-          cp .env.testing .env
-          npm ci
-          npm run migration:run -- --seed
+      # - name: Prepare API for e2e tests
+      #   working-directory: packages/api
+      #   run: |
+      #     cp .env.testing .env
+      #     npm ci
+      #     npm run migration:run -- --seed
 
       # - name: Run Cypress tests
       #   uses: cypress-io/github-action@v2
