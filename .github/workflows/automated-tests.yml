@@ -157,6 +157,7 @@ jobs:
         with:
           path: |
             **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install project dependencies
