@@ -128,48 +128,57 @@ jobs:
       matrix:
         node-version: [14.x]
         os: ["ubuntu-latest"]
-    # services:
-    #   plataforma-sabia-redis:
-    #     image: redis
-    #     ports:
-    #       - 6379:6379
-    #     options: >-
-    #       --health-cmd "redis-cli ping"
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
+    services:
+      plataforma-sabia-redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-    #   plataforma-sabia-mysql:
-    #     image: mysql
-    #     env:
-    #       MYSQL_ROOT_PASSWORD: ""
-    #       MYSQL_ALLOW_EMPTY_PASSWORD: true
-    #       MYSQL_DATABASE: sabia_testing
-    #     ports:
-    #       - 3306:3306
-    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      plataforma-sabia-mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: sabia_testing
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Prepare API for e2e tests
-      #   working-directory: packages/api
-      #   run: |
-      #     cp .env.testing .env
-      #     npm ci
-      #     npm run migration:run -- --seed
+      - name: Restore dependencies from cache
+        uses: actions/cache@v2
+        id: project_dependencies
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-      # - name: Run Cypress tests
-      #   uses: cypress-io/github-action@v2
-      #   env:
-      #     ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      #   with:
-      #     command: npm run test:e2e:run
-      #     browser: chrome
+      - name: Install project dependencies
+        if: steps.project_dependencies.outputs.cache-hit != 'true'
+        run: npm install
 
-      - name: Install
-        run: npm install nyc
+      - name: Prepare API for e2e tests
+        working-directory: packages/api
+        run: |
+          cp .env.testing .env
+          npm run migration:run -- --seed
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v2
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        with:
+          command: npm run test:e2e:run
+          browser: chrome
+          install: false
 
       - name: Download WEB coverage
         uses: actions/download-artifact@v2
@@ -185,18 +194,15 @@ jobs:
         working-directory: packages/web
         run: |
           unzip coverage.zip -d .
-          ls -la ./coverage
 
       - name: Unzip API coverage
         working-directory: packages/api
         run: |
           unzip coverage.zip -d .
-          ls -la ./.nyc_output
 
       - name: Merge coverages
         run: |
           npm run merge-coverage
-          ls -la ./coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
