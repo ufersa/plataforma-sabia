@@ -122,7 +122,6 @@ jobs:
   # It should be enough time to web/api job get done
   e2eAndCoverage:
     name: E2E / Coverage
-    needs: [web,api]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
