@@ -194,7 +194,9 @@ jobs:
           ls -la ./.nyc_output
 
       - name: Merge coverages
-        run: npm run merge-coverage
+        run: |
+          npm run merge-coverage
+          ls -la ./coverage
 
       # - name: Coveralls
       #   uses: coverallsapp/github-action@master
