@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         if: steps.web_dependencies_cache.outputs.cache-hit != 'true'
         working-directory: packages/web
-        run: npm install
+        run: npm ci
 
       - name: Run WEB tests
         working-directory: packages/web
@@ -101,7 +101,7 @@ jobs:
       - name: Install dependencies
         if: steps.api_dependencies_cache.outputs.cache-hit != 'true'
         working-directory: packages/api
-        run: npm install
+        run: npm ci
 
       - name: Setup API environments
         working-directory: packages/api
@@ -168,7 +168,7 @@ jobs:
 
       - name: Install project dependencies
         if: steps.project_dependencies.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
 
       - name: Prepare API for e2e tests
         working-directory: packages/api
