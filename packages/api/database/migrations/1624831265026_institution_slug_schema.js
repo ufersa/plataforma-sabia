@@ -17,10 +17,9 @@ class InstitutionSlugSchema extends Schema {
 		this.schedule(async (trx) => {
 			const institutions = await Database.table('institutions').transacting(trx);
 
-			for (const institution of institutions) {
+			for await (const institution of institutions) {
 				let institutionSlug;
 				if (institution.slug === null) {
-					// eslint-disable-next-line no-await-in-loop
 					institutionSlug = await createUniqueSlug(
 						Institution,
 						institution.initials,
@@ -28,7 +27,7 @@ class InstitutionSlugSchema extends Schema {
 						'',
 					);
 				}
-				// eslint-disable-next-line no-await-in-loop
+
 				await Database.table('institutions')
 					.where('id', institution.id)
 					.update({ slug: institutionSlug });
