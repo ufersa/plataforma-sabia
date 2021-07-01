@@ -6,9 +6,10 @@ import Head from '../../../components/head';
 import { findResultsState, searchStateToURL, urlToSearchState } from '../../../utils/algoliaHelper';
 import { getInstitution } from '../../../services';
 import SolutionList from './SolutionList';
+import ErrorPage from '../../../pages/_error';
 import * as S from './styles';
 
-const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution }) => {
+const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution, notFound }) => {
 	const [searchState, setSearchState] = useState(initialSearchState);
 	const { t } = useTranslation(['pages']);
 
@@ -16,6 +17,10 @@ const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution
 		searchStateToURL(newSearchState);
 		setSearchState(newSearchState);
 	};
+
+	if (notFound) {
+		return <ErrorPage statusCode={404} />;
+	}
 
 	return (
 		<>
@@ -98,13 +103,18 @@ InstitutionShowcasePage.propTypes = {
 		email: PropTypes.string.isRequired,
 		website: PropTypes.string.isRequired,
 	}).isRequired,
+	notFound: PropTypes.bool,
 };
 
-InstitutionShowcasePage.getInitialProps = async ({ query, res, asPath }) => {
+InstitutionShowcasePage.defaultProps = {
+	notFound: false,
+};
+
+InstitutionShowcasePage.getInitialProps = async ({ query, asPath }) => {
 	const institution = await getInstitution(query.institution);
 
 	if (!institution) {
-		return res.writeHead(302, { Location: '/_error.js' }).end();
+		return { notFound: true };
 	}
 
 	const initialSearchState = urlToSearchState(asPath);

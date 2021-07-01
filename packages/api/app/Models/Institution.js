@@ -29,10 +29,10 @@ class Institution extends Model {
 	}
 
 	/**
-	 * Query scope to get the institution either by id or initials
+	 * Query scope to get the institution either by id or slug
 	 *
 	 * @param {object} query The query object.
-	 * @param {number|string} institution The institution id or initials
+	 * @param {number|string} institution The institution id or slug
 	 * @returns {object}
 	 */
 	static scopeGetInstitution(query, institution) {
@@ -40,7 +40,7 @@ class Institution extends Model {
 			return query.where({ id: institution });
 		}
 
-		return query.where({ initials: institution });
+		return query.where({ slug: institution });
 	}
 
 	/**

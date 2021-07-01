@@ -8,11 +8,11 @@ import { internal as internalPages } from '../../../utils/consts/pages';
 
 import * as S from './styles';
 
-const HitCard = ({ hit: { initials, name, logo, __meta__ } }) => {
+const HitCard = ({ hit: { initials, name, logo, slug, __meta__ } }) => {
 	const { t } = useTranslation(['common']);
 
 	return (
-		<Link href={internalPages.institutionShowcase.replace(':institution', initials)} passHref>
+		<Link href={internalPages.institutionShowcase.replace(':institution', slug)} passHref>
 			<S.Container>
 				<S.Info>
 					<img src={logo?.url || '/add-to-cart-rafiki.svg'} alt="Institution logo" />
@@ -55,6 +55,7 @@ HitCard.propTypes = {
 		logo: {
 			url: PropTypes.string,
 		},
+		slug: PropTypes.string,
 		__meta__: PropTypes.shape({
 			technologies_count: PropTypes.number,
 			services_count: PropTypes.number,
