@@ -199,13 +199,34 @@ class Params {
 			],
 		};
 
+		/* const collumNames = {	
+			institutions: 'name',
+			services: 'name',
+			users: 'first_name',
+		}; */
+
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
-			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
+			const {
+				id,
+				embed,
+				page,
+				perPage,
+				order,
+				orderBy,
+				ids,
+				notIn,
+				filterBy,
+				filter,
+			} = request.params;
 
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
 			const { filterById = true, skipRelationships = [], skipPagination = false } = options;
+
+			if (filterBy && filter) {
+				this.where(filterBy, 'LIKE', `${filter}%`);
+			}
 
 			if (embed.all) {
 				relationships[resource].map(

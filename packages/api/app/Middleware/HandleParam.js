@@ -9,7 +9,17 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed', 'ids', 'notIn']);
+		const data = request.only([
+			'page',
+			'perPage',
+			'order',
+			'orderBy',
+			'embed',
+			'ids',
+			'notIn',
+			'filterBy',
+			'filter',
+		]);
 
 		if (data.embed === '') {
 			data.embed = {
@@ -48,6 +58,8 @@ class HandleParam {
 			embed,
 			ids: data.ids.length ? data.ids : defaultListIds,
 			notIn: data.notIn.length ? data.notIn : defaultListIds,
+			filterBy: data.filterBy,
+			filter: data.filter,
 		};
 
 		request.params = params;
