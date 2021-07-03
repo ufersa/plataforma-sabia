@@ -225,7 +225,7 @@ class Params {
 			const { filterById = true, skipRelationships = [], skipPagination = false } = options;
 
 			if (filterBy && filter) {
-				this.where(filterBy, 'LIKE', `${filter}%`);
+				this.where(filterBy, 'LIKE', `%${filter}%`);
 			}
 
 			if (embed.all) {
