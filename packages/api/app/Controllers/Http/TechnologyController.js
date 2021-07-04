@@ -14,6 +14,7 @@ const Reviewer = use('App/Models/Reviewer');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
 const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 const Permission = use('App/Models/Permission');
+const TechnologyLocation = use('App/Models/TechnologyLocation');
 
 const Bull = use('Rocketseat/Bull');
 const TechnologyDistributionJob = use('App/Jobs/TechnologyDistribution');
@@ -290,23 +291,11 @@ class TechnologyController {
 			await technology.locations().detach(null, null, trx);
 		}
 
-		const locationsMap = locations.reduce(
-			(obj, currentLocation) => {
-				const { location_id, location_type } = currentLocation;
-				obj.ids.push(location_id);
-				obj.locations[location_id] = location_type;
-				return obj;
-			},
-			{ ids: [], locations: {} },
-		);
-
-		await technology.locations().attach(
-			locationsMap.ids,
-			(row) => {
-				// eslint-disable-next-line no-param-reassign
-				row.location_type = locationsMap.locations[row.location_id];
-			},
-			trx,
+		await TechnologyLocation.createMany(
+			locations.map((location) => ({
+				technology_id: technology.id,
+				...location,
+			})),
 		);
 	}
 

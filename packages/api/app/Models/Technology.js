@@ -211,7 +211,7 @@ class Technology extends Model {
 
 	locations() {
 		return this.belongsToMany('App/Models/Location')
-			.pivotTable('technology_location')
+			.pivotModel('App/Models/TechnologyLocation')
 			.withPivot(['location_type']);
 	}
 

@@ -32,7 +32,9 @@ class Location extends Model {
 	}
 
 	technologies() {
-		return this.belongsToMany('App/Models/Technology').pivotTable('technology_location');
+		return this.belongsToMany('App/Models/Technology').pivotModel(
+			'App/Models/TechnologyLocation',
+		);
 	}
 }
 
