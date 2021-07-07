@@ -199,12 +199,6 @@ class Params {
 			],
 		};
 
-		/* const collumNames = {	
-			institutions: 'name',
-			services: 'name',
-			users: 'first_name',
-		}; */
-
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
 			const {
 				id,
