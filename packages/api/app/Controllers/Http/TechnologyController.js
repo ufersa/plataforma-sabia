@@ -293,8 +293,8 @@ class TechnologyController {
 
 		await TechnologyLocation.createMany(
 			locations.map((location) => ({
-				technology_id: technology.id,
 				...location,
+				technology_id: technology.id,
 			})),
 		);
 	}
