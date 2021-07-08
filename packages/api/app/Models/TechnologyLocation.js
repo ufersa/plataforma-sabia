@@ -2,7 +2,6 @@
 const Model = use('Model');
 
 class TechnologyLocation extends Model {
-
 	static get table() {
 		return 'technology_location';
 	}
