@@ -6,6 +6,7 @@ const Role = use('App/Models/Role');
 const Permission = use('App/Models/Permission');
 const User = use('App/Models/User');
 const Disclaimer = use('App/Models/Disclaimer');
+const Factory = use('Factory');
 const { createUser } = require('../utils/Suts');
 const {
 	roles: { ADMIN: ADMIN_ROLE },
@@ -507,6 +508,31 @@ test('GET Check translations on General', async ({ client }) => {
 			message: 'O recurso Term não foi encontrado',
 		},
 	});
+});
+
+test('GET using filterBy and filter to filter resources', async ({ client }) => {
+	const { user: loggedUser } = await createUser({ append: { role: ADMIN_ROLE } });
+
+	const filter = {
+		filterBy: 'name',
+		filter: 'Xavier',
+	};
+	const institution = await Factory.model('App/Models/Institution').create({
+		name: "Xavier's School for Gifted Youngsters",
+	});
+
+	const response = await client
+		.get(`/institutions`)
+		.query(filter)
+		.loginVia(loggedUser, 'jwt')
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset([
+		{
+			name: institution.name,
+		},
+	]);
 });
 
 module.exports.defaultParams = defaultParams;
