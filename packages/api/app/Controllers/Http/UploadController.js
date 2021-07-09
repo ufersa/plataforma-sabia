@@ -4,6 +4,8 @@ const Upload = use('App/Models/Upload');
 const fs = require('fs');
 const fsp = require('fs').promises;
 
+const { makeSafeHash } = require('../../Utils/slugify');
+
 const Logger = use('Logger');
 
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
@@ -46,7 +48,8 @@ class UploadController {
 
 			uploads = await Promise.all(
 				files.files.map(async (file) => {
-					const fileName = `${new Date().getTime()}_${file.clientName}`;
+					const ext = file.clientName.split('.').pop();
+					const fileName = `${await makeSafeHash(file.clientName)}.${ext}`;
 
 					const filePath = `${Helpers.tmpPath(folder)}/${fileName}`;
 					await file.move(Helpers.tmpPath(folder), { name: fileName, overwrite: true });
@@ -63,7 +66,7 @@ class UploadController {
 
 					return user.uploads().create(
 						{
-							filename: file.fileName,
+							filename: file.clientName,
 							object: objectInfo.object,
 							object_id: objectInfo.object_id,
 							url,
@@ -94,7 +97,7 @@ class UploadController {
 	async destroy({ params, response }) {
 		const upload = await Upload.findOrFail(params.id);
 
-		const file = new URL(upload.url).pathname.slice(1);
+		const file = decodeURIComponent(new URL(upload.url).pathname.slice(1));
 
 		if (upload.url.includes('amazonaws')) {
 			if (await Drive.exists(file)) {
