@@ -861,6 +861,43 @@ test('POST /technologies/:id/locations associates locations with own technology.
 	response.assertJSONSubset(newLocations.toJSON());
 });
 
+test('POST /technologies/:id/locations associates same location with two different location types.', async ({
+	client,
+	assert,
+}) => {
+	const { user: loggedUser } = await createUser({
+		append: { role: roles.RESEARCHER },
+	});
+
+	const newTechnology = await Factory.model('App/Models/Technology').create();
+	await newTechnology.users().attach(loggedUser.id);
+
+	const city = await City.first();
+	const locationInst = await Factory.model('App/Models/Location').create({
+		city_id: city.id,
+	});
+
+	const locations = [
+		{
+			location_id: locationInst.id,
+			location_type: technologyLocationsTypes.WHERE_IS_ALREADY_IMPLEMENTED,
+		},
+		{
+			location_id: locationInst.id,
+			location_type: technologyLocationsTypes.WHO_DEVELOP,
+		},
+	];
+
+	const response = await client
+		.post(`/technologies/${newTechnology.id}/locations`)
+		.loginVia(loggedUser, 'jwt')
+		.send({ locations })
+		.end();
+
+	response.assertStatus(200);
+	assert.isAtLeast(response.body.length, 2);
+});
+
 test('PUT /technologies/:id Unauthorized User trying update technology details', async ({
 	client,
 }) => {
