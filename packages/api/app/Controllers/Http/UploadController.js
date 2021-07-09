@@ -103,7 +103,6 @@ class UploadController {
 			if (await Drive.exists(file)) {
 				try {
 					await Drive.delete(file);
-					await upload.delete();
 				} catch (error) {
 					return response
 						.status(400)
@@ -117,6 +116,7 @@ class UploadController {
 			} else {
 				Logger.error('File does not exist.');
 			}
+			await upload.delete();
 		} else {
 			const localPath = upload.object ? `${uploadsPath}/${upload.object}` : `${uploadsPath}`;
 			const path = Helpers.publicPath(`${localPath}/${upload.filename}`);

@@ -14,7 +14,6 @@ const ReviewerTechnologyHistory = use('App/Models/ReviewerTechnologyHistory');
 const Revision = use('App/Models/Revision');
 const City = use('App/Models/City');
 const Factory = use('Factory');
-const Config = use('Adonis/Src/Config');
 const Bull = use('Rocketseat/Bull');
 const fs = require('fs').promises;
 
@@ -36,7 +35,6 @@ trait('Test/ApiClient');
 trait('Auth/Client');
 trait('DatabaseTransactions');
 
-const { uploadsPath } = Config.get('upload');
 const technologyDistributionJobKey = 'TechnologyDistribution-key';
 
 const invalidField = {
@@ -298,10 +296,12 @@ test('POST /technologies creates/saves a new technology with thumbnail.', async 
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-thumbnail.jpg`))
 		.end();
 
-	await fs
-		.access(Helpers.publicPath(`${uploadsPath}/test-thumbnail.jpg`))
-		.then(() => assert.isTrue(true))
-		.catch(() => assert.isTrue(false));
+	assert.isTrue(uploadResponse.body[0].url.includes('amazonaws'));
+
+	// await fs
+	// 	.access(Helpers.publicPath(`${uploadsPath}/test-thumbnail.jpg`))
+	// 	.then(() => assert.isTrue(true))
+	// 	.catch(() => assert.isTrue(false));
 	uploadResponse.assertStatus(200);
 
 	const thumbnail_id = uploadResponse.body[0].id;

@@ -3,9 +3,7 @@ const Helpers = use('Helpers');
 const fs = require('fs').promises;
 const { createUser } = require('../utils/Suts');
 
-const Config = use('Adonis/Src/Config');
 const Factory = use('Factory');
-const { uploadsPath } = Config.get('upload');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -15,6 +13,7 @@ const { antl, errors, errorPayload } = require('../../app/Utils');
 
 const User = use('App/Models/User');
 const Upload = use('App/Models/Upload');
+const Drive = use('Drive');
 
 const base64String =
 	'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAFA3PEY8MlBGQUZaVVBfeMiCeG5uePWvuZHI' +
@@ -28,17 +27,6 @@ const base64String =
 	'dvNy70e/H//xAAcEQEAAgMAAwAAAAAAAAAAAAABABECECASITD/2gAIAQMBAT8AWKwb5y9Yxbhyl7HkImsXkSJivVTx' +
 	'B02Px//Z';
 const base64Data = base64String.replace(/^data:image\/jpeg;base64,/, '');
-
-const fsExists = async (path) => {
-	return fs
-		.access(path)
-		.then(() => {
-			return true;
-		})
-		.catch(() => {
-			return false;
-		});
-};
 
 test('POST /uploads trying to upload non-allowed file extension.', async ({ client }) => {
 	const { user: loggedUser } = await createUser();
@@ -87,10 +75,7 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 		.end();
-	const result = await fsExists(
-		Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`),
-	);
-	assert.isTrue(result);
+	assert.isTrue(response.body[0].url.includes('amazonaws'));
 
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
@@ -115,8 +100,7 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 		.end();
 
 	response.body.map(async (file) => {
-		const result = await fsExists(Helpers.publicPath(`${uploadsPath}/${file.filename}`));
-		assert.isTrue(result);
+		assert.isTrue(file.url.includes('amazonaws'));
 	});
 
 	const filesIds = response.body.map((file) => file.id);
@@ -160,55 +144,11 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
 		.end();
 
-	const result = await fsExists(
-		Helpers.publicPath(
-			`${uploadsPath}/${response.body[0].object}/${response.body[0].filename}`,
-		),
-	);
-	assert.isTrue(result);
+	assert.isTrue(response.body[0].url.includes('amazonaws'));
+
 	const uploadCreated = await Upload.findOrFail(response.body[0].id);
 	response.assertStatus(200);
 	response.assertJSONSubset([uploadCreated.toJSON()]);
-});
-
-test('POST /uploads creates unique filenames.', async ({ client, assert }) => {
-	const { user: loggedUser } = await createUser();
-
-	await fs.writeFile(
-		Helpers.tmpPath(`resources/test/test-image-unique.jpg`),
-		base64Data,
-		'base64',
-	);
-
-	const file = {
-		clientName: 'test-image-unique.jpg',
-		extname: 'jpg',
-	};
-	let uniqueFilename = await Upload.getUniqueFileName(file);
-
-	const response = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
-		.end();
-
-	let result = await fsExists(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`));
-	assert.isTrue(result);
-
-	assert.equal(response.body[0].filename, uniqueFilename);
-
-	uniqueFilename = await Upload.getUniqueFileName(file);
-
-	const response2 = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/${file.clientName}`))
-		.end();
-
-	result = await fsExists(Helpers.publicPath(`${uploadsPath}/${uniqueFilename}`));
-	assert.isTrue(result);
-
-	assert.equal(response2.body[0].filename, uniqueFilename);
 });
 
 test('POST /uploads user trying to upload for object and object_id without permission.', async ({
@@ -249,16 +189,15 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
-	let result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
-	assert.isTrue(result);
+	assert.isTrue(responseUpload.body[0].url.includes('amazonaws'));
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(loggedUser, 'jwt')
 		.end();
 
-	result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
-	assert.isFalse(result);
+	const file = decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1));
+	assert.isFalse(await Drive.exists(file));
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
@@ -281,8 +220,7 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
-	const result = await fsExists(Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`));
-	assert.isTrue(result);
+	assert.isTrue(responseUpload.body[0].url.includes('amazonaws'));
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
@@ -293,37 +231,6 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 	response.assertJSONSubset(
 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
 	);
-});
-
-test('POST /uploads new upload when a file with the same name already exists.', async ({
-	client,
-	assert,
-}) => {
-	const { user: loggedUser } = await createUser();
-
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
-
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-1.jpg`), base64Data, 'base64');
-	await fs.writeFile(Helpers.publicPath(`${uploadsPath}/test-image-3.jpg`), base64Data, 'base64');
-
-	const response = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
-		.end();
-	const result = await fsExists(
-		Helpers.publicPath(`${uploadsPath}/${response.body[0].filename}`),
-	);
-	assert.isTrue(result);
-
-	const uploadCreated = await Upload.findOrFail(response.body[0].id);
-	response.assertStatus(200);
-	response.body[0].object = null;
-	response.body[0].object_id = null;
-	response.assertJSONSubset([uploadCreated.toJSON()]);
-
-	assert.equal(response.body[0].filename, 'test-image-2.jpg');
 });
 
 test('DELETE /uploads/:id delete a record where the associated file does not exist in the directory.', async ({
@@ -344,15 +251,12 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
 
-	const pathFile = Helpers.publicPath(`${uploadsPath}/test-image-for-delete.jpg`);
+	assert.isTrue(responseUpload.body[0].url.includes('amazonaws'));
+	const file = decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1));
 
-	let result = await fsExists(pathFile);
-	assert.isTrue(result);
-
-	await fs.unlink(pathFile);
-
-	result = await fsExists(pathFile);
-	assert.isFalse(result);
+	assert.isTrue(await Drive.exists(file));
+	await Drive.delete(file);
+	assert.isFalse(await Drive.exists(file));
 
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
