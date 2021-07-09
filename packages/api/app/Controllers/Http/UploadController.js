@@ -79,9 +79,10 @@ class UploadController {
 			await commit();
 		} catch (error) {
 			trx.rollback();
-			await Promise.all(
-				uploads.map((file) => Drive.delete(new URL(file.url).pathname.slice(1))),
-			);
+			if (uploads)
+				await Promise.all(
+					uploads.map((file) => Drive.delete(new URL(file.url).pathname.slice(1))),
+				);
 			return response
 				.status(400)
 				.send(
