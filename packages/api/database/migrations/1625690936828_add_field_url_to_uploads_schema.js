@@ -20,7 +20,7 @@ class AddFieldUrlToUploadsSchema extends Schema {
 		await this.hasColumn('uploads', 'url').then((exists) => {
 			if (!exists) {
 				this.table('uploads', (table) => {
-					table.string('url', 255);
+					table.string('url', 255).after('object_id');
 				});
 			}
 		});
