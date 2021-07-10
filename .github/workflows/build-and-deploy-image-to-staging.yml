@@ -4,7 +4,7 @@ on:
     - 'master'
     workflow_dispatch:
 
-name: CI - Deploy to STAGING
+name: Deploy to STAGING
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
