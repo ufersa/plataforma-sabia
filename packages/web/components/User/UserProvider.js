@@ -110,6 +110,7 @@ const resetPassword = async ({ token, password, email }) => {
 
 export const UserProvider = ({ children, user }) => {
 	const [state, dispatch] = useReducer(userReducer, user);
+	const isAuthenticated = !!state?.email;
 
 	const setUser = useCallback((value) => {
 		dispatch({
@@ -165,6 +166,7 @@ export const UserProvider = ({ children, user }) => {
 		<UserContext.Provider
 			value={{
 				user: state,
+				isAuthenticated,
 				setUser,
 				login,
 				logout,
