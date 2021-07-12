@@ -115,7 +115,6 @@ describe('Protected component', () => {
 			user: {
 				email: null,
 			},
-			isAuthenticated: false,
 		});
 
 		const childrenText = 'children';
@@ -140,7 +139,6 @@ describe('Protected component', () => {
 			user: {
 				email: null,
 			},
-			isAuthenticated: false,
 		});
 
 		const { container, queryByTestId } = render(
