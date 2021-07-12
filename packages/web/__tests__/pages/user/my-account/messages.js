@@ -17,6 +17,7 @@ describe('<Messages />', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 		render(<MessagesPage {...props} />);
 

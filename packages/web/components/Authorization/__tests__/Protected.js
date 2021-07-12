@@ -28,6 +28,7 @@ describe('Protected component', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 
 		const childrenText = 'children';
@@ -50,6 +51,7 @@ describe('Protected component', () => {
 					role: 'admin',
 				},
 			},
+			isAuthenticated: true,
 		});
 
 		const childrenText = 'children';
@@ -72,6 +74,7 @@ describe('Protected component', () => {
 					role: 'moderator',
 				},
 			},
+			isAuthenticated: true,
 		});
 
 		const childrenText = 'children';
