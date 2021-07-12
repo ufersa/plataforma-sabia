@@ -36,6 +36,7 @@ test('it renders Revisions page correctly', () => {
 				role: ROLES.REVIEWER,
 			},
 		},
+		isAuthenticated: true,
 	});
 
 	const { container } = render(

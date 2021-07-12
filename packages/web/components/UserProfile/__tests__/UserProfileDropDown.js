@@ -31,7 +31,6 @@ describe('UserProfileDropDown', () => {
 	it('should not request notifications if user is unauthenticated', () => {
 		jest.spyOn(useAuth, 'default').mockReturnValue({
 			user: {},
-			isAuthenticated: false,
 		});
 		const mockedQuestions = jest.spyOn(userServices, 'getUserUnansweredQuestions');
 		const mockedMessages = jest.spyOn(userServices, 'getUserNewMessages');
