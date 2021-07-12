@@ -17,13 +17,14 @@ import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
 import { internal as internalPages, landingPage } from '../utils/consts/pages';
+import { isAppEnvProduction } from '../utils/helper';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', (url) => {
 	NProgress.done();
-	if (['production'].includes(config.APP_ENV)) {
+	if (isAppEnvProduction()) {
 		pageview(url);
 	}
 });
