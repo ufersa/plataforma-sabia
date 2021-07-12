@@ -12,17 +12,17 @@ import { getUserUnansweredQuestions, getUserNewMessages } from '../../services/u
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
-	const { user } = useAuth();
+	const { user, isAuthenticated } = useAuth();
 	const { colors } = theme;
 
 	const { data: { data: userUnansweredQuestions } = {} } = useSWR(
-		['get-user-unanswered-questions-count'],
+		isAuthenticated ? 'get-user-unanswered-questions-count' : null,
 		() => getUserUnansweredQuestions(),
 		{ revalidateOnFocus: false },
 	);
 
 	const { data: userNewMessages } = useSWR(
-		['get-user-new-messages-count'],
+		isAuthenticated ? 'get-user-new-messages-count' : null,
 		() => getUserNewMessages(),
 		{ revalidateOnFocus: false },
 	);
