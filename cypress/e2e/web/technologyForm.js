@@ -235,7 +235,7 @@ describe('creating/editing technology', () => {
 		cy.findByText(/sua tecnologia foi cadastrada/i).should('be.visible');
 	});
 
-	it('should be able to upload images and set a thumbnail', () => {
+	it.skip('should be able to upload images and set a thumbnail', () => {
 		Cypress.config('scrollBehavior', 'center');
 		cy.visit('/user/my-account/technologies');
 
