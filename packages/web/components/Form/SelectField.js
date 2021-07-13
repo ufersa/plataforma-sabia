@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
@@ -14,6 +15,10 @@ import { theme } from '../../styles';
 
 const reactSelectStyles = {
 	default: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			minHeight: '4.4rem',
@@ -27,6 +32,10 @@ const reactSelectStyles = {
 	},
 
 	rounded: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			minHeight: '4.4rem',
@@ -46,6 +55,10 @@ const reactSelectStyles = {
 	},
 
 	gray: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			backgroundColor: theme.colors.lightGray4,
@@ -104,6 +117,7 @@ const SelectField = ({
 	isHidden,
 	isLoading,
 	instanceId,
+	isAsync,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -206,7 +220,9 @@ const SelectField = ({
 
 		return newOption;
 	};
-	const Component = creatable ? StyledCreatable : StyledSelect;
+
+	// eslint-disable-next-line no-nested-ternary
+	const Component = creatable ? StyledCreatable : isAsync ? AsyncSelect : StyledSelect;
 
 	return (
 		<InputFieldWrapper
@@ -291,6 +307,7 @@ SelectField.propTypes = {
 	isHidden: PropTypes.bool,
 	isLoading: PropTypes.bool,
 	instanceId: PropTypes.string,
+	isAsync: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
@@ -308,6 +325,7 @@ SelectField.defaultProps = {
 	isHidden: false,
 	isLoading: false,
 	instanceId: '',
+	isAsync: false,
 };
 
 export default SelectField;
