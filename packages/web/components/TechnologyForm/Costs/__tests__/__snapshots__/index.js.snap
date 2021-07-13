@@ -665,7 +665,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   class="c7"
                 >
                   <div
-                    class="c21 react-select-container css-2b097c-container"
+                    class="c21 react-select-container css-dyr6gj-container"
                     id="technologyCosts.costs.development_costs[0].type"
                   >
                     <div
@@ -833,7 +833,7 @@ exports[`it add one row when clicking the add button 1`] = `
                   class="c7"
                 >
                   <div
-                    class="c21 react-select-container css-2b097c-container"
+                    class="c21 react-select-container css-dyr6gj-container"
                     id="technologyCosts.costs.development_costs[0].measure_unit"
                   >
                     <div
@@ -2538,7 +2538,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c7"
             >
               <div
-                class="c21 react-select-container css-2b097c-container"
+                class="c21 react-select-container css-dyr6gj-container"
                 id="technologyCosts.funding_type"
               >
                 <div
@@ -2686,7 +2686,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
               class="c7"
             >
               <div
-                class="c21 react-select-container css-2b097c-container"
+                class="c21 react-select-container css-dyr6gj-container"
                 id="technologyCosts.funding_status"
               >
                 <div

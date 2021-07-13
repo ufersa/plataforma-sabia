@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaPlus } from 'react-icons/fa';
+import debounce from 'lodash.debounce';
+import useSWR from 'swr';
+
 import { useAuth, useModal } from '../../../hooks';
 import { UserProfile, UserSpecialities, S } from '../../../components/UserProfile';
 import { Protected } from '../../../components/Authorization';
@@ -27,6 +30,27 @@ import {
 import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
 import { maskPatterns, replaceWithMask } from '../../../utils/masks';
+
+const mapInstitutionsOptions = (institutions) =>
+	institutions?.map((institution) => ({
+		label: getInstitutionLabel(institution),
+		value: institution.id,
+	})) || [];
+
+/**
+ * Transform user fields that needs mask.
+ * This is necessary because we receive values without mask from api.
+ *
+ * @param {object} user The current user object
+ * @returns {object} Transformed user object with masks
+ */
+const transformUserDefaultValues = (user) => ({
+	...user,
+	cpf: replaceWithMask(user.cpf, 'cpf'),
+	birth_date: replaceWithMask(dateToString(user.birth_date), 'brazilianDate'),
+	phone_number: replaceWithMask(user.phone_number, 'phoneNumber'),
+	zipcode: replaceWithMask(user.zipcode, 'zipCode'),
+});
 
 const MyProfile = () => {
 	const { user, setUser } = useAuth();
@@ -109,7 +133,10 @@ const MyProfile = () => {
 				<S.MainContentContainer>
 					<HeaderProfile />
 					<S.MainContent>
-						<Form onSubmit={handleSubmit}>
+						<Form
+							defaultValues={{ ...transformUserDefaultValues(user) }}
+							onSubmit={handleSubmit}
+						>
 							<CommonDataForm user={user} message={message} loading={loading} />
 						</Form>
 						<Form onSubmit={handlePasswordSubmit}>
@@ -126,9 +153,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	const { setValue, register } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
-	const [institutionsLoading, setInstitutionsLoading] = useState(true);
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
-	const [institutions, setInstitutions] = useState([]);
 	const [userAreas, setUserAreas] = useState(user?.areas || []);
 	const [hasAreasLoading, setHasAreasLoading] = useState([true]);
 	const areaKeys = ['great_area_id', 'area_id', 'sub_area_id', 'speciality_id'];
@@ -140,32 +165,37 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		speciality_id: null,
 	};
 
-	const setCurrentUserInstitution = useCallback(
-		async (data) => {
-			const userInstitution = data.find(
-				(institution) => institution.id === user.institution_id,
-			);
-
-			if (userInstitution) {
-				setValue('institution_id', {
-					label: getInstitutionLabel(userInstitution),
-					value: userInstitution.id,
-				});
-			}
+	const { data: { data: institutions } = {} } = useSWR(
+		'get-institutions',
+		() => getInstitutions({ perPage: 10, order: 'desc' }),
+		{
+			revalidateOnFocus: false,
 		},
-		[setValue, user.institution_id],
 	);
 
-	const loadInstitutions = useCallback(async () => {
-		const { data } = await getInstitutions({ perPage: 100, order: 'desc' });
-		setInstitutions(data);
-		await setCurrentUserInstitution(data);
-		setInstitutionsLoading(false);
-	}, [setCurrentUserInstitution]);
+	const handleFetchInstitutions = debounce((value, callback) => {
+		getInstitutions({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
+			const mappedOptions = mapInstitutionsOptions(response.data);
+			callback(mappedOptions);
+		});
+	}, 300);
 
-	useEffect(() => {
-		loadInstitutions();
-	}, [loadInstitutions]);
+	/**
+	 * Returns default institutions for use in async select
+	 * Do not concat user institution with institutions array if already exists
+	 *
+	 * @returns {Array} Institutions options
+	 */
+	const getDefaultInstitutionsOptions = () => {
+		const userInstitution = institutions?.find(
+			(institution) => institution.id === user.institution_id,
+		);
+
+		return [
+			...mapInstitutionsOptions(institutions),
+			...(!userInstitution ? mapInstitutionsOptions([user.institution]) : []),
+		];
+	};
 
 	useEffect(() => {
 		register('researcher');
@@ -193,7 +223,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="full_name"
 						label={t('account:labels.fullName')}
 						validation={{ required: true }}
-						defaultValue={user.full_name}
 						variant="gray"
 					/>
 				</Cell>
@@ -203,7 +232,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							form={form}
 							name="email"
 							label={t('account:labels.mainEmail')}
-							defaultValue={user.email}
 							type="email"
 							disabled="disabled"
 							variant="gray"
@@ -226,7 +254,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.cpf')}
 						validation={{ required: true }}
 						variant="gray"
-						defaultValue={replaceWithMask(user?.cpf, 'cpf')}
 						pattern={maskPatterns.cpf.pattern}
 						mask={maskPatterns.cpf.stringMask}
 					/>
@@ -238,10 +265,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.birthDate')}
 						validation={{ required: true }}
 						variant="gray"
-						defaultValue={replaceWithMask(
-							dateToString(user?.birth_date),
-							'brazilianDate',
-						)}
 						pattern={maskPatterns.brazilianDate.pattern}
 						mask={maskPatterns.brazilianDate.stringMask}
 					/>
@@ -254,7 +277,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						label={t('account:labels.phoneNumber')}
 						validation={{ required: true }}
 						variant="gray"
-						defaultValue={replaceWithMask(user?.phone_number, 'phoneNumber')}
 						maskChar={null}
 						mask={maskPatterns.phoneNumber.stringMask}
 						pattern={maskPatterns.phoneNumber.pattern}
@@ -270,7 +292,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 						label={t('account:labels.zipCode')}
 						variant="gray"
-						defaultValue={replaceWithMask(user?.zipcode, 'zipCode')}
 						mask={maskPatterns.zipCode.stringMask}
 						pattern={maskPatterns.zipCode.pattern}
 					/>
@@ -281,7 +302,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="address"
 						validation={{ required: true }}
 						label={t('account:labels.address')}
-						defaultValue={user?.address ?? ''}
 						variant="gray"
 					/>
 				</Cell>
@@ -291,7 +311,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="address2"
 						validation={{ required: true }}
 						label={t('account:labels.address2')}
-						defaultValue={user?.address2 ?? ''}
 						variant="gray"
 					/>
 				</Cell>
@@ -303,7 +322,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="district"
 						validation={{ required: true }}
 						label={t('account:labels.district')}
-						defaultValue={user?.district ?? ''}
 						variant="gray"
 					/>
 				</Cell>
@@ -313,7 +331,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="city"
 						label={t('account:labels.city')}
 						validation={{ required: true }}
-						defaultValue={user?.city ?? ''}
 						variant="gray"
 					/>
 				</Cell>
@@ -325,10 +342,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						validation={{ required: true }}
 						variant="gray"
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
-						defaultValue={{
-							label: user?.state,
-							value: user?.state,
-						}}
+						instanceId="select-state-my-account"
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -337,7 +351,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="country"
 						validation={{ required: true }}
 						label={t('account:labels.country')}
-						defaultValue={user?.country ?? ''}
 						variant="gray"
 					/>
 				</Cell>
@@ -349,16 +362,18 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					<Row align="center">
 						<Cell col="auto">
 							<SelectField
-								isSearchable
 								form={form}
 								name="institution_id"
 								label={t('account:labels.institution')}
-								isLoading={institutionsLoading}
+								placeholder="Pesquise sua instituição"
 								variant="gray"
-								options={institutions?.map((institution) => ({
-									label: getInstitutionLabel(institution),
-									value: institution.id,
-								}))}
+								isAsync
+								cacheOptions
+								defaultOptions={getDefaultInstitutionsOptions()}
+								loadOptions={handleFetchInstitutions}
+								loadingMessage={() => 'Carregando...'}
+								noOptionsMessage={() => 'Nenhuma insitutição encontrada...'}
+								instanceId="select-institutions-my-account"
 							/>
 						</Cell>
 						<S.Button
@@ -366,16 +381,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 							variant="outlined"
 							wrapperCss={S.buttonInstitutionsWrapperCss}
 							onClick={() =>
-								openModal(
-									'createInstitutions',
-									{
-										onClose: () => {
-											setInstitutionsLoading(true);
-											loadInstitutions();
-										},
-									},
-									{ overlayClick: false },
-								)
+								openModal('createInstitutions', null, { overlayClick: false })
 							}
 						>
 							<FaPlus /> Nova Organização
@@ -388,7 +394,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						name="lattes_id"
 						type="number"
 						label={t('account:labels.lattesId')}
-						defaultValue={user?.lattes_id ?? ''}
 						variant="gray"
 						help={
 							<>
@@ -507,6 +512,7 @@ CommonDataForm.propTypes = {
 		state: PropTypes.string,
 		country: PropTypes.string,
 		institution_id: PropTypes.number,
+		institution: PropTypes.shape({}),
 		researcher: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 		areas: PropTypes.arrayOf(PropTypes.shape({})),
 	}),
