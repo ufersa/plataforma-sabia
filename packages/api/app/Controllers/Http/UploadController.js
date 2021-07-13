@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
-const fs = require('fs');
-const fsp = require('fs').promises;
+const { createReadStream } = require('fs');
 
 const { makeSafeHash } = require('../../Utils/slugify');
 
@@ -54,7 +53,7 @@ class UploadController {
 					const filePath = `${Helpers.tmpPath(folder)}/${fileName}`;
 					await file.move(Helpers.tmpPath(folder), { name: fileName, overwrite: true });
 
-					const fileStream = await fs.createReadStream(filePath);
+					const fileStream = await createReadStream(filePath);
 
 					const url = await Drive.put(`${folder}/${fileName}`, fileStream, {
 						ACL: 'public-read',
@@ -100,34 +99,23 @@ class UploadController {
 
 		const file = decodeURIComponent(new URL(upload.url).pathname.slice(1));
 
-		if (upload.url.includes('amazonaws')) {
-			if (await Drive.exists(file)) {
-				try {
-					await Drive.delete(file);
-				} catch (error) {
-					return response
-						.status(400)
-						.send(
-							errorPayload(
-								errors.RESOURCE_DELETED_ERROR,
-								antl('error.resource.resourceDeletedError'),
-							),
-						);
-				}
-			} else {
-				Logger.error('File does not exist.');
+		if (await Drive.exists(file)) {
+			try {
+				await Drive.delete(file);
+			} catch (error) {
+				return response
+					.status(400)
+					.send(
+						errorPayload(
+							errors.RESOURCE_DELETED_ERROR,
+							antl('error.resource.resourceDeletedError'),
+						),
+					);
 			}
-			await upload.delete();
 		} else {
-			const localPath = upload.object ? `${uploadsPath}/${upload.object}` : `${uploadsPath}`;
-			const path = Helpers.publicPath(`${localPath}/${upload.filename}`);
-
-			await upload.delete();
-			await fsp
-				.access(path)
-				.then(() => fsp.unlink(path))
-				.catch(() => Logger.error('File does not exist'));
+			Logger.error('File does not exist.');
 		}
+		await upload.delete();
 
 		return response.status(200).send({ success: true });
 	}
