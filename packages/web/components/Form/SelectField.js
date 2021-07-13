@@ -110,6 +110,7 @@ const SelectField = ({
 	label,
 	help,
 	options,
+	defaultOptions,
 	validation,
 	creatable,
 	onCreate,
@@ -158,8 +159,9 @@ const SelectField = ({
 
 	// update the select options whenever options prop changes
 	useEffect(() => {
-		setSelectOptions(options.sort(compareOptions));
-	}, [options]);
+		const useOptionsFrom = isAsync ? defaultOptions : options;
+		setSelectOptions(useOptionsFrom.sort(compareOptions));
+	}, [options, defaultOptions, isAsync]);
 
 	/**
 	 * React-select expects value to be in { value: '', label: '' } shape so we run a useEffect
@@ -170,9 +172,14 @@ const SelectField = ({
 			return;
 		}
 
-		if (!options || options.length === 0) {
+		if (
+			(!options || options.length === 0) &&
+			(!defaultOptions || defaultOptions.length === 0)
+		) {
 			return;
 		}
+
+		const useOptionsFrom = isAsync ? defaultOptions : options;
 
 		if (!selectedValue) {
 			setNeedsUpdate(false);
@@ -182,22 +189,24 @@ const SelectField = ({
 		if (isMulti) {
 			setValue(
 				name,
-				selectedValue.map((value) => options.find((option) => option.value === value)),
+				selectedValue.map((value) =>
+					useOptionsFrom.find((option) => `${option.value}` === `${value}`),
+				),
 			);
 		} else if (typeof selectedValue === 'object') {
 			setValue(
 				name,
-				options.find((option) => option.value === selectedValue.value),
+				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue.value}`),
 			);
 		} else {
 			setValue(
 				name,
-				options.find((option) => option.value === selectedValue),
+				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue}`),
 			);
 		}
 
 		setNeedsUpdate(false);
-	}, [selectedValue, options, name, setValue, isMulti, needsUpdate]);
+	}, [selectedValue, options, defaultOptions, name, setValue, isMulti, isAsync, needsUpdate]);
 
 	/**
 	 * Handles creating a new element in the select field.
@@ -255,6 +264,7 @@ const SelectField = ({
 					aria-label={label}
 					aria-required={validation.required}
 					options={selectOptions}
+					defaultOptions={selectOptions}
 					isMulti={isMulti}
 					onCreateOption={creatable ? onCreateOption : null}
 					isDisabled={internalIsLoading || isLoading || isHidden}
@@ -304,6 +314,12 @@ SelectField.propTypes = {
 			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		}),
 	),
+	defaultOptions: PropTypes.arrayOf(
+		PropTypes.shape({
+			label: PropTypes.string,
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		}),
+	),
 	callback: PropTypes.func,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
@@ -321,6 +337,7 @@ SelectField.defaultProps = {
 	isMulti: false,
 	validation: {},
 	options: [],
+	defaultOptions: [],
 	help: null,
 	callback: null,
 	wrapperCss: [],
