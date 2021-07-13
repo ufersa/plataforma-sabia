@@ -92,6 +92,9 @@ const StyledSelect = styled(Select)`
 const StyledCreatable = styled(CreatableSelect)`
 	${styles}
 `;
+const StyledAsync = styled(AsyncSelect)`
+	${styles}
+`;
 
 const Hint = styled.span`
 	${({ theme: { colors } }) => css`
@@ -222,7 +225,7 @@ const SelectField = ({
 	};
 
 	// eslint-disable-next-line no-nested-ternary
-	const Component = creatable ? StyledCreatable : isAsync ? AsyncSelect : StyledSelect;
+	const Component = creatable ? StyledCreatable : isAsync ? StyledAsync : StyledSelect;
 
 	return (
 		<InputFieldWrapper
