@@ -5,10 +5,13 @@ import { getInstitutions } from '../../../services';
 import { getInstitutionLabel } from '../../../utils/helper';
 import { InputField, SelectField, TextField } from '../../Form';
 import { inputWrapperCss } from './styles';
+import { useAuth } from '../../../hooks';
 
 const StepOne = ({ form }) => {
+	const { isAuthenticated } = useAuth();
+
 	const { data: { data: institutions } = {}, isValidating: isValidatingInstitutions } = useSWR(
-		'get-institutions',
+		isAuthenticated ? 'get-institutions' : null,
 		() => getInstitutions({ perPage: 50, order: 'desc' }),
 		{
 			revalidateOnFocus: false,
