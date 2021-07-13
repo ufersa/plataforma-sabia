@@ -13,6 +13,7 @@ const getNewIssueUrl = (error, sentryReportId, request) => {
 		error.stack.toString(),
 		'```',
 		'### Request:',
+		`URL: *${request.method()}* ${request.originalUrl()}`,
 		'```json',
 		JSON.stringify(request.all()),
 		'```',
@@ -35,12 +36,34 @@ const buildPayload = ({
 	return {
 		blocks: [
 			{
-				type: 'header',
-				text: {
-					type: 'plain_text',
-					text: title,
-					emoji: false,
-				},
+				type: 'section',
+				fields: [
+					{
+						type: 'header',
+						text: {
+							type: 'plain_text',
+							text: title,
+							emoji: false,
+						},
+					},
+					{
+						type: 'actions',
+						elements: [
+							{
+								type: 'button',
+								text: {
+									type: 'plain_text',
+									text: 'Create issue',
+									emoji: true,
+								},
+								style: 'danger',
+								value: 'create_issue',
+								action_id: 'button-action',
+								url: actionUrl,
+							},
+						],
+					},
+				],
 			},
 			{
 				type: 'divider',
@@ -50,11 +73,11 @@ const buildPayload = ({
 				fields: [
 					{
 						type: 'mrkdwn',
-						text: `*Date:*\n${date}`,
+						text: `*Date:* ${date}`,
 					},
 					{
 						type: 'mrkdwn',
-						text: `*Sentry Report ID:*\n${sentryReportId}`,
+						text: `*Sentry Report ID:* ${sentryReportId}`,
 					},
 				],
 			},
@@ -63,24 +86,7 @@ const buildPayload = ({
 				fields: [
 					{
 						type: 'mrkdwn',
-						text: `*Error:*\n${errorMessage}`,
-					},
-				],
-			},
-			{
-				type: 'actions',
-				elements: [
-					{
-						type: 'button',
-						text: {
-							type: 'plain_text',
-							text: 'Create issue',
-							emoji: true,
-						},
-						style: 'danger',
-						value: 'create_issue',
-						action_id: 'button-action',
-						url: actionUrl,
+						text: `*Error:* ${errorMessage}`,
 					},
 				],
 			},

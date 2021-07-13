@@ -4,7 +4,7 @@ import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
 import Router, { withRouter } from 'next/router';
-import NProgress from 'nprogress'; // nprogress module
+import NProgress from 'nprogress';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import LayoutDefault from '../components/_Layouts/Default';
 import LayoutLandingPage from '../components/_Layouts/LandingPage';
@@ -16,14 +16,15 @@ import { getMe, setGlobalToken } from '../services';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
+import { internal as internalPages, landingPage } from '../utils/consts/pages';
+import { isAppEnvProduction } from '../utils/helper';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-// Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', (url) => {
 	NProgress.done();
-	if (['production'].includes(config.APP_ENV)) {
+	if (isAppEnvProduction()) {
 		pageview(url);
 	}
 });
@@ -131,7 +132,9 @@ export class SabiaApp extends App {
 					<UserProvider user={user || {}}>
 						<ModalProvider>
 							<ShoppingCartProvider>
-								{['/about', '/ideas'].includes(router.pathname) ? (
+								{[internalPages.ideas, landingPage.about].includes(
+									router.pathname,
+								) ? (
 									<LayoutLandingPage>
 										<Component {...pageProps} />
 									</LayoutLandingPage>
