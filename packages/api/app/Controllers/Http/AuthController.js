@@ -66,14 +66,6 @@ class AuthController {
 		user.status = 'verified';
 		await user.save();
 
-		/* const mailData = {
-			email: user.email,
-			subject: request.antl('message.auth.accountActivatedEmailSubject'),
-			template: 'emails.active-account',
-			user,
-		};
-		Bull.add(SendMailJob.key, mailData, { attempts: 3 }); */
-
 		return auth.generate(user);
 	}
 
