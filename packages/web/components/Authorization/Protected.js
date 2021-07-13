@@ -19,19 +19,18 @@ const Protected = ({
 }) => {
 	const { t } = useTranslation(['common']);
 	const { openModal } = useModal();
-	const { user } = useAuth();
+	const { user, isAuthenticated } = useAuth();
 	const router = useRouter();
 
-	const isLoggedIn = !!user?.email;
 	const isAuthorized =
-		isLoggedIn && customIsAuthorized && (userRole ? userRole === user.role?.role : true);
+		isAuthenticated && customIsAuthorized && (userRole ? userRole === user.role?.role : true);
 
 	useEffect(() => {
 		if (onlyUnauthorizedMessage) {
 			return;
 		}
 
-		if (!isLoggedIn && !inline) {
+		if (!isAuthenticated && !inline) {
 			return openModal('login', {
 				message: t('common:signInToContinue'),
 			});
@@ -44,7 +43,15 @@ const Protected = ({
 		return () => {};
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoggedIn, openModal, router, redirectTo, isAuthorized, onlyUnauthorizedMessage, inline]);
+	}, [
+		isAuthenticated,
+		openModal,
+		router,
+		redirectTo,
+		isAuthorized,
+		onlyUnauthorizedMessage,
+		inline,
+	]);
 
 	const NotAuthorizedComponent = inline ? (
 		<InlineLogin />
