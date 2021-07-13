@@ -25,6 +25,7 @@ describe('<Header />', () => {
 					can_buy_technology: true,
 				},
 			},
+			isAuthenticated: true,
 		});
 		render(
 			<TechnologyProvider technology={fakeTechnology}>
@@ -41,6 +42,7 @@ describe('<Header />', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 		render(
 			<TechnologyProvider
@@ -62,6 +64,7 @@ describe('<Header />', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 		render(
 			<TechnologyProvider

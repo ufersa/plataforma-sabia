@@ -1,5 +1,6 @@
 import get from 'lodash.get';
 import { MEASURE_UNIT as measureUnitEnum, ROLES as rolesEnum } from './enums/api.enum';
+import config from '../config';
 
 /**
  * Calculates the distance between two provided dates (e.g.: "Five days ago")
@@ -381,6 +382,13 @@ export const getMeasureUnitLabel = (value) =>
  * @returns {boolean} True if current environment is browser, false otherwise
  */
 export const isRunningOnBrowser = () => typeof window !== 'undefined';
+
+/**
+ * Returns if APP_ENV is set to production
+ *
+ * @returns {boolean} True if APP_ENV is equals production, false otherwise
+ */
+export const isAppEnvProduction = () => config.APP_ENV === 'production';
 
 /**
  * Returns institution name prefixed by initials
