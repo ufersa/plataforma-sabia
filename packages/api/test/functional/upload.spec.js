@@ -212,6 +212,7 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
+
 	let result = await fsExists(
 		Helpers.publicPath(
 			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
@@ -252,6 +253,7 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
 		.end();
+
 	const result = await fsExists(
 		Helpers.publicPath(
 			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
