@@ -258,7 +258,7 @@ describe('creating/editing technology', () => {
 			cy.get('@uploadedImages')
 				.children()
 				.should(($div) => {
-					if ($div.length < 2) throw new Error();
+					cy.expect($div.length).to.be.above(1);
 				});
 
 			cy.get('@uploadedImages')
@@ -281,7 +281,7 @@ describe('creating/editing technology', () => {
 			cy.get('@uploadedImages')
 				.children()
 				.should(($div) => {
-					if ($div.length < 2) throw new Error();
+					cy.expect($div.length).to.be.above(1);
 				});
 
 			cy.findAllByRole('radio', { name: /usar como capa/i })
