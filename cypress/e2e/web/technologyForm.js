@@ -276,18 +276,20 @@ describe('creating/editing technology', () => {
 			cy.findByRole('button', { name: /salvar e continuar/i }).click();
 
 			cy.url().should('contain', '/edit/review');
-			// cy.findByRole('button', { name: /voltar/i }).click();
+			cy.findByRole('button', { name: /voltar/i }).click();
 
-			// cy.get('@uploadedImages')
-			// 	.children()
-			// 	.should('have.length', 2);
+			cy.get('@uploadedImages')
+				.children()
+				.should(($div) => {
+					if ($div.length < 2) throw new Error();
+				});
 
-			// cy.findAllByRole('radio', { name: /usar como capa/i })
-			// 	.eq(1)
-			// 	.click({ force: true });
+			cy.findAllByRole('radio', { name: /usar como capa/i })
+				.eq(1)
+				.click({ force: true });
 
-			// cy.findByRole('button', { name: /salvar e continuar/i }).click();
-			// cy.url().should('contain', '/edit/review');
+			cy.findByRole('button', { name: /salvar e continuar/i }).click();
+			cy.url().should('contain', '/edit/review');
 
 			cy.visit(`/t/${technologyId}`);
 

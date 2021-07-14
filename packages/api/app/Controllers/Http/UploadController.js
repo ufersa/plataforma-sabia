@@ -8,8 +8,6 @@ const fs = require('fs/promises');
 
 const { makeSafeHash } = require('../../Utils/slugify');
 
-const Logger = use('Logger');
-
 const { antl, errors, errorPayload, getTransaction } = require('../../Utils');
 
 const Config = use('Adonis/Src/Config');
@@ -27,7 +25,6 @@ class UploadController {
 
 		return Upload.query()
 			.where(query)
-
 			.withFilters(request)
 			.withParams(request);
 	}
@@ -93,7 +90,6 @@ class UploadController {
 			await commit();
 		} catch (error) {
 			trx.rollback();
-			Logger.error(error);
 			if (uploads)
 				await Promise.all(
 					uploads.map((file) => Drive.delete(new URL(file.url).pathname.slice(1))),
