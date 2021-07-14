@@ -67,7 +67,7 @@ const aliases = {};
 | Here you store ace commands for your package
 |
 */
-const commands = ['App/Commands/AlgoliaIndex'];
+const commands = ['App/Commands/AlgoliaIndex', 'App/Commands/TestSlackWebhook'];
 
 /*
 |--------------------------------------------------------------------------
