@@ -84,7 +84,8 @@ test('POST /uploads creates/saves a new upload.', async ({ client, assert }) => 
 		.post('uploads')
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
 
 	const result = await fsExists(
 		Helpers.publicPath(
@@ -113,7 +114,8 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_2.jpg`))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_3.jpg`))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_4.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
 
 	response.body.map(async (file) => {
 		const result = await fsExists(
@@ -161,7 +163,8 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 		.loginVia(loggedUser, 'jwt')
 		.field('meta', JSON.stringify(meta))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
 
 	const result = await fsExists(
 		Helpers.publicPath(
@@ -190,7 +193,8 @@ test('POST /uploads user trying to upload for object and object_id without permi
 		.loginVia(loggedUser, 'jwt')
 		.field('meta', JSON.stringify(meta))
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
 
 	response.assertStatus(403);
 	response.assertJSONSubset(
@@ -211,7 +215,9 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 		.post('uploads')
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
+
 	let result = await fsExists(
 		Helpers.publicPath(
 			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
@@ -222,7 +228,8 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(loggedUser, 'jwt')
-		.end();
+		.end()
+		.catch(() => {});
 
 	result = await fsExists(
 		Helpers.publicPath(
@@ -251,7 +258,9 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 		.post('uploads')
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
+
 	const result = await fsExists(
 		Helpers.publicPath(
 			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
@@ -262,7 +271,8 @@ test('DELETE /uploads/:id user trying to delete other user upload.', async ({ cl
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(otherUser, 'jwt')
-		.end();
+		.end()
+		.catch(() => {});
 
 	response.assertStatus(403);
 	response.assertJSONSubset(
@@ -286,7 +296,8 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 		.post('uploads')
 		.loginVia(loggedUser, 'jwt')
 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
-		.end();
+		.end()
+		.catch(() => {});
 
 	const pathFile = Helpers.publicPath(
 		`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
@@ -303,7 +314,8 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 	const response = await client
 		.delete(`uploads/${responseUpload.body[0].id}`)
 		.loginVia(loggedUser, 'jwt')
-		.end();
+		.end()
+		.catch(() => {});
 
 	response.assertStatus(200);
 	response.assertJSONSubset({
