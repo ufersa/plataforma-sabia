@@ -26,81 +26,67 @@ const getNewIssueUrl = (error, sentryReportId, request) => {
 	return url.toString();
 };
 
-const buildPayload = ({
-	title = 'Error report',
-	date,
-	errorMessage,
-	sentryReportId,
-	actionUrl,
-}) => {
-	return {
-		blocks: [
-			{
-				type: 'section',
-				fields: [
-					{
-						type: 'header',
-						text: {
-							type: 'plain_text',
-							text: title,
-							emoji: false,
-						},
-					},
-					{
-						type: 'actions',
-						elements: [
-							{
-								type: 'button',
-								text: {
-									type: 'plain_text',
-									text: 'Create issue',
-									emoji: true,
-								},
-								style: 'danger',
-								value: 'create_issue',
-								action_id: 'button-action',
-								url: actionUrl,
-							},
-						],
-					},
-				],
+const buildPayload = ({ date, error, sentryReportId, actionUrl, request }) => ({
+	blocks: [
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: '*API Error report*',
 			},
-			{
-				type: 'divider',
+			accessory: {
+				type: 'button',
+				text: {
+					type: 'plain_text',
+					text: 'Create issue',
+					emoji: false,
+				},
+				value: 'create_issue',
+				url: actionUrl,
+				action_id: 'button-action',
+				style: 'danger',
 			},
-			{
-				type: 'section',
-				fields: [
-					{
-						type: 'mrkdwn',
-						text: `*Date:* ${date}`,
-					},
-					{
-						type: 'mrkdwn',
-						text: `*Sentry Report ID:* ${sentryReportId}`,
-					},
-				],
-			},
-			{
-				type: 'section',
-				fields: [
-					{
-						type: 'mrkdwn',
-						text: `*Error:* ${errorMessage}`,
-					},
-				],
-			},
-		],
-	};
-};
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Date:*\n${date}`,
+				},
+				{
+					type: 'mrkdwn',
+					text: `*Sentry Report ID:*\n${sentryReportId}`,
+				},
+			],
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Endpoint:* [${request.method()}] ${request.originalUrl()}\n`,
+				},
+			],
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Error:*\n${error.message}`,
+				},
+			],
+		},
+	],
+});
 
 const notify = async (error, sentryReportId = '', request = {}) => {
 	const actionUrl = getNewIssueUrl(error, sentryReportId, request);
 
 	const payload = buildPayload({
-		title: 'API Error report',
 		date: dayjs().format('DD/MM/YYYY [às] HH:mm'),
-		errorMessage: error.message,
+		error,
 		sentryReportId,
 		request,
 		actionUrl,
