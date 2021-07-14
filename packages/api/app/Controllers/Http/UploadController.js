@@ -1,7 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 const Helpers = use('Helpers');
 const Upload = use('App/Models/Upload');
+const Env = use('Env');
+
 const { createReadStream } = require('fs');
+const fs = require('fs/promises');
 
 const { makeSafeHash } = require('../../Utils/slugify');
 
@@ -13,6 +16,7 @@ const Config = use('Adonis/Src/Config');
 const { uploadsPath } = Config.get('upload');
 
 const Drive = use('Drive');
+const isTesting = Env.getOrFail('APP_ENV') === 'testing';
 
 class UploadController {
 	async index({ request }) {
@@ -50,18 +54,29 @@ class UploadController {
 					const ext = file.clientName.split('.').pop();
 					const fileName = `${await makeSafeHash(file.clientName)}.${ext}`;
 
-					const filePath = `${Helpers.tmpPath(folder)}/${fileName}`;
-					await file.move(Helpers.tmpPath(folder), { name: fileName, overwrite: true });
+					let url;
+					if (isTesting) {
+						file.move(Helpers.publicPath(folder), {
+							name: fileName,
+							overwrite: true,
+						});
+						url = `${Config.get('app.appURL')}/${folder}/${fileName}`;
+					} else {
+						const filePath = `${Helpers.tmpPath(folder)}/${fileName}`;
+						await file.move(Helpers.tmpPath(folder), {
+							name: fileName,
+							overwrite: true,
+						});
 
-					const fileStream = await createReadStream(filePath);
+						const fileStream = await createReadStream(filePath);
 
-					const url = await Drive.put(`${folder}/${fileName}`, fileStream, {
-						ACL: 'public-read',
-						ContentType: `${file.type}/${file.subtype}`,
-					});
-
-					fileStream._destroy();
-					Drive.disk('local').delete(filePath);
+						url = await Drive.put(`${folder}/${fileName}`, fileStream, {
+							ACL: 'public-read',
+							ContentType: `${file.type}/${file.subtype}`,
+						});
+						fileStream._destroy();
+						Drive.disk('local').delete(filePath);
+					}
 
 					return user.uploads().create(
 						{
@@ -78,6 +93,7 @@ class UploadController {
 			await commit();
 		} catch (error) {
 			trx.rollback();
+			Logger.error(error);
 			if (uploads)
 				await Promise.all(
 					uploads.map((file) => Drive.delete(new URL(file.url).pathname.slice(1))),
@@ -99,7 +115,7 @@ class UploadController {
 
 		const file = decodeURIComponent(new URL(upload.url).pathname.slice(1));
 
-		if (await Drive.exists(file)) {
+		if (!isTesting && (await Drive.exists(file))) {
 			try {
 				await Drive.delete(file);
 			} catch (error) {
@@ -113,7 +129,12 @@ class UploadController {
 					);
 			}
 		} else {
-			Logger.error('File does not exist.');
+			await fs
+				.access(Helpers.publicPath(file))
+				.then(() => {
+					fs.unlink(Helpers.publicPath(file));
+				})
+				.catch(() => {});
 		}
 		await upload.delete();
 
