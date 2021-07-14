@@ -3,7 +3,7 @@ const Helpers = use('Helpers');
 const fs = require('fs').promises;
 const { createUser } = require('../utils/Suts');
 
-const Factory = use('Factory');
+// const Factory = use('Factory');
 
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -174,29 +174,29 @@ test('POST /uploads creates/saves multiple uploads.', async ({ client, assert })
 // 	response.assertJSONSubset([uploadCreated.toJSON()]);
 // });
 
-test('POST /uploads user trying to upload for object and object_id without permission.', async ({
-	client,
-}) => {
-	const { user: loggedUser } = await createUser();
-	const technologyInst = await Factory.model('App/Models/Technology').create();
+// test('POST /uploads user trying to upload for object and object_id without permission.', async ({
+// 	client,
+// }) => {
+// 	const { user: loggedUser } = await createUser();
+// 	const technologyInst = await Factory.model('App/Models/Technology').create();
 
-	const meta = {
-		object: 'technologies',
-		object_id: technologyInst.id,
-	};
+// 	const meta = {
+// 		object: 'technologies',
+// 		object_id: technologyInst.id,
+// 	};
 
-	const response = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.field('meta', JSON.stringify(meta))
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
-		.end();
+// 	const response = await client
+// 		.post('uploads')
+// 		.loginVia(loggedUser, 'jwt')
+// 		.field('meta', JSON.stringify(meta))
+// 		.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
+// 		.end();
 
-	response.assertStatus(403);
-	response.assertJSONSubset(
-		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
-	);
-});
+// 	response.assertStatus(403);
+// 	response.assertJSONSubset(
+// 		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+// 	);
+// });
 
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
