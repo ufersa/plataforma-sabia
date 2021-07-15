@@ -139,6 +139,8 @@ test('POST /announcements creates a new Announcement', async ({ client, assert }
 		})
 		.end();
 
+	console.log(response.error);
+
 	const announcementCreated = await Announcement.findOrFail(response.body.id);
 
 	response.assertStatus(200);

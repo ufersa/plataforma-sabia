@@ -24,8 +24,8 @@ const personal_data_required_fields = [
 	'zipcode',
 	'address',
 	'district',
-	'city',
-	'state',
+	'city_id',
+	'state_id',
 	'country',
 ];
 
@@ -134,7 +134,8 @@ class User extends Model {
 				const userField = this.toJSON()[field];
 
 				const allowedField =
-					userField && (userField?.length || Object.values(userField)?.length);
+					userField &&
+					(userField?.length || Object.values(userField)?.length || userField > 0);
 
 				return !allowedField ? field : null;
 			})
