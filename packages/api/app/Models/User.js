@@ -297,6 +297,14 @@ class User extends Model {
 		return this.hasMany('App/Models/DeviceToken');
 	}
 
+	city() {
+		return this.belongsTo('App/Models/City');
+	}
+
+	state() {
+		return this.belongsTo('App/Models/State');
+	}
+
 	async generateToken(type) {
 		const token = await Token.generateUniqueTokenCode();
 		return this.tokens().create({
