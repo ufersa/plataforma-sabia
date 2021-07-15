@@ -27,6 +27,10 @@ class ExceptionHandler extends BaseExceptionHandler {
 				.send(errorPayload(errors.VALIDATION_ERROR, error.messages));
 		}
 
+		if (error.code === 'E_ROUTE_NOT_FOUND') {
+			return response.status(404).send();
+		}
+
 		if (['E_USER_NOT_FOUND', 'E_PASSWORD_MISMATCH'].includes(error.code)) {
 			return response
 				.status(error.status)
