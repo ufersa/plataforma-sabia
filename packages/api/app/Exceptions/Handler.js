@@ -101,11 +101,11 @@ class ExceptionHandler extends BaseExceptionHandler {
 	}
 
 	async report(error, { request }) {
-		if (!this.errorCodeShouldReport(error.code)) {
-			return;
-		}
-
 		if (Env.get('APP_ENV') === 'production') {
+			if (!this.errorCodeShouldReport(error.code)) {
+				return;
+			}
+
 			try {
 				const eventId = await Sentry.captureException(error);
 				await Slack.notifyError(error, eventId, request);
