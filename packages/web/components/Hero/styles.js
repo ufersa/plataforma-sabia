@@ -6,7 +6,7 @@ import { Tabs, Tab as RTab } from '../Tab';
 export const HeroImage = styled.div`
 	${({ image }) => css`
 		background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${image});
-		height: 59vh;
+		height: 60vh;
 
 		background-position: center;
 		background-repeat: no-repeat;
