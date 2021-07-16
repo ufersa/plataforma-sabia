@@ -38,11 +38,6 @@ jobs:
         working-directory: packages/web
         run: npm ci
 
-      - name: Run ESLint
-        uses: reviewdog/action-eslint@v1
-        with: 
-          eslint_flags: 'src/packages/web'
-
       - name: Run WEB tests
         working-directory: packages/web
         run: npm run jest:ci
@@ -131,8 +126,8 @@ jobs:
   # Theoretically we should wait them to finish before start this one
   # But, we can try to get coverage data after E2E tests run
   # It should be enough time to web/api job get done
-  e2eAndCoverage:
-    name: E2E / Coverage
+  e2eLintAndCoverage:
+    name: ESLint / E2E / Coverage
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -174,6 +169,9 @@ jobs:
       - name: Install project dependencies
         if: steps.project_dependencies.outputs.cache-hit != 'true'
         run: npm ci
+
+      - name: Run ESLint
+        uses: reviewdog/action-eslint@v1
 
       - name: Prepare API for e2e tests
         working-directory: packages/api
