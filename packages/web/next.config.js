@@ -1,6 +1,8 @@
 const nextTranslate = require('next-translate');
 require('dotenv').config();
 
+let testEslint;
+
 module.exports = nextTranslate({
 	webpack: (config) => {
 		config.module.rules.push({
