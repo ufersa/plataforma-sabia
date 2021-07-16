@@ -19,7 +19,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 			E_MISSING_DATABASE_ROW: true,
 		};
 
-		return errorCodeReportMapping[errorCode] || true;
+		return errorCodeReportMapping[errorCode] ?? true;
 	}
 
 	/**
