@@ -29,9 +29,9 @@ class UserCityStateSchema extends Schema {
 				.transacting(trx);
 
 			for await (const user of usersWithCity) {
-				// Tryng update user city
+				// Trying to update the user's city
 				const userCity = await Database.table('cities')
-					.whereRaw(`UPPER(name) = UPPER('${user.city}')`)
+					.whereRaw('UPPER(name) = UPPER(?)', [user.city])
 					.first();
 
 				if (userCity) {
@@ -40,11 +40,12 @@ class UserCityStateSchema extends Schema {
 						.update({ city_id: userCity.id });
 				}
 
-				// Tryng update user state
+				// Trying to update the user's state
 				const userState = await Database.table('states')
-					.whereRaw(
-						`UPPER(name) = UPPER('${user.state}') OR UPPER(initials) = UPPER('${user.state}')`,
-					)
+					.whereRaw('UPPER(name) = UPPER(?) OR UPPER(initials) = UPPER(?)', [
+						user.state,
+						user.state,
+					])
 					.first();
 
 				if (userState) {
