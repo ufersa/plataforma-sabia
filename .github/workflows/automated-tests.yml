@@ -5,7 +5,6 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:
 
 name: CI
 
@@ -38,6 +37,11 @@ jobs:
         if: steps.web_dependencies_cache.outputs.cache-hit != 'true'
         working-directory: packages/web
         run: npm ci
+
+      - name: Run ESLint
+        uses: reviewdog/action-eslint@v1
+        with: 
+          eslint_flags: 'src/packages/web'
 
       - name: Run WEB tests
         working-directory: packages/web
