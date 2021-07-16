@@ -11,7 +11,7 @@
 
 ## Running the Web Server
 
-1. Rename the `.env.example` to `.env` and replace the variables values.
+1. Copy the `.env.example` to `.env` and replace the variables values.
 2. Make sure you have started the [API server](../api/README.md).
 3. Install the dependencies: `npm run install`.
 4. Start the server: `npm run dev` (`npm run start` for production mode).
