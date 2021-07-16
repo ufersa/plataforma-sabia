@@ -15,8 +15,6 @@
 |     Make sure to pass a relative path from the project root.
 */
 
-let testEslint;
-
 const { Ignitor } = require('@adonisjs/ignitor');
 const fold = require('@adonisjs/fold');
 
