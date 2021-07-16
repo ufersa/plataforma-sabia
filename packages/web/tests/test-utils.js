@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
 import I18nProvider from 'next-translate/I18nProvider';
+import { SWRConfig } from 'swr';
 
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
@@ -33,20 +34,22 @@ export const routerMock = {
 // eslint-disable-next-line react/prop-types
 const AllProviders = ({ children }) => {
 	return (
-		<I18nProvider lang="pt" namespaces={{ ...ptTranslations }}>
-			<ThemeProvider>
-				<GlobalStyle />
-				<UserProvider>
-					<ModalProvider>
-						<ShoppingCartProvider>
-							<RouterContext.Provider value={routerMock}>
-								{children}
-							</RouterContext.Provider>
-						</ShoppingCartProvider>
-					</ModalProvider>
-				</UserProvider>
-			</ThemeProvider>
-		</I18nProvider>
+		<SWRConfig value={{ dedupingInterval: 0 }}>
+			<I18nProvider lang="pt" namespaces={{ ...ptTranslations }}>
+				<ThemeProvider>
+					<GlobalStyle />
+					<UserProvider>
+						<ModalProvider>
+							<ShoppingCartProvider>
+								<RouterContext.Provider value={routerMock}>
+									{children}
+								</RouterContext.Provider>
+							</ShoppingCartProvider>
+						</ModalProvider>
+					</UserProvider>
+				</ThemeProvider>
+			</I18nProvider>
+		</SWRConfig>
 	);
 };
 

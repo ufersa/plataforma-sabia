@@ -36,6 +36,7 @@ describe('Technology Details Page', () => {
 			user: {
 				email,
 			},
+			isAuthenticated: !!email,
 		});
 
 		const { container } = render(
@@ -59,6 +60,7 @@ describe('Technology Details Page', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 		const technologyNoCosts = { ...technology, technologyCosts: {} };
 
