@@ -47,8 +47,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./package-lock.json') }}
 
       - name: Install ESLint
-        if: steps.eslint_web_cache.outputs.cache-hit != 'true'
-        run: npm install eslint
+        # if: steps.eslint_web_cache.outputs.cache-hit != 'true'
+        run: npm install eslint --ignore-scripts
 
       - name: Run ESLint
         uses: reviewdog/action-eslint@v1
