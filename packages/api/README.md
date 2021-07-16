@@ -13,7 +13,7 @@
 
 ## Running the API Server
 
-1. Rename the `.env.example` file to `.env` and update all of the environment variables correctly.
+1. Copy the `.env.example` file to `.env` and update all of the environment variables correctly.
 2. Make sure you have a MySQL database server (feel free to use docker or whatever method you prefer) up and running and update the `DB_HOST`, `DB_PORT`, `DB_USER` and `DB_PASSWORD` environment variables.
 3. Install the dependencies: `npm install`.
 4. Run the migrations in order to create the tables:

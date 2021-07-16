@@ -410,7 +410,7 @@ exports[`it render the MapAndAttachments page 1`] = `
                   class="c7"
                 >
                   <div
-                    class="c8 react-select-container css-2b097c-container"
+                    class="c8 react-select-container css-dyr6gj-container"
                     id="where_can_be_applied"
                   >
                     <div
@@ -1100,7 +1100,7 @@ exports[`should render the videos list 1`] = `
                   class="c7"
                 >
                   <div
-                    class="c8 react-select-container css-2b097c-container"
+                    class="c8 react-select-container css-dyr6gj-container"
                     id="where_can_be_applied"
                   >
                     <div
@@ -1790,7 +1790,7 @@ exports[`should the videos list is empty 1`] = `
                   class="c7"
                 >
                   <div
-                    class="c8 react-select-container css-2b097c-container"
+                    class="c8 react-select-container css-dyr6gj-container"
                     id="where_can_be_applied"
                   >
                     <div
