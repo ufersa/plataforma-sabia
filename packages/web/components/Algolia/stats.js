@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { Stats as AlgoliaStats } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 const Stats = () => {
 	const { t } = useTranslation(['search']);

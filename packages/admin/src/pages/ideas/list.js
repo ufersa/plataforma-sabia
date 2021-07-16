@@ -4,12 +4,10 @@ import {
 	List,
 	Datagrid,
 	TextField,
-	SingleFieldList,
 	EditButton,
 	DeleteWithConfirmButton,
 	ReferenceField,
 } from 'react-admin';
-import { ChipField, ReferenceArrayField } from '../../components';
 
 const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow }) => (
 	<List
@@ -28,13 +26,8 @@ const IdeasList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasShow })
 			<ReferenceField label="labels.owner" source="user_id" reference="users">
 				<TextField source="email" />
 			</ReferenceField>
-			<ReferenceArrayField label="labels.keywords" reference="terms" source="keywords">
-				<SingleFieldList>
-					<ChipField source="term" />
-				</SingleFieldList>
-			</ReferenceArrayField>
-			<EditButton />
-			<DeleteWithConfirmButton />
+			<EditButton label="" variant="contained" color="primary" />
+			<DeleteWithConfirmButton label="" variant="contained" color="default" />
 		</Datagrid>
 	</List>
 );

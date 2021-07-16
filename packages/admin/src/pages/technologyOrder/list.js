@@ -8,6 +8,7 @@ import {
 	EditButton,
 	DateField,
 	ArrayField,
+	DeleteWithConfirmButton,
 } from 'react-admin';
 import FilterBar from './FilterBar';
 import { StatusField } from '../../components';
@@ -58,8 +59,8 @@ const TechnologyOrdersList = ({ basePath, resource, hasCreate, hasEdit, hasList,
 				<TextField source="quantity" />
 				<TextField source="unit_value" />
 				<DateField showTime source="created_at" />
-				<DateField showTime source="updated_at" />
-				<EditButton />
+				<EditButton label="" variant="contained" color="primary" />
+				<DeleteWithConfirmButton label="" variant="contained" color="default" />
 			</Datagrid>
 		</List>
 	);

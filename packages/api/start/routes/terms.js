@@ -131,6 +131,14 @@ const Route = use('Route');
  *   			"message":"The resource Taxonomy was not found"
  * 			}
  *		}
+ *@apiErrorExample {json} Unique Term Error
+ *    HTTP/1.1 400 Bad Request
+ *		{
+ * 			"error": {
+ *   			"error_code": "UNIQUE_TERM_ERROR",
+ *   			"message":"This term already exists for this taxonomy"
+ * 			}
+ *		}
  *@apiError (Forbidden 403) {Object} error Error object
  *@apiError (Forbidden 403) {String} error.error_code Error code
  *@apiError (Forbidden 403) {String} error.message Error message

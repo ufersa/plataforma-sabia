@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hits } from 'react-instantsearch-dom';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ThemeProvider } from '../../styles';
 import { getTabs, getSolutionsComponents } from './solutionsAlgoliaComponents';
@@ -36,6 +36,7 @@ import {
 	Panel,
 	ResultsButton,
 	ClearFiltersButton,
+	ScrollTo,
 } from '../Algolia';
 
 import { MobileFilterButton } from '../Mobile';
@@ -74,8 +75,9 @@ const MainSearch = ({
 			onSearchParameters={onSearchParameters}
 		>
 			<ThemeProvider>
-				<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
-
+				<ScrollTo alignToTop={false} scrollOn="query">
+					<DebouncedSearchBox placeholder={t('search:searchPlaceholder')} />
+				</ScrollTo>
 				<Wrapper>
 					<Container
 						onSelect={(index) => {

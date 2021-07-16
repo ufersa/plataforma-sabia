@@ -1,6 +1,6 @@
 const Config = use('Config');
 const dayjs = require('dayjs');
-const https = require('https');
+const fetch = require('node-fetch');
 
 const getNewIssueUrl = (error, sentryReportId, request) => {
 	const { user, repository } = Config.get('app.github');
@@ -13,102 +13,92 @@ const getNewIssueUrl = (error, sentryReportId, request) => {
 		error.stack.toString(),
 		'```',
 		'### Request:',
+		`URL: *${request.method()}* ${request.originalUrl()}`,
 		'```json',
-		JSON.stringify(request),
+		JSON.stringify(request.all()),
 		'```',
 	].join('\n');
 
-	url.searchParams.set('title', error.message);
+	url.searchParams.set('title', JSON.stringify(error.message));
 	url.searchParams.set('labels', 'bug,API');
 	url.searchParams.set('body', body);
 
 	return url.toString();
 };
 
-const buildPayload = ({
-	title = 'Error report',
-	date,
-	errorMessage,
-	sentryReportId,
-	actionUrl,
-}) => {
-	return {
-		blocks: [
-			{
-				type: 'header',
+const buildPayload = ({ date, error, sentryReportId, actionUrl, request }) => ({
+	blocks: [
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: '*API Error report*',
+			},
+			accessory: {
+				type: 'button',
 				text: {
 					type: 'plain_text',
-					text: title,
+					text: 'Create issue',
 					emoji: false,
 				},
+				value: 'create_issue',
+				url: actionUrl,
+				action_id: 'button-action',
+				style: 'danger',
 			},
-			{
-				type: 'divider',
-			},
-			{
-				type: 'section',
-				fields: [
-					{
-						type: 'mrkdwn',
-						text: `*Date:*\n${date}`,
-					},
-					{
-						type: 'mrkdwn',
-						text: `*Sentry Report ID:*\n${sentryReportId}`,
-					},
-				],
-			},
-			{
-				type: 'section',
-				fields: [
-					{
-						type: 'mrkdwn',
-						text: `*Error:*\n${errorMessage}`,
-					},
-				],
-			},
-			{
-				type: 'actions',
-				elements: [
-					{
-						type: 'button',
-						text: {
-							type: 'plain_text',
-							text: 'Create issue',
-							emoji: true,
-						},
-						style: 'danger',
-						value: 'create_issue',
-						action_id: 'button-action',
-						url: actionUrl,
-					},
-				],
-			},
-		],
-	};
-};
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Date:*\n${date}`,
+				},
+				{
+					type: 'mrkdwn',
+					text: `*Sentry Report ID:*\n${sentryReportId}`,
+				},
+			],
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Endpoint:* [${request.method()}] ${request.originalUrl()}\n`,
+				},
+			],
+		},
+		{
+			type: 'section',
+			fields: [
+				{
+					type: 'mrkdwn',
+					text: `*Error:*\n${error.message}`,
+				},
+			],
+		},
+	],
+});
 
 const notify = async (error, sentryReportId = '', request = {}) => {
 	const actionUrl = getNewIssueUrl(error, sentryReportId, request);
 
 	const payload = buildPayload({
-		title: 'API Error report',
 		date: dayjs().format('DD/MM/YYYY [às] HH:mm'),
-		errorMessage: error.message,
+		error,
 		sentryReportId,
 		request,
 		actionUrl,
 	});
 
-	const req = https.request({
+	await fetch(`https://hooks.slack.com/services/${Config.get('slack.notify_path')}`, {
 		method: 'POST',
-		hostname: 'hooks.slack.com',
-		path: `/services/${Config.get('slack.notify_path')}`,
-		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(payload),
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
-
-	req.write(JSON.stringify(payload));
-	req.end();
 
 	return true;
 };

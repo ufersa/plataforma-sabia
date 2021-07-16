@@ -1,12 +1,12 @@
 import React from 'react';
 import { Map as GoogleMap, Marker } from 'google-maps-react';
 import PropTypes from 'prop-types';
-import TechonologyEnums from '../../utils/enums/technology.enums';
+import { LOCATIONS as technologyLocationsEnum } from '../../utils/enums/technology.enums';
 
 export const getMarkerIconByTerm = new Map([
-	[TechonologyEnums.WHO_DEVELOP, '/google-map-marker-icon.png'],
-	[TechonologyEnums.WHERE_IS_ALREADY_IMPLEMENTED, '/google-map-marker-icon-2.png'],
-	[TechonologyEnums.WHERE_CAN_BE_APPLIED, '/google-map-marker-icon-3.png'],
+	[technologyLocationsEnum.WHO_DEVELOP, '/google-map-marker-icon.png'],
+	[technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED, '/google-map-marker-icon-2.png'],
+	[technologyLocationsEnum.WHERE_CAN_BE_APPLIED, '/google-map-marker-icon-3.png'],
 ]);
 
 const MapContainer = ({ markers }) => {
@@ -15,7 +15,7 @@ const MapContainer = ({ markers }) => {
 	return (
 		<GoogleMap
 			google={google}
-			zoom={7}
+			zoom={5}
 			initialCenter={{
 				lat: -6.780127,
 				lng: -36.702823,

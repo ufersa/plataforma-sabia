@@ -9,7 +9,17 @@ class HandleParam {
 	 * @param {Function} next next
 	 */
 	async handle({ request, response }, next) {
-		const data = request.only(['page', 'perPage', 'order', 'orderBy', 'embed', 'ids', 'notIn']);
+		const data = request.only([
+			'page',
+			'perPage',
+			'order',
+			'orderBy',
+			'embed',
+			'ids',
+			'notIn',
+			'filterBy',
+			'filter',
+		]);
 
 		if (data.embed === '') {
 			data.embed = {
@@ -26,7 +36,8 @@ class HandleParam {
 		const defaultEmbed = false;
 		const embed = data.embed ? data.embed : defaultEmbed;
 
-		const maxPerPage = 100;
+		/** The solution is temporary, not permanent. */
+		const maxPerPage = 250;
 		const defaultPerPage = 10;
 		const defaultPage = 1;
 
@@ -47,6 +58,8 @@ class HandleParam {
 			embed,
 			ids: data.ids.length ? data.ids : defaultListIds,
 			notIn: data.notIn.length ? data.notIn : defaultListIds,
+			filterBy: data.filterBy,
+			filter: data.filter,
 		};
 
 		request.params = params;

@@ -2,7 +2,30 @@
 const Institution = use('App/Models/Institution');
 const Upload = use('App/Models/Upload');
 const User = use('App/Models/User');
-const { errors, errorPayload, getTransaction, Algolia } = require('../../Utils');
+const {
+	errors,
+	errorPayload,
+	getTransaction,
+	Algolia,
+	technologyStatuses,
+} = require('../../Utils');
+
+const saveAlgoliaIndex = async (institutionId) => {
+	const institution = await Institution.query()
+		.where({ id: institutionId })
+		.with('logo')
+		.withCount('technologies', (builder) => {
+			builder
+				.where('technologies.status', technologyStatuses.PUBLISHED)
+				.where('active', true);
+		})
+		.withCount('services', (builder) => {
+			builder.where('active', true);
+		})
+		.first();
+
+	await Algolia.saveIndex('institution', institution);
+};
 
 class InstitutionController {
 	constructor() {
@@ -42,7 +65,10 @@ class InstitutionController {
 	 * GET /institutions/:id
 	 */
 	async show({ request }) {
-		return Institution.query().withParams(request);
+		return Institution.query()
+			.with('logo')
+			.getInstitution(request.params.id)
+			.withParams(request);
 	}
 
 	/**
@@ -64,7 +90,8 @@ class InstitutionController {
 				const logo = await Upload.findOrFail(logo_id);
 				await institution.logo().associate(logo, trx);
 			}
-			await Promise.all([Algolia.saveIndex('institution', institution), commit()]);
+			await commit();
+			await saveAlgoliaIndex(institution.id);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -91,7 +118,8 @@ class InstitutionController {
 				const logo = await Upload.findOrFail(logo_id);
 				await institution.logo().associate(logo, trx);
 			}
-			await Promise.all([Algolia.saveIndex('institution', institution), commit()]);
+			await commit();
+			await saveAlgoliaIndex(institution.id);
 		} catch (error) {
 			await trx.rollback();
 			throw error;
@@ -111,7 +139,7 @@ class InstitutionController {
 		const institution = await Institution.findOrFail(id);
 		await institution.responsible().dissociate();
 		await institution.responsible().associate(newResponsible);
-		await Algolia.saveIndex('institution', institution);
+		await saveAlgoliaIndex(institution.id);
 		return institution;
 	}
 

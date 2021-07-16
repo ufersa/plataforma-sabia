@@ -12,6 +12,7 @@ class Params {
 				'revisions',
 				'knowledgeArea',
 				'keywords',
+				'locations',
 			],
 			roles: ['permissions', 'users'],
 			users: [
@@ -60,12 +61,23 @@ class Params {
 			service_orders: ['service', 'user', 'serviceOrderReviews'],
 			service_order_reviews: ['serviceOrder', 'user'],
 			reviewer_technology_history: ['reviewer', 'technology'],
+			locations: ['city'],
 		};
 		const listOrder = ['asc', 'desc'];
 		const listOrderBy = {
 			technologies: ['id', 'title', 'slug', 'likes', 'created_at'],
 			roles: ['id', 'role', 'created_at', 'updated_at'],
-			users: ['id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'],
+			users: [
+				'id',
+				'first_name',
+				'last_name',
+				'email',
+				'created_at',
+				'updated_at',
+				'institution_id',
+				'status',
+				'role_id',
+			],
 			taxonomies: ['id', 'taxonomy', 'created_at', 'updated_at'],
 			terms: ['id', 'term', 'slug', 'created_at', 'updated_at'],
 			permissions: ['id', 'permission', 'created_at', 'updated_at'],
@@ -175,15 +187,40 @@ class Params {
 				'created_at',
 				'updated_at',
 			],
+			locations: [
+				'id',
+				'place_id',
+				'address',
+				'city_id',
+				'lat',
+				'lng',
+				'created_at',
+				'updated_at',
+			],
 		};
 
 		Model.queryMacro('withParams', async function withParams(request, options = {}) {
-			const { id, embed, page, perPage, order, orderBy, ids, notIn } = request.params;
+			const {
+				id,
+				embed,
+				page,
+				perPage,
+				order,
+				orderBy,
+				ids,
+				notIn,
+				filterBy,
+				filter,
+			} = request.params;
 
 			// eslint-disable-next-line no-underscore-dangle
 			const resource = this._single.table;
 
 			const { filterById = true, skipRelationships = [], skipPagination = false } = options;
+
+			if (filterBy && filter) {
+				this.where(filterBy, 'LIKE', `%${filter}%`);
+			}
 
 			if (embed.all) {
 				relationships[resource].map(

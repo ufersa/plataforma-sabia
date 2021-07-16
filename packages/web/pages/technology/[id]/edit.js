@@ -30,6 +30,7 @@ import {
 	registerTechnology,
 	sendTechnologyToRevision,
 	getCNPQAreas,
+	updateTechnologyLocations,
 } from '../../../services';
 import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
@@ -187,6 +188,10 @@ const TechnologyFormPage = ({
 						users,
 					});
 				}
+			}
+
+			if (data.locations) {
+				await updateTechnologyLocations(technologyId, data.locations);
 			}
 		}
 
@@ -362,7 +367,6 @@ TechnologyFormPage.getInitialProps = async ({ query, res, user }) => {
 		taxonomies,
 		technology,
 		greatAreas,
-		namespacesRequired: ['common', 'error'],
 		shouldShowCompleteRegistrationModal,
 	};
 };

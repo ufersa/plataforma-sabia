@@ -18,6 +18,10 @@ exports[`<ReadinessLevel /> should render without crashing 1`] = `
   margin-right: calc(100% - 0px);
 }
 
+.c0 > img {
+  border-radius: 0.5rem;
+}
+
 @media screen and (max-width:768px) {
   .c0 > img {
     max-width: 100%;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { FiPlus, FiEdit } from 'react-icons/fi';
 import useSWR from 'swr';
 import Link from 'next/link';
@@ -20,6 +20,7 @@ import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { useModal } from '../../../hooks';
 import { Spinner } from '../../../components/Loading';
 import { formatMoney } from '../../../utils/helper';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const MyServices = ({
 	initialServices,
@@ -127,7 +128,7 @@ const MyServices = ({
 					{services.length ? (
 						<MainContent>
 							<InfoContainer>
-								<Link href="/service/new">
+								<Link href={internalPages.newService}>
 									<AddButton>
 										<span>{t('account:labels.addServices')}</span>
 										<FiPlus />
@@ -277,7 +278,6 @@ MyServices.getInitialProps = async (ctx) => {
 		sortOptions,
 		currentSort: { orderBy: query.orderBy, order: query.order },
 		user,
-		namespacesRequired: ['helper', 'account', 'profile', 'datagrid'],
 	};
 };
 

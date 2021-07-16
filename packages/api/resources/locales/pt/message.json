@@ -12,6 +12,8 @@
   "reviewer.changesMade": "Plataforma Sabiá - Mudanças Efetuadas na Tecnologia",
   "reviewer.technologyReviewRevoked": "Plataforma Sabiá - Revisão de Tecnologia Revogada",
   "researcher.technologyOrder": "Plataforma Sabiá - Aquisição de Tecnologia",
+  "technology.technologyOrderConfirmation": "Plataforma Sabiá - Confirmação de Aquisição de Technologia",
+  "technology.technologyOrderCancelConfirmation": "Plataforma Sabiá - Confirmação de Cancelamento de Aquisição de Tecnologia",
   "order.technologyOrderClosed": "Plataforma Sabiá - Pedido de Tecnologia Fechado",
   "order.technologyOrderCancelled": "Plataforma Sabiá - Pedido de Tecnologia Cancelado",
   "order.serviceOrderClosed": "Plataforma Sabiá - Pedido de Serviço Fechado",
@@ -20,5 +22,6 @@
   "question.technologyQuestionAnswered": "Plataforma Sabiá - Pergunta para a tecnologia foi respondida",
   "announcement.announcementPublished": "Plataforma Sabiá - Edital Publicado",
   "service.serviceRequested": "Plataforma Sabiá - Serviço Solicitado",
-  "service.serviceOrderConfirmation": "Plataforma Sabiá - Confirmação de Solicitação de Serviço"
+  "service.serviceOrderConfirmation": "Plataforma Sabiá - Confirmação de Solicitação de Serviço",
+  "service.serviceOrderCancelConfirmation": "Plataforma Sabiá - Confirmação de Cancelamento de Solicitação de Serviço"
 }

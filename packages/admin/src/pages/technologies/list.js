@@ -62,8 +62,8 @@ const TechnologiesList = ({ basePath, resource, hasCreate, hasEdit, hasList, has
 				/>
 				<StatusField source="status" />
 				<DateField source="created_at" />
-				<EditButton />
-				<DeleteWithConfirmButton />
+				<EditButton label="" variant="contained" color="primary" />
+				<DeleteWithConfirmButton label="" variant="contained" color="default" />
 			</Datagrid>
 		</List>
 	);

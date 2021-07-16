@@ -1,5 +1,6 @@
 import get from 'lodash.get';
-import { MEASURE_UNIT as measureUnitEnum } from './enums/api.enum';
+import { MEASURE_UNIT as measureUnitEnum, ROLES as rolesEnum } from './enums/api.enum';
+import config from '../config';
 
 /**
  * Calculates the distance between two provided dates (e.g.: "Five days ago")
@@ -383,6 +384,13 @@ export const getMeasureUnitLabel = (value) =>
 export const isRunningOnBrowser = () => typeof window !== 'undefined';
 
 /**
+ * Returns if APP_ENV is set to production
+ *
+ * @returns {boolean} True if APP_ENV is equals production, false otherwise
+ */
+export const isAppEnvProduction = () => config.APP_ENV === 'production';
+
+/**
  * Returns institution name prefixed by initials
  *
  * @param {object} institution The institution object
@@ -408,3 +416,12 @@ export const stripHTML = (html, trim = true) => {
 
 	return noTagsHtml;
 };
+
+/**
+ * Returns owner user of a given technology
+ *
+ * @param {object} technology The technology
+ * @returns {object} The owner user
+ */
+export const getTechnologyOwner = (technology) =>
+	technology.users?.find((user) => user?.pivot?.role === rolesEnum.OWNER);

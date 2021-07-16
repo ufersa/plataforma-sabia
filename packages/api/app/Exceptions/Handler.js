@@ -10,6 +10,18 @@ const { errors, errorPayload, Slack } = require('../Utils');
  * @class ExceptionHandler
  */
 class ExceptionHandler extends BaseExceptionHandler {
+	errorCodeShouldReport(errorCode) {
+		const errorCodeReportMapping = {
+			E_ROUTE_NOT_FOUND: false,
+			E_USER_NOT_FOUND: true,
+			E_PASSWORD_MISMATCH: true,
+			E_ROW_NOT_FOUND: true,
+			E_MISSING_DATABASE_ROW: true,
+		};
+
+		return errorCodeReportMapping[errorCode] ?? true;
+	}
+
 	/**
 	 * Handle exception thrown during the HTTP lifecycle
 	 *
@@ -90,8 +102,17 @@ class ExceptionHandler extends BaseExceptionHandler {
 
 	async report(error, { request }) {
 		if (Env.get('APP_ENV') === 'production') {
-			const eventId = await Sentry.captureException(error);
-			await Slack.notifyError(error, eventId, request);
+			if (!this.errorCodeShouldReport(error.code)) {
+				return;
+			}
+
+			try {
+				const eventId = await Sentry.captureException(error);
+				await Slack.notifyError(error, eventId, request);
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.error(err);
+			}
 		}
 	}
 }

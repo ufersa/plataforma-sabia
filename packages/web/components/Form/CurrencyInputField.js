@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import NumberFormat from 'react-number-format';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import get from 'lodash.get';
 import styled, { css } from 'styled-components';
 import { InputFieldWrapper, InputLabel, InputError, Row, inputModifiers } from './styles';
@@ -65,15 +65,15 @@ const CurrencyInputField = ({
 	variant,
 	...inputProps
 }) => {
-	const { t, i18n } = useTranslation(['error']);
+	const { t, lang } = useTranslation(['error']);
 	const { control, errors } = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {
 		...validation,
 		pattern: {
-			value: currencySettings[i18n.language].pattern,
-			message: t('invalidPattern'),
+			value: currencySettings[lang].pattern,
+			message: t('error:invalidPattern'),
 		},
 	};
 
@@ -86,9 +86,9 @@ const CurrencyInputField = ({
 			<Row>
 				<Controller
 					as={StyledNumberFormat}
-					prefix={currencySettings[i18n.language].prefix}
-					thousandSeparator={currencySettings[i18n.language].thousandSeparator}
-					decimalSeparator={currencySettings[i18n.language].decimalSeparator}
+					prefix={currencySettings[lang].prefix}
+					thousandSeparator={currencySettings[lang].thousandSeparator}
+					decimalSeparator={currencySettings[lang].decimalSeparator}
 					decimalScale={2}
 					fixedDecimalScale
 					id={name}

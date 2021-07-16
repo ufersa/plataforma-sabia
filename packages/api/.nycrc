@@ -1,6 +1,7 @@
 {
   "all": true,
   "exclude": [
+    "preloads/**",
     "coverage/**",
     "packages/*/test/**",
     "test/**",
@@ -9,7 +10,8 @@
     "**/__tests__/**",
     "node_modules",
     "vowfile.js",
-    "server.js"
+    "server.js",
+    "ace.js"
   ],
   "reporter": [
     "lcov"

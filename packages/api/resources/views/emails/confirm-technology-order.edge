@@ -1,0 +1,22 @@
+@layout('layout.mail')
+
+@section('content-header')
+    Olá, <span class="FullName">{{ buyer.full_name }}</span>
+@endsection
+
+@section('content')
+  <p>Você realizou um pedido de tecnologia na Plataforma Sabiá:</p>
+
+  <p>
+    Detalhes do pedido:
+  </p>
+  {{technologyOrder.technology.title}}
+  <p>
+  <b>Quantidade:</b> {{technologyOrder.quantity}}</br>
+  <b>Observações:</b> {{technologyOrder.comment}}
+  </p>
+  <p>Clique no botão abaixo para ter acesso aos pedidos:</p>
+  <div class="button-div">
+      <a class="button" href="{{WEB_URL}}/user/my-account/my-orders">Ver pedidos</a>
+  </div>
+@endsection

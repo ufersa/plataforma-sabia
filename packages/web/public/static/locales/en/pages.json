@@ -103,6 +103,53 @@
   "shoppingCart": {
     "title": "Shopping Cart"
   },
+  "showcase": {
+    "list": {
+      "description": "Institutions and companies with registered solutions in Sabiá Platform",
+      "keywords": [
+        "showcase",
+        "tech showcase",
+        "portfolio",
+        "catalog",
+        "semiarid",
+        "digital platform",
+        "sabiá platform",
+        "ufersa sabiá platform",
+        "technologies for semiarid",
+        "social technologies",
+        "technological inovation",
+        "northeast",
+        "universities",
+        "searches",
+        "startups",
+        "companies",
+        "industries",
+        "inovation",
+        "invention"
+      ],
+      "title": "Tech Showcase at Sabiá Platform"
+    },
+    "show": {
+      "description": "Discover the technologies and services developed at {{name}} - {{initials}}",
+      "keywords": [
+        "technological showcase",
+        "technologies",
+        "services",
+        "services provision",
+        "sabiá platform",
+        "semi-arid",
+        "University",
+        "institutions",
+        "Institute",
+        "innovation",
+        "invention",
+        "nit",
+        "core of technological innovation",
+        "innovation agency"
+      ],
+      "title": "{{initials}}'s technological showcase at Sabiá Platform"
+    }
+  },
   "solution": {
     "new": {
       "description": "Register technologies or services focused on the semiarid region",

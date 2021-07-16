@@ -7,7 +7,7 @@ const Dropdown = ({ links }) => {
 	return (
 		<DropdownContainer className="dropdown" aria-label="submenu">
 			{links.map((link) => (
-				<li key={link.id}>
+				<li key={link.id || link.href}>
 					<Link href={link.href}>
 						<a
 							target={link.external ? '_blank' : '_self'}

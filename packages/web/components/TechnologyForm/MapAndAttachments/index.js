@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
 import { Controller } from 'react-hook-form';
 import { upload, deleteUpload } from '../../../services/uploads';
-import { createTerm } from '../../../services/terms';
+import { createLocation } from '../../../services';
 import { InputField, SelectField, InputHiddenField, HelpModal } from '../../Form';
 import {
 	UploadedImages,
@@ -35,26 +35,20 @@ import {
 import { Row, Column } from '../../Common/Layout';
 import { CircularButton } from '../../Button';
 import { getYoutubeVideoId } from '../../../utils/helper';
+import { LOCATIONS as technologyLocationsEnum } from '../../../utils/enums/technology.enums';
 import ImagesPreview from './ImagesPreview';
+import { toast } from '../../Toast';
 
-const parseMetaObjectIntoKeyValue = (findTerm, terms) => {
-	const filteredTerms = terms.filter(({ term }) => term === findTerm);
+const parseLocationsFromApi = (findLocationType, locations) => {
+	const filteredLocations = locations.filter(
+		(location) => location.pivot?.location_type === findLocationType,
+	);
 
-	const newTerms = filteredTerms.map(({ metas, id }) => {
-		const parsedObject = {
-			id,
-		};
-		metas.forEach((meta) => {
-			parsedObject[meta.meta_key] = meta.meta_value;
-		});
-		return parsedObject;
-	});
-
-	return newTerms;
+	return filteredLocations.map((location) => ({ ...location, description: location.address }));
 };
 
 const MapAndAttachments = ({ form, data }) => {
-	const { attachments, rawTerms: terms } = data.technology;
+	const { attachments } = data.technology;
 	const imgsRef = useRef(null);
 	const pdfRef = useRef(null);
 	const [whereIsAlreadyImplemented, setWhereIsAlreadyImplemented] = useState([]);
@@ -68,25 +62,28 @@ const MapAndAttachments = ({ form, data }) => {
 	const { control } = form;
 
 	useEffect(() => {
-		const whereIsAlreadyImplementedParsed = parseMetaObjectIntoKeyValue(
-			'where_is_already_implemented',
-			terms,
+		const whereIsAlreadyImplementedParsed = parseLocationsFromApi(
+			technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
+			data.technology?.locations,
 		);
 		setWhereIsAlreadyImplemented(whereIsAlreadyImplementedParsed);
 
-		const whoDevelopParsed = parseMetaObjectIntoKeyValue('who_develop', terms);
+		const whoDevelopParsed = parseLocationsFromApi(
+			technologyLocationsEnum.WHO_DEVELOP,
+			data.technology?.locations,
+		);
 		setWhoDevelop(whoDevelopParsed);
 	}, []);
 
 	useEffect(() => {
 		whoDevelop.forEach((element, index) => {
-			form.setValue(`terms.who_develop[${index}]`, element.id);
+			form.setValue(`locations.who_develop[${index}]`, element.id);
 		});
 	}, [whoDevelop]);
 
 	useEffect(() => {
 		whereIsAlreadyImplemented.forEach((element, index) => {
-			form.setValue(`terms.where_is_already_implemented[${index}]`, element.id);
+			form.setValue(`locations.where_is_already_implemented[${index}]`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
 
@@ -161,7 +158,7 @@ const MapAndAttachments = ({ form, data }) => {
 			}
 		} catch (error) {
 			setUploadError(
-				'Ocorreu um error ao fazer o upload, verifique se você seguiu as instruções corretamente, verificando o tipo de arquivo e o tamanho dele',
+				'Ocorreu um error ao fazer o upload, verifique se você seguiu as instruções corretamente, checando o tipo de arquivo e o tamanho dele',
 			);
 		}
 	};
@@ -180,22 +177,24 @@ const MapAndAttachments = ({ form, data }) => {
 		}
 	};
 
-	// eslint-disable-next-line consistent-return
-	const deleteFromCollection = (index, collection) => {
+	const deleteFromCollection = async (index, collection) => {
 		if (collection === 'whoDevelop') {
-			return setWhoDevelop(whoDevelop.filter((element, innerIndex) => index !== innerIndex));
+			setWhoDevelop((prevState) => prevState.filter((_, innerIndex) => index !== innerIndex));
+			return;
 		}
 
 		if (collection === 'whereIsAlreadyImplemented') {
-			return setWhereIsAlreadyImplemented(
-				whereIsAlreadyImplemented.filter((element, innerIndex) => index !== innerIndex),
+			setWhereIsAlreadyImplemented((prevState) =>
+				prevState.filter((_, innerIndex) => index !== innerIndex),
 			);
 		}
 	};
 
-	const onSelect = async (value, options, properties, term) => {
+	const onSelect = async ({ properties, locationType }) => {
 		const state =
-			term === 'where_is_already_implemented' ? whereIsAlreadyImplemented : whoDevelop;
+			locationType === technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED
+				? whereIsAlreadyImplemented
+				: whoDevelop;
 		const toBePushed = properties;
 		if (state.some((element) => element.placeId === toBePushed.placeId)) {
 			return;
@@ -207,27 +206,27 @@ const MapAndAttachments = ({ form, data }) => {
 				lng: response[0].geometry.location.lng(),
 			};
 		}
-		const createResponse = await createTerm(term, 'GOOGLE_PLACE', [
-			{
-				meta_key: 'placeId',
-				meta_value: toBePushed.placeId,
-			},
-			{
-				meta_key: 'description',
-				meta_value: toBePushed.description,
-			},
-			{
-				meta_key: 'latitude',
-				meta_value: `${toBePushed.location.lat}`,
-			},
-			{
-				meta_key: 'longitude',
-				meta_value: `${toBePushed.location.lng}`,
-			},
-		]);
 
-		const newState = [...state, { ...toBePushed, id: createResponse.id }];
-		if (term === 'where_is_already_implemented') {
+		const createResponse = await createLocation({
+			place_id: toBePushed.placeId,
+			address: toBePushed.description,
+			lat: toBePushed.location?.lat?.toString(),
+			lng: toBePushed.location?.lng?.toString(),
+		});
+
+		if (createResponse.error) {
+			toast.error(
+				createResponse.messages?.[0]?.message ||
+					'Ocorreu um erro para salvar sua localização, tente novamente em instantes.',
+			);
+			return;
+		}
+
+		const newState = [
+			...state,
+			{ ...toBePushed, locationType, id: createResponse.location.id },
+		];
+		if (locationType === technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED) {
 			setWhereIsAlreadyImplemented(newState);
 			setWhereIsAlreadyImplementedInput('');
 		} else {
@@ -255,8 +254,11 @@ const MapAndAttachments = ({ form, data }) => {
 								name="who_develop"
 								value={whoDevelopInput}
 								onChange={(value) => setWhoDevelopInput(value)}
-								onSelect={(value, options, properties) =>
-									onSelect(value, options, properties, 'who_develop')
+								onSelect={(_, __, properties) =>
+									onSelect({
+										properties,
+										locationType: technologyLocationsEnum.WHO_DEVELOP,
+									})
 								}
 							>
 								{({
@@ -330,7 +332,7 @@ const MapAndAttachments = ({ form, data }) => {
 											form={form}
 											type="hidden"
 											ref={form.register()}
-											name={`terms.who_develop[${index}]`}
+											name={`locations.who_develop[${index}]`}
 										/>
 									</IconRow>
 								);
@@ -373,13 +375,12 @@ const MapAndAttachments = ({ form, data }) => {
 								name="where_is_already_implemented"
 								value={whereIsAlreadyImplementedInput}
 								onChange={(value) => setWhereIsAlreadyImplementedInput(value)}
-								onSelect={(value, options, properties) =>
-									onSelect(
-										value,
-										options,
+								onSelect={(_, __, properties) =>
+									onSelect({
 										properties,
-										'where_is_already_implemented',
-									)
+										locationType:
+											technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
+									})
 								}
 							>
 								{({
@@ -456,7 +457,7 @@ const MapAndAttachments = ({ form, data }) => {
 											form={form}
 											type="hidden"
 											ref={form.register()}
-											name={`terms.where_is_already_implemented[${index}]`}
+											name={`locations.where_is_already_implemented[${index}]`}
 										/>
 									</IconRow>
 								);
@@ -486,7 +487,7 @@ const MapAndAttachments = ({ form, data }) => {
 							</UploadBox>
 						)}
 					</Dropzone>
-					<UploadedImages>
+					<UploadedImages data-cy="uploaded-images">
 						<Controller
 							as={ImagesPreview}
 							name="thumbnail_id"
@@ -611,7 +612,7 @@ MapAndAttachments.propTypes = {
 				images: PropTypes.arrayOf(PropTypes.shape({})),
 				documents: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
-			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),
+			locations: PropTypes.arrayOf(PropTypes.shape({})),
 			videos: PropTypes.arrayOf(PropTypes.shape({})),
 		}),
 	}),
@@ -625,7 +626,7 @@ MapAndAttachments.defaultProps = {
 				images: [],
 				documents: [],
 			},
-			rawTerms: [],
+			locations: [],
 			videos: [],
 		},
 	},

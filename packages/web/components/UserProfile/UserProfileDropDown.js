@@ -2,7 +2,7 @@ import React from 'react';
 import useSWR from 'swr';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import LogoutButton from './LogoutButton';
 import PageLink from './PageLink';
 import getPages from './pages';
@@ -12,17 +12,17 @@ import { getUserUnansweredQuestions, getUserNewMessages } from '../../services/u
 
 const UserProfileDropDown = ({ visible, toggleVisible }) => {
 	const { t } = useTranslation(['profile']);
-	const { user } = useAuth();
+	const { user, isAuthenticated } = useAuth();
 	const { colors } = theme;
 
 	const { data: { data: userUnansweredQuestions } = {} } = useSWR(
-		['get-user-unanswered-questions-count'],
+		isAuthenticated ? 'get-user-unanswered-questions-count' : null,
 		() => getUserUnansweredQuestions(),
 		{ revalidateOnFocus: false },
 	);
 
 	const { data: userNewMessages } = useSWR(
-		['get-user-new-messages-count'],
+		isAuthenticated ? 'get-user-new-messages-count' : null,
 		() => getUserNewMessages(),
 		{ revalidateOnFocus: false },
 	);
@@ -42,7 +42,11 @@ const UserProfileDropDown = ({ visible, toggleVisible }) => {
 									onClick={toggleVisible}
 									notification={page?.notification}
 								>
-									<page.icon stroke={colors.secondary} strokeWidth={1.5} />
+									<page.icon
+										color={colors.secondary}
+										stroke={colors.secondary}
+										strokeWidth={1.5}
+									/>
 									{page.title}
 								</PageLink>
 							</li>

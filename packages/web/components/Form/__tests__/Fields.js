@@ -25,7 +25,7 @@ test.each(commonFieldsTests)(
 		);
 
 		fireEvent.submit(container.querySelector('form'));
-		await findByText('error:requiredField');
+		await findByText(/Este campo é obrigatório/i);
 		// if validaton is not succesfull onSubmit must not be called
 		expect(onSubmit).not.toHaveBeenCalled();
 		expect(container).toMatchSnapshot();
@@ -59,9 +59,9 @@ test('SwitchField works as expected', () => {
 	);
 
 	expect(container).toMatchSnapshot();
-	expect(container.querySelector('label[for=test-input]')).toHaveTextContent('common:no');
+	expect(container.querySelector('label[for=test-input]')).toHaveTextContent(/não/i);
 	fireEvent.click(container.querySelector('input'));
-	expect(container.querySelector('label[for=test-input]')).toHaveTextContent('common:yes');
+	expect(container.querySelector('label[for=test-input]')).toHaveTextContent(/sim/i);
 });
 
 test('CheckBoxField works as expected', () => {

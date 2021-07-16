@@ -80,7 +80,7 @@ export const Link = styled(NextLink)`
 
 		${!!buttonDisabled &&
 			css`
-			cursor: not-allowed;
+			pointer-events: none;
 			opacity 0.5;
 		`};
 	`}

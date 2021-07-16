@@ -19,5 +19,6 @@
   "reviewer.statusNoAllowedForReview": "The technology status: {status} is not allowed for review",
   "user.registrationUncompleted": "You need to complete your registration to access this resource. Uncompleted Fields: {unCompletedFields}",
   "operation.statusNoAllowedForOperation": "It's not allowed to perform the {op} operation with the {status} status",
-  "user.withoutInstitution": "You need to belong to an institution to perform this operation"
+  "user.withoutInstitution": "You need to belong to an institution to perform this operation",
+  "term.uniqueTermError": "This term already exists for this taxonomy"
 }

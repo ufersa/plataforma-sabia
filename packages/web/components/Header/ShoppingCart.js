@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import styled, { css } from 'styled-components';
+import { internal as internalPages } from '../../utils/consts/pages';
 import { useShoppingCart } from '../../hooks';
 
 const ShoppingCart = () => {
@@ -10,7 +11,7 @@ const ShoppingCart = () => {
 
 	return (
 		<Container>
-			<Link href="/shopping-cart" passHref>
+			<Link href={internalPages.shoppingCart} passHref>
 				<Button as="a">
 					<IconWrapper>
 						<FiShoppingCart fontSize={24} />

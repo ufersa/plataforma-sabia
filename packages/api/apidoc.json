@@ -1,6 +1,8 @@
 {
-    "name": "Sabiá Platform API documentation",
-    "version": "1.0.0",
-    "description": "API documentation",
-    "sampleUrl": "http://127.0.0.1:3333"
+  "name": "Sabiá Platform API documentation",
+  "title": "Sabiá Platform API documentation",
+  "version": "1.0.0",
+  "description": "API documentation",
+  "url": "https://api.plataformasabia.com",
+  "useHostUrlAsSampleUrl": true
 }

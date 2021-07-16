@@ -50,6 +50,8 @@ exports[`it renders Profile page and empty Specialties 1`] = `
 
 .c4 svg {
   margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .c4:hover {
@@ -397,17 +399,21 @@ exports[`it renders Profile page and empty Specialties 1`] = `
       <div
         class="c2"
       >
-        profile:welcomeUser
+        Olá, 
+        <span>
+          Usuário
+        </span>
       </div>
       <h3
         class="c3"
       >
-        profile:userArea
+        ÁREA DO USUÁRIO
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -421,12 +427,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myProfile
+        Meu perfil
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -447,12 +454,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:messages
+        Mensagens
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="20"
           width="24"
@@ -466,12 +474,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:favoriteTechnologies
+        Tecnologias favoritas
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -485,17 +494,18 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:userOrders
+        Meus pedidos
       </a>
       <h3
         class="c3"
       >
-        profile:researcherArea
+        ÁREA DO PESQUISADOR
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -516,12 +526,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myTechnologies
+        Minhas tecnologias
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           viewBox="0 0 24 24"
@@ -571,12 +582,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myServices
+        Meus serviços
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -597,12 +609,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:orders
+        Pedidos
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -623,17 +636,18 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:questions
+        Perguntas
       </a>
       <h3
         class="c3"
       >
-        profile:reviewerArea
+        ÁREA DO CURADOR
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -647,12 +661,13 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:profileCurate
+        Perfil do curador
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -666,16 +681,18 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:curateTechnologies
+        Avaliar tecnologias
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="currentColor"
           height="1em"
           stroke="hsla(0, 0%, 52%)"
           stroke-width="1.5"
+          style="color: rgb(133, 133, 133);"
           viewBox="0 0 1024 1024"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -684,7 +701,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 0 0 3 14.1zm167.7 301.1l-56.7-19.5a8 8 0 0 0-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 0 1-112.5 75.9 352.18 352.18 0 0 1-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 0 1-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 0 1 171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 0 1 112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 0 1 775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z"
           />
         </svg>
-        profile:revisionsHistory
+        Tecnologias avaliadas
       </a>
       <button
         class="c5"
@@ -702,7 +719,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
             d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"
           />
         </svg>
-        logout
+        Sair
       </button>
     </section>
     <section
@@ -724,7 +741,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
           <section>
             <h4 />
             <span>
-              profile:curate
+              Curador
             </span>
           </section>
         </section>
@@ -907,7 +924,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
           class="c18"
         >
           <h3>
-            profile:curateMySpecialties
+            Minhas áreas de atuação
           </h3>
           <ul
             class="c19"
@@ -973,6 +990,8 @@ exports[`it renders Profile page correctly 1`] = `
 
 .c4 svg {
   margin-right: 1rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .c4:hover {
@@ -1405,17 +1424,21 @@ exports[`it renders Profile page correctly 1`] = `
       <div
         class="c2"
       >
-        profile:welcomeUser
+        Olá, 
+        <span>
+          Usuário
+        </span>
       </div>
       <h3
         class="c3"
       >
-        profile:userArea
+        ÁREA DO USUÁRIO
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1429,12 +1452,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myProfile
+        Meu perfil
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1455,12 +1479,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:messages
+        Mensagens
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="20"
           width="24"
@@ -1474,12 +1499,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:favoriteTechnologies
+        Tecnologias favoritas
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1493,17 +1519,18 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:userOrders
+        Meus pedidos
       </a>
       <h3
         class="c3"
       >
-        profile:researcherArea
+        ÁREA DO PESQUISADOR
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1524,12 +1551,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myTechnologies
+        Minhas tecnologias
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           viewBox="0 0 24 24"
@@ -1579,12 +1607,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:myServices
+        Meus serviços
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1605,12 +1634,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:orders
+        Pedidos
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1631,17 +1661,18 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:questions
+        Perguntas
       </a>
       <h3
         class="c3"
       >
-        profile:reviewerArea
+        ÁREA DO CURADOR
       </h3>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1655,12 +1686,13 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:profileCurate
+        Perfil do curador
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="none"
           height="24"
           width="24"
@@ -1674,16 +1706,18 @@ exports[`it renders Profile page correctly 1`] = `
             stroke-width="1.5"
           />
         </svg>
-        profile:curateTechnologies
+        Avaliar tecnologias
       </a>
       <a
         class="c4"
       >
         <svg
+          color="hsla(0, 0%, 52%)"
           fill="currentColor"
           height="1em"
           stroke="hsla(0, 0%, 52%)"
           stroke-width="1.5"
+          style="color: rgb(133, 133, 133);"
           viewBox="0 0 1024 1024"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -1692,7 +1726,7 @@ exports[`it renders Profile page correctly 1`] = `
             d="M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 0 0 3 14.1zm167.7 301.1l-56.7-19.5a8 8 0 0 0-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 0 1-112.5 75.9 352.18 352.18 0 0 1-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 0 1-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 0 1 171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 0 1 112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 0 1 775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z"
           />
         </svg>
-        profile:revisionsHistory
+        Tecnologias avaliadas
       </a>
       <button
         class="c5"
@@ -1710,7 +1744,7 @@ exports[`it renders Profile page correctly 1`] = `
             d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"
           />
         </svg>
-        logout
+        Sair
       </button>
     </section>
     <section
@@ -1732,7 +1766,7 @@ exports[`it renders Profile page correctly 1`] = `
           <section>
             <h4 />
             <span>
-              profile:curate
+              Curador
             </span>
           </section>
         </section>
@@ -1915,7 +1949,7 @@ exports[`it renders Profile page correctly 1`] = `
           class="c18"
         >
           <h3>
-            profile:curateMySpecialties
+            Minhas áreas de atuação
           </h3>
           <ul
             class="c19"
@@ -1934,7 +1968,7 @@ exports[`it renders Profile page correctly 1`] = `
                 class="c21"
                 type="button"
               >
-                helper:remove
+                Remover
               </button>
             </li>
           </ul>

@@ -1,10 +1,23 @@
 /* @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
+const { createUniqueSlug } = require('../Utils/slugify');
 
 class Institution extends Model {
 	static boot() {
 		super.boot();
 		this.addTrait('Params');
+
+		this.addHook('beforeSave', async (institution) => {
+			const shouldUpdateSlug =
+				!institution.$originalAttributes.initials ||
+				institution.initials !== institution.$originalAttributes.initials ||
+				institution.slug === null;
+
+			if (shouldUpdateSlug) {
+				// eslint-disable-next-line no-param-reassign
+				institution.slug = await createUniqueSlug(this, institution.initials, 'slug', '');
+			}
+		});
 	}
 
 	static get computed() {
@@ -13,6 +26,21 @@ class Institution extends Model {
 
 	getObjectId({ id }) {
 		return `institution-${id}`;
+	}
+
+	/**
+	 * Query scope to get the institution either by id or slug
+	 *
+	 * @param {object} query The query object.
+	 * @param {number|string} institution The institution id or slug
+	 * @returns {object}
+	 */
+	static scopeGetInstitution(query, institution) {
+		if (Number.isInteger(Number(institution))) {
+			return query.where({ id: institution });
+		}
+
+		return query.where({ slug: institution });
 	}
 
 	/**
@@ -53,6 +81,14 @@ class Institution extends Model {
 
 	logo() {
 		return this.belongsTo('App/Models/Upload', 'logo_id');
+	}
+
+	technologies() {
+		return this.manyThrough('App/Models/User', 'technologies');
+	}
+
+	services() {
+		return this.manyThrough('App/Models/User', 'services');
 	}
 }
 

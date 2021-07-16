@@ -12,8 +12,12 @@ import {
 	CommentContent,
 	CommentText,
 } from '../CurateTechnology/History/styles';
-import { STATUS as statusEnum } from '../../utils/enums/technology.enums';
+import {
+	STATUS as statusEnum,
+	LOCATIONS as technologyLocationsEnum,
+} from '../../utils/enums/technology.enums';
 import { SafeHtml } from '../SafeHtml';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const FormWizardContainer = styled.div``;
 
@@ -251,6 +255,23 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			formattedData.type = formattedData.type.value;
 		}
 
+		if (currentStepSlug === 'map-and-attachments') {
+			const whoDevelop = formattedData.locations?.[technologyLocationsEnum.WHO_DEVELOP]?.map(
+				(location) => ({
+					location_id: location,
+					location_type: technologyLocationsEnum.WHO_DEVELOP,
+				}),
+			);
+			const whereIsImplemented = formattedData.locations?.[
+				technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED
+			]?.map((location) => ({
+				location_id: location,
+				location_type: technologyLocationsEnum.WHERE_IS_ALREADY_IMPLEMENTED,
+			}));
+
+			formattedData.locations = [...(whoDevelop || []), ...(whereIsImplemented || [])];
+		}
+
 		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
@@ -272,7 +293,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 		if (isPublished || showLink) {
 			return (
 				<StepItem completed={index <= currentStepIndex} key={step.slug}>
-					<Link href={`/technology/${data?.technology?.id}/edit/${step.slug}`}>
+					<Link
+						href={`${internalPages.editTechnology.replace(
+							':id',
+							data?.technology?.id,
+						)}${step.slug}`}
+					>
 						<div>
 							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
 							<StepLabel>{step.label}</StepLabel>

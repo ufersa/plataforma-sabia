@@ -266,6 +266,13 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   margin-bottom: 0.8rem;
 }
 
+.c18 p:last-child {
+  color: hsla(0,0%,31%);
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+  margin-top: 0.4rem;
+}
+
 .c20 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -324,10 +331,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   -webkit-justify-content: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
 }
 
 .c21 button {
@@ -743,6 +746,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c46 {
@@ -770,6 +777,10 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c37 {
@@ -958,14 +969,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   }
 }
 
-@media screen and (min-width:769px) {
-  .c17 {
-    -webkit-flex-wrap: unset;
-    -ms-flex-wrap: unset;
-    flex-wrap: unset;
-  }
-}
-
 @media (max-width:768px) {
   .c13 {
     margin-top: 1rem;
@@ -1129,7 +1132,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
               aria-controls="react-autowhatever-1"
               autocomplete="off"
               class="react-autosuggest__input"
-              placeholder="search:searchPlaceholder"
+              placeholder="Qual solução você busca?"
               type="text"
               value=""
             />
@@ -1330,7 +1333,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             id="react-tabs-4"
             role="tab"
           >
-            Georeferenciamento
+            Mapas
           </li>
           <li
             aria-controls="react-tabs-7"
@@ -1352,7 +1355,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             id="react-tabs-8"
             role="tab"
           >
-            Relatos de Experiência
+            Avaliação
           </li>
           <li
             aria-controls="react-tabs-11"
@@ -1810,6 +1813,13 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin-bottom: 0.8rem;
 }
 
+.c18 p:last-child {
+  color: hsla(0,0%,31%);
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+  margin-top: 0.4rem;
+}
+
 .c20 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1868,10 +1878,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   -webkit-justify-content: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
 }
 
 .c21 button {
@@ -2287,6 +2293,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c46 {
@@ -2314,6 +2324,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c37 {
@@ -2510,14 +2524,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   }
 }
 
-@media screen and (min-width:769px) {
-  .c17 {
-    -webkit-flex-wrap: unset;
-    -ms-flex-wrap: unset;
-    flex-wrap: unset;
-  }
-}
-
 @media (max-width:768px) {
   .c13 {
     margin-top: 1rem;
@@ -2653,7 +2659,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
               aria-controls="react-autowhatever-1"
               autocomplete="off"
               class="react-autosuggest__input"
-              placeholder="search:searchPlaceholder"
+              placeholder="Qual solução você busca?"
               type="text"
               value=""
             />
@@ -2854,7 +2860,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             id="react-tabs-18"
             role="tab"
           >
-            Georeferenciamento
+            Mapas
           </li>
           <li
             aria-controls="react-tabs-21"
@@ -2876,7 +2882,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             id="react-tabs-22"
             role="tab"
           >
-            Relatos de Experiência
+            Avaliação
           </li>
           <li
             aria-controls="react-tabs-25"

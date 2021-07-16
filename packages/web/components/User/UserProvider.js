@@ -59,6 +59,23 @@ const emailConfirmation = async ({ email }) => {
 };
 
 /**
+ * Resets the user password through the provided token.
+ *
+ * @param {object} options Options.
+ * @param {string} options.token Unique token sent to the user.
+ * @param {string} options.email User email.
+ *
+ * @returns {boolean}
+ */
+const accountConfirmation = async ({ token, email }) => {
+	try {
+		return auth.accountConfirmation(token, email);
+	} catch (exception) {
+		return false;
+	}
+};
+
+/**
  * Calls the request password reset  endpoint.
  *
  * @param {object} options Options.
@@ -83,9 +100,9 @@ const requestPasswordReset = async ({ email }) => {
  *
  * @returns {boolean}
  */
-const resetPassword = async ({ token, password }) => {
+const resetPassword = async ({ token, password, email }) => {
 	try {
-		return auth.resetPassword(token, password);
+		return auth.resetPassword(token, password, email);
 	} catch (exception) {
 		return false;
 	}
@@ -93,6 +110,7 @@ const resetPassword = async ({ token, password }) => {
 
 export const UserProvider = ({ children, user }) => {
 	const [state, dispatch] = useReducer(userReducer, user);
+	const isAuthenticated = !!state?.email;
 
 	const setUser = useCallback((value) => {
 		dispatch({
@@ -148,11 +166,13 @@ export const UserProvider = ({ children, user }) => {
 		<UserContext.Provider
 			value={{
 				user: state,
+				isAuthenticated,
 				setUser,
 				login,
 				logout,
 				register,
 				emailConfirmation,
+				accountConfirmation,
 				requestPasswordReset,
 				resetPassword,
 			}}

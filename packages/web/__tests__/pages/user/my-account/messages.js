@@ -17,9 +17,12 @@ describe('<Messages />', () => {
 			user: {
 				email: 'test@test.com',
 			},
+			isAuthenticated: true,
 		});
 		render(<MessagesPage {...props} />);
 
-		expect(screen.getByText(/nochatmessagestoshow/i)).toBeInTheDocument();
+		expect(
+			screen.getByText(/Você não possui mensagens para exibir até o momento/i),
+		).toBeInTheDocument();
 	});
 });

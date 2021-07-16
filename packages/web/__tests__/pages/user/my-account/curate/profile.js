@@ -26,6 +26,7 @@ test('it renders Profile page correctly', () => {
 				role: ROLES.REVIEWER,
 			},
 		},
+		isAuthenticated: true,
 	});
 
 	const { container } = render(<CurateProfile categories={categories} />);
@@ -43,6 +44,7 @@ test('it renders Profile page and empty Specialties', () => {
 				role: ROLES.REVIEWER,
 			},
 		},
+		isAuthenticated: true,
 	});
 
 	const { container } = render(<CurateProfile categories={[]} />);

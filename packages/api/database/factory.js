@@ -11,6 +11,7 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const Config = use('Adonis/Src/Config');
+
 const {
 	technologyStatuses,
 	technologyUseStatuses,
@@ -95,6 +96,7 @@ Factory.blueprint('App/Models/Technology', (faker, i, data) => {
 Factory.blueprint('App/Models/Term', async (faker, i, data) => {
 	return {
 		term: faker.word({ syllables: 6 }),
+		slug: `${faker.word({ syllables: 6 })}-${new Date().getTime()}`,
 		...data,
 	};
 });
@@ -287,6 +289,17 @@ Factory.blueprint('App/Models/Upload', async (faker, i, data) => {
 		filename: `${faker.word({ length: 20 })}.${faker.pickone(
 			Config.get('upload.allowedFormats'),
 		)}`,
+		...data,
+	};
+});
+
+Factory.blueprint('App/Models/Location', async (faker, i, data) => {
+	return {
+		place_id: faker.hash(),
+		address: faker.address(),
+		city_id: data.city_id,
+		lat: String(faker.latitude()),
+		lng: String(faker.longitude()),
 		...data,
 	};
 });

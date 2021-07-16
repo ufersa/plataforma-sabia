@@ -1,30 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import Link from 'next/link';
-
-import * as S from '../Common/hitCardStyles';
 import { Likes } from '../../Card';
+import * as S from '../Common/hitCardStyles';
+import { internal as internalPages } from '../../../utils/consts/pages';
 
 const TechnologyHitCard = ({
 	hit: { id, title, description, thumbnail, likes, slug, institution },
 }) => {
 	return (
-		<Link href={`/t/${slug}`} passHref target="_blank">
+		<Link
+			href={internalPages.technologyDetails.replace(':slug', slug)}
+			passHref
+			target="_blank"
+		>
 			<a>
 				<S.Wrapper>
 					<S.UpperContent>
 						<S.ItemDetails>
 							<div>
-								<S.ThumbnailWrapper>
-									<Image
-										key={`${thumbnail?.url || 'card-image'}-${slug}`}
-										layout="responsive"
-										width={80}
-										height={80}
-										objectFit="cover"
-										src={thumbnail?.url || '/card-image.jpg'}
-									/>
+								<S.ThumbnailWrapper imageWidth={10} imageHeight={10}>
+									<img src={thumbnail?.url || '/card-image.jpg'} alt={title} />
 								</S.ThumbnailWrapper>
 
 								<S.Infos>

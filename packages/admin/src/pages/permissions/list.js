@@ -16,8 +16,8 @@ const PermissionsList = ({ basePath, resource, hasCreate, hasEdit, hasList, hasS
 			<TextField source="id" />
 			<TextField source="permission" />
 			<TextField source="description" />
-			<EditButton />
-			<DeleteWithConfirmButton />
+			<EditButton label="" variant="contained" color="primary" />
+			<DeleteWithConfirmButton label="" variant="contained" color="default" />
 		</Datagrid>
 	</List>
 );

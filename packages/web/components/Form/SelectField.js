@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
@@ -14,6 +15,10 @@ import { theme } from '../../styles';
 
 const reactSelectStyles = {
 	default: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			minHeight: '4.4rem',
@@ -27,6 +32,10 @@ const reactSelectStyles = {
 	},
 
 	rounded: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			minHeight: '4.4rem',
@@ -46,6 +55,10 @@ const reactSelectStyles = {
 	},
 
 	gray: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
 		control: (base) => ({
 			...base,
 			backgroundColor: theme.colors.lightGray4,
@@ -79,6 +92,9 @@ const StyledSelect = styled(Select)`
 const StyledCreatable = styled(CreatableSelect)`
 	${styles}
 `;
+const StyledAsync = styled(AsyncSelect)`
+	${styles}
+`;
 
 const Hint = styled.span`
 	${({ theme: { colors } }) => css`
@@ -94,6 +110,7 @@ const SelectField = ({
 	label,
 	help,
 	options,
+	defaultOptions,
 	validation,
 	creatable,
 	onCreate,
@@ -104,6 +121,7 @@ const SelectField = ({
 	isHidden,
 	isLoading,
 	instanceId,
+	isAsync,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -141,8 +159,9 @@ const SelectField = ({
 
 	// update the select options whenever options prop changes
 	useEffect(() => {
-		setSelectOptions(options.sort(compareOptions));
-	}, [options]);
+		const useOptionsFrom = isAsync ? defaultOptions : options;
+		setSelectOptions(useOptionsFrom.sort(compareOptions));
+	}, [options, defaultOptions, isAsync]);
 
 	/**
 	 * React-select expects value to be in { value: '', label: '' } shape so we run a useEffect
@@ -153,9 +172,14 @@ const SelectField = ({
 			return;
 		}
 
-		if (!options || options.length === 0) {
+		if (
+			(!options || options.length === 0) &&
+			(!defaultOptions || defaultOptions.length === 0)
+		) {
 			return;
 		}
+
+		const useOptionsFrom = isAsync ? defaultOptions : options;
 
 		if (!selectedValue) {
 			setNeedsUpdate(false);
@@ -165,22 +189,24 @@ const SelectField = ({
 		if (isMulti) {
 			setValue(
 				name,
-				selectedValue.map((value) => options.find((option) => option.value === value)),
+				selectedValue.map((value) =>
+					useOptionsFrom.find((option) => `${option.value}` === `${value}`),
+				),
 			);
 		} else if (typeof selectedValue === 'object') {
 			setValue(
 				name,
-				options.find((option) => option.value === selectedValue.value),
+				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue.value}`),
 			);
 		} else {
 			setValue(
 				name,
-				options.find((option) => option.value === selectedValue),
+				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue}`),
 			);
 		}
 
 		setNeedsUpdate(false);
-	}, [selectedValue, options, name, setValue, isMulti, needsUpdate]);
+	}, [selectedValue, options, defaultOptions, name, setValue, isMulti, isAsync, needsUpdate]);
 
 	/**
 	 * Handles creating a new element in the select field.
@@ -206,7 +232,9 @@ const SelectField = ({
 
 		return newOption;
 	};
-	const Component = creatable ? StyledCreatable : StyledSelect;
+
+	// eslint-disable-next-line no-nested-ternary
+	const Component = creatable ? StyledCreatable : isAsync ? StyledAsync : StyledSelect;
 
 	return (
 		<InputFieldWrapper
@@ -236,6 +264,7 @@ const SelectField = ({
 					aria-label={label}
 					aria-required={validation.required}
 					options={selectOptions}
+					defaultOptions={selectOptions}
 					isMulti={isMulti}
 					onCreateOption={creatable ? onCreateOption : null}
 					isDisabled={internalIsLoading || isLoading || isHidden}
@@ -285,12 +314,19 @@ SelectField.propTypes = {
 			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		}),
 	),
+	defaultOptions: PropTypes.arrayOf(
+		PropTypes.shape({
+			label: PropTypes.string,
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		}),
+	),
 	callback: PropTypes.func,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
 	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
 	isHidden: PropTypes.bool,
 	isLoading: PropTypes.bool,
 	instanceId: PropTypes.string,
+	isAsync: PropTypes.bool,
 };
 
 SelectField.defaultProps = {
@@ -301,6 +337,7 @@ SelectField.defaultProps = {
 	isMulti: false,
 	validation: {},
 	options: [],
+	defaultOptions: [],
 	help: null,
 	callback: null,
 	wrapperCss: [],
@@ -308,6 +345,7 @@ SelectField.defaultProps = {
 	isHidden: false,
 	isLoading: false,
 	instanceId: '',
+	isAsync: false,
 };
 
 export default SelectField;

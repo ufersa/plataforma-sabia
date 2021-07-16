@@ -5,7 +5,8 @@ import ptBrMessages from 'ra-language-pt-br';
 import { statuses_ptBr, statuses_en } from './translations/statuses';
 
 const common_fields = {
-	id: 'Id',
+	id: 'ID',
+	name: 'Nome',
 	title: 'Título',
 	description: 'Descrição',
 
@@ -95,13 +96,70 @@ const common_fields = {
 	uploads: 'Uploads',
 };
 
+const menuSections = {
+	ptBr: {
+		solutions: 'Soluções',
+		usersSection: 'Usuários',
+		config: 'Configurações',
+	},
+	en: {
+		solutions: 'Solutions',
+		usersSection: 'Users',
+		config: 'Settings',
+	},
+};
+
 const ptBr = {
 	...ptBrMessages,
 	statuses: statuses_ptBr,
 	labels: { ...common_fields },
+	menu: menuSections.ptBr,
 	resources: {
 		technologies: {
 			name: 'Tecnologias',
+			fields: {
+				...common_fields,
+				private: 'Privado',
+				public_domain: 'Domínio público',
+				intellectual_property: 'Propriedade intelectual',
+				thumbnail_id: 'Imagem principal',
+				likes: 'Likes',
+				patent: 'Patente',
+				patent_number: 'Número da patente',
+				primary_purpose: 'Objetivo Principal',
+				secondary_purpose: 'Objetivos secundários',
+				application_mode: 'Aplicação',
+				application_examples: 'Exemplos de Aplicação',
+				installation_time: 'Duração do processo de instalação da tecnologia',
+				solves_problem: 'Problemas que a tecnologia soluciona',
+				entailes_problem: 'Problemas que a tecnologia acarreta',
+				requirements: 'Pré-requisitos para a implantação',
+				risks: 'Riscos associados à tecnologia',
+				contribution: 'Contribuição para o semiárido',
+
+				funding_required: 'Financiamento é necessário',
+				notes: 'Notas',
+				funding_value: 'Valor do financiamento',
+				funding_status: 'Status do financiamento',
+				funding_type: 'Tipo de financiamento',
+				is_seller: 'Está a venda?',
+				price: 'Preço R$',
+				costs: 'Custos',
+
+				cost_type: 'Tipo de custo',
+				quantity: 'Quantidade',
+				value: 'Valor',
+				measure_unit: 'Unidade de medida',
+
+				historic: 'Histórico',
+				assessment: 'Avaliações',
+			},
+			buttons: {
+				thumbnail: 'Principal',
+			},
+		},
+		services: {
+			name: 'Serviços',
 			fields: {
 				...common_fields,
 				private: 'Privado',
@@ -235,12 +293,14 @@ const ptBr = {
 		notification: {
 			send_email_sucess: 'Email enviado com sucesso',
 			delete_sucess: 'Excluído com sucesso',
+			thumbnail_defined: 'Imagem principal definida com sucesso',
 		},
 	},
 };
 const en = {
 	...englishMessages,
 	statuses: statuses_en,
+	menu: menuSections.en,
 	labels: {
 		owner: 'Owner',
 		buyer: 'Buyer',
@@ -281,7 +341,13 @@ const en = {
 		region: 'Region',
 	},
 	resources: {
-		technologies: { name: 'Technologies' },
+		technologies: {
+			name: 'Technologies',
+			buttons: {
+				thumbnail: 'Main',
+			},
+		},
+		services: { name: 'Services' },
 		terms: { name: 'Terms' },
 		taxonomies: { name: 'Taxonomies' },
 		users: { name: 'Users' },
@@ -297,6 +363,7 @@ const en = {
 		notification: {
 			send_email_sucess: 'Email successfully sent',
 			delete_sucess: 'Successfully deleted',
+			thumbnail_defined: 'Thumbnail successfully defined',
 		},
 	},
 };

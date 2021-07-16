@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import useSWR from 'swr';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
@@ -55,6 +55,7 @@ const UserProfile = () => {
 						>
 							<page.icon
 								stroke={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
+								color={isCurrentPage(page) ? colors.secondary : colors.lightGray2}
 								strokeWidth={isCurrentPage(page) ? 2.5 : 1.5}
 							/>
 							{page.title}

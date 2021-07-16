@@ -4,7 +4,7 @@ import React from 'react';
 import App from 'next/app';
 import cookies from 'next-cookies';
 import Router, { withRouter } from 'next/router';
-import NProgress from 'nprogress'; // nprogress module
+import NProgress from 'nprogress';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import LayoutDefault from '../components/_Layouts/Default';
 import LayoutLandingPage from '../components/_Layouts/LandingPage';
@@ -13,18 +13,18 @@ import { UserProvider } from '../components/User';
 import { ShoppingCartProvider } from '../components/ShoppingCart';
 import { ToastContainer } from '../components/Toast';
 import { getMe, setGlobalToken } from '../services';
-import { appWithTranslation } from '../utils/i18n';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
+import { internal as internalPages, landingPage } from '../utils/consts/pages';
+import { isAppEnvProduction } from '../utils/helper';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-// Binding events to NProgress.
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', (url) => {
 	NProgress.done();
-	if (['staging', 'production'].includes(config.APP_ENV)) {
+	if (isAppEnvProduction()) {
 		pageview(url);
 	}
 });
@@ -69,35 +69,62 @@ export class SabiaApp extends App {
 					/>
 				</Head>
 				<ThemeProvider>
-					<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY" />
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `window.dataLayer = window.dataLayer || [];
+					{config.LOAD_ANALYTICS && (
+						<>
+							<script
+								async
+								src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY"
+							/>
+							<script
+								dangerouslySetInnerHTML={{
+									__html: `window.dataLayer = window.dataLayer || [];
 								function gtag(){dataLayer.push(arguments);}
 								gtag('js', new Date());
 
 								gtag('config', 'G-QZWK6JMHSY', {
 									page_path: window.location.pathname,
 								});`,
-						}}
-					/>
-					<script
-						type="text/javascript"
-						dangerouslySetInnerHTML={{
-							__html: `var _smartsupp = _smartsupp || {};
+								}}
+							/>
+						</>
+					)}
+
+					{config.LOAD_HOTJAR && (
+						<script
+							dangerouslySetInnerHTML={{
+								__html: `
+									(function(h,o,t,j,a,r){
+										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+										h._hjSettings={hjid:2331648,hjsv:6};
+										a=o.getElementsByTagName('head')[0];
+										r=o.createElement('script');r.async=1;
+										r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+										a.appendChild(r);
+									})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+								`,
+							}}
+						/>
+					)}
+
+					{config.LOAD_SMARTSUP && (
+						<script
+							type="text/javascript"
+							dangerouslySetInnerHTML={{
+								__html: `var _smartsupp = _smartsupp || {};
 									_smartsupp.key = '${config.SMARTSUP_KEY}';
 									window.smartsupp||(function(d) {
-									var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-									s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-									c.type='text/javascript';c.charset='utf-8';c.async=true;
-									c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+										var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+										s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+										c.type='text/javascript';c.charset='utf-8';c.async=true;
+										c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
 									})(document);`,
-						}}
-					/>
+							}}
+						/>
+					)}
+
 					<script
 						key="script/pre-init"
 						type="application/javascript"
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
 					/>
 					<GlobalStyle />
@@ -105,7 +132,9 @@ export class SabiaApp extends App {
 					<UserProvider user={user || {}}>
 						<ModalProvider>
 							<ShoppingCartProvider>
-								{['/about', '/ideas'].includes(router.pathname) ? (
+								{[internalPages.ideas, landingPage.about].includes(
+									router.pathname,
+								) ? (
 									<LayoutLandingPage>
 										<Component {...pageProps} />
 									</LayoutLandingPage>
@@ -123,4 +152,4 @@ export class SabiaApp extends App {
 	}
 }
 
-export default appWithTranslation(withRouter(SabiaApp));
+export default withRouter(SabiaApp);

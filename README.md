@@ -17,9 +17,6 @@
   <a href="https://github.com/ufersa/plataforma-sabia/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Sabia Platform is released under the MIT license." />
   </a>
-  <a href="https://travis-ci.com/ufersa/plataforma-sabia">
-    <img src="https://travis-ci.com/ufersa/plataforma-sabia.svg?branch=master" alt="Current travis build status" />
-  </a>
   <a href="https://coveralls.io/github/ufersa/plataforma-sabia?branch=master">
     <img src="https://coveralls.io/repos/github/ufersa/plataforma-sabia/badge.svg?branch=master" alt="Code coverage" />
   </a>
