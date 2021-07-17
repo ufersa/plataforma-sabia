@@ -69,30 +69,31 @@ export class SabiaApp extends App {
 					/>
 				</Head>
 				<ThemeProvider>
-					{config.LOAD_ANALYTICS && (
-						<>
-							<script
-								async
-								src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY"
-							/>
-							<script
-								dangerouslySetInnerHTML={{
-									__html: `window.dataLayer = window.dataLayer || [];
+					<>
+						{config.LOAD_ANALYTICS && (
+							<>
+								<script
+									async
+									src="https://www.googletagmanager.com/gtag/js?id=G-QZWK6JMHSY"
+								/>
+								<script
+									dangerouslySetInnerHTML={{
+										__html: `window.dataLayer = window.dataLayer || [];
 								function gtag(){dataLayer.push(arguments);}
 								gtag('js', new Date());
 
 								gtag('config', 'G-QZWK6JMHSY', {
 									page_path: window.location.pathname,
 								});`,
-								}}
-							/>
-						</>
-					)}
+									}}
+								/>
+							</>
+						)}
 
-					{config.LOAD_HOTJAR && (
-						<script
-							dangerouslySetInnerHTML={{
-								__html: `
+						{config.LOAD_HOTJAR && (
+							<script
+								dangerouslySetInnerHTML={{
+									__html: `
 									(function(h,o,t,j,a,r){
 										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
 										h._hjSettings={hjid:2331648,hjsv:6};
@@ -102,15 +103,15 @@ export class SabiaApp extends App {
 										a.appendChild(r);
 									})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 								`,
-							}}
-						/>
-					)}
+								}}
+							/>
+						)}
 
-					{config.LOAD_SMARTSUP && (
-						<script
-							type="text/javascript"
-							dangerouslySetInnerHTML={{
-								__html: `var _smartsupp = _smartsupp || {};
+						{config.LOAD_SMARTSUP && (
+							<script
+								type="text/javascript"
+								dangerouslySetInnerHTML={{
+									__html: `var _smartsupp = _smartsupp || {};
 									_smartsupp.key = '${config.SMARTSUP_KEY}';
 									window.smartsupp||(function(d) {
 										var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
@@ -118,34 +119,35 @@ export class SabiaApp extends App {
 										c.type='text/javascript';c.charset='utf-8';c.async=true;
 										c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
 									})(document);`,
-							}}
-						/>
-					)}
+								}}
+							/>
+						)}
 
-					<script
-						key="script/pre-init"
-						type="application/javascript"
-						dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
-					/>
-					<GlobalStyle />
-					<ToastContainer />
-					<UserProvider user={user || {}}>
-						<ModalProvider>
-							<ShoppingCartProvider>
-								{[internalPages.ideas, landingPage.about].includes(
-									router.pathname,
-								) ? (
-									<LayoutLandingPage>
-										<Component {...pageProps} />
-									</LayoutLandingPage>
-								) : (
-									<LayoutDefault>
-										<Component {...pageProps} />
-									</LayoutDefault>
-								)}
-							</ShoppingCartProvider>
-						</ModalProvider>
-					</UserProvider>
+						<script
+							key="script/pre-init"
+							type="application/javascript"
+							dangerouslySetInnerHTML={{ __html: loadEnvConfig }}
+						/>
+						<GlobalStyle />
+						<ToastContainer />
+						<UserProvider user={user || {}}>
+							<ModalProvider>
+								<ShoppingCartProvider>
+									{[internalPages.ideas, landingPage.about].includes(
+										router.pathname,
+									) ? (
+										<LayoutLandingPage>
+											<Component {...pageProps} />
+										</LayoutLandingPage>
+									) : (
+										<LayoutDefault>
+											<Component {...pageProps} />
+										</LayoutDefault>
+									)}
+								</ShoppingCartProvider>
+							</ModalProvider>
+						</UserProvider>
+					</>
 				</ThemeProvider>
 			</>
 		);
