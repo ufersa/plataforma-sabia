@@ -9,7 +9,7 @@ Resolves #
 
 ## QA Steps
 
-<!-- Passos para testar essa PR (de preferência por um não-desenvolver) -->
+<!-- Passos para testar essa PR (de preferência por um usuário comum) -->
 
 ## Checklist
 
