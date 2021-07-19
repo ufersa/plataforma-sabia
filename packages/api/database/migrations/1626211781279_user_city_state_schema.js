@@ -9,19 +9,11 @@ class UserCityStateSchema extends Schema {
 			table
 				.integer('city_id')
 				.after('city')
-				.unsigned()
-				.references('id')
-				.inTable('cities')
-				.onUpdate('CASCADE')
-				.onDelete('SET NULL');
+				.unsigned();
 			table
 				.integer('state_id')
 				.after('state')
-				.unsigned()
-				.references('id')
-				.inTable('states')
-				.onUpdate('CASCADE')
-				.onDelete('SET NULL');
+				.unsigned();
 		});
 		this.schedule(async (trx) => {
 			const usersWithCity = await Database.table('users')
