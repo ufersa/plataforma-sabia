@@ -37,13 +37,13 @@ class UserSeeder {
 			address: 'Rua dos Calafates, 405',
 			address2: 'Cond. Green Garden, apt 104',
 			birth_date: '2020-12-24T03:00:00.000Z',
-			city: 'Mossoró',
+			city_id: 2408003,
+			state_id: 24,
 			country: 'Brasil',
 			cpf: '71943347042',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
 			phone_number: '(99) 9999-9999',
-			state: 'RN',
 			zipcode: '12345123',
 		});
 
@@ -60,13 +60,13 @@ class UserSeeder {
 			address: 'Rua dos Calafates, 405',
 			address2: 'Cond. Green Garden, apt 104',
 			birth_date: '2020-12-24T03:00:00.000Z',
-			city: 'Mossoró',
+			city_id: 2408003,
+			state_id: 24,
 			country: 'Brasil',
 			cpf: '40855496002',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
 			phone_number: '(99) 9999-9999',
-			state: 'RN',
 			zipcode: '12345123',
 		});
 
@@ -83,13 +83,13 @@ class UserSeeder {
 			address: 'Rua dos Calafates, 405',
 			address2: 'Cond. Green Garden, apt 104',
 			birth_date: '2020-12-24T03:00:00.000Z',
-			city: 'Mossoró',
+			city_id: 2408003,
+			state_id: 24,
 			country: 'Brasil',
 			cpf: '30522362028',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
 			phone_number: '(99) 9999-9999',
-			state: 'RN',
 			zipcode: '12345123',
 		});
 
@@ -107,13 +107,13 @@ class UserSeeder {
 			address: 'Rua dos Calafates, 405',
 			address2: 'Cond. Green Garden, apt 104',
 			birth_date: '2020-12-24T03:00:00.000Z',
-			city: 'Mossoró',
+			city_id: 2408003,
+			state_id: 24,
 			country: 'Brasil',
 			cpf: '25543261004',
 			district: 'Alto de São Manoel',
 			lattes_id: '1',
 			phone_number: '(99) 9999-9999',
-			state: 'RN',
 			zipcode: '12345123',
 		});
 
