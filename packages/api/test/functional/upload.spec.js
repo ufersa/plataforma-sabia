@@ -156,17 +156,13 @@ test('POST /uploads creates/saves a new upload with object and object_id.', asyn
 
 		await technologyInst.users().attach([loggedUser.id]);
 
-		await fs.writeFile(
-			Helpers.tmpPath(`resources/test/test-image_with_object.jpg`),
-			base64Data,
-			'base64',
-		);
+		await fs.writeFile(Helpers.tmpPath(`resources/test/test-image.jpg`), base64Data, 'base64');
 
 		const response = await client
 			.post('uploads')
 			.loginVia(loggedUser, 'jwt')
 			.field('meta', JSON.stringify(meta))
-			.attach('files[]', Helpers.tmpPath(`resources/test/test-image_with_object.jpg`))
+			.attach('files[]', Helpers.tmpPath(`resources/test/test-image.jpg`))
 			.end();
 
 		const result = await fsExists(
@@ -212,59 +208,55 @@ test('POST /uploads user trying to upload for object and object_id without permi
 });
 
 test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
-	const { user: loggedUser } = await createUser();
+	try {
+		const { user: loggedUser } = await createUser();
 
-	await fs.writeFile(
-		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
-		base64Data,
-		'base64',
-	);
+		await fs.writeFile(Helpers.tmpPath(`resources/test/test-delete.jpg`), base64Data, 'base64');
 
-	const responseUpload = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
-		.end();
+		const responseUpload = await client
+			.post('uploads')
+			.loginVia(loggedUser, 'jwt')
+			.attach('files[]', Helpers.tmpPath(`resources/test/test-delete.jpg`))
+			.end();
 
-	let result = await fsExists(
-		Helpers.publicPath(
-			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
-		),
-	);
-	assert.isTrue(result);
+		let result = await fsExists(
+			Helpers.publicPath(
+				`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
+			),
+		);
+		assert.isTrue(result);
 
-	const response = await client
-		.delete(`uploads/${responseUpload.body[0].id}`)
-		.loginVia(loggedUser, 'jwt')
-		.end();
+		const response = await client
+			.delete(`uploads/${responseUpload.body[0].id}`)
+			.loginVia(loggedUser, 'jwt')
+			.end();
 
-	result = await fsExists(
-		Helpers.publicPath(
-			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
-		),
-	);
-	assert.isFalse(result);
+		result = await fsExists(
+			Helpers.publicPath(
+				`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
+			),
+		);
+		assert.isFalse(result);
 
-	response.assertStatus(200);
-	response.assertJSONSubset({
-		success: true,
-	});
+		response.assertStatus(200);
+		response.assertJSONSubset({
+			success: true,
+		});
+	} catch (error) {
+		Logger.error(error);
+	}
 });
 
 test('DELETE /uploads/:id user trying to delete other user upload.', async ({ client, assert }) => {
 	const { user: loggedUser } = await createUser();
 	const otherUser = await User.first();
 
-	await fs.writeFile(
-		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
-		base64Data,
-		'base64',
-	);
+	await fs.writeFile(Helpers.tmpPath(`resources/test/test-delete.jpg`), base64Data, 'base64');
 
 	const responseUpload = await client
 		.post('uploads')
 		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
+		.attach('files[]', Helpers.tmpPath(`resources/test/test-delete.jpg`))
 		.end();
 
 	const result = await fsExists(
@@ -289,39 +281,39 @@ test('DELETE /uploads/:id delete a record where the associated file does not exi
 	client,
 	assert,
 }) => {
-	const { user: loggedUser } = await createUser();
+	try {
+		const { user: loggedUser } = await createUser();
 
-	await fs.writeFile(
-		Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`),
-		base64Data,
-		'base64',
-	);
+		await fs.writeFile(Helpers.tmpPath(`resources/test/test-delete.jpg`), base64Data, 'base64');
 
-	const responseUpload = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-image-for-delete.jpg`))
-		.end();
+		const responseUpload = await client
+			.post('uploads')
+			.loginVia(loggedUser, 'jwt')
+			.attach('files[]', Helpers.tmpPath(`resources/test/test-delete.jpg`))
+			.end();
 
-	const pathFile = Helpers.publicPath(
-		`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
-	);
+		const pathFile = Helpers.publicPath(
+			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
+		);
 
-	let result = await fsExists(pathFile);
-	assert.isTrue(result);
+		let result = await fsExists(pathFile);
+		assert.isTrue(result);
 
-	await fs.unlink(pathFile);
+		await fs.unlink(pathFile);
 
-	result = await fsExists(pathFile);
-	assert.isFalse(result);
+		result = await fsExists(pathFile);
+		assert.isFalse(result);
 
-	const response = await client
-		.delete(`uploads/${responseUpload.body[0].id}`)
-		.loginVia(loggedUser, 'jwt')
-		.end();
+		const response = await client
+			.delete(`uploads/${responseUpload.body[0].id}`)
+			.loginVia(loggedUser, 'jwt')
+			.end();
 
-	response.assertStatus(200);
-	response.assertJSONSubset({
-		success: true,
-	});
+		response.assertStatus(200);
+		response.assertJSONSubset({
+			success: true,
+		});
+	} catch (error) {
+		Logger.error(error);
+	}
 });
