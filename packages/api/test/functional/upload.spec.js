@@ -248,33 +248,37 @@ test('DELETE /uploads/:id deletes upload.', async ({ client, assert }) => {
 });
 
 test('DELETE /uploads/:id user trying to delete other user upload.', async ({ client, assert }) => {
-	const { user: loggedUser } = await createUser();
-	const otherUser = await User.first();
+	try {
+		const { user: loggedUser } = await createUser();
+		const otherUser = await User.first();
 
-	await fs.writeFile(Helpers.tmpPath(`resources/test/test-delete.jpg`), base64Data, 'base64');
+		await fs.writeFile(Helpers.tmpPath(`resources/test/test-delete.jpg`), base64Data, 'base64');
 
-	const responseUpload = await client
-		.post('uploads')
-		.loginVia(loggedUser, 'jwt')
-		.attach('files[]', Helpers.tmpPath(`resources/test/test-delete.jpg`))
-		.end();
+		const responseUpload = await client
+			.post('uploads')
+			.loginVia(loggedUser, 'jwt')
+			.attach('files[]', Helpers.tmpPath(`resources/test/test-delete.jpg`))
+			.end();
 
-	const result = await fsExists(
-		Helpers.publicPath(
-			`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
-		),
-	);
-	assert.isTrue(result);
+		const result = await fsExists(
+			Helpers.publicPath(
+				`${decodeURIComponent(new URL(responseUpload.body[0].url).pathname.slice(1))}`,
+			),
+		);
+		assert.isTrue(result);
 
-	const response = await client
-		.delete(`uploads/${responseUpload.body[0].id}`)
-		.loginVia(otherUser, 'jwt')
-		.end();
+		const response = await client
+			.delete(`uploads/${responseUpload.body[0].id}`)
+			.loginVia(otherUser, 'jwt')
+			.end();
 
-	response.assertStatus(403);
-	response.assertJSONSubset(
-		errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
-	);
+		response.assertStatus(403);
+		response.assertJSONSubset(
+			errorPayload(errors.UNAUTHORIZED_ACCESS, antl('error.permission.unauthorizedAccess')),
+		);
+	} catch (error) {
+		Logger.error(error);
+	}
 });
 
 test('DELETE /uploads/:id delete a record where the associated file does not exist in the directory.', async ({
