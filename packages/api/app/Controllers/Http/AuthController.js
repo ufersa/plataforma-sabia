@@ -10,6 +10,20 @@ const SendMailJob = use('App/Jobs/SendMail');
 const { errors, errorPayload } = require('../../Utils');
 
 class AuthController {
+	async checkToken({ request, response }) {
+		const { email, token, tokenType } = request.only(['email', 'token', 'tokenType']);
+
+		const tokenObject = await Token.getTokenObjectFor(email, token, tokenType);
+
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
 	/**
 	 * Register an user.
 	 *

@@ -52,8 +52,8 @@ class UserCityStateSchema extends Schema {
 	down() {
 		this.alter('users', (table) => {
 			// reverse alternations
-			table.dropForeign(['city_id']).dropColumn('city_id');
-			table.dropForeign(['state_id']).dropColumn('state_id');
+			table.dropColumn('city_id');
+			table.dropColumn('state_id');
 		});
 	}
 }

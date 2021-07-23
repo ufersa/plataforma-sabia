@@ -415,3 +415,63 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 
 	loginResponse.assertStatus(401);
 });
+
+// Check token
+test('/auth/check-token', async ({ client, assert }) => {
+	const { user } = await createUser({ append: { status: 'invited' } });
+	const token = await user.generateToken('reset-pw');
+	assert.isNotTrue(token.isRevoked());
+
+	const response = await client
+		.post('/auth/check-token')
+		.send({
+			email: user.email,
+			token: token.token,
+			tokenType: 'reset-pw',
+		})
+		.end();
+
+	response.assertStatus(200);
+	response.assertJSONSubset({ success: true });
+});
+
+test('/auth/check-token fails with invalid token', async ({ client }) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const token = await user.generateToken('confirm-ac');
+
+	const response = await client
+		.post('/auth/check-token')
+		.send({
+			email: user.email,
+			token: token.token,
+			tokenType: 'reset-pw',
+		})
+		.end();
+
+	response.assertStatus(401);
+	response.assertJSONSubset(errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')));
+});
+
+test('/auth/check-token fails with invalid token type', async ({ client }) => {
+	const { user } = await createUser({ append: { status: 'verified' } });
+	const token = await user.generateToken('confirm-ac');
+
+	const response = await client
+		.post('/auth/check-token')
+		.send({
+			email: user.email,
+			token: token.token,
+			tokenType: 'unknown-token-type',
+		})
+		.end();
+
+	response.assertStatus(400);
+	response.assertJSONSubset(
+		errorPayload('VALIDATION_ERROR', [
+			{
+				field: 'tokenType',
+				validation: 'in',
+			},
+		]),
+	);
+});

@@ -170,6 +170,38 @@ Route.get('/auth/forgot-password', 'AuthController.forgotPassword').validator('F
 Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('ResetPassword');
 
 /**
+ * @api {post} /auth/check-token Checks if numeric token is valid
+ * @apiGroup Auth
+ * @apiParam {String} email Mandatory User Email.
+ * @apiParam {String} token Mandatory Token.
+ * @apiParam {String} tokenType Mandatory Token Type.
+ * @apiParamExample  {json} Request sample:
+ *    {
+ * 		"email": "user@gmail.com",
+ *		"token": "123456",
+ *		"tokenType": "reset-pw"
+ *    }
+ * @apiSuccess {Boolean} success Success Flag
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *		"success":"true"
+ *    }
+ *@apiError (401 Unauthorized) {Object} error Error object
+ *@apiError (401 Unauthorized) {String} error.error_code Error code
+ *@apiError (401 Unauthorized) {String} error.message Error message
+ *@apiErrorExample {json} Invalid Token Error
+ *    HTTP/1.1 401 Unauthorized
+ *    {
+ *		"error": {
+ *			"error_code": "INVALID_TOKEN",
+ *			"message": "O token é inválido."
+ *		}
+ *    }
+ */
+Route.post('/auth/check-token', 'AuthController.checkToken').validator('CheckToken');
+
+/**
  * @api {post} /auth/confirm-account Confirms User Account
  * @apiGroup Auth
  * @apiParam {String} token Mandatory Token.
