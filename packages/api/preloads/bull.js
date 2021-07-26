@@ -1,14 +1,30 @@
+/** @type {import('@rocketseat/adonis-bull')} */
 const Bull = use('Rocketseat/Bull');
 const UpdateTechnologyTotalViewsJob = use('App/Jobs/UpdateTechnologyTotalViews');
+const ConsolidateMetricsJob = use('App/Jobs/ConsolidateMetrics');
 
-Bull.process()
-	// Optionally you can start BullBoard:
-	.ui(9999); // http://localhost:9999
-// You don't need to specify the port, the default number is 9999
+Bull.process().ui(9999);
 
 // Run the update technology views job every midnight
-Bull.add(UpdateTechnologyTotalViewsJob.key, null, {
-	repeat: {
-		cron: '0 0 * * *',
+Bull.add(
+	UpdateTechnologyTotalViewsJob.key,
+	{},
+	{
+		repeat: {
+			cron: '0 0 * * *',
+		},
 	},
-});
+);
+
+/**
+ * TODO: update time
+ */
+Bull.add(
+	ConsolidateMetricsJob.key,
+	{},
+	{
+		repeat: {
+			cron: '*/10 * * * * *',
+		},
+	},
+);
