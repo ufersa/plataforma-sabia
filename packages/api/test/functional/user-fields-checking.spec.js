@@ -21,7 +21,11 @@ test('POST /technologies checks user personal and organizational data before cre
 	await loggedUser.institution().dissociate();
 	await loggedUser.areas().detach();
 	await loggedUser.city().dissociate();
-	const unCompletedFields = ['address', 'city_id', 'institution'];
+	const unCompletedFields = [
+		'address',
+		//  'city_id',
+		'institution',
+	];
 
 	const technologyFactory = await Factory.model('App/Models/Technology').make();
 
