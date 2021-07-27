@@ -24,8 +24,8 @@ const personal_data_required_fields = [
 	'zipcode',
 	'address',
 	'district',
-	'city_id',
-	'state_id',
+	// 'city_id',
+	// 'state_id',
 	'country',
 ];
 
