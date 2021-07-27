@@ -333,15 +333,6 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
-						form={form}
-						name="city"
-						label={t('account:labels.city')}
-						validation={{ required: true }}
-						variant="gray"
-					/>
-				</Cell>
-				<Cell col={3}>
 					<SelectField
 						form={form}
 						name="state"
@@ -350,6 +341,15 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						variant="gray"
 						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
 						instanceId="select-state-my-account"
+					/>
+				</Cell>
+				<Cell col={3}>
+					<InputField
+						form={form}
+						name="city"
+						label={t('account:labels.city')}
+						validation={{ required: true }}
+						variant="gray"
 					/>
 				</Cell>
 				<Cell col={3}>
