@@ -78,7 +78,6 @@ const MyProfile = () => {
 		phone_number,
 		zipcode,
 		institution_id,
-		state,
 		knowledge_area,
 		...data
 	}) => {
@@ -90,7 +89,8 @@ const MyProfile = () => {
 			phone_number: unMask(phone_number) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
 			zipcode: unMask(zipcode) ?? '',
-			state: state?.value,
+			state_id: data.state_id?.value,
+			city_id: data.city_id?.value,
 			institution_id: institution_id?.value,
 			areas:
 				knowledge_area?.map((area) => {
