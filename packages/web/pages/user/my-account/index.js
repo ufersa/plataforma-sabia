@@ -191,7 +191,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	});
 
 	const { data: brazilStateCities = [] } = useSWR(
-		() => `get-brazil-state-city-${brazilStateId.value || brazilStateId}`,
+		brazilStateId ? `get-brazil-state-city-${brazilStateId.value || brazilStateId}` : null,
 		() => getStateCities(brazilStateId.value, { perPage: 10 }),
 		{
 			revalidateOnFocus: false,
