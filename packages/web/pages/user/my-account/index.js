@@ -27,8 +27,13 @@ import {
 	mapArrayOfObjectToSelect,
 	getInstitutionLabel,
 } from '../../../utils/helper';
-import { STATES } from '../../../utils/enums/states.enum';
-import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
+import {
+	updateUser,
+	updateUserPassword,
+	getInstitutions,
+	getStates,
+	getStateCities,
+} from '../../../services';
 import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
 const mapInstitutionsOptions = (institutions) => {
@@ -157,7 +162,7 @@ const MyProfile = () => {
 };
 
 const CommonDataForm = ({ form, user, message, loading }) => {
-	const { setValue, register } = form;
+	const { setValue, register, watch } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
@@ -171,6 +176,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		sub_area_id: null,
 		speciality_id: null,
 	};
+	const brazilStateId = watch('state_id');
 
 	const { data: { data: institutions } = {} } = useSWR(
 		'get-institutions',
@@ -180,8 +186,20 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		},
 	);
 
+	const { data: brazilStates = [] } = useSWR('get-brazil-states', () => getStates(), {
+		revalidateOnFocus: false,
+	});
+
+	const { data: brazilStateCities = [] } = useSWR(
+		() => `get-brazil-state-city-${brazilStateId.value || brazilStateId}`,
+		() => getStateCities(brazilStateId.value, { perPage: 10 }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
 	const handleFetchInstitutions = debounce((value, callback) => {
-		getInstitutions({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
+		getStateCities({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
 			const mappedOptions = mapInstitutionsOptions(response.data);
 			callback(mappedOptions);
 		});
@@ -335,21 +353,30 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 				<Cell col={3}>
 					<SelectField
 						form={form}
-						name="state"
+						name="state_id"
 						label={t('account:labels.state')}
 						validation={{ required: true }}
 						variant="gray"
-						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
+						options={mapArrayOfObjectToSelect(brazilStates, 'initials', 'id')}
 						instanceId="select-state-my-account"
+						placeholder="Selecione o estado..."
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
+					<SelectField
 						form={form}
-						name="city"
+						name="city_id"
 						label={t('account:labels.city')}
-						validation={{ required: true }}
+						placeholder={
+							!brazilStateId
+								? 'Selecione o estado primeiro...'
+								: 'Selecione a cidade...'
+						}
 						variant="gray"
+						options={mapArrayOfObjectToSelect(brazilStateCities, 'name', 'id')}
+						noOptionsMessage={() => 'Nenhuma cidade encontrada...'}
+						instanceId="select-city-my-account"
+						validation={{ required: true }}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -502,6 +529,7 @@ CommonDataForm.propTypes = {
 		setValue: PropTypes.func,
 		register: PropTypes.func,
 		getValues: PropTypes.func,
+		watch: PropTypes.func,
 	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
