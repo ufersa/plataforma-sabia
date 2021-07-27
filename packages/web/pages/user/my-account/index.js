@@ -31,11 +31,18 @@ import { STATES } from '../../../utils/enums/states.enum';
 import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
 import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
-const mapInstitutionsOptions = (institutions) =>
-	institutions?.map((institution) => ({
-		label: getInstitutionLabel(institution),
-		value: institution.id,
-	})) || [];
+const mapInstitutionsOptions = (institutions) => {
+	if (!institutions?.length) {
+		return [];
+	}
+
+	return (
+		institutions?.map((institution) => ({
+			label: getInstitutionLabel(institution),
+			value: institution?.id,
+		})) || []
+	);
+};
 
 /**
  * Transform user fields that needs mask.
