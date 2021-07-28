@@ -27,15 +27,27 @@ import {
 	mapArrayOfObjectToSelect,
 	getInstitutionLabel,
 } from '../../../utils/helper';
-import { STATES } from '../../../utils/enums/states.enum';
-import { updateUser, updateUserPassword, getInstitutions } from '../../../services';
+import {
+	updateUser,
+	updateUserPassword,
+	getInstitutions,
+	getStates,
+	getStateCities,
+} from '../../../services';
 import { maskPatterns, replaceWithMask } from '../../../utils/masks';
 
-const mapInstitutionsOptions = (institutions) =>
-	institutions?.map((institution) => ({
-		label: getInstitutionLabel(institution),
-		value: institution.id,
-	})) || [];
+const mapInstitutionsOptions = (institutions) => {
+	if (!institutions?.length) {
+		return [];
+	}
+
+	return (
+		institutions?.map((institution) => ({
+			label: getInstitutionLabel(institution),
+			value: institution?.id,
+		})) || []
+	);
+};
 
 /**
  * Transform user fields that needs mask.
@@ -66,7 +78,6 @@ const MyProfile = () => {
 		phone_number,
 		zipcode,
 		institution_id,
-		state,
 		knowledge_area,
 		...data
 	}) => {
@@ -78,7 +89,8 @@ const MyProfile = () => {
 			phone_number: unMask(phone_number) ?? '',
 			birth_date: stringToDate(birth_date) ?? '',
 			zipcode: unMask(zipcode) ?? '',
-			state: state?.value,
+			state_id: data.state_id?.value,
+			city_id: data.city_id?.value,
 			institution_id: institution_id?.value,
 			areas:
 				knowledge_area?.map((area) => {
@@ -150,7 +162,7 @@ const MyProfile = () => {
 };
 
 const CommonDataForm = ({ form, user, message, loading }) => {
-	const { setValue, register } = form;
+	const { setValue, register, watch } = form;
 	const { t } = useTranslation(['account']);
 	const { openModal } = useModal();
 	const [isResearcher, setIsResearcher] = useState(Boolean(user.researcher));
@@ -164,6 +176,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		sub_area_id: null,
 		speciality_id: null,
 	};
+	const brazilStateId = watch('state_id');
 
 	const { data: { data: institutions } = {} } = useSWR(
 		'get-institutions',
@@ -173,8 +186,20 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 		},
 	);
 
+	const { data: brazilStates = [] } = useSWR('get-brazil-states', () => getStates(), {
+		revalidateOnFocus: false,
+	});
+
+	const { data: brazilStateCities = [] } = useSWR(
+		brazilStateId ? `get-brazil-state-city-${brazilStateId.value || brazilStateId}` : null,
+		() => getStateCities(brazilStateId.value || brazilStateId, { perPage: 10 }),
+		{
+			revalidateOnFocus: false,
+		},
+	);
+
 	const handleFetchInstitutions = debounce((value, callback) => {
-		getInstitutions({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
+		getStateCities({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
 			const mappedOptions = mapInstitutionsOptions(response.data);
 			callback(mappedOptions);
 		});
@@ -326,23 +351,32 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 					/>
 				</Cell>
 				<Cell col={3}>
-					<InputField
+					<SelectField
 						form={form}
-						name="city"
-						label={t('account:labels.city')}
+						name="state_id"
+						label={t('account:labels.state')}
 						validation={{ required: true }}
 						variant="gray"
+						options={mapArrayOfObjectToSelect(brazilStates, 'initials', 'id')}
+						instanceId="select-state-my-account"
+						placeholder="Selecione o estado..."
 					/>
 				</Cell>
 				<Cell col={3}>
 					<SelectField
 						form={form}
-						name="state"
-						label={t('account:labels.state')}
-						validation={{ required: true }}
+						name="city_id"
+						label={t('account:labels.city')}
+						placeholder={
+							!brazilStateId
+								? 'Selecione o estado primeiro...'
+								: 'Selecione a cidade...'
+						}
 						variant="gray"
-						options={mapArrayOfObjectToSelect(STATES, 'initials', 'initials')}
-						instanceId="select-state-my-account"
+						options={mapArrayOfObjectToSelect(brazilStateCities, 'name', 'id')}
+						noOptionsMessage={() => 'Nenhuma cidade encontrada...'}
+						instanceId="select-city-my-account"
+						validation={{ required: true }}
 					/>
 				</Cell>
 				<Cell col={3}>
@@ -495,6 +529,7 @@ CommonDataForm.propTypes = {
 		setValue: PropTypes.func,
 		register: PropTypes.func,
 		getValues: PropTypes.func,
+		watch: PropTypes.func,
 	}),
 	user: PropTypes.shape({
 		full_name: PropTypes.string,
