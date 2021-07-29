@@ -13,6 +13,7 @@ class CollectBusinessMetrics {
 		// eslint-disable-next-line no-console
 		console.time('all');
 		new this.TechnologyMetrics().collect();
+		// eslint-disable-next-line no-console
 		console.timeEnd('all');
 		return true;
 	}
