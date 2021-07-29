@@ -1,4 +1,4 @@
-import { apiDelete, apiPost } from './api';
+import { apiDelete, apiGet, apiPost } from './api';
 
 /**
  * Creates a new location
@@ -28,6 +28,39 @@ export const deleteLocation = async (id) => {
 	}
 
 	const response = await apiDelete(`locations/${id}`);
+
+	if (response.status !== 200) {
+		return { error: true, messages: response.data?.error?.message || [] };
+	}
+
+	return response.data;
+};
+
+/**
+ * Gets brazilian states
+ *
+ * @param {object} options Optional params
+ * @returns {Array} States list
+ */
+export const getStates = async (options = {}) => {
+	const response = await apiGet('states', { embed: true, ...options });
+
+	if (response.status !== 200) {
+		return { error: true, messages: response.data?.error?.message || [] };
+	}
+
+	return response.data;
+};
+
+/**
+ * Gets brazilian state cities
+ *
+ * @param {string|number} stateId The state id
+ * @param {object} options Optional params
+ * @returns {Array} States list
+ */
+export const getStateCities = async (stateId, options = {}) => {
+	const response = await apiGet(`states/${stateId}/cities`, { embed: true, ...options });
 
 	if (response.status !== 200) {
 		return { error: true, messages: response.data?.error?.message || [] };
