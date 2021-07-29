@@ -1,7 +1,7 @@
 /** @type {import('@rocketseat/adonis-bull')} */
 const Bull = use('Rocketseat/Bull');
 const UpdateTechnologyTotalViewsJob = use('App/Jobs/UpdateTechnologyTotalViews');
-const ConsolidateMetricsJob = use('App/Jobs/ConsolidateMetrics');
+const CollectBusinessMetricsJob = use('App/Jobs/CollectBusinessMetrics');
 
 Bull.process().ui(9999);
 
@@ -20,7 +20,7 @@ Bull.add(
  * TODO: update time
  */
 Bull.add(
-	ConsolidateMetricsJob.key,
+	CollectBusinessMetricsJob.key,
 	{},
 	{
 		repeat: {

@@ -21,7 +21,8 @@ module.exports = {
     | Collect overall performance metrics of the entire application.
    */
 	systemMetrics: {
-		enabled: true,
+		/// ///////////////////////
+		enabled: false,
 		prefix: '',
 	},
 
@@ -33,7 +34,8 @@ module.exports = {
     | Measures the performance of HTTP request based on status codes returned.
    */
 	httpMetric: {
-		enabled: true,
+		/// ///////////////////////
+		enabled: false,
 		name: 'adonis_http_request_durations',
 		includeQueryParams: true,
 		help: 'Total time each HTTP request takes.',
