@@ -297,7 +297,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 						href={`${internalPages.editTechnology.replace(
 							':id',
 							data?.technology?.id,
-						)}${step.slug}`}
+						)}/${step.slug}`}
 					>
 						<div>
 							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>
