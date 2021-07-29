@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 /** @type {import('@adonisjs/lucid/src/Database')} */
 const Database = use('Database');
 /** @type {typeof import('prom-client')} */
