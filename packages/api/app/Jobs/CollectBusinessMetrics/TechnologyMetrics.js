@@ -22,7 +22,7 @@ class TechnologyMetrics {
 				help: 'Technology ranking by views count',
 				labelNames: ['id', 'title'],
 			},
-			technologyMostLikedCount: {
+			technologyMostLikedGauge: {
 				name: 'technologies_most_liked_count',
 				help: 'Technology ranking by likes count',
 				labelNames: ['id', 'title'],
@@ -68,10 +68,10 @@ class TechnologyMetrics {
 				)
 			)[0];
 
-			const counter = new this.prometheus.Counter(this.metrics.technologiesDateCount);
+			const gauge = new this.prometheus.Gauge(this.metrics.technologiesDateCount);
 
 			data.forEach((item) => {
-				counter.inc({ date: item.date }, item.count);
+				gauge.set({ date: item.date }, item.count);
 			});
 		}
 
@@ -87,16 +87,16 @@ class TechnologyMetrics {
 				)
 			)[0];
 
-			const counter = new this.prometheus.Counter(this.metrics.technologyMostViewedCount);
+			const gauge = new this.prometheus.Gauge(this.metrics.technologyMostViewedCount);
 
 			data.forEach((item) => {
-				counter.inc({ id: item.id, title: item.title }, item.total_views);
+				gauge.set({ id: item.id, title: item.title }, item.total_views);
 			});
 		}
 
 		// Technologies Most Liked
 		{
-			this.prometheus.register.removeSingleMetric(this.metrics.technologyMostLikedCount.name);
+			this.prometheus.register.removeSingleMetric(this.metrics.technologyMostLikedGauge.name);
 
 			const data = (
 				await Database.raw(
@@ -104,10 +104,10 @@ class TechnologyMetrics {
 				)
 			)[0];
 
-			const counter = new this.prometheus.Counter(this.metrics.technologyMostLikedCount);
+			const gauge = new this.prometheus.Gauge(this.metrics.technologyMostLikedGauge);
 
 			data.forEach((item) => {
-				counter.inc({ id: item.id, title: item.title }, item.likes);
+				gauge.set({ id: item.id, title: item.title }, item.likes);
 			});
 		}
 
