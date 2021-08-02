@@ -402,7 +402,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 								placeholder="Pesquise sua instituição"
 								variant="gray"
 								isAsync
-								// cacheOptions
+								cacheOptions
 								defaultOptions={getDefaultInstitutionsOptions()}
 								loadOptions={handleFetchInstitutions}
 								loadingMessage={() => 'Carregando...'}
