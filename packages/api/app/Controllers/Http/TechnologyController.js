@@ -29,6 +29,7 @@ const {
 	questionStatuses,
 	Algolia,
 	reviewerTechnologyHistoryStatuses,
+	tokenTypes,
 } = require('../../Utils');
 
 class TechnologyController {
@@ -374,7 +375,7 @@ class TechnologyController {
 		const { webURL } = Config.get('app');
 		users.forEach(async (user) => {
 			const { token } = user.isInvited()
-				? await user.generateToken('reset-pw')
+				? await user.generateToken(tokenTypes.RESET_PASSWORD)
 				: { token: null };
 
 			const mailData = {

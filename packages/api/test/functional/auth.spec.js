@@ -2,7 +2,7 @@ const { test, trait } = use('Test/Suite')('Auth');
 const User = use('App/Models/User');
 const Bull = use('Rocketseat/Bull');
 const dayjs = require('dayjs');
-const { antl, errors, errorPayload } = require('../../app/Utils');
+const { antl, errors, errorPayload, tokenTypes } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 const Config = use('Config');
@@ -205,7 +205,7 @@ test('/auth/register user register flow', async ({ client, assert }) => {
 	const user = await User.findOrFail(registerResponse.body.id);
 
 	// Confirms account by token
-	const { token } = await user.generateToken('confirm-ac');
+	const { token } = await user.generateToken(tokenTypes.CONFIRM_ACCOUNT);
 	const confirmAcResponse = await client
 		.post('/auth/confirm-account')
 		.send({ email: user.email, token })
@@ -310,7 +310,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 	await Bull.reset();
 
 	const { user } = await createUser({ append: { status: 'invited' } });
-	const token = await user.generateToken('reset-pw');
+	const token = await user.generateToken(tokenTypes.RESET_PASSWORD);
 	assert.isNotTrue(token.isRevoked());
 
 	const password = 'new_password';
@@ -353,7 +353,7 @@ test('/auth/reset-password', async ({ client, assert }) => {
 
 test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const newToken = await user.generateToken('confirm-ac');
+	const newToken = await user.generateToken(tokenTypes.CONFIRM_ACCOUNT);
 
 	const password = 'new_password';
 
@@ -372,7 +372,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	);
 
 	// now try with a revoked token
-	const token = await user.generateToken('reset-pw');
+	const token = await user.generateToken(tokenTypes.RESET_PASSWORD);
 	await token.revoke();
 	resetPasswordResponse = await client
 		.post('/auth/reset-password')
@@ -388,7 +388,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 		errorPayload(errors.INVALID_TOKEN, antl('error.auth.invalidToken')),
 	);
 	// now try with an expired token
-	const expiredToken = await user.generateToken('reset-pw');
+	const expiredToken = await user.generateToken(tokenTypes.RESET_PASSWORD);
 	const expiredDate = dayjs()
 		.subtract(ttl + 1, 'days')
 		.format('YYYY-MM-DD HH:mm:ss');
@@ -419,7 +419,7 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 // Check token
 test('/auth/check-token', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'invited' } });
-	const token = await user.generateToken('reset-pw');
+	const token = await user.generateToken(tokenTypes.RESET_PASSWORD);
 	assert.isNotTrue(token.isRevoked());
 
 	const response = await client
@@ -427,7 +427,7 @@ test('/auth/check-token', async ({ client, assert }) => {
 		.send({
 			email: user.email,
 			token: token.token,
-			tokenType: 'reset-pw',
+			tokenType: tokenTypes.RESET_PASSWORD,
 		})
 		.end();
 
@@ -437,14 +437,14 @@ test('/auth/check-token', async ({ client, assert }) => {
 
 test('/auth/check-token fails with invalid token', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const token = await user.generateToken('confirm-ac');
+	const token = await user.generateToken(tokenTypes.CONFIRM_ACCOUNT);
 
 	const response = await client
 		.post('/auth/check-token')
 		.send({
 			email: user.email,
 			token: token.token,
-			tokenType: 'reset-pw',
+			tokenType: tokenTypes.RESET_PASSWORD,
 		})
 		.end();
 
@@ -454,7 +454,7 @@ test('/auth/check-token fails with invalid token', async ({ client }) => {
 
 test('/auth/check-token fails with invalid token type', async ({ client }) => {
 	const { user } = await createUser({ append: { status: 'verified' } });
-	const token = await user.generateToken('confirm-ac');
+	const token = await user.generateToken(tokenTypes.CONFIRM_ACCOUNT);
 
 	const response = await client
 		.post('/auth/check-token')

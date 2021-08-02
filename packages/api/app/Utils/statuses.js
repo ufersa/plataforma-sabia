@@ -179,9 +179,9 @@ const technologyLocationsTypes = {
 };
 
 const tokenTypes = {
-	CONFIRM_AC: 'confirm-ac',
-	NEW_EMAIL: 'new-email',
-	RESET_PW: 'reset-pw',
+	CONFIRM_ACCOUNT: 'confirm-account',
+	CHANGE_EMAIL: 'change-email',
+	RESET_PASSWORD: 'reset-password',
 };
 
 module.exports = {
