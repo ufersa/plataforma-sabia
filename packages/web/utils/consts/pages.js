@@ -42,6 +42,7 @@ export const internal = {
 	curatorProfile: '/curator-profile',
 	curateTechnologies: '/curate-technologies',
 	revisions: '/revisions',
+	register: '/cadastrar',
 };
 
 export const auth = {
