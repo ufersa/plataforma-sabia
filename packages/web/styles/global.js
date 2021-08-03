@@ -52,9 +52,13 @@ export default createGlobalStyle`
 		font-size: 1.6rem;
 		cursor: pointer;
 	}
-	input{
+	input {
 		font-size: 1.4rem;
+		&:-webkit-autofill {
+			background-clip: text;
+		}
 	}
+
 	ul {
 		list-style: none;
 	}
