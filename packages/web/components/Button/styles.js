@@ -183,6 +183,19 @@ const rectangularButtonVariants = {
 			opacity: 0.84;
 		}
 	`,
+	round: (colors, colorVariant, metrics) => css`
+		text-transform: none;
+		font-weight: 500;
+		border-radius: ${metrics.baseRadius}rem;
+		padding: 0.8rem;
+
+		color: ${colors.white};
+		background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
+
+		:hover:not(:disabled) {
+			opacity: 0.74;
+		}
+	`,
 };
 
 export const RectangularButton = styled.button`
@@ -194,6 +207,8 @@ export const RectangularButton = styled.button`
 		fullWidth,
 		autoX,
 		boxShadow,
+		capitalize,
+		round,
 	}) => css`
 		border: 2px solid transparent;
 		background: none;
@@ -207,11 +222,12 @@ export const RectangularButton = styled.button`
 
 		padding: 0.2rem 0.8rem;
 		line-height: 2.4rem;
-		text-transform: uppercase;
+		text-transform: ${!!capitalize && 'uppercase'};
 		text-align: center;
 
 		margin: ${!!autoX && '0 auto'};
 		box-shadow: ${!!boxShadow && '0px 19px 16px -14px rgb(0 0 0 / 25%)'};
+		border-radius: ${!!round && `${metrics.baseRadius}rem`};
 
 		&:disabled {
 			opacity: 0.5;
