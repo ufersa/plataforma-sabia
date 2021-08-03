@@ -54,9 +54,10 @@ export default createGlobalStyle`
 	}
 	input {
 		font-size: 1.4rem;
-		&:-webkit-autofill {
-			background-clip: text;
-		}
+	}
+	input:-webkit-autofill { 
+		background-clip: text;
+    -webkit-background-clip: text;
 	}
 
 	ul {
