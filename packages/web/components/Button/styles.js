@@ -188,6 +188,7 @@ const rectangularButtonVariants = {
 		font-weight: 500;
 		border-radius: ${metrics.baseRadius}rem;
 		padding: 0.8rem;
+		gap: 0.8rem;
 
 		color: ${colors.white};
 		background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
