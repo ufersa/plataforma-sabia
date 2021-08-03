@@ -31,6 +31,9 @@ export default createGlobalStyle`
 			overflow: hidden;
 		}
 	}
+	#__next {
+		height: 100%;
+	}
 	a, button, p, span, li, input {
 		font-family: 'Montserrat';
 	}
