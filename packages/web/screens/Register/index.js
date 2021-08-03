@@ -8,7 +8,12 @@ import { RectangularButton } from '../../components/Button/styles';
 
 const Register = () => {
 	const [activeStep, setActiveStep] = useState({ ...steps[0], index: 0 });
+	const CurrentStepComponent = activeStep.component;
 	const hasPreviousStep = !!steps[activeStep.index - 1];
+
+	const setNextStep = () => {
+		setActiveStep((active) => ({ ...steps[active.index + 1], index: active.index + 1 }));
+	};
 
 	const setPrevStep = () => {
 		setActiveStep((active) => ({ ...steps[active.index - 1], index: active.index - 1 }));
@@ -60,6 +65,14 @@ const Register = () => {
 					stepsLength={steps.length}
 					activeStepIndex={activeStep.index}
 				/>
+
+				{CurrentStepComponent && (
+					<CurrentStepComponent
+						activeStep={activeStep}
+						setNextStep={setNextStep}
+						setPrevStep={setPrevStep}
+					/>
+				)}
 			</S.Content>
 		</S.Container>
 	);
