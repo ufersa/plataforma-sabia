@@ -14,7 +14,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 		const errorCodeReportMapping = {
 			E_ROUTE_NOT_FOUND: false,
 			E_VALIDATION_FAILED: false,
-			E_USER_NOT_FOUND: true,
+			E_USER_NOT_FOUND: false,
 			E_PASSWORD_MISMATCH: true,
 			E_ROW_NOT_FOUND: true,
 			E_MISSING_DATABASE_ROW: true,
