@@ -30,6 +30,12 @@ Router.events.on('routeChangeComplete', (url) => {
 });
 Router.events.on('routeChangeError', () => NProgress.done());
 
+const getLayoutComponent = (pathname) =>
+	({
+		[internalPages.ideas]: LayoutLandingPage,
+		[landingPage.about]: LayoutLandingPage,
+	}[pathname] || LayoutDefault);
+
 export class SabiaApp extends App {
 	static async getInitialProps(appContext) {
 		const { token } = cookies(appContext.ctx);
@@ -58,8 +64,9 @@ export class SabiaApp extends App {
 	render() {
 		const { Component, pageProps, user, router } = this.props;
 		const loadEnvConfig = `
-			window.env = ${JSON.stringify(config)};
+		window.env = ${JSON.stringify(config)};
 		`;
+		const LayoutComponent = getLayoutComponent(router.pathname);
 
 		return (
 			<>
@@ -133,17 +140,9 @@ export class SabiaApp extends App {
 						<UserProvider user={user || {}}>
 							<ModalProvider>
 								<ShoppingCartProvider>
-									{[internalPages.ideas, landingPage.about].includes(
-										router.pathname,
-									) ? (
-										<LayoutLandingPage>
-											<Component {...pageProps} />
-										</LayoutLandingPage>
-									) : (
-										<LayoutDefault>
-											<Component {...pageProps} />
-										</LayoutDefault>
-									)}
+									<LayoutComponent>
+										<Component {...pageProps} />
+									</LayoutComponent>
 								</ShoppingCartProvider>
 							</ModalProvider>
 						</UserProvider>
