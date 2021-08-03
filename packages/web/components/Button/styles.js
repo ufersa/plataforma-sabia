@@ -125,6 +125,7 @@ const rectangularColorsToTheme = {
 	orange: 'primary',
 	green: 'secondary',
 	blue: 'blue',
+	silver: 'silver',
 };
 
 const rectangularButtonVariants = {
