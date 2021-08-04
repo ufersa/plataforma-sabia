@@ -192,16 +192,19 @@ const SelectField = ({
 				selectedValue.map((value) =>
 					useOptionsFrom.find((option) => `${option.value}` === `${value}`),
 				),
+				{ shouldDirty: true },
 			);
 		} else if (typeof selectedValue === 'object') {
 			setValue(
 				name,
 				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue.value}`),
+				{ shouldDirty: true },
 			);
 		} else {
 			setValue(
 				name,
 				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue}`),
+				{ shouldDirty: true },
 			);
 		}
 
@@ -225,9 +228,9 @@ const SelectField = ({
 		const currentValue = getValues(name) || [];
 
 		if (isMulti) {
-			setValue(name, [...currentValue, newOption]);
+			setValue(name, [...currentValue, newOption], { shouldDirty: true });
 		} else {
-			setValue(name, newOption);
+			setValue(name, newOption, { shouldDirty: true });
 		}
 
 		return newOption;
