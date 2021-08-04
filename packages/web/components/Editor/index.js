@@ -11,8 +11,10 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 		return (
 			<Controller
 				name={name}
-				render={({ onChange: _onChange }) => (
+				render={({ field }) => (
 					<CKEditor
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...field}
 						editor={ClassicEditor}
 						config={config}
 						onChange={([, editor]) => {
@@ -22,7 +24,7 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 								onChange(editorData);
 							}
 
-							return _onChange(editorData);
+							return field.onChange(editorData);
 						}}
 						data={defaultValue}
 					/>

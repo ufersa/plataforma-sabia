@@ -490,11 +490,15 @@ const MapAndAttachments = ({ form, data }) => {
 					</Dropzone>
 					<UploadedImages data-cy="uploaded-images">
 						<Controller
-							as={ImagesPreview}
+							render={({ field }) => (
+								<ImagesPreview
+									{...field}
+									previewedImgFiles={previewedImgFiles}
+									deleteAttachment={deleteAttachment}
+								/>
+							)}
 							name="thumbnail_id"
 							control={control}
-							previewedImgFiles={previewedImgFiles}
-							deleteAttachment={deleteAttachment}
 						/>
 					</UploadedImages>
 

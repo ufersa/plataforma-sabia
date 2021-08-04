@@ -254,32 +254,32 @@ const SelectField = ({
 
 			<Row>
 				<Controller
-					render={({ onChange, value }) => (
-						<Component
-							value={value}
-							onChange={([selectedOption]) => {
-								if (typeof callback === 'function') callback(selectedOption);
-								return onChange(selectedOption);
-							}}
-						/>
-					)}
-					className="react-select-container"
-					classNamePrefix="react-select"
 					control={control}
 					rules={validation}
 					id={name}
 					name={name}
-					aria-label={label}
-					aria-required={validation.required}
-					options={selectOptions}
-					defaultOptions={selectOptions}
-					isMulti={isMulti}
-					onCreateOption={creatable ? onCreateOption : null}
-					isDisabled={internalIsLoading || isLoading || isHidden}
-					isLoading={internalIsLoading || isLoading}
-					styles={reactSelectStyles[variant]}
-					instanceId={instanceId}
-					{...selectProps}
+					render={({ field }) => (
+						<Component
+							{...field}
+							onChange={([selectedOption]) => {
+								if (typeof callback === 'function') callback(selectedOption);
+								return field.onChange(selectedOption);
+							}}
+							className="react-select-container"
+							classNamePrefix="react-select"
+							aria-label={label}
+							aria-required={validation.required}
+							options={selectOptions}
+							defaultOptions={selectOptions}
+							isMulti={isMulti}
+							onCreateOption={creatable ? onCreateOption : null}
+							isDisabled={internalIsLoading || isLoading || isHidden}
+							isLoading={internalIsLoading || isLoading}
+							styles={reactSelectStyles[variant]}
+							instanceId={instanceId}
+							{...selectProps}
+						/>
+					)}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>

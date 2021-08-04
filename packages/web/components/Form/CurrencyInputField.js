@@ -85,21 +85,25 @@ const CurrencyInputField = ({
 
 			<Row>
 				<Controller
-					as={StyledNumberFormat}
-					prefix={currencySettings[lang].prefix}
-					thousandSeparator={currencySettings[lang].thousandSeparator}
-					decimalSeparator={currencySettings[lang].decimalSeparator}
-					decimalScale={2}
-					fixedDecimalScale
 					id={name}
 					name={name}
-					aria-label={label}
-					aria-required={validation.required}
+					render={({ field }) => (
+						<StyledNumberFormat
+							prefix={currencySettings[lang].prefix}
+							thousandSeparator={currencySettings[lang].thousandSeparator}
+							decimalSeparator={currencySettings[lang].decimalSeparator}
+							decimalScale={2}
+							fixedDecimalScale
+							aria-label={label}
+							aria-required={validation.required}
+							variant={variant}
+							{...field}
+							{...inputProps}
+						/>
+					)}
 					rules={fullValidation}
 					control={control}
 					defaultValue={defaultValue || ''}
-					variant={variant}
-					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
