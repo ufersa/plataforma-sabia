@@ -3,6 +3,11 @@ on:
     branches:  
     - 'master'
   workflow_dispatch:
+    inputs:
+      runTests:
+        description: 'Run all tests before deploying'     
+        required: true
+        default: 'true'
 
 name: Deploy to STAGING
 jobs:
@@ -40,21 +45,33 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup API and run tests
+      - name: Setup API
         run: |
           cd packages/api 
           cp .env.testing .env
           npm install
+          
+      - name: Run API tests
+        if: ${{ github.event.inputs.runTests == 'true' }}
+        run: |
+          cd packages/api 
           npm run test
           npm run migration:refresh -- --seed
       
-      - name: Setup WEB and run tests
+      - name: Setup WEB
         run: |
           cd packages/web
           npm install
           npm run jest:ci
-      
+          
+      - name: Run WEB tests
+        if: ${{ github.event.inputs.runTests == 'true' }}
+        run: |
+          cd packages/web
+          npm run jest:ci
+        
       - name: Run Cypress
+        if: ${{ github.event.inputs.runTests == 'true' }}
         uses: cypress-io/github-action@v1
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
