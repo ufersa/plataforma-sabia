@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@hookform/devtools": "^3.1.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "@storybook/addon-essentials": "^6.0.20",
     "@storybook/addon-links": "^6.0.20",
