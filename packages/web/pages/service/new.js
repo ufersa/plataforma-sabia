@@ -109,7 +109,7 @@ const NewServicePage = ({ keywordTerms }) => {
 			return router.push('/');
 		}
 
-		const isValidForm = await form.triggerValidation();
+		const isValidForm = await form.trigger();
 		if (isValidForm) {
 			await handleSubmit(form.getValues(), null, true);
 		}
