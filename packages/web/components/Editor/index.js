@@ -40,7 +40,7 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 		timerOnChange = setTimeout(() => {
 			const editorData = editor.getData();
 
-			setValue(name, editorData);
+			setValue(name, editorData, { shouldDirty: true });
 
 			if (onChange) {
 				onChange(editorData);
