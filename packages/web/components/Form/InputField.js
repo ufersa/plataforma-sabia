@@ -23,10 +23,7 @@ const InputField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const {
-		register,
-		formState: { errors },
-	} = form;
+	const { register, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
 
 	return (

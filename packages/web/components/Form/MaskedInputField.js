@@ -57,10 +57,7 @@ const MaskedInputField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const {
-		formState: { errors },
-		control,
-	} = form;
+	const { formState: { errors } = {}, control } = form;
 	const errorObject = get(errors, name);
 
 	return (

@@ -66,10 +66,7 @@ const CurrencyInputField = ({
 	...inputProps
 }) => {
 	const { t, lang } = useTranslation(['error']);
-	const {
-		control,
-		formState: { errors },
-	} = form;
+	const { control, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {

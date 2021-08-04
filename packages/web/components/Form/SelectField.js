@@ -130,13 +130,7 @@ const SelectField = ({
 	const [internalIsLoading, setInternalIsLoading] = useState(false);
 	const [selectOptions, setSelectOptions] = useState(options);
 
-	const {
-		formState: { errors },
-		control,
-		watch,
-		setValue,
-		getValues,
-	} = form;
+	const { formState: { errors } = {}, control, watch, setValue, getValues } = form;
 
 	let selectedValue = watch(name);
 	if (selectedValue) {

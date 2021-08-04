@@ -60,11 +60,7 @@ const TextField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const {
-		register,
-		formState: { errors },
-		watch,
-	} = form;
+	const { register, formState: { errors } = {}, watch } = form;
 	const selfValue = watch(name);
 	const [counterColor, setCounterColor] = useState('lightGray2');
 

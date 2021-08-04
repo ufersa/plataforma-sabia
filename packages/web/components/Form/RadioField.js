@@ -85,10 +85,7 @@ const RadioField = ({
 	...radioProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const {
-		register,
-		formState: { errors },
-	} = form;
+	const { register, formState: { errors } = {} } = form;
 
 	return (
 		<RadioContainer>
