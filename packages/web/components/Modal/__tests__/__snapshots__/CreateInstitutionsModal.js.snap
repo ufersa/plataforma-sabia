@@ -513,6 +513,7 @@ exports[`<CreateInstitutionsModal /> should render correctly 1`] = `
                 aria-label="CNPJ"
                 aria-required="true"
                 class="c12"
+                id="cnpj"
                 name="cnpj"
                 placeholder=""
                 type="text"

@@ -666,6 +666,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 >
                   <div
                     class="c21 react-select-container css-dyr6gj-container"
+                    id="technologyCosts.costs.development_costs.0.type"
                   >
                     <div
                       class="react-select__control css-1b7oqde-control"
@@ -799,6 +800,7 @@ exports[`it add one row when clicking the add button 1`] = `
                     aria-label="Valor"
                     aria-required="true"
                     class="c22"
+                    id="technologyCosts.costs.development_costs.0.value"
                     inputmode="numeric"
                     name="technologyCosts.costs.development_costs.0.value"
                     placeholder="Valor"
@@ -832,6 +834,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 >
                   <div
                     class="c21 react-select-container css-dyr6gj-container"
+                    id="technologyCosts.costs.development_costs.0.measure_unit"
                   >
                     <div
                       class="react-select__control css-1b7oqde-control"
@@ -2535,6 +2538,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c21 react-select-container css-dyr6gj-container"
+                id="technologyCosts.funding_type"
               >
                 <div
                   class="react-select__control css-1b7oqde-control"
@@ -2654,6 +2658,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
                 aria-label="Valor do Financiamento"
                 aria-required="true"
                 class="c22"
+                id="technologyCosts.funding_value"
                 inputmode="numeric"
                 name="technologyCosts.funding_value"
                 placeholder="R$"
@@ -2681,6 +2686,7 @@ exports[`it shows the funding fields when selecting funding as required 1`] = `
             >
               <div
                 class="c21 react-select-container css-dyr6gj-container"
+                id="technologyCosts.funding_status"
               >
                 <div
                   class="react-select__control css-1b7oqde-control"

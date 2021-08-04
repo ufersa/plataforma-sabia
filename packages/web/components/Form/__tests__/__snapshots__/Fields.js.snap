@@ -525,6 +525,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
       >
         <div
           class="c4 react-select-container css-dyr6gj-container"
+          id="test-input"
         >
           <div
             class="react-select__control css-1b7oqde-control"
@@ -719,6 +720,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
       >
         <div
           class="c5 react-select-container css-dyr6gj-container"
+          id="test-input"
         >
           <span
             aria-live="polite"

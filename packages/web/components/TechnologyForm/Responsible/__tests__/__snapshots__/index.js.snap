@@ -1252,6 +1252,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     aria-label="Telefone"
                     aria-required="true"
                     class="c20"
+                    id="technologyResponsibles.users.0.phone_number"
                     name="technologyResponsibles.users.0.phone_number"
                     placeholder="(xx) xxxxxxxxx"
                     type="text"
