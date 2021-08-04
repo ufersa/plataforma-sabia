@@ -100,7 +100,7 @@ const MapAndAttachments = ({ form, data }) => {
 		const videoId = getYoutubeVideoId(link);
 
 		if (videoId) {
-			form.clearError('link_video');
+			form.clearErrors('link_video');
 			const alreadyExists = videos.some((video) => video?.videoId === videoId);
 
 			if (!alreadyExists) {
@@ -603,7 +603,7 @@ MapAndAttachments.propTypes = {
 		register: PropTypes.func,
 		setValue: PropTypes.func,
 		setError: PropTypes.func,
-		clearError: PropTypes.func,
+		clearErrors: PropTypes.func,
 		control: PropTypes.shape({}),
 	}),
 	data: PropTypes.shape({
