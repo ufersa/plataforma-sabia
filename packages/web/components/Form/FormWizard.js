@@ -272,6 +272,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			formattedData.locations = [...(whoDevelop || []), ...(whereIsImplemented || [])];
 		}
 
+		if (Array.isArray(formattedData.knowledge_area_id)) {
+			const filteredAreas = formattedData.knowledge_area_id.filter(Boolean);
+			formattedData.knowledge_area_id =
+				formattedData.knowledge_area_id[filteredAreas[filteredAreas.length - 1]];
+		}
+
 		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 

@@ -185,7 +185,7 @@ export const prepareTerms = (termsObject) => {
 
 		if (Array.isArray(term)) {
 			const ids = term.map((t) => {
-				if (typeof t === 'string') {
+				if (typeof t === 'string' || typeof t === 'number') {
 					return t;
 				}
 				return t.value;
