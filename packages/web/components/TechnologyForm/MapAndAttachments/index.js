@@ -93,7 +93,7 @@ const MapAndAttachments = ({ form, data }) => {
 
 	const onAddVideos = (link) => {
 		if (!link || link === '') {
-			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			form.setError('link_video', { type: 'manual', message: 'Formato de URL inválido' });
 			return;
 		}
 
@@ -115,10 +115,13 @@ const MapAndAttachments = ({ form, data }) => {
 				]);
 				form.setValue('link_video', '');
 			} else {
-				form.setError('link_video', 'manual', 'O vídeo já foi adicionado');
+				form.setError('link_video', {
+					type: 'manual',
+					message: 'O vídeo já foi adicionado',
+				});
 			}
 		} else {
-			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			form.setError('link_video', { type: 'manual', message: 'Formato de URL inválido' });
 		}
 	};
 
