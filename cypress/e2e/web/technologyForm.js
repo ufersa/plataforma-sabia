@@ -15,15 +15,15 @@ describe('technology knowledge area validation', () => {
 		cy.authenticate().visit('/technology/new');
 	});
 	it('step 1 - selecting a great area renders areas', () => {
-		cy.select('knowledge_area_id[0]', { exactMatch: true, position: 1 });
+		cy.select('knowledge_area_id.0.', { exactMatch: true, position: 1 });
 		cy.findByText(/escolha a área da tecnologia/i).should('exist');
 	});
 	it('step 1 - selecting an area renders sub-areas', () => {
-		cy.select('knowledge_area_id[1]', { exactMatch: true, position: 2 });
+		cy.select('knowledge_area_id.1', { exactMatch: true, position: 2 });
 		cy.findByText(/escolha a sub-área da tecnologia/i).should('exist');
 	});
 	it('step 1 - selecting a sub-area renders specialities', () => {
-		cy.select('knowledge_area_id[2]', { exactMatch: true, position: 4 });
+		cy.select('knowledge_area_id.2', { exactMatch: true, position: 4 });
 		cy.findByText(/escolha a especialidade da tecnologia/i).should('exist');
 	});
 });
@@ -86,10 +86,10 @@ describe('creating/editing technology', () => {
 			cy.select('classification');
 			cy.select('dimension');
 			cy.select('type');
-			cy.select('knowledge_area_id[0]', { exactMatch: true, position: 1 });
-			cy.select('knowledge_area_id[1]', { exactMatch: true, position: 2 });
-			cy.select('knowledge_area_id[2]', { exactMatch: true, position: 4 });
-			cy.select('knowledge_area_id[3]', { exactMatch: true, position: 2 });
+			cy.select('knowledge_area_id.0', { exactMatch: true, position: 1 });
+			cy.select('knowledge_area_id.1', { exactMatch: true, position: 2 });
+			cy.select('knowledge_area_id.2', { exactMatch: true, position: 4 });
+			cy.select('knowledge_area_id.3', { exactMatch: true, position: 2 });
 
 			cy.findByText(/salvar e continuar/i).click();
 			cy.url().should('include', 'edit');
