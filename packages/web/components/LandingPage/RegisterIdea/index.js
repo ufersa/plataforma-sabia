@@ -123,6 +123,7 @@ const RegisterIdea = () => {
 						options={mapArrayOfObjectToSelect(keywordsTerms, 'term', 'id')}
 						validation={{ required: true }}
 						wrapperCss={S.inputWrapperCss}
+						instanceId="select-new-idea"
 					/>
 					<Actions disableSubmit={isSubmitting} />
 				</Form>
