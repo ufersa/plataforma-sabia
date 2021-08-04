@@ -17,7 +17,7 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 						{...field}
 						editor={ClassicEditor}
 						config={config}
-						onChange={([, editor]) => {
+						onChange={(_, editor) => {
 							const editorData = editor.getData();
 
 							if (onChange) {
