@@ -9,8 +9,8 @@ import { mapArrayOfObjectToSelect } from '../../utils/helper';
 const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => {
 	const [isFirstMount, setIsFirstMount] = useState(true);
 	const { watch, setValue } = form;
-	const areaKeyToWatch = `knowledge_area[${index}]`;
-	const areaKeyMapping = [...Array(4).keys()].map((key) => `${areaKeyToWatch}[${key}]`);
+	const areaKeyToWatch = `knowledge_area.${index}`;
+	const areaKeyMapping = [...Array(4).keys()].map((key) => `${areaKeyToWatch}.${key}`);
 	const swrOptions = {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false,

@@ -22,7 +22,7 @@ const RightContent = styled.div`
 `;
 
 const CostsTable = ({ item, index, form, remove, collection }) => {
-	const nameString = `${collection}[${index}]`;
+	const nameString = `${collection}.${index}`;
 
 	return (
 		<>

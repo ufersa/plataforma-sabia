@@ -77,13 +77,13 @@ const MapAndAttachments = ({ form, data }) => {
 
 	useEffect(() => {
 		whoDevelop.forEach((element, index) => {
-			form.setValue(`locations.who_develop[${index}]`, element.id);
+			form.setValue(`locations.who_develop.${index}`, element.id);
 		});
 	}, [whoDevelop]);
 
 	useEffect(() => {
 		whereIsAlreadyImplemented.forEach((element, index) => {
-			form.setValue(`locations.where_is_already_implemented[${index}]`, element.id);
+			form.setValue(`locations.where_is_already_implemented.${index}`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
 
@@ -334,7 +334,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											name={`locations.who_develop[${index}]`}
+											name={`locations.who_develop.${index}`}
 										/>
 									</IconRow>
 								);
@@ -458,7 +458,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											name={`locations.where_is_already_implemented[${index}]`}
+											name={`locations.where_is_already_implemented.${index}`}
 										/>
 									</IconRow>
 								);

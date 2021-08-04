@@ -221,7 +221,7 @@ export const normalizeKnowledgeAreas = (knowledgeArea) => {
 
 	return fields.reduce((acc, field, index) => {
 		if (knowledgeArea[field]) {
-			acc[`knowledge_area_id[${index}]`] = knowledgeArea[field].knowledge_area_id;
+			acc[`knowledge_area_id.${index}`] = knowledgeArea[field].knowledge_area_id;
 		}
 
 		return acc;
