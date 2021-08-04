@@ -72,17 +72,25 @@ const MaskedInputField = ({
 			)}
 			<Row>
 				<Controller
-					as={StyledInput}
+					render={({ field }) => (
+						<StyledInput
+							mask={mask}
+							type="text"
+							placeholder={
+								!label && validation.required ? `${placeholder} *` : placeholder
+							}
+							aria-label={label}
+							aria-required={validation.required}
+							alwaysShowMask={alwaysShowMask}
+							variant={variant}
+							{...field}
+							{...inputProps}
+						/>
+					)}
 					control={control}
-					mask={mask}
 					name={name}
 					id={name}
-					type="text"
-					aria-label={label}
-					aria-required={validation.required}
-					alwaysShowMask={alwaysShowMask}
 					defaultValue={String(defaultValue)}
-					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					rules={{
 						...validation,
 						pattern: {
@@ -90,8 +98,6 @@ const MaskedInputField = ({
 							message: t('error:invalidPattern'),
 						},
 					}}
-					variant={variant}
-					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
