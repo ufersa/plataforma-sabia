@@ -57,7 +57,10 @@ const MaskedInputField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { errors, control } = form;
+	const {
+		formState: { errors },
+		control,
+	} = form;
 	const errorObject = get(errors, name);
 
 	return (
@@ -109,7 +112,7 @@ MaskedInputField.propTypes = {
 	help: PropTypes.node,
 	placeholder: PropTypes.string,
 	form: PropTypes.shape({
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 		control: PropTypes.shape({}),
 	}),
 	validation: PropTypes.shape({

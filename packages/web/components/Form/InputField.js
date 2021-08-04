@@ -23,7 +23,10 @@ const InputField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors } = form;
+	const {
+		register,
+		formState: { errors },
+	} = form;
 	const errorObject = get(errors, name);
 
 	return (
@@ -68,7 +71,7 @@ InputField.propTypes = {
 	type: PropTypes.string,
 	form: PropTypes.shape({
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	help: PropTypes.node,
 	/**

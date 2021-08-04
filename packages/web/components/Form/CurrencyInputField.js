@@ -66,7 +66,10 @@ const CurrencyInputField = ({
 	...inputProps
 }) => {
 	const { t, lang } = useTranslation(['error']);
-	const { control, errors } = form;
+	const {
+		control,
+		formState: { errors },
+	} = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {
@@ -121,7 +124,7 @@ CurrencyInputField.propTypes = {
 	form: PropTypes.shape({
 		control: PropTypes.shape({}),
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),

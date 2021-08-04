@@ -129,7 +129,13 @@ const SelectField = ({
 	const [internalIsLoading, setInternalIsLoading] = useState(false);
 	const [selectOptions, setSelectOptions] = useState(options);
 
-	const { errors, control, watch, setValue, getValues } = form;
+	const {
+		formState: { errors },
+		control,
+		watch,
+		setValue,
+		getValues,
+	} = form;
 
 	let selectedValue = watch(name);
 	if (selectedValue) {
@@ -303,7 +309,7 @@ SelectField.propTypes = {
 	onCreate: PropTypes.func,
 	isMulti: PropTypes.bool,
 	form: PropTypes.shape({
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 		control: PropTypes.shape({}),
 		watch: PropTypes.func,
 		setValue: PropTypes.func,

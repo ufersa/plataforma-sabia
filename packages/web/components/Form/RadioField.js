@@ -85,7 +85,10 @@ const RadioField = ({
 	...radioProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors } = form;
+	const {
+		register,
+		formState: { errors },
+	} = form;
 
 	return (
 		<RadioContainer>
@@ -129,7 +132,7 @@ RadioField.propTypes = {
 		getValues: PropTypes.func,
 		register: PropTypes.func,
 		watch: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	/**
 	 * @see https://react-hook-form.com/api#register

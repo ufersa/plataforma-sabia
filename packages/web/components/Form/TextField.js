@@ -60,7 +60,11 @@ const TextField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors, getValues } = form;
+	const {
+		register,
+		formState: { errors },
+		getValues,
+	} = form;
 	const values = getValues();
 	const selfValue = values[name];
 	const [content, setContent] = useState(selfValue);
@@ -138,7 +142,7 @@ TextField.propTypes = {
 	label: PropTypes.string.isRequired,
 	form: PropTypes.shape({
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 		getValues: PropTypes.func,
 	}),
 	help: PropTypes.node,
