@@ -1166,7 +1166,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               >
                 <label
                   class="c10"
-                  for="technologyResponsibles.users[0].full_name"
+                  for="technologyResponsibles.users.0.full_name"
                 >
                   Nome Completo
                    
@@ -1184,8 +1184,8 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     aria-label="Nome Completo"
                     aria-required="true"
                     class="c8"
-                    id="technologyResponsibles.users[0].full_name"
-                    name="technologyResponsibles.users[0].full_name"
+                    id="technologyResponsibles.users.0.full_name"
+                    name="technologyResponsibles.users.0.full_name"
                     placeholder="Nome do responsável"
                     type="text"
                   />
@@ -1200,7 +1200,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               >
                 <label
                   class="c10"
-                  for="technologyResponsibles.users[0].email"
+                  for="technologyResponsibles.users.0.email"
                 >
                   Email
                    
@@ -1218,8 +1218,8 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     aria-label="Email"
                     aria-required="true"
                     class="c8"
-                    id="technologyResponsibles.users[0].email"
-                    name="technologyResponsibles.users[0].email"
+                    id="technologyResponsibles.users.0.email"
+                    name="technologyResponsibles.users.0.email"
                     placeholder="Ex.: email@dominio.com.br"
                     type="text"
                   />
@@ -1234,7 +1234,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
               >
                 <label
                   class="c10"
-                  for="technologyResponsibles.users[0].phone_number"
+                  for="technologyResponsibles.users.0.phone_number"
                 >
                   Telefone
                    
@@ -1252,8 +1252,7 @@ exports[`it increases the number of rows when clicking on add button 1`] = `
                     aria-label="Telefone"
                     aria-required="true"
                     class="c20"
-                    id="technologyResponsibles.users[0].phone_number"
-                    name="technologyResponsibles.users[0].phone_number"
+                    name="technologyResponsibles.users.0.phone_number"
                     placeholder="(xx) xxxxxxxxx"
                     type="text"
                     value=""

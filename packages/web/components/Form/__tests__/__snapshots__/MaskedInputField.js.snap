@@ -98,7 +98,6 @@ exports[`MaskedInputField works as expected if required props are provided 1`] =
         <input
           aria-label=""
           class="c3"
-          id="cpf"
           name="cpf"
           placeholder=""
           type="text"
@@ -209,7 +208,6 @@ exports[`it does not render a value if the typed value is invalid  1`] = `
         <input
           aria-label=""
           class="c3"
-          id="CEP"
           name="CEP"
           placeholder="Your CEP"
           type="text"
@@ -320,7 +318,6 @@ exports[`it renders the Mask correctly as the user types 1`] = `
         <input
           aria-label=""
           class="c3"
-          id="CEP"
           name="CEP"
           placeholder="Your CEP"
           type="text"
@@ -431,7 +428,6 @@ exports[`it renders the value correctly if the default value is provided with a 
         <input
           aria-label=""
           class="c3"
-          id="cpf"
           name="cpf"
           placeholder=""
           type="text"
@@ -542,7 +538,6 @@ exports[`it renders the value correctly if the default value is provided without
         <input
           aria-label=""
           class="c3"
-          id="cpf"
           name="cpf"
           placeholder=""
           type="text"
@@ -653,7 +648,6 @@ exports[`it shows the mask correctly when no default value is provided and the i
         <input
           aria-label=""
           class="c3"
-          id="cpf"
           name="cpf"
           placeholder="Your CPF"
           type="text"
@@ -778,7 +772,6 @@ exports[`it shows validation error on submit if the value is invalid 1`] = `
         <input
           aria-label=""
           class="c3"
-          id="CEP"
           name="CEP"
           placeholder="Your CEP"
           type="text"
