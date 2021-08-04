@@ -10,20 +10,25 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 	if (renderWithController) {
 		return (
 			<Controller
-				as={<CKEditor editor={ClassicEditor} config={config} />}
-				onChange={([, editor]) => {
-					const editorData = editor.getData();
-
-					if (onChange) {
-						onChange(editorData);
-					}
-
-					return editorData;
-				}}
-				control={control}
 				name={name}
+				render={({ onChange: _onChange }) => (
+					<CKEditor
+						editor={ClassicEditor}
+						config={config}
+						onChange={([, editor]) => {
+							const editorData = editor.getData();
+
+							if (onChange) {
+								onChange(editorData);
+							}
+
+							return _onChange(editorData);
+						}}
+						data={defaultValue}
+					/>
+				)}
+				control={control}
 				disabled={disabled}
-				data={defaultValue}
 			/>
 		);
 	}
