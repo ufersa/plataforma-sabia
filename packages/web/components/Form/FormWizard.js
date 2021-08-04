@@ -237,6 +237,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			formattedData.technologyCosts = {
 				...formData.technologyCosts,
 				costs: {
+					development_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.development_costs,
+					),
 					implementation_costs: parseCostValueToInt(
 						formData.technologyCosts?.costs?.implementation_costs,
 					),
