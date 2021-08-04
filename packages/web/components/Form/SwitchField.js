@@ -98,9 +98,9 @@ const SwitchField = ({
 				type="checkbox"
 				id={name}
 				name={name}
-				ref={form.register(validation)}
 				aria-hidden={isHidden}
 				{...checkboxProps}
+				{...form.register(name, validation)}
 			/>
 			<Row>
 				<SwitchLabelWrapper>
