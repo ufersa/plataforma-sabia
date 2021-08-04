@@ -78,7 +78,7 @@ const Responsible = ({ form }) => {
 				childsComponent={({ item, index, remove }) => {
 					return (
 						<>
-							<Row key={item.id} align="center" data-testid="row">
+							<Row key={item.fieldArrayId} align="center" data-testid="row">
 								<Cell col={5}>
 									<InputField
 										form={form}

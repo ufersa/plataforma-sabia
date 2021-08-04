@@ -43,6 +43,7 @@ const Repeater = ({
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name,
+		keyName: 'fieldArrayId',
 	});
 
 	useEffect(() => {
