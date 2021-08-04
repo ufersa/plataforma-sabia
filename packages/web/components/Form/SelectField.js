@@ -122,6 +122,7 @@ const SelectField = ({
 	isLoading,
 	instanceId,
 	isAsync,
+	onChange,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -266,11 +267,6 @@ const SelectField = ({
 					name={name}
 					render={({ field }) => (
 						<Component
-							{...field}
-							onChange={(selectedValues) => {
-								if (typeof callback === 'function') callback(selectedValues);
-								return field.onChange(selectedValues);
-							}}
 							className="react-select-container"
 							classNamePrefix="react-select"
 							aria-label={label}
@@ -284,6 +280,15 @@ const SelectField = ({
 							styles={reactSelectStyles[variant]}
 							instanceId={instanceId}
 							{...selectProps}
+							{...field}
+							onChange={(selectedValues) => {
+								if (typeof callback === 'function') callback(selectedValues);
+
+								if (typeof onChange === 'function')
+									return field.onChange(onChange(selectedValues));
+
+								return field.onChange(selectedValues);
+							}}
 						/>
 					)}
 				/>
@@ -341,6 +346,7 @@ SelectField.propTypes = {
 	isLoading: PropTypes.bool,
 	instanceId: PropTypes.string,
 	isAsync: PropTypes.bool,
+	onChange: PropTypes.func,
 };
 
 SelectField.defaultProps = {
@@ -360,6 +366,7 @@ SelectField.defaultProps = {
 	isLoading: false,
 	instanceId: '',
 	isAsync: false,
+	onChange: null,
 };
 
 export default SelectField;
