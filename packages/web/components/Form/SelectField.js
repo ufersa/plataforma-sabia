@@ -248,17 +248,22 @@ const SelectField = ({
 					{validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
+
 			<Row>
 				<Controller
-					as={Component}
+					render={({ onChange, value }) => (
+						<Component
+							value={value}
+							onChange={([selectedOption]) => {
+								if (typeof callback === 'function') callback(selectedOption);
+								return onChange(selectedOption);
+							}}
+						/>
+					)}
 					className="react-select-container"
 					classNamePrefix="react-select"
 					control={control}
 					rules={validation}
-					onChange={([selectedOption]) => {
-						if (typeof callback === 'function') callback(selectedOption);
-						return selectedOption;
-					}}
 					id={name}
 					name={name}
 					aria-label={label}
