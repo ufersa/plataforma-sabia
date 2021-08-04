@@ -267,9 +267,9 @@ const SelectField = ({
 					render={({ field }) => (
 						<Component
 							{...field}
-							onChange={([selectedOption]) => {
-								if (typeof callback === 'function') callback(selectedOption);
-								return field.onChange(selectedOption);
+							onChange={(selectedValues) => {
+								if (typeof callback === 'function') callback(selectedValues);
+								return field.onChange(selectedValues);
 							}}
 							className="react-select-container"
 							classNamePrefix="react-select"
