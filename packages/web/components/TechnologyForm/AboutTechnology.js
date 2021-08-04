@@ -457,25 +457,25 @@ AboutTechnology.propTypes = {
 	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({
 			target_audience: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			biome: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			government_program: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			keywords: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			stage: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			classification: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			dimension: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 		}),
 		greatAreas: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
