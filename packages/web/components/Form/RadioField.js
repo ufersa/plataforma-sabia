@@ -101,9 +101,9 @@ const RadioField = ({
 							type="radio"
 							id={`${name}_${option.label}`}
 							name={name}
-							ref={register(validation)}
 							value={option.value}
 							{...radioProps}
+							{...register(name, validation)}
 						/>
 						<RadioLabel htmlFor={`${name}_${option.label}`}>
 							<div className="marker">

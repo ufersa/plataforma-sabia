@@ -45,10 +45,10 @@ const InputField = ({
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					ref={register(validation)}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					variant={variant}
 					{...inputProps}
+					{...register(name, validation)}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>

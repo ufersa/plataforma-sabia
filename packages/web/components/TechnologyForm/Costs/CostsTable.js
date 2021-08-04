@@ -29,8 +29,9 @@ const CostsTable = ({ item, index, form, remove, collection }) => {
 			<Row key={item.id} align="center">
 				<input
 					name={`${nameString}.id`}
-					ref={form.register({ required: false })}
 					type="hidden"
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...form.register(`${nameString}.id`, { required: false })}
 				/>
 
 				<Cell col={2}>

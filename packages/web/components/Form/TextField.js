@@ -111,13 +111,13 @@ const TextField = ({
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					ref={register(validation)}
 					variant={variant}
 					maxLength={maxLength}
 					onChange={(e) => formatContent(e.target.value)}
 					value={content}
 					resize={resize}
 					{...inputProps}
+					{...register(name, validation)}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>

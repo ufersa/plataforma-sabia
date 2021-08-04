@@ -334,7 +334,6 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											ref={form.register()}
 											name={`locations.who_develop[${index}]`}
 										/>
 									</IconRow>
@@ -459,7 +458,6 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											ref={form.register()}
 											name={`locations.where_is_already_implemented[${index}]`}
 										/>
 									</IconRow>
