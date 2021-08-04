@@ -71,6 +71,7 @@ const MaskedInputField = ({
 				<Controller
 					render={({ field }) => (
 						<StyledInput
+							id={name}
 							mask={mask}
 							type="text"
 							placeholder={
@@ -86,7 +87,6 @@ const MaskedInputField = ({
 					)}
 					control={control}
 					name={name}
-					id={name}
 					defaultValue={String(defaultValue)}
 					rules={{
 						...validation,

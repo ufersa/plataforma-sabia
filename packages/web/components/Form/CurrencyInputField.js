@@ -85,10 +85,10 @@ const CurrencyInputField = ({
 
 			<Row>
 				<Controller
-					id={name}
 					name={name}
 					render={({ field }) => (
 						<StyledNumberFormat
+							id={name}
 							prefix={currencySettings[lang].prefix}
 							thousandSeparator={currencySettings[lang].thousandSeparator}
 							decimalSeparator={currencySettings[lang].decimalSeparator}

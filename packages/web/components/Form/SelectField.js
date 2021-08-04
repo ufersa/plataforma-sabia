@@ -257,10 +257,10 @@ const SelectField = ({
 				<Controller
 					control={control}
 					rules={validation}
-					id={name}
 					name={name}
 					render={({ field }) => (
 						<Component
+							id={name}
 							className="react-select-container"
 							classNamePrefix="react-select"
 							aria-label={label}
