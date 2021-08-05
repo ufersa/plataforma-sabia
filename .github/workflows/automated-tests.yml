@@ -79,7 +79,7 @@ jobs:
       - name: Run WEB tests
         working-directory: packages/web
         run: |
-          echo "Parameter ${{ github.event.inputs.runTests }}""
+          echo "Parameter ${{ github.event.inputs.runTests }}"
           npm run jest:ci
 
       - name: Zip coverage data
