@@ -66,7 +66,7 @@ const CurrencyInputField = ({
 	...inputProps
 }) => {
 	const { t, lang } = useTranslation(['error']);
-	const { control, errors } = form;
+	const { control, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
 
 	const fullValidation = {
@@ -85,21 +85,25 @@ const CurrencyInputField = ({
 
 			<Row>
 				<Controller
-					as={StyledNumberFormat}
-					prefix={currencySettings[lang].prefix}
-					thousandSeparator={currencySettings[lang].thousandSeparator}
-					decimalSeparator={currencySettings[lang].decimalSeparator}
-					decimalScale={2}
-					fixedDecimalScale
-					id={name}
 					name={name}
-					aria-label={label}
-					aria-required={validation.required}
+					render={({ field }) => (
+						<StyledNumberFormat
+							id={name}
+							prefix={currencySettings[lang].prefix}
+							thousandSeparator={currencySettings[lang].thousandSeparator}
+							decimalSeparator={currencySettings[lang].decimalSeparator}
+							decimalScale={2}
+							fixedDecimalScale
+							aria-label={label}
+							aria-required={validation.required}
+							variant={variant}
+							{...field}
+							{...inputProps}
+						/>
+					)}
 					rules={fullValidation}
 					control={control}
 					defaultValue={defaultValue || ''}
-					variant={variant}
-					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
@@ -117,7 +121,7 @@ CurrencyInputField.propTypes = {
 	form: PropTypes.shape({
 		control: PropTypes.shape({}),
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	validation: PropTypes.shape({
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),

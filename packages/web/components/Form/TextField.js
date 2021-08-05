@@ -60,21 +60,13 @@ const TextField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors, getValues } = form;
-	const values = getValues();
-	const selfValue = values[name];
-	const [content, setContent] = useState(selfValue);
+	const { register, formState: { errors } = {}, watch } = form;
+	const selfValue = watch(name);
 	const [counterColor, setCounterColor] = useState('lightGray2');
 
 	const formatContent = useCallback(
 		(text) => {
-			if (text?.length > maxLength) {
-				setContent(text.slice(0, maxLength));
-			} else {
-				setContent(text);
-			}
-
-			if (maxLength - text?.length === 0) {
+			if (maxLength - text?.length <= 0) {
 				setCounterColor('red');
 			} else if (maxLength - text?.length <= (maxLength * percentChar) / 100) {
 				setCounterColor('darkOrange');
@@ -95,8 +87,16 @@ const TextField = ({
 	}, [selfValue, formatContent]);
 
 	useEffect(() => {
-		formatContent(content);
-	}, [content, formatContent]);
+		formatContent(selfValue);
+	}, [selfValue, formatContent]);
+
+	const { onChange, ...restFormProps } = register(name, {
+		...validation,
+		maxLength: {
+			value: maxLength,
+			message: 'Quantidade de caracteres acima do permitido (1000)',
+		},
+	});
 
 	return (
 		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'} customCss={wrapperCss}>
@@ -111,20 +111,22 @@ const TextField = ({
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					ref={register(validation)}
 					variant={variant}
 					maxLength={maxLength}
-					onChange={(e) => formatContent(e.target.value)}
-					value={content}
 					resize={resize}
 					{...inputProps}
+					{...restFormProps}
+					onChange={(e) => {
+						onChange(e);
+						formatContent(e.target.value);
+					}}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{content && (
+			{selfValue && (
 				<CharCounter
 					counterColor={counterColor}
-				>{`${content.length}/${maxLength}`}</CharCounter>
+				>{`${selfValue.length}/${maxLength}`}</CharCounter>
 			)}
 			{errors && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
@@ -138,8 +140,8 @@ TextField.propTypes = {
 	label: PropTypes.string.isRequired,
 	form: PropTypes.shape({
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
-		getValues: PropTypes.func,
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
+		watch: PropTypes.func,
 	}),
 	help: PropTypes.node,
 	/**
