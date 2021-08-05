@@ -52,7 +52,7 @@ jobs:
           npm install
           
       - name: Run API tests
-        if: ${{ github.event.inputs.runTests == 'true' }}
+        if: ${{ github.event.inputs.runTests == '' || github.event.inputs.runTests == 'true' }}
         run: |
           cd packages/api 
           npm run test
@@ -65,13 +65,13 @@ jobs:
           npm run jest:ci
           
       - name: Run WEB tests
-        if: ${{ github.event.inputs.runTests == 'true' }}
+        if: ${{ github.event.inputs.runTests == '' || github.event.inputs.runTests == 'true' }}
         run: |
           cd packages/web
           npm run jest:ci
         
       - name: Run Cypress
-        if: ${{ github.event.inputs.runTests == 'true' }}
+        if: ${{ github.event.inputs.runTests == '' || github.event.inputs.runTests == 'true' }}
         uses: cypress-io/github-action@v1
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
