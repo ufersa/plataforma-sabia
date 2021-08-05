@@ -199,7 +199,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	);
 
 	const handleFetchInstitutions = debounce((value, callback) => {
-		getStateCities({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
+		getInstitutions({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
 			const mappedOptions = mapInstitutionsOptions(response.data);
 			callback(mappedOptions);
 		});
