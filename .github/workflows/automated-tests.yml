@@ -5,7 +5,12 @@ on:
   pull_request:
     branches:
       - master
-
+  workflow_dispatch:
+    inputs:
+      runTests:
+        description: 'Run all tests before deploying'     
+        required: true
+        default: 'true'
 name: CI
 
 jobs:
@@ -69,7 +74,9 @@ jobs:
       - name: Install dependencies
         if: steps.web_dependencies_cache.outputs.cache-hit != 'true'
         working-directory: packages/web
-        run: npm ci
+        run: |
+          echo "Parameter ${{ github.event.inputs.runTests }}""
+          npm ci
 
       - name: Run WEB tests
         working-directory: packages/web
