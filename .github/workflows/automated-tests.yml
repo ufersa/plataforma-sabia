@@ -74,13 +74,13 @@ jobs:
       - name: Install dependencies
         if: steps.web_dependencies_cache.outputs.cache-hit != 'true'
         working-directory: packages/web
-        run: |
-          echo "Parameter ${{ github.event.inputs.runTests }}""
-          npm ci
+        run: npm ci
 
       - name: Run WEB tests
         working-directory: packages/web
-        run: npm run jest:ci
+        run: |
+          echo "Parameter ${{ github.event.inputs.runTests }}""
+          npm run jest:ci
 
       - name: Zip coverage data
         working-directory: packages/web
