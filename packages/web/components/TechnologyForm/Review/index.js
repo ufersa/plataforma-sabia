@@ -78,16 +78,16 @@ const Review = ({ data: { technology }, form }) => {
 						<TextValue title="Descrição" value={technology?.description} />
 						<TextValue
 							title="Grande área"
-							value={technology['knowledge_area_id[0]']?.label}
+							value={technology['knowledge_area_id.0']?.label}
 						/>
-						<TextValue title="Area" value={technology['knowledge_area_id[1]']?.label} />
+						<TextValue title="Area" value={technology['knowledge_area_id.1']?.label} />
 						<TextValue
 							title="Sub-área"
-							value={technology['knowledge_area_id[2]']?.label}
+							value={technology['knowledge_area_id.2']?.label}
 						/>
 						<TextValue
 							title="Especialidade"
-							value={technology['knowledge_area_id[3]']?.label}
+							value={technology['knowledge_area_id.3']?.label}
 						/>
 						<TextValue
 							title="Classificação"
@@ -474,10 +474,10 @@ Review.propTypes = {
 			patent: PropTypes.number,
 			videos: PropTypes.arrayOf(PropTypes.shape({})),
 			status: PropTypes.string,
-			'knowledge_area_id[0]': PropTypes.shape({ label: PropTypes.string }),
-			'knowledge_area_id[1]': PropTypes.shape({ label: PropTypes.string }),
-			'knowledge_area_id[2]': PropTypes.shape({ label: PropTypes.string }),
-			'knowledge_area_id[3]': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id.0': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id.1': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id.2': PropTypes.shape({ label: PropTypes.string }),
+			'knowledge_area_id.3': PropTypes.shape({ label: PropTypes.string }),
 			risks: PropTypes.string,
 			contribution: PropTypes.string,
 			rawTerms: PropTypes.arrayOf(PropTypes.shape({})),

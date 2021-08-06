@@ -23,7 +23,7 @@ const InputField = ({
 	...inputProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors } = form;
+	const { register, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
 	const hasError = typeof errorObject !== 'undefined';
 	return (
@@ -45,11 +45,11 @@ const InputField = ({
 					name={name}
 					aria-label={label}
 					aria-required={validation.required}
-					ref={register(validation)}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					variant={variant}
 					hasError={hasError}
 					{...inputProps}
+					{...register(name, validation)}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
@@ -69,7 +69,7 @@ InputField.propTypes = {
 	type: PropTypes.string,
 	form: PropTypes.shape({
 		register: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	help: PropTypes.node,
 	/**

@@ -60,7 +60,7 @@ export const Actions = styled.div`
  * @returns {React.Element}
  */
 export const Form = ({ onSubmit, children, defaultValues, noMargin, noPadding, ...rest }) => {
-	const methods = useForm({ defaultValues });
+	const methods = useForm({ defaultValues, shouldUnregister: true });
 
 	return (
 		<StyledForm

@@ -17,7 +17,7 @@ const data = {
 const formMock = {
 	onSubmit: jest.fn(),
 	getValues: jest.fn(() => ({ comment: '' })),
-	errors: {},
+	formState: { errors: {} },
 	register: jest.fn(),
 };
 

@@ -360,6 +360,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						options={mapArrayOfObjectToSelect(brazilStates, 'initials', 'id')}
 						instanceId="select-state-my-account"
 						placeholder="Selecione o estado..."
+						callback={() => {
+							setValue('city_id', null);
+						}}
 					/>
 				</Cell>
 				<Cell col={3}>
