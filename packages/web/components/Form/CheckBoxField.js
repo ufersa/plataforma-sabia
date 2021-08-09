@@ -54,13 +54,14 @@ const checkboxVariants = {
 	`,
 };
 
-const StyledCheckBox = styled.div`
+const StyledCheckBoxLabel = styled.label`
 	${({ theme: { colors }, noPadding, variant }) => css`
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		padding: ${!noPadding ? '1rem' : '0'};
 		font: 1.2rem;
+		cursor: pointer;
 
 		& ${StyledCheckBoxInput}:checked + ${StyledCheckBoxMark} {
 			background: ${colors.blue} -19px top no-repeat;
@@ -76,30 +77,37 @@ const StyledCheckBox = styled.div`
 			}
 		}
 
+		a {
+			color: ${({ theme }) => theme.colors.secondary};
+			padding: 0 !important;
+			transition: color 0.2s ease-in-out;
+
+			&:hover {
+				color: ${({ theme }) => theme.colors.darkGreen};
+			}
+		}
+
 		${checkboxVariants[variant]({ colors })}
 	`}
 `;
 
-const StyledCheckBoxLabel = styled.label`
-	width: 100%;
-	color: ${({ theme }) => theme.colors.lightGray};
-	cursor: pointer;
+const CheckBoxField = ({
+	name,
+	value,
+	label,
+	required,
+	onChange,
+	noPadding,
+	variant,
+	form,
+	validation,
+	...rest
+}) => {
+	const handleOnChangeNoForm = () => onChange((oldValue) => !oldValue);
+	const hasHookForm = !!form;
 
-	a {
-		color: ${({ theme }) => theme.colors.secondary};
-		padding: 0 !important;
-		transition: color 0.2s ease-in-out;
-
-		&:hover {
-			color: ${({ theme }) => theme.colors.darkGreen};
-		}
-	}
-`;
-
-const CheckBoxField = ({ name, value, label, required, onChange, noPadding, variant, ...rest }) => {
-	const handleOnChange = () => onChange((oldValue) => !oldValue);
 	return (
-		<StyledCheckBox noPadding={noPadding} variant={variant}>
+		<StyledCheckBoxLabel noPadding={noPadding} variant={variant} htmlFor={name}>
 			<StyledCheckBoxInput
 				id={name}
 				name={name}
@@ -107,20 +115,21 @@ const CheckBoxField = ({ name, value, label, required, onChange, noPadding, vari
 				aria-label={label}
 				aria-required={required}
 				required={required}
-				checked={value}
-				onChange={handleOnChange}
+				onChange={handleOnChangeNoForm}
+				{...(!hasHookForm && { checked: !!value })}
 				{...rest}
+				{...((hasHookForm && form.register(name, validation)) || {})}
 			/>
 			<StyledCheckBoxMark
-				onClick={handleOnChange}
+				onClick={handleOnChangeNoForm}
 				role="checkbox"
 				aria-label={label}
 				aria-required={required}
 				aria-checked={value}
 				tabindex="0"
 			/>
-			<StyledCheckBoxLabel htmlFor={name}>{label}</StyledCheckBoxLabel>
-		</StyledCheckBox>
+			{label}
+		</StyledCheckBoxLabel>
 	);
 };
 CheckBoxField.propTypes = {
@@ -131,6 +140,8 @@ CheckBoxField.propTypes = {
 	onChange: PropTypes.func,
 	noPadding: PropTypes.bool,
 	variant: PropTypes.oneOf(['default', 'rounded']),
+	form: PropTypes.shape({ register: PropTypes.func }),
+	validation: PropTypes.shape({}),
 };
 
 CheckBoxField.defaultProps = {
@@ -140,6 +151,8 @@ CheckBoxField.defaultProps = {
 	onChange: () => {},
 	noPadding: false,
 	variant: 'default',
+	form: null,
+	validation: {},
 };
 
 export default CheckBoxField;
