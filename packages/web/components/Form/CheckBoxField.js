@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import useTranslation from 'next-translate/useTranslation';
+import { validationErrorMessage } from '../../utils/helper';
+import { InputError } from './styles';
 
 const StyledCheckBoxMark = styled.span`
 	${({ theme: { colors } }) => css`
@@ -91,6 +94,13 @@ const StyledCheckBoxLabel = styled.label`
 	`}
 `;
 
+const CheckboxWrapper = styled.div``;
+
+const StyledError = styled(InputError)`
+	font-size: 1.4rem;
+	margin-top: 0.5rem;
+`;
+
 const CheckBoxField = ({
 	name,
 	value,
@@ -103,33 +113,41 @@ const CheckBoxField = ({
 	validation,
 	...rest
 }) => {
+	const { t } = useTranslation();
 	const handleOnChangeNoForm = () => onChange((oldValue) => !oldValue);
-	const hasHookForm = !!form;
+	const {
+		formState: { errors },
+	} = form;
 
 	return (
-		<StyledCheckBoxLabel noPadding={noPadding} variant={variant} htmlFor={name}>
-			<StyledCheckBoxInput
-				id={name}
-				name={name}
-				type="checkbox"
-				aria-label={label}
-				aria-required={required}
-				required={required}
-				onChange={handleOnChangeNoForm}
-				{...(!hasHookForm && { checked: !!value })}
-				{...rest}
-				{...((hasHookForm && form.register(name, validation)) || {})}
-			/>
-			<StyledCheckBoxMark
-				onClick={handleOnChangeNoForm}
-				role="checkbox"
-				aria-label={label}
-				aria-required={required}
-				aria-checked={value}
-				tabindex="0"
-			/>
-			{label}
-		</StyledCheckBoxLabel>
+		<CheckboxWrapper>
+			<StyledCheckBoxLabel noPadding={noPadding} variant={variant} htmlFor={name}>
+				<StyledCheckBoxInput
+					id={name}
+					name={name}
+					type="checkbox"
+					aria-label={label}
+					aria-required={required}
+					required={required}
+					onChange={handleOnChangeNoForm}
+					{...(!form && { checked: !!value })}
+					{...rest}
+					{...((!!form && form.register(name, validation)) || {})}
+				/>
+				<StyledCheckBoxMark
+					onClick={handleOnChangeNoForm}
+					role="checkbox"
+					aria-label={label}
+					aria-required={required}
+					aria-checked={value}
+					tabindex="0"
+				/>
+				{label}
+			</StyledCheckBoxLabel>
+			{errors && Object.keys(errors).length ? (
+				<StyledError>{validationErrorMessage(errors, name, t)}</StyledError>
+			) : null}
+		</CheckboxWrapper>
 	);
 };
 CheckBoxField.propTypes = {
@@ -140,7 +158,10 @@ CheckBoxField.propTypes = {
 	onChange: PropTypes.func,
 	noPadding: PropTypes.bool,
 	variant: PropTypes.oneOf(['default', 'rounded']),
-	form: PropTypes.shape({ register: PropTypes.func }),
+	form: PropTypes.shape({
+		register: PropTypes.func,
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
+	}),
 	validation: PropTypes.shape({}),
 };
 
