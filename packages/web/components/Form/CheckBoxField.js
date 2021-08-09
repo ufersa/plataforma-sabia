@@ -17,6 +17,7 @@ const StyledCheckBoxMark = styled.span`
 		border: 1px solid ${colors.mediumGray};
 		border-radius: 0.2rem;
 		cursor: pointer;
+		flex-shrink: 0;
 	`}
 `;
 
