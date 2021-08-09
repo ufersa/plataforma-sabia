@@ -37,9 +37,7 @@ const StyledCheckBoxInput = styled.input`
 	}
 `;
 
-const StyledCheckBoxLabel = styled.label.attrs(({ htmlFor }) => ({
-	htmlFor,
-}))`
+const StyledCheckBoxLabel = styled.label`
 	width: 100%;
 	color: ${({ theme }) => theme.colors.lightGray};
 	cursor: pointer;
