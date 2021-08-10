@@ -1,4 +1,5 @@
 import StepOne from './StepOne';
+import StepThree from './StepThree';
 import StepTwo from './StepTwo';
 
 const steps = [
@@ -17,6 +18,8 @@ const steps = [
 	{
 		title: 'Validação',
 		subtitle: 'Verifique o seu e-mail para continuar',
+		component: StepThree,
+		backgroundImage: '/authentication-rafiki.svg',
 	},
 	{
 		title: 'Dados pessoais',

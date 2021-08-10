@@ -229,3 +229,30 @@ export const Form = styled.form`
 	flex-direction: column;
 	height: 100%;
 `;
+
+export const StepInfo = styled.p`
+	${({ theme: { colors } }) => css`
+		color: ${colors.silver};
+		margin-bottom: 2.4rem;
+	`}
+`;
+
+export const VerificationCodeWrapper = styled.div`
+	margin-top: 5.6rem;
+	> div {
+		gap: 0.8rem;
+		justify-content: center;
+	}
+`;
+
+export const ResendEmailLink = styled.div`
+	text-align: right;
+	margin-top: 0.4rem;
+
+	button {
+		width: fit-content;
+		margin-left: auto;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+`;
