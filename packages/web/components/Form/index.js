@@ -15,4 +15,5 @@ export { default as RequiredInfo } from './Required/Info';
 export { default as HtmlViewField } from './HtmlViewField';
 export { default as QuantityField } from './QuantityField';
 export { default as RadioField } from './RadioField';
+export { default as VerificationCodeField } from './VerificationCodeField';
 export * from './Form';

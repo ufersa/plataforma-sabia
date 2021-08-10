@@ -139,3 +139,31 @@ export const InputFieldWrapper = styled.div`
 		${customCss}
 	`}
 `;
+
+export const VerificationCodeWrapper = styled.div`
+	${({ theme: { colors, metrics } }) => css`
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 40px);
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input {
+			-moz-appearance: textfield;
+			caret-color: ${colors.secondary};
+			font-size: 1.6rem;
+			line-height: 2.4rem;
+			padding: 0.8rem 1.2rem;
+			border: 1px solid ${colors.lightGray4};
+			border-radius: ${metrics.baseRadius}rem;
+			text-align: center;
+		}
+
+		input:focus {
+			border: 1px solid ${colors.lightGray2};
+		}
+	`}
+`;
