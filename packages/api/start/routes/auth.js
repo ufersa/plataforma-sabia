@@ -200,19 +200,30 @@ Route.post('/auth/reset-password', 'AuthController.resetPassword').validator('Re
 Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('ConfirmAccount');
 
 /**
- * @api {post} /auth/resend-confirmation-emai Resends Confirmation Email
+ * @api {post} /auth/resend-confirmation-email Resends Confirmation Email
  * @apiGroup Auth
  * @apiParam {String} email Mandatory User Email.
  * @apiParamExample  {json} Request sample:
- *    {
- *		"email": "user@email.com",
- *    }
+ * {
+ *   "email": "user@email.com",
+ * }
  * @apiSuccess {Boolean} success Success Flag
  * @apiSuccessExample {json} Success
- *    HTTP/1.1 200 OK
- *    {
- *		"success":"true"
- *    }
+ * HTTP/1.1 200 OK
+ * {
+ *   "success":"true"
+ * }
+ * @apiError (400 Bad Request) {Object} error Error object
+ * @apiError (400 Bad Request) {String} error.error_code Error code
+ * @apiError (400 Bad Request) {String} error.message Error message
+ * @apiErrorExample {json} Invalid Email Error
+ * HTTP/1.1 400 Bad Request
+ * {
+ *   "error": {
+ * 	   "error_code": "INVALID_EMAIL",
+ * 	   "message": "O email é inválido ou não existe."
+ *   }
+ * }
  */
 Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail').validator(
 	'ResendConfirmationEmail',
