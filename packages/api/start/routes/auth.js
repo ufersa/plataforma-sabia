@@ -214,4 +214,6 @@ Route.post('/auth/confirm-account', 'AuthController.confirmAccount').validator('
  *		"success":"true"
  *    }
  */
-Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail');
+Route.post('/auth/resend-confirmation-email', 'AuthController.resendConfirmationEmail').validator(
+	'ResendConfirmationEmail',
+);
