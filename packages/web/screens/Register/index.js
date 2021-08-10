@@ -24,7 +24,7 @@ const Register = () => {
 			<S.Sidebar>
 				{hasPreviousStep && (
 					<RectangularButton colorVariant="silver" onClick={setPrevStep}>
-						<FiArrowLeft fontSize="2rem" />
+						<FiArrowLeft fontSize="2rem" strokeWidth={2.5} />
 					</RectangularButton>
 				)}
 
