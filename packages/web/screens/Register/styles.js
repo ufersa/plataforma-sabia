@@ -184,6 +184,48 @@ export const Actions = styled.div`
 
 export const InputsWrapper = styled.div`
 	> div:not(:last-child) {
-		margin-bottom: 1.6rem;
+		margin-bottom: 2.4rem;
 	}
+`;
+
+export const CheckboxLabel = styled.p`
+	${({ theme: { colors } }) => css`
+		color: ${colors.black};
+		font-weight: 500;
+		font-size: 1.2rem;
+	`}
+`;
+
+export const CheckboxWrapper = styled.div`
+	margin-bottom: 4rem;
+	> div:first-child {
+		margin-bottom: 0.8rem;
+	}
+`;
+
+export const FloatingAction = styled.div`
+	${({ theme: { screens, metrics } }) => css`
+		margin: auto -3.2rem -3.2rem -3.2rem;
+
+		> button {
+			border-radius: 00;
+		}
+
+		@media screen and (min-width: ${screens.medium - 1}px) {
+			margin: 0;
+			display: flex;
+			justify-content: flex-end;
+
+			> button {
+				padding: 0.2rem 0.8rem;
+				border-radius: ${metrics.baseRadius}rem;
+			}
+		}
+	`}
+`;
+
+export const Form = styled.form`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 `;

@@ -1,12 +1,15 @@
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 import { RectangularButton } from '../../components/Button';
-import { InputField } from '../../components/Form';
+import { CheckBoxField, InputField } from '../../components/Form';
+import { register } from '../../services';
+import { toast } from '../../components/Toast';
 
 import * as S from './styles';
 
-const StepTwo = ({ activeStep, setPrevStep }) => {
+const StepTwo = ({ activeStep, setNextStep }) => {
 	const form = useForm({
 		defaultValues: {
 			email: '',
@@ -15,11 +18,25 @@ const StepTwo = ({ activeStep, setPrevStep }) => {
 			privacyTerms: false,
 		},
 	});
+	const passwordField = useRef({});
+	passwordField.current = form.watch('password');
 
-	const handleSubmit = () => {};
+	const handleSubmit = async ({ email, password }) => {
+		const response = await register(email, password);
+
+		if (response.error) {
+			toast.error(
+				response.error.message[0].message ||
+					'Ocorreu um erro para efetuar seu registro. Recarregue a página e tente novamente...',
+			);
+			return;
+		}
+
+		setNextStep();
+	};
 
 	return (
-		<form onSubmit={form.handleSubmit(handleSubmit)}>
+		<S.Form onSubmit={form.handleSubmit(handleSubmit)}>
 			<S.StepTitle>{activeStep.title}</S.StepTitle>
 			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
 
@@ -50,21 +67,59 @@ const StepTwo = ({ activeStep, setPrevStep }) => {
 					placeholder="Confirme sua senha"
 					variant="lightRounded"
 					type="password"
-					validation={{ required: true }}
+					validation={{
+						required: true,
+						validate: {
+							passwordMatch: (value) =>
+								passwordField.current === value || 'As senhas não são iguais',
+						},
+					}}
 				/>
+
+				<S.CheckboxWrapper>
+					<CheckBoxField
+						form={form}
+						validation={{ required: true }}
+						name="terms-and-privacy"
+						label={
+							<S.CheckboxLabel>
+								Concordo com os{' '}
+								<a href="/terms-of-use" target="_blank">
+									termos de uso
+								</a>{' '}
+								e{' '}
+								<a href="/privacy-policy" target="_blank">
+									política de privacidade
+								</a>{' '}
+								da Plataforma Sabiá
+							</S.CheckboxLabel>
+						}
+						noPadding
+						variant="rounded"
+					/>
+
+					<CheckBoxField
+						form={form}
+						name="receive-news"
+						label={
+							<S.CheckboxLabel>
+								Concordo em receber novidades da Plataforma Sabiá por email.
+								(OPCIONAL)
+							</S.CheckboxLabel>
+						}
+						noPadding
+						variant="rounded"
+					/>
+				</S.CheckboxWrapper>
 			</S.InputsWrapper>
 
-			<S.Actions>
-				<RectangularButton colorVariant="silver" onClick={setPrevStep}>
-					<FiArrowLeft fontSize="2rem" />
-					Voltar
-				</RectangularButton>
+			<S.FloatingAction>
 				<RectangularButton variant="round" colorVariant="green" type="submit">
 					Continuar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
-			</S.Actions>
-		</form>
+			</S.FloatingAction>
+		</S.Form>
 	);
 };
 
@@ -73,7 +128,7 @@ StepTwo.propTypes = {
 		title: PropTypes.string.isRequired,
 		subtitle: PropTypes.string.isRequired,
 	}).isRequired,
-	setPrevStep: PropTypes.func.isRequired,
+	setNextStep: PropTypes.func.isRequired,
 };
 
 export default StepTwo;
