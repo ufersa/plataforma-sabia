@@ -48,8 +48,8 @@ const InputField = ({
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					variant={variant}
 					hasError={hasError}
-					{...inputProps}
 					{...register(name, validation)}
+					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
