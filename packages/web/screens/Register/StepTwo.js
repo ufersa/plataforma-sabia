@@ -9,7 +9,7 @@ import { toast } from '../../components/Toast';
 
 import * as S from './styles';
 
-const StepTwo = ({ activeStep, setNextStep }) => {
+const StepTwo = ({ activeStep, setNextStep, updateUserData }) => {
 	const form = useForm({
 		defaultValues: {
 			email: '',
@@ -32,6 +32,7 @@ const StepTwo = ({ activeStep, setNextStep }) => {
 			return;
 		}
 
+		updateUserData(response);
 		setNextStep();
 	};
 
@@ -129,6 +130,7 @@ StepTwo.propTypes = {
 		subtitle: PropTypes.string.isRequired,
 	}).isRequired,
 	setNextStep: PropTypes.func.isRequired,
+	updateUserData: PropTypes.func.isRequired,
 };
 
 export default StepTwo;
