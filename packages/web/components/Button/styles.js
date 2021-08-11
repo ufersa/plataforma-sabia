@@ -236,10 +236,6 @@ export const RectangularButton = styled.button`
 			cursor: not-allowed;
 		}
 
-		> svg {
-			margin-right: 0.8rem;
-		}
-
 		@media screen and (min-width: ${screens.medium}px) {
 			width: ${fullWidth ? '100%' : 'fit-content'};
 		}
