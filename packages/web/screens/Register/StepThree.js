@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { FiArrowRight } from 'react-icons/fi';
 import { RectangularButton } from '../../components/Button';
 import { VerificationCodeField } from '../../components/Form';
@@ -12,13 +11,12 @@ import * as S from './styles';
 const verificationCodeFieldsNumber = 6;
 const verificationCodeDefaultValue = Array(verificationCodeFieldsNumber).fill('');
 
-const StepThree = ({ activeStep, setNextStep, userData }) => {
+const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 	const [verificationCodeValues, setVerificationCodeValues] = useState(
 		verificationCodeDefaultValue,
 	);
 	const verificationCodeRef = useRef();
 	const [isFetching, setIsFetching] = useState(false);
-	const form = useForm();
 
 	useEffect(() => {
 		if (verificationCodeRef.current) {
@@ -26,10 +24,10 @@ const StepThree = ({ activeStep, setNextStep, userData }) => {
 		}
 	}, []);
 
-	const handleSubmit = useCallback(
+	const handleCompletedCode = useCallback(
 		async (values) => {
 			setIsFetching(true);
-			const verificationCode = values.join('');
+			const verificationCode = values?.join('');
 
 			const response = await accountConfirmation(verificationCode, userData.email);
 
@@ -45,13 +43,27 @@ const StepThree = ({ activeStep, setNextStep, userData }) => {
 						'Ocorreu um erro para validar seu registro. Tente novamente em alguns instantes...',
 				);
 				setIsFetching(false);
+				verificationCodeRef.current.focus();
 				return;
 			}
 
+			updateUserData(response);
 			setNextStep();
 		},
-		[userData.email, setNextStep],
+		[userData.email, setNextStep, updateUserData],
 	);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		if (verificationCodeValues.every((value) => value.length)) {
+			handleCompletedCode(verificationCodeValues);
+			return;
+		}
+
+		toast.error('Preencha o código de verificação');
+		verificationCodeRef.current.focus();
+	};
 
 	const handleResendEmailConfirmation = async () => {
 		setIsFetching(true);
@@ -74,7 +86,7 @@ const StepThree = ({ activeStep, setNextStep, userData }) => {
 	};
 
 	return (
-		<S.Form onSubmit={form.handleSubmit(handleSubmit)}>
+		<S.Form onSubmit={handleSubmit}>
 			<S.StepTitle>{activeStep.title}</S.StepTitle>
 			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
 			<S.StepInfo>
@@ -83,7 +95,7 @@ const StepThree = ({ activeStep, setNextStep, userData }) => {
 			<S.VerificationCodeWrapper>
 				<VerificationCodeField
 					ref={verificationCodeRef}
-					onCompleted={handleSubmit}
+					onCompleted={handleCompletedCode}
 					fieldsNumber={verificationCodeFieldsNumber}
 					values={verificationCodeValues}
 					setValues={setVerificationCodeValues}
@@ -123,6 +135,7 @@ StepThree.propTypes = {
 	userData: PropTypes.shape({
 		email: PropTypes.string.isRequired,
 	}).isRequired,
+	updateUserData: PropTypes.func.isRequired,
 };
 
 export default StepThree;
