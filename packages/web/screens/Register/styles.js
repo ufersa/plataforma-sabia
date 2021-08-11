@@ -207,7 +207,8 @@ export const FloatingAction = styled.div`
 	${({ theme: { screens, metrics } }) => css`
 		margin: auto -3.2rem -3.2rem -3.2rem;
 
-		> button {
+		> button,
+		a {
 			border-radius: 00;
 		}
 
@@ -216,7 +217,8 @@ export const FloatingAction = styled.div`
 			display: flex;
 			justify-content: flex-end;
 
-			> button {
+			> button,
+			a {
 				padding: 0.2rem 0.8rem;
 				border-radius: ${metrics.baseRadius}rem;
 			}
@@ -255,4 +257,29 @@ export const ResendEmailLink = styled.div`
 		font-size: 1.2rem;
 		font-weight: 500;
 	}
+`;
+
+export const FinishContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 100%;
+	text-align: center;
+`;
+
+export const FinishTitle = styled.h3`
+	${({ theme: { colors } }) => css`
+		color: ${colors.secondary};
+		max-width: 27.5rem;
+		line-height: 3rem;
+	`}
+`;
+
+export const FinishSubtitle = styled.p`
+	${({ theme: { colors } }) => css`
+		color: ${colors.silver};
+		font-size: 1.6rem;
+		line-height: 2.4rem;
+	`}
 `;
