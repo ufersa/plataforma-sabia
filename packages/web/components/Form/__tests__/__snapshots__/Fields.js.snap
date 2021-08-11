@@ -722,8 +722,25 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
           class="c5 react-select-container css-dyr6gj-container"
           id="test-input"
         >
+          <span
+            aria-live="polite"
+            class="css-1laao21-a11yText"
+          >
+            <span
+              id="aria-selection-event"
+            >
+               
+              
+            </span>
+            <span
+              id="aria-context"
+            >
+               
+                0 results available. Test Input is focused ,type to refine list, press Down to open the menu, 
+            </span>
+          </span>
           <div
-            class="react-select__control css-1b7oqde-control"
+            class="react-select__control react-select__control--is-focused css-icbd0f-control"
           >
             <div
               class="react-select__value-container css-g1d714-ValueContainer"
@@ -767,7 +784,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
               />
               <div
                 aria-hidden="true"
-                class="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                class="react-select__indicator react-select__dropdown-indicator css-1gtu0rj-indicatorContainer"
               >
                 <svg
                   aria-hidden="true"

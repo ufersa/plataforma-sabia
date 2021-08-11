@@ -185,7 +185,7 @@ export const prepareTerms = (termsObject) => {
 
 		if (Array.isArray(term)) {
 			const ids = term.map((t) => {
-				if (typeof t === 'string') {
+				if (typeof t === 'string' || typeof t === 'number') {
 					return t;
 				}
 				return t.value;
@@ -219,13 +219,15 @@ export const normalizeAttachments = (attachments) => ({
 export const normalizeKnowledgeAreas = (knowledgeArea) => {
 	const fields = ['greatArea', 'area', 'subArea', 'speciality'];
 
-	return fields.reduce((acc, field, index) => {
-		if (knowledgeArea[field]) {
-			acc[`knowledge_area_id[${index}]`] = knowledgeArea[field].knowledge_area_id;
-		}
-
-		return acc;
-	}, {});
+	return fields.reduce(
+		(acc, field) => ({
+			knowledge_area_id: [
+				...(acc.knowledge_area_id || []),
+				knowledgeArea?.[field]?.knowledge_area_id ?? null,
+			],
+		}),
+		{},
+	);
 };
 
 /**

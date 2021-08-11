@@ -9,8 +9,8 @@ import { mapArrayOfObjectToSelect } from '../../utils/helper';
 const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => {
 	const [isFirstMount, setIsFirstMount] = useState(true);
 	const { watch, setValue } = form;
-	const areaKeyToWatch = `knowledge_area[${index}]`;
-	const areaKeyMapping = [...Array(4).keys()].map((key) => `${areaKeyToWatch}[${key}]`);
+	const areaKeyToWatch = `knowledge_area.${index}`;
+	const areaKeyMapping = [...Array(4).keys()].map((key) => `${areaKeyToWatch}.${key}`);
 	const swrOptions = {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false,
@@ -114,7 +114,7 @@ const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => 
 						options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
 						isLoading={isValidatingGreatAreas}
 						defaultValue={selected?.great_area_id}
-						onChange={([selectedOption]) => {
+						onChange={(selectedOption) => {
 							setValue(areaKeyMapping[1], null);
 							setValue(areaKeyMapping[2], null);
 							setValue(areaKeyMapping[3], null);
@@ -131,7 +131,7 @@ const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => 
 						isHidden={!greatArea || !rawAreas?.length}
 						isLoading={isValidatingAreas}
 						defaultValue={selected?.area_id}
-						onChange={([selectedOption]) => {
+						onChange={(selectedOption) => {
 							setValue(areaKeyMapping[2], null);
 							setValue(areaKeyMapping[3], null);
 							return selectedOption;
@@ -147,7 +147,7 @@ const UserSpecialities = ({ form, selected, index, onFinishInitialLoading }) => 
 						isHidden={!area || !rawSubAreas?.length}
 						isLoading={isValidatingSubAreas}
 						defaultValue={selected?.sub_area_id}
-						onChange={([selectedOption]) => {
+						onChange={(selectedOption) => {
 							setValue(areaKeyMapping[3], null);
 							return selectedOption;
 						}}

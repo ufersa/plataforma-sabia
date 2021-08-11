@@ -99,13 +99,13 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 			cy.get('[name="technologyResponsibles.users_add_button"]').click();
 		}
 
-		cy.get(`[name='technologyResponsibles.users[${index}].phone_number']`).type(
+		cy.get(`[name='technologyResponsibles.users.${index}.phone_number']`).type(
 			technologyFixture.responsible[index].phone,
 		);
-		cy.get(`[name='technologyResponsibles.users[${index}].email']`).type(
+		cy.get(`[name='technologyResponsibles.users.${index}.email']`).type(
 			technologyFixture.responsible[index].email,
 		);
-		cy.get(`[name='technologyResponsibles.users[${index}].full_name']`).type(
+		cy.get(`[name='technologyResponsibles.users.${index}.full_name']`).type(
 			technologyFixture.responsible[index].fullName,
 		);
 	}

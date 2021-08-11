@@ -36,7 +36,7 @@ const CurateTechnology = ({ technology }) => {
 	const [assessment, setAssessment] = useState('');
 	const router = useRouter();
 	const form = useForm({ description: '' });
-	const { description } = form.watch(['description']);
+	const [description] = form.watch(['description']);
 
 	const {
 		data: [

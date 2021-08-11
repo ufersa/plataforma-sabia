@@ -442,10 +442,7 @@ const cnpqSingleAreaData = {
 };
 
 const cnpqNormalizedData = {
-	'knowledge_area_id[0]': 20000006,
-	'knowledge_area_id[1]': 20800002,
-	'knowledge_area_id[2]': 20801009,
-	'knowledge_area_id[3]': 20801017,
+	knowledge_area_id: [20000006, 20800002, 20801009, 20801017],
 };
 
 describe('createTechnology', () => {

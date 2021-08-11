@@ -122,6 +122,7 @@ const SelectField = ({
 	isLoading,
 	instanceId,
 	isAsync,
+	onChange,
 	...selectProps
 }) => {
 	const { t } = useTranslation(['error']);
@@ -129,7 +130,7 @@ const SelectField = ({
 	const [internalIsLoading, setInternalIsLoading] = useState(false);
 	const [selectOptions, setSelectOptions] = useState(options);
 
-	const { errors, control, watch, setValue, getValues } = form;
+	const { formState: { errors } = {}, control, watch, setValue, getValues } = form;
 
 	let selectedValue = watch(name);
 	if (selectedValue) {
@@ -192,16 +193,19 @@ const SelectField = ({
 				selectedValue.map((value) =>
 					useOptionsFrom.find((option) => `${option.value}` === `${value}`),
 				),
+				{ shouldDirty: true },
 			);
 		} else if (typeof selectedValue === 'object') {
 			setValue(
 				name,
 				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue.value}`),
+				{ shouldDirty: true },
 			);
 		} else {
 			setValue(
 				name,
 				useOptionsFrom.find((option) => `${option.value}` === `${selectedValue}`),
+				{ shouldDirty: true },
 			);
 		}
 
@@ -225,9 +229,9 @@ const SelectField = ({
 		const currentValue = getValues(name) || [];
 
 		if (isMulti) {
-			setValue(name, [...currentValue, newOption]);
+			setValue(name, [...currentValue, newOption], { shouldDirty: true });
 		} else {
-			setValue(name, newOption);
+			setValue(name, newOption, { shouldDirty: true });
 		}
 
 		return newOption;
@@ -248,30 +252,39 @@ const SelectField = ({
 					{validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
+
 			<Row>
 				<Controller
-					as={Component}
-					className="react-select-container"
-					classNamePrefix="react-select"
 					control={control}
 					rules={validation}
-					onChange={([selectedOption]) => {
-						if (typeof callback === 'function') callback(selectedOption);
-						return selectedOption;
-					}}
-					id={name}
 					name={name}
-					aria-label={label}
-					aria-required={validation.required}
-					options={selectOptions}
-					defaultOptions={selectOptions}
-					isMulti={isMulti}
-					onCreateOption={creatable ? onCreateOption : null}
-					isDisabled={internalIsLoading || isLoading || isHidden}
-					isLoading={internalIsLoading || isLoading}
-					styles={reactSelectStyles[variant]}
-					instanceId={instanceId}
-					{...selectProps}
+					render={({ field }) => (
+						<Component
+							id={name}
+							className="react-select-container"
+							classNamePrefix="react-select"
+							aria-label={label}
+							aria-required={validation.required}
+							options={selectOptions}
+							defaultOptions={selectOptions}
+							isMulti={isMulti}
+							onCreateOption={creatable ? onCreateOption : null}
+							isDisabled={internalIsLoading || isLoading || isHidden}
+							isLoading={internalIsLoading || isLoading}
+							styles={reactSelectStyles[variant]}
+							instanceId={instanceId}
+							{...selectProps}
+							{...field}
+							onChange={(selectedValues) => {
+								if (typeof callback === 'function') callback(selectedValues);
+
+								if (typeof onChange === 'function')
+									return field.onChange(onChange(selectedValues));
+
+								return field.onChange(selectedValues);
+							}}
+						/>
+					)}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
@@ -295,7 +308,7 @@ SelectField.propTypes = {
 	onCreate: PropTypes.func,
 	isMulti: PropTypes.bool,
 	form: PropTypes.shape({
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 		control: PropTypes.shape({}),
 		watch: PropTypes.func,
 		setValue: PropTypes.func,
@@ -327,6 +340,7 @@ SelectField.propTypes = {
 	isLoading: PropTypes.bool,
 	instanceId: PropTypes.string,
 	isAsync: PropTypes.bool,
+	onChange: PropTypes.func,
 };
 
 SelectField.defaultProps = {
@@ -346,6 +360,7 @@ SelectField.defaultProps = {
 	isLoading: false,
 	instanceId: '',
 	isAsync: false,
+	onChange: null,
 };
 
 export default SelectField;

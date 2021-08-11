@@ -77,13 +77,13 @@ const MapAndAttachments = ({ form, data }) => {
 
 	useEffect(() => {
 		whoDevelop.forEach((element, index) => {
-			form.setValue(`locations.who_develop[${index}]`, element.id);
+			form.setValue(`locations.who_develop.${index}`, element.id);
 		});
 	}, [whoDevelop]);
 
 	useEffect(() => {
 		whereIsAlreadyImplemented.forEach((element, index) => {
-			form.setValue(`locations.where_is_already_implemented[${index}]`, element.id);
+			form.setValue(`locations.where_is_already_implemented.${index}`, element.id);
 		});
 	}, [whereIsAlreadyImplemented]);
 
@@ -93,14 +93,14 @@ const MapAndAttachments = ({ form, data }) => {
 
 	const onAddVideos = (link) => {
 		if (!link || link === '') {
-			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			form.setError('link_video', { type: 'manual', message: 'Formato de URL inválido' });
 			return;
 		}
 
 		const videoId = getYoutubeVideoId(link);
 
 		if (videoId) {
-			form.clearError('link_video');
+			form.clearErrors('link_video');
 			const alreadyExists = videos.some((video) => video?.videoId === videoId);
 
 			if (!alreadyExists) {
@@ -115,10 +115,13 @@ const MapAndAttachments = ({ form, data }) => {
 				]);
 				form.setValue('link_video', '');
 			} else {
-				form.setError('link_video', 'manual', 'O vídeo já foi adicionado');
+				form.setError('link_video', {
+					type: 'manual',
+					message: 'O vídeo já foi adicionado',
+				});
 			}
 		} else {
-			form.setError('link_video', 'manual', 'Formato de URL inválido');
+			form.setError('link_video', { type: 'manual', message: 'Formato de URL inválido' });
 		}
 	};
 
@@ -331,8 +334,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											ref={form.register()}
-											name={`locations.who_develop[${index}]`}
+											name={`locations.who_develop.${index}`}
 										/>
 									</IconRow>
 								);
@@ -456,8 +458,7 @@ const MapAndAttachments = ({ form, data }) => {
 										<InputHiddenField
 											form={form}
 											type="hidden"
-											ref={form.register()}
-											name={`locations.where_is_already_implemented[${index}]`}
+											name={`locations.where_is_already_implemented.${index}`}
 										/>
 									</IconRow>
 								);
@@ -489,11 +490,15 @@ const MapAndAttachments = ({ form, data }) => {
 					</Dropzone>
 					<UploadedImages data-cy="uploaded-images">
 						<Controller
-							as={ImagesPreview}
+							render={({ field }) => (
+								<ImagesPreview
+									{...field}
+									previewedImgFiles={previewedImgFiles}
+									deleteAttachment={deleteAttachment}
+								/>
+							)}
 							name="thumbnail_id"
 							control={control}
-							previewedImgFiles={previewedImgFiles}
-							deleteAttachment={deleteAttachment}
 						/>
 					</UploadedImages>
 
@@ -603,7 +608,7 @@ MapAndAttachments.propTypes = {
 		register: PropTypes.func,
 		setValue: PropTypes.func,
 		setError: PropTypes.func,
-		clearError: PropTypes.func,
+		clearErrors: PropTypes.func,
 		control: PropTypes.shape({}),
 	}),
 	data: PropTypes.shape({

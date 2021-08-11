@@ -199,7 +199,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 	);
 
 	const handleFetchInstitutions = debounce((value, callback) => {
-		getStateCities({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
+		getInstitutions({ filterBy: 'name', filter: value, order: 'desc' }).then((response) => {
 			const mappedOptions = mapInstitutionsOptions(response.data);
 			callback(mappedOptions);
 		});
@@ -360,6 +360,9 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						options={mapArrayOfObjectToSelect(brazilStates, 'initials', 'id')}
 						instanceId="select-state-my-account"
 						placeholder="Selecione o estado..."
+						callback={() => {
+							setValue('city_id', null);
+						}}
 					/>
 				</Cell>
 				<Cell col={3}>
