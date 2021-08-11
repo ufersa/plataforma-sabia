@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { RectangularButton } from '../../components/Button';
 import { VerificationCodeField } from '../../components/Form';
@@ -15,7 +15,9 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 	const [verificationCodeValues, setVerificationCodeValues] = useState(
 		verificationCodeDefaultValue,
 	);
+	const isVerificationCodeFilled = verificationCodeValues.every((value) => value.length);
 	const verificationCodeRef = useRef();
+	const formRef = useRef();
 	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(() => {
@@ -24,10 +26,18 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 		}
 	}, []);
 
-	const handleCompletedCode = useCallback(
-		async (values) => {
+	useEffect(() => {
+		if (isVerificationCodeFilled) {
+			formRef.current.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+		}
+	}, [isVerificationCodeFilled]);
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		if (isVerificationCodeFilled) {
 			setIsFetching(true);
-			const verificationCode = values?.join('');
+			const verificationCode = verificationCodeValues?.join('');
 
 			const response = await accountConfirmation(verificationCode, userData.email);
 
@@ -49,15 +59,6 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 
 			updateUserData(response);
 			setNextStep();
-		},
-		[userData.email, setNextStep, updateUserData],
-	);
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
-		if (verificationCodeValues.every((value) => value.length)) {
-			handleCompletedCode(verificationCodeValues);
 			return;
 		}
 
@@ -86,7 +87,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 	};
 
 	return (
-		<S.Form onSubmit={handleSubmit}>
+		<S.Form ref={formRef} onSubmit={handleSubmit}>
 			<S.StepTitle>{activeStep.title}</S.StepTitle>
 			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
 			<S.StepInfo>
@@ -95,7 +96,6 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 			<S.VerificationCodeWrapper>
 				<VerificationCodeField
 					ref={verificationCodeRef}
-					onCompleted={handleCompletedCode}
 					fieldsNumber={verificationCodeFieldsNumber}
 					values={verificationCodeValues}
 					setValues={setVerificationCodeValues}

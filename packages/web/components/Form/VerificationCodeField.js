@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { VerificationCodeWrapper } from './styles';
 
@@ -9,19 +9,11 @@ const KEY_CODE = {
 	RIGHT: 39,
 };
 
-const VerificationCodeField = forwardRef(({ onCompleted, values, setValues }, ref) => {
+const VerificationCodeField = forwardRef(({ values, setValues }, ref) => {
 	const inputsRef = useRef([]);
 	useImperativeHandle(ref, () => ({
 		focus: () => inputsRef.current[0].focus(),
 	}));
-
-	useEffect(() => {
-		const isAllFilled = values.every((value) => value.length > 0);
-
-		if (isAllFilled) {
-			onCompleted(values);
-		}
-	}, [values, onCompleted]);
 
 	const triggerValueChange = (index, value) => {
 		const newValues = [...values];
@@ -118,13 +110,11 @@ const VerificationCodeField = forwardRef(({ onCompleted, values, setValues }, re
 });
 
 VerificationCodeField.propTypes = {
-	onCompleted: PropTypes.func,
 	values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
 	setValues: PropTypes.func.isRequired,
 };
 
 VerificationCodeField.defaultProps = {
-	onCompleted: () => {},
 	values: null,
 };
 
