@@ -257,4 +257,27 @@ export const RectangularButton = styled.button`
 	`}
 `;
 
+export const LoaderWrapper = styled.div`
+	${({ theme: { colors }, buttonColorVariant }) => css`
+		position: absolute;
+		top: 2px;
+		left: 50%;
+		transform: translateX(-50%);
+
+		> div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			> div {
+				background-color: ${colors[rectangularColorsToTheme[buttonColorVariant]]};
+			}
+		}
+	`}
+`;
+
+export const ButtonWrapper = styled.div`
+	position: relative;
+`;
+
 export default StyledButton;
