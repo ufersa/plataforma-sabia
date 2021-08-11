@@ -78,6 +78,30 @@ const reactSelectStyles = {
 			color: theme.colors.secondary,
 		}),
 	},
+
+	lightRounded: {
+		container: (base) => ({
+			...base,
+			width: '100%',
+		}),
+		control: (base) => ({
+			...base,
+			minHeight: '4.4rem',
+			borderRadius: `${theme.metrics.baseRadius}rem`,
+			borderColor: theme.colors.lightGray4,
+		}),
+		singleValue: (base) => ({
+			...base,
+			color: theme.colors.darkGray,
+		}),
+		indicatorSeparator: () => ({
+			display: 'none',
+		}),
+		placeholder: (base) => ({
+			...base,
+			color: theme.colors.lightGray3,
+		}),
+	},
 };
 
 const styles = css`
@@ -335,7 +359,7 @@ SelectField.propTypes = {
 	),
 	callback: PropTypes.func,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'rounded', 'gray']),
+	variant: PropTypes.oneOf(['default', 'rounded', 'gray', 'lightRounded']),
 	isHidden: PropTypes.bool,
 	isLoading: PropTypes.bool,
 	instanceId: PropTypes.string,

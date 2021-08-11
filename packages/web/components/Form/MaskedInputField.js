@@ -63,7 +63,7 @@ const MaskedInputField = ({
 	return (
 		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
 			{label && (
-				<InputLabel htmlFor={name}>
+				<InputLabel htmlFor={name} variant={variant}>
 					{label} {validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
@@ -122,7 +122,7 @@ MaskedInputField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'gray', 'rounded']),
+	variant: PropTypes.oneOf(['default', 'gray', 'rounded', 'lightRounded']),
 };
 
 MaskedInputField.defaultProps = {
