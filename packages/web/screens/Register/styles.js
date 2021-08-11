@@ -204,7 +204,10 @@ export const CheckboxWrapper = styled.div`
 `;
 
 export const FloatingAction = styled.div`
-	${({ theme: { screens, metrics } }) => css`
+	${({ theme: { screens, metrics }, justifyContent }) => css`
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row-reverse;
 		margin: auto -3.2rem -3.2rem -3.2rem;
 
 		> button,
@@ -212,15 +215,24 @@ export const FloatingAction = styled.div`
 			border-radius: 00;
 		}
 
+		> button + #back-button {
+			display: none;
+		}
+
 		@media screen and (min-width: ${screens.medium - 1}px) {
 			margin: 0;
+			margin-top: 17.6rem;
 			display: flex;
-			justify-content: flex-end;
+			justify-content: ${justifyContent || 'space-between'};
 
 			> button,
 			a {
 				padding: 0.2rem 0.8rem;
 				border-radius: ${metrics.baseRadius}rem;
+			}
+
+			> button + #back-button {
+				display: inherit;
 			}
 		}
 	`}
