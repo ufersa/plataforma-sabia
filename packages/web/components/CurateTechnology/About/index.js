@@ -61,22 +61,22 @@ const About = () => {
 				/>
 				<TextValue
 					title="Grande área"
-					value={technology.technologyCNPQAreas['knowledge_area_id[0]']?.label}
+					value={technology.technologyCNPQAreas['knowledge_area_id.0']?.label}
 					showIfEmpty
 				/>
 				<TextValue
 					title="Área"
-					value={technology.technologyCNPQAreas['knowledge_area_id[1]']?.label}
+					value={technology.technologyCNPQAreas['knowledge_area_id.1']?.label}
 					showIfEmpty
 				/>
 				<TextValue
 					title="Sub-area"
-					value={technology.technologyCNPQAreas['knowledge_area_id[2]']?.label}
+					value={technology.technologyCNPQAreas['knowledge_area_id.2']?.label}
 					showIfEmpty
 				/>
 				<TextValue
 					title="Especialidade"
-					value={technology.technologyCNPQAreas['knowledge_area_id[3]']?.label}
+					value={technology.technologyCNPQAreas['knowledge_area_id.3']?.label}
 					showIfEmpty
 				/>
 			</ContentBox>

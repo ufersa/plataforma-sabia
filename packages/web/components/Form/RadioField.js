@@ -85,7 +85,7 @@ const RadioField = ({
 	...radioProps
 }) => {
 	const { t } = useTranslation(['error']);
-	const { register, errors } = form;
+	const { register, formState: { errors } = {} } = form;
 
 	return (
 		<RadioContainer>
@@ -101,9 +101,9 @@ const RadioField = ({
 							type="radio"
 							id={`${name}_${option.label}`}
 							name={name}
-							ref={register(validation)}
 							value={option.value}
 							{...radioProps}
+							{...register(name, validation)}
 						/>
 						<RadioLabel htmlFor={`${name}_${option.label}`}>
 							<div className="marker">
@@ -129,7 +129,7 @@ RadioField.propTypes = {
 		getValues: PropTypes.func,
 		register: PropTypes.func,
 		watch: PropTypes.func,
-		errors: PropTypes.shape({}),
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	/**
 	 * @see https://react-hook-form.com/api#register

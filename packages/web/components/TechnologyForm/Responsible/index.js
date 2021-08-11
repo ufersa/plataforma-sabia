@@ -78,11 +78,11 @@ const Responsible = ({ form }) => {
 				childsComponent={({ item, index, remove }) => {
 					return (
 						<>
-							<Row key={item.id} align="center" data-testid="row">
+							<Row key={item.fieldArrayId} align="center" data-testid="row">
 								<Cell col={5}>
 									<InputField
 										form={form}
-										name={`${users}[${index}].full_name`}
+										name={`${users}.${index}.full_name`}
 										label="Nome Completo"
 										placeholder="Nome do responsável"
 										validation={{ required: true }}
@@ -91,7 +91,7 @@ const Responsible = ({ form }) => {
 								<Cell col={3}>
 									<InputField
 										form={form}
-										name={`${users}[${index}].email`}
+										name={`${users}.${index}.email`}
 										label="Email"
 										placeholder="Ex.: email@dominio.com.br"
 										validation={{ required: true }}
@@ -100,9 +100,9 @@ const Responsible = ({ form }) => {
 								<Cell col={2}>
 									<MaskedInputField
 										form={form}
-										name={`${users}[${index}].phone_number`}
+										name={`${users}.${index}.phone_number`}
 										defaultValue={replaceWithMask(
-											form.getValues(`${users}[${index}].phone_number`),
+											form.getValues(`${users}.${index}.phone_number`),
 											'phoneNumber',
 										)}
 										alwaysShowMask={false}

@@ -22,15 +22,16 @@ const RightContent = styled.div`
 `;
 
 const CostsTable = ({ item, index, form, remove, collection }) => {
-	const nameString = `${collection}[${index}]`;
+	const nameString = `${collection}.${index}`;
 
 	return (
 		<>
-			<Row key={item.id} align="center">
+			<Row key={item.fieldArrayId} align="center">
 				<input
 					name={`${nameString}.id`}
-					ref={form.register({ required: false })}
 					type="hidden"
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...form.register(`${nameString}.id`, { required: false })}
 				/>
 
 				<Cell col={2}>
@@ -156,7 +157,7 @@ CostsTable.propTypes = {
 		register: PropTypes.func,
 	}).isRequired,
 	item: PropTypes.shape({
-		id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		fieldArrayId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		description: PropTypes.string,
 		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
