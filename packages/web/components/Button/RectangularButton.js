@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import ScaleLoader from 'react-spinners/ScaleLoader';
-import { RectangularButton as StyledButton, LoaderWrapper, ButtonWrapper } from './styles';
+import { RectangularButton as StyledButton } from './styles';
 
 const RectangularButton = forwardRef(
 	(
@@ -18,35 +17,27 @@ const RectangularButton = forwardRef(
 			fullWidth,
 			autoX,
 			boxShadow,
-			isLoading,
 			...inputProps
 		},
 		ref,
 	) => {
 		return (
-			<ButtonWrapper>
-				<StyledButton
-					colorVariant={colorVariant}
-					variant={variant}
-					disabled={disabled || isLoading}
-					onClick={onClick}
-					type={type}
-					name={name}
-					backgroundUrl={backgroundUrl}
-					fullWidth={fullWidth}
-					autoX={autoX}
-					boxShadow={boxShadow}
-					ref={ref}
-					{...inputProps}
-				>
-					{children}
-				</StyledButton>
-				{isLoading && (
-					<LoaderWrapper buttonColorVariant={colorVariant}>
-						<ScaleLoader />
-					</LoaderWrapper>
-				)}
-			</ButtonWrapper>
+			<StyledButton
+				colorVariant={colorVariant}
+				variant={variant}
+				disabled={disabled}
+				onClick={onClick}
+				type={type}
+				name={name}
+				backgroundUrl={backgroundUrl}
+				fullWidth={fullWidth}
+				autoX={autoX}
+				boxShadow={boxShadow}
+				ref={ref}
+				{...inputProps}
+			>
+				{children}
+			</StyledButton>
 		);
 	},
 );
@@ -63,7 +54,6 @@ RectangularButton.propTypes = {
 	fullWidth: PropTypes.bool,
 	autoX: PropTypes.bool,
 	boxShadow: PropTypes.bool,
-	isLoading: PropTypes.bool,
 };
 
 RectangularButton.defaultProps = {
@@ -77,7 +67,6 @@ RectangularButton.defaultProps = {
 	fullWidth: false,
 	autoX: false,
 	boxShadow: false,
-	isLoading: false,
 };
 
 RectangularButton.displayName = 'RectangularButton';

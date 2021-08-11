@@ -212,6 +212,7 @@ export const RectangularButton = styled.button`
 		capitalize,
 		round,
 	}) => css`
+		position: relative;
 		border: 2px solid transparent;
 		background: none;
 		font-size: 1.4rem;
@@ -255,29 +256,6 @@ export const RectangularButton = styled.button`
 		${!!variant &&
 			rectangularButtonVariants[variant](colors, colorVariant, metrics, backgroundUrl)};
 	`}
-`;
-
-export const LoaderWrapper = styled.div`
-	${({ theme: { colors }, buttonColorVariant }) => css`
-		position: absolute;
-		top: 2px;
-		left: 50%;
-		transform: translateX(-50%);
-
-		> div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			> div {
-				background-color: ${colors[rectangularColorsToTheme[buttonColorVariant]]};
-			}
-		}
-	`}
-`;
-
-export const ButtonWrapper = styled.div`
-	position: relative;
 `;
 
 export default StyledButton;
