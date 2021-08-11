@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { RectangularButton } from '../../components/Button';
 import { CheckBoxField, InputField } from '../../components/Form';
 import { register } from '../../services';
@@ -9,7 +9,7 @@ import { toast } from '../../components/Toast';
 
 import * as S from './styles';
 
-const StepTwo = ({ activeStep, setNextStep, updateUserData }) => {
+const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 	const form = useForm({
 		defaultValues: {
 			email: '',
@@ -119,6 +119,15 @@ const StepTwo = ({ activeStep, setNextStep, updateUserData }) => {
 					Continuar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
+				<RectangularButton
+					variant="text"
+					colorVariant="silver"
+					id="back-button"
+					onClick={setPrevStep}
+				>
+					<FiArrowLeft fontSize="2rem" />
+					Voltar
+				</RectangularButton>
 			</S.FloatingAction>
 		</S.Form>
 	);
@@ -130,6 +139,7 @@ StepTwo.propTypes = {
 		subtitle: PropTypes.string.isRequired,
 	}).isRequired,
 	setNextStep: PropTypes.func.isRequired,
+	setPrevStep: PropTypes.func.isRequired,
 	updateUserData: PropTypes.func.isRequired,
 };
 
