@@ -173,7 +173,12 @@ CheckBoxField.defaultProps = {
 	onChange: () => {},
 	noPadding: false,
 	variant: 'default',
-	form: null,
+	form: {
+		formState: {
+			errors: {},
+		},
+		register: () => {},
+	},
 	validation: {},
 };
 
