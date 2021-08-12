@@ -138,14 +138,16 @@ const AboutForm = ({ record, save, resource }) => {
 				resettable
 			/>
 			<CityInput />
-			<AutocompleteArrayInput
-				name="areas"
-				source="areas"
-				choices={areasMap}
-				suggestionLimit={10}
-				fullWidth
-				resettable
-			/>
+			{!!areasMap && (
+				<AutocompleteArrayInput
+					name="areas"
+					source="areas"
+					choices={areasMap}
+					suggestionLimit={10}
+					fullWidth
+					resettable
+				/>
+			)}
 			<TextInput source="country" fullWidth resettable />
 			<ReferenceInput source="role" reference="roles" validate={[required()]} fullWidth>
 				<SelectInput optionText="role" />
@@ -165,7 +167,7 @@ AboutForm.propTypes = {
 		state_id: PropTypes.number,
 		city_id: PropTypes.number,
 		permissions: PropTypes.arrayOf(PropTypes.number),
-		areas: PropTypes.arrayOf(PropTypes.number),
+		areas: PropTypes.arrayOf(PropTypes.object),
 	}),
 	resource: PropTypes.string,
 	save: PropTypes.func,

@@ -296,7 +296,6 @@ const ptBr = {
 			thumbnail_defined: 'Imagem principal definida com sucesso',
 		},
 	},
-	undefined: '',
 };
 const en = {
 	...englishMessages,
@@ -367,7 +366,6 @@ const en = {
 			thumbnail_defined: 'Thumbnail successfully defined',
 		},
 	},
-	undefined: '',
 };
 
 const i18nProvider = polyglotI18nProvider(
