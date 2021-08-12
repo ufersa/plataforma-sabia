@@ -12,9 +12,9 @@ import {
 	TextField,
 	TextInput,
 	useQuery,
+	FormDataConsumer,
 } from 'react-admin';
-import { useFormState } from 'react-final-form';
-import { ReferenceArrayInput, statuses } from '../../../components';
+import { ReferenceArrayInput, statuses, CityInput } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	record.role = record?.role_id;
@@ -66,41 +66,6 @@ const AboutForm = ({ record, save, resource }) => {
 		name: area.name,
 	}));
 
-	const CityInput = () => {
-		const { values } = useFormState();
-
-		const citiesResult = useQuery({
-			type: 'getList',
-			resource: `states/${values.state_id}/cities`,
-			payload: {
-				pagination: {
-					page: 1,
-					perPage: 100,
-				},
-				sort: {
-					field: 'id',
-					order: 'asc',
-				},
-			},
-		});
-
-		const cities = citiesResult?.data?.map((cityItem) => ({
-			id: cityItem.id,
-			name: cityItem.name,
-		}));
-
-		return (
-			<AutocompleteInput
-				label="Cidade"
-				name="city_id"
-				source="city"
-				choices={cities}
-				fullWidth
-				resettable
-			/>
-		);
-	};
-
 	return (
 		<SimpleForm record={newRecord} save={save} resource={resource}>
 			<SelectInput
@@ -137,7 +102,9 @@ const AboutForm = ({ record, save, resource }) => {
 				fullWidth
 				resettable
 			/>
-			<CityInput />
+			<FormDataConsumer>
+				{({ formData }) => !!formData.state_id && <CityInput state={formData.state_id} />}
+			</FormDataConsumer>
 			{!!areasMap && (
 				<AutocompleteArrayInput
 					name="areas"
