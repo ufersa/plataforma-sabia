@@ -1,7 +1,18 @@
 const slugify = require('slugify');
 
-const Hash = use('Hash');
 const Database = use('Database');
+
+const removeAccents = (text) => {
+	let textWithoutAccents;
+	textWithoutAccents = text.toLowerCase();
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+	textWithoutAccents = textWithoutAccents.replace(new RegExp('[Ç]', 'gi'), 'c');
+	return textWithoutAccents;
+};
 
 const incrementSlugSuffix = (oldSlug) => {
 	const slugSplitted = oldSlug.split('-');
@@ -23,10 +34,10 @@ const createUniqueSlug = async (
 	slugColumn = 'slug',
 	replacement = '-',
 ) => {
-	const slug = slugify(propertyToBeSlugfied, {
+	const slug = slugify(removeAccents(propertyToBeSlugfied), {
 		replacement,
 		lower: true,
-		remove: /[*+~.()'"!:@]/g,
+		remove: /[^\w\s]/g,
 	});
 
 	const slugStoredPreviously = await model
@@ -51,19 +62,8 @@ const createTermSlug = async (term, taxonomy_id) => {
 	return `${taxonomyPrefix}-${slug}`;
 };
 
-const makeSafeHash = async (plain) => {
-	let hashed = await Hash.make(plain);
-
-	if (hashed.includes('/')) {
-		hashed = await makeSafeHash(plain);
-	}
-
-	return hashed;
-};
-
 module.exports = {
 	createUniqueSlug,
 	incrementSlugSuffix,
 	createTermSlug,
-	makeSafeHash,
 };
