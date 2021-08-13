@@ -1,5 +1,7 @@
 const slugify = require('slugify');
 
+const Hash = use('Hash');
+
 /** Extends slugify charMap: https://github.com/simov/slugify/blob/master/config/charmap.json */
 slugify.extend({ '²': '2' });
 slugify.extend({ '³': '3' });
@@ -54,8 +56,19 @@ const createTermSlug = async (term, taxonomy_id) => {
 	return `${taxonomyPrefix}-${slug}`;
 };
 
+const makeSafeHash = async (plain) => {
+	let hashed = await Hash.make(plain);
+
+	if (hashed.includes('/')) {
+		hashed = await makeSafeHash(plain);
+	}
+
+	return hashed;
+};
+
 module.exports = {
 	createUniqueSlug,
 	incrementSlugSuffix,
 	createTermSlug,
+	makeSafeHash,
 };
