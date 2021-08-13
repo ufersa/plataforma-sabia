@@ -1,18 +1,10 @@
 const slugify = require('slugify');
 
-const Database = use('Database');
+/** Extends slugify charMap: https://github.com/simov/slugify/blob/master/config/charmap.json */
+slugify.extend({ '²': '2' });
+slugify.extend({ '³': '3' });
 
-const removeAccents = (text) => {
-	let textWithoutAccents;
-	textWithoutAccents = text.toLowerCase();
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
-	textWithoutAccents = textWithoutAccents.replace(new RegExp('[Ç]', 'gi'), 'c');
-	return textWithoutAccents;
-};
+const Database = use('Database');
 
 const incrementSlugSuffix = (oldSlug) => {
 	const slugSplitted = oldSlug.split('-');
@@ -34,10 +26,10 @@ const createUniqueSlug = async (
 	slugColumn = 'slug',
 	replacement = '-',
 ) => {
-	const slug = slugify(removeAccents(propertyToBeSlugfied), {
+	const slug = slugify(propertyToBeSlugfied, {
 		replacement,
 		lower: true,
-		remove: /[^\w\s]/g,
+		strict: true,
 	});
 
 	const slugStoredPreviously = await model
