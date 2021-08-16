@@ -83,6 +83,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 						form={form}
 						validation={{ required: true }}
 						name="terms-and-privacy"
+						ariaLabel="Concordo com os termos de uso e política de privacidade da Plataforma Sabiá"
 						label={
 							<S.CheckboxLabel>
 								Concordo com os{' '}
@@ -103,6 +104,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 					<CheckBoxField
 						form={form}
 						name="receive-news"
+						ariaLabel="Concordo em receber novidades da Plataforma Sabiá por email. (OPCIONAL)"
 						label={
 							<S.CheckboxLabel>
 								Concordo em receber novidades da Plataforma Sabiá por email.
