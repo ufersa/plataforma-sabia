@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import useTranslation from 'next-translate/useTranslation';
+import get from 'lodash.get';
 import { validationErrorMessage } from '../../utils/helper';
 import { InputError } from './styles';
 
@@ -126,6 +127,8 @@ const CheckBoxField = ({
 	const {
 		formState: { errors },
 	} = form;
+	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	return (
 		<CheckboxWrapper>
@@ -153,7 +156,7 @@ const CheckBoxField = ({
 				/>
 				{label}
 			</StyledCheckBoxLabel>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<StyledError>{validationErrorMessage(errors, name, t)}</StyledError>
 			) : null}
 		</CheckboxWrapper>

@@ -68,6 +68,7 @@ const CurrencyInputField = ({
 	const { t, lang } = useTranslation(['error']);
 	const { control, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	const fullValidation = {
 		...validation,
@@ -78,7 +79,7 @@ const CurrencyInputField = ({
 	};
 
 	return (
-		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'}>
+		<InputFieldWrapper hasError={hasError}>
 			<InputLabel htmlFor={name}>
 				{label} {validation.required && <RequiredIndicator />}
 			</InputLabel>
@@ -107,7 +108,7 @@ const CurrencyInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>

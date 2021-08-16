@@ -26,6 +26,7 @@ const InputField = ({
 	const { register, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
 	const hasError = typeof errorObject !== 'undefined';
+
 	return (
 		<InputFieldWrapper
 			hasError={hasError}
@@ -53,7 +54,7 @@ const InputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>

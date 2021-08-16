@@ -7,6 +7,7 @@ import CreatableSelect from 'react-select/creatable';
 import styled, { css } from 'styled-components';
 import { Controller } from 'react-hook-form';
 import useTranslation from 'next-translate/useTranslation';
+import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
@@ -155,6 +156,8 @@ const SelectField = ({
 	const [selectOptions, setSelectOptions] = useState(options);
 
 	const { formState: { errors } = {}, control, watch, setValue, getValues } = form;
+	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	let selectedValue = watch(name);
 	if (selectedValue) {
@@ -265,11 +268,7 @@ const SelectField = ({
 	const Component = creatable ? StyledCreatable : isAsync ? StyledAsync : StyledSelect;
 
 	return (
-		<InputFieldWrapper
-			hasError={typeof errors[name] !== 'undefined'}
-			customCss={wrapperCss}
-			isHidden={isHidden}
-		>
+		<InputFieldWrapper hasError={hasError} customCss={wrapperCss} isHidden={isHidden}>
 			{label && (
 				<InputLabel htmlFor={name}>
 					{label}
@@ -318,7 +317,7 @@ const SelectField = ({
 					pressionar a tecla Enter.
 				</Hint>
 			)}
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>
