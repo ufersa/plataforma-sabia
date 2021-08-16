@@ -142,8 +142,8 @@ export const InputFieldWrapper = styled.div`
 
 export const VerificationCodeWrapper = styled.div`
 	${({ theme: { colors, metrics } }) => css`
-		display: grid;
-		grid-template-columns: repeat(auto-fit, 40px);
+		display: flex;
+		width: fit-content;
 
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
@@ -160,6 +160,7 @@ export const VerificationCodeWrapper = styled.div`
 			border: 1px solid ${colors.lightGray4};
 			border-radius: ${metrics.baseRadius}rem;
 			text-align: center;
+			max-width: 4rem;
 		}
 
 		input:focus {
