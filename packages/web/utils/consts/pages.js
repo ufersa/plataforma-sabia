@@ -43,6 +43,7 @@ export const internal = {
 	curateTechnologies: '/curate-technologies',
 	revisions: '/revisions',
 	register: '/cadastrar',
+	confirm_account: '/confirmar-conta',
 };
 
 export const auth = {
