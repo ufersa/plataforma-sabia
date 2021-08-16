@@ -24,6 +24,7 @@ export const FinishContainer = styled.div`
 			align-items: center;
 			justify-content: space-evenly;
 			text-align: center;
+			margin: 0 auto;
 
 			a {
 				display: none;
