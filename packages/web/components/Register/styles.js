@@ -33,7 +33,7 @@ export const InputsWrapper = styled.div`
 	}
 `;
 
-export const FloatingAction = styled.div`
+export const Actions = styled.div`
 	${({ theme: { screens, metrics }, justifyContent }) => css`
 		display: flex;
 		justify-content: space-between;

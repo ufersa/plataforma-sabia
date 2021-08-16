@@ -7,7 +7,7 @@ import { CheckBoxField, InputField } from '../../Form';
 import { register } from '../../../services';
 import { toast } from '../../Toast';
 
-import { Form, StepTitle, StepSubtitle, InputsWrapper, FloatingAction } from '../styles';
+import { Form, StepTitle, StepSubtitle, InputsWrapper, Actions } from '../styles';
 import * as S from './styles';
 
 const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
@@ -115,7 +115,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 				</S.CheckboxWrapper>
 			</InputsWrapper>
 
-			<FloatingAction>
+			<Actions>
 				<RectangularButton variant="round" colorVariant="green" type="submit">
 					Continuar
 					<FiArrowRight fontSize="2rem" />
@@ -129,7 +129,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 					<FiArrowLeft fontSize="2rem" />
 					Voltar
 				</RectangularButton>
-			</FloatingAction>
+			</Actions>
 		</Form>
 	);
 };

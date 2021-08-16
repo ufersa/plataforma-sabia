@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { RectangularButton } from '../../Button';
 
-import { FloatingAction } from '../styles';
+import { Actions } from '../styles';
 import * as S from './styles';
 
 const StepFive = ({ activeStep }) => {
@@ -15,13 +15,13 @@ const StepFive = ({ activeStep }) => {
 				<S.FinishTitle>{activeStep.title}</S.FinishTitle>
 				<S.FinishSubtitle>{activeStep.subtitle}</S.FinishSubtitle>
 			</S.FinishContainer>
-			<FloatingAction>
+			<Actions>
 				<Link href="/" passHref>
 					<RectangularButton as="a" variant="round" colorVariant="orange">
 						Finalizar
 					</RectangularButton>
 				</Link>
-			</FloatingAction>
+			</Actions>
 		</>
 	);
 };

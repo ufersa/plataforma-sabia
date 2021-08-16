@@ -6,7 +6,7 @@ import { VerificationCodeField } from '../../Form';
 import { toast } from '../../Toast';
 import { accountConfirmation, emailConfirmation } from '../../../services';
 
-import { Form, StepTitle, StepSubtitle, StepInfo, FloatingAction } from '../styles';
+import { Form, StepTitle, StepSubtitle, StepInfo, Actions } from '../styles';
 import * as S from './styles';
 
 const verificationCodeFieldsNumber = 6;
@@ -112,7 +112,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 				</S.ResendEmailLink>
 			</S.VerificationCodeWrapper>
 
-			<FloatingAction>
+			<Actions>
 				<RectangularButton
 					disabled={isFetching}
 					variant="round"
@@ -122,7 +122,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 					Validar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
-			</FloatingAction>
+			</Actions>
 		</Form>
 	);
 };

@@ -11,7 +11,7 @@ import { getStateCities, getStates, updateUser } from '../../../services';
 import { toast } from '../../Toast';
 import { maskPatterns } from '../../../utils/masks';
 
-import * as S from '../styles';
+import { Form, StepTitle, StepSubtitle, InputsWrapper, Actions } from '../styles';
 import { mapArrayOfObjectToSelect, setCookie } from '../../../utils/helper';
 
 const mapValuesToApi = (values) => ({
@@ -72,11 +72,11 @@ const StepFour = ({ activeStep, setNextStep, userData }) => {
 	};
 
 	return (
-		<S.Form onSubmit={form.handleSubmit(handleSubmit)}>
-			<S.StepTitle>{activeStep.title}</S.StepTitle>
-			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
+		<Form onSubmit={form.handleSubmit(handleSubmit)}>
+			<StepTitle>{activeStep.title}</StepTitle>
+			<StepSubtitle>{activeStep.subtitle}</StepSubtitle>
 
-			<S.InputsWrapper>
+			<InputsWrapper>
 				<InputField
 					name="fullName"
 					form={form}
@@ -128,9 +128,9 @@ const StepFour = ({ activeStep, setNextStep, userData }) => {
 					instanceId="select-city-register"
 					validation={{ required: true }}
 				/>
-			</S.InputsWrapper>
+			</InputsWrapper>
 
-			<S.FloatingAction>
+			<Actions>
 				<RectangularButton
 					variant="round"
 					colorVariant="green"
@@ -140,8 +140,8 @@ const StepFour = ({ activeStep, setNextStep, userData }) => {
 					Finalizar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
-			</S.FloatingAction>
-		</S.Form>
+			</Actions>
+		</Form>
 	);
 };
 
