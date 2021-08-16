@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import { MdEmail } from 'react-icons/md';
 import { RectangularButton } from '../../components/Button';
-import { Form } from '../../components/Form';
 import * as S from './styles';
 
 const StepOne = ({ activeStep, setNextStep }) => {
 	return (
-		<Form noMargin noPadding>
+		<S.Form>
 			<S.StepTitle>{activeStep.title}</S.StepTitle>
 			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
 
@@ -15,11 +14,11 @@ const StepOne = ({ activeStep, setNextStep }) => {
 				<p>realizar o cadastro?</p>
 			</S.RegisterTypeTitle>
 
-			<RectangularButton variant="round" colorVariant="green" onClick={setNextStep}>
+			<RectangularButton variant="round" colorVariant="green" onClick={setNextStep} fullWidth>
 				<MdEmail fontSize="2rem" />
 				Utilizando o e-mail
 			</RectangularButton>
-		</Form>
+		</S.Form>
 	);
 };
 

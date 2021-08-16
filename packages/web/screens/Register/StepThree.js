@@ -100,17 +100,17 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 					values={verificationCodeValues}
 					setValues={setVerificationCodeValues}
 				/>
+				<S.ResendEmailLink>
+					<RectangularButton
+						disabled={isFetching}
+						colorVariant="blue"
+						onClick={handleResendEmailConfirmation}
+					>
+						Enviar novamente
+					</RectangularButton>
+				</S.ResendEmailLink>
 			</S.VerificationCodeWrapper>
 
-			<S.ResendEmailLink>
-				<RectangularButton
-					disabled={isFetching}
-					colorVariant="blue"
-					onClick={handleResendEmailConfirmation}
-				>
-					Enviar novamente
-				</RectangularButton>
-			</S.ResendEmailLink>
 			<S.FloatingAction>
 				<RectangularButton
 					disabled={isFetching}

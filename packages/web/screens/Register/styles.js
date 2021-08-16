@@ -75,7 +75,7 @@ export const Steps = styled.ul``;
 
 export const Step = styled.li`
 	${({ theme: { colors }, active, completed }) => css`
-		margin-bottom: 1rem;
+		margin-bottom: 1.6rem;
 		display: flex;
 		align-items: center;
 		color: ${colors.lightGray2};
@@ -239,9 +239,15 @@ export const FloatingAction = styled.div`
 `;
 
 export const Form = styled.form`
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+
+		@media screen and (min-width: ${screens.medium + 1}px) {
+			max-width: 41.5rem;
+		}
+	`}
 `;
 
 export const StepInfo = styled.p`
@@ -252,15 +258,24 @@ export const StepInfo = styled.p`
 `;
 
 export const VerificationCodeWrapper = styled.div`
-	margin-top: 5.6rem;
-	> div {
-		gap: 0.8rem;
-		justify-content: center;
-	}
+	${({ theme: { screens } }) => css`
+		margin: 5.6rem auto 0;
+		width: fit-content;
+		> div {
+			gap: 0.8rem;
+			justify-content: center;
+		}
+
+		@media screen and (min-width: ${screens.medium + 1}px) {
+			margin: 5.6rem 0 0;
+			> div {
+				gap: 1.6rem;
+			}
+		}
+	`}
 `;
 
 export const ResendEmailLink = styled.div`
-	text-align: right;
 	margin-top: 0.4rem;
 
 	button {
