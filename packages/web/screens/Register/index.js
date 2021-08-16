@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { FiArrowRight, FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 
 import * as S from './styles';
-import steps from './steps';
 import { RectangularButton } from '../../components/Button/styles';
+import { steps } from '../../components/Register';
 
 const Register = () => {
 	const [activeStep, setActiveStep] = useState({ ...steps[0], index: 0 });

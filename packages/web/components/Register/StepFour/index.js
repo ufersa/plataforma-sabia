@@ -5,14 +5,14 @@ import { FiArrowRight } from 'react-icons/fi';
 import useSWR from 'swr';
 import useTranslation from 'next-translate/useTranslation';
 
-import { RectangularButton } from '../../components/Button';
-import { InputField, MaskedInputField, SelectField } from '../../components/Form';
-import { getStateCities, getStates, updateUser } from '../../services';
-import { toast } from '../../components/Toast';
-import { maskPatterns } from '../../utils/masks';
+import { RectangularButton } from '../../Button';
+import { InputField, MaskedInputField, SelectField } from '../../Form';
+import { getStateCities, getStates, updateUser } from '../../../services';
+import { toast } from '../../Toast';
+import { maskPatterns } from '../../../utils/masks';
 
-import * as S from './styles';
-import { mapArrayOfObjectToSelect, setCookie } from '../../utils/helper';
+import * as S from '../styles';
+import { mapArrayOfObjectToSelect, setCookie } from '../../../utils/helper';
 
 const mapValuesToApi = (values) => ({
 	full_name: values.fullName,

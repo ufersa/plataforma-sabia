@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import { MdEmail } from 'react-icons/md';
-import { RectangularButton } from '../../components/Button';
+import { RectangularButton } from '../../Button';
+
+import { Form, StepTitle, StepSubtitle } from '../styles';
 import * as S from './styles';
 
 const StepOne = ({ activeStep, setNextStep }) => {
 	return (
-		<S.Form>
-			<S.StepTitle>{activeStep.title}</S.StepTitle>
-			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
+		<Form>
+			<StepTitle>{activeStep.title}</StepTitle>
+			<StepSubtitle>{activeStep.subtitle}</StepSubtitle>
 
 			<S.RegisterTypeTitle>
 				Como você quer
@@ -18,7 +20,7 @@ const StepOne = ({ activeStep, setNextStep }) => {
 				<MdEmail fontSize="2rem" />
 				Utilizando o e-mail
 			</RectangularButton>
-		</S.Form>
+		</Form>
 	);
 };
 

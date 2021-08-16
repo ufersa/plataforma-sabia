@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-import { RectangularButton } from '../../components/Button';
+import { RectangularButton } from '../../Button';
+
+import { FloatingAction } from '../styles';
 import * as S from './styles';
 
 const StepFive = ({ activeStep }) => {
@@ -13,13 +15,13 @@ const StepFive = ({ activeStep }) => {
 				<S.FinishTitle>{activeStep.title}</S.FinishTitle>
 				<S.FinishSubtitle>{activeStep.subtitle}</S.FinishSubtitle>
 			</S.FinishContainer>
-			<S.FloatingAction>
+			<FloatingAction>
 				<Link href="/" passHref>
 					<RectangularButton as="a" variant="round" colorVariant="orange">
 						Finalizar
 					</RectangularButton>
 				</Link>
-			</S.FloatingAction>
+			</FloatingAction>
 		</>
 	);
 };

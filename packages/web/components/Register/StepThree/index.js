@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-import { RectangularButton } from '../../components/Button';
-import { VerificationCodeField } from '../../components/Form';
-import { toast } from '../../components/Toast';
-import { accountConfirmation, emailConfirmation } from '../../services';
+import { RectangularButton } from '../../Button';
+import { VerificationCodeField } from '../../Form';
+import { toast } from '../../Toast';
+import { accountConfirmation, emailConfirmation } from '../../../services';
 
+import { Form, StepTitle, StepSubtitle, StepInfo, FloatingAction } from '../styles';
 import * as S from './styles';
 
 const verificationCodeFieldsNumber = 6;
@@ -87,12 +88,12 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 	};
 
 	return (
-		<S.Form ref={formRef} onSubmit={handleSubmit}>
-			<S.StepTitle>{activeStep.title}</S.StepTitle>
-			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
-			<S.StepInfo>
+		<Form ref={formRef} onSubmit={handleSubmit}>
+			<StepTitle>{activeStep.title}</StepTitle>
+			<StepSubtitle>{activeStep.subtitle}</StepSubtitle>
+			<StepInfo>
 				Digite abaixo o código de <strong>6 dígitos</strong> que enviamos para o seu e-mail.
-			</S.StepInfo>
+			</StepInfo>
 			<S.VerificationCodeWrapper>
 				<VerificationCodeField
 					ref={verificationCodeRef}
@@ -111,7 +112,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 				</S.ResendEmailLink>
 			</S.VerificationCodeWrapper>
 
-			<S.FloatingAction>
+			<FloatingAction>
 				<RectangularButton
 					disabled={isFetching}
 					variant="round"
@@ -121,8 +122,8 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 					Validar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
-			</S.FloatingAction>
-		</S.Form>
+			</FloatingAction>
+		</Form>
 	);
 };
 

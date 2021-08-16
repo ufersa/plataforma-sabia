@@ -2,11 +2,12 @@ import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import { RectangularButton } from '../../components/Button';
-import { CheckBoxField, InputField } from '../../components/Form';
-import { register } from '../../services';
-import { toast } from '../../components/Toast';
+import { RectangularButton } from '../../Button';
+import { CheckBoxField, InputField } from '../../Form';
+import { register } from '../../../services';
+import { toast } from '../../Toast';
 
+import { Form, StepTitle, StepSubtitle, InputsWrapper, FloatingAction } from '../styles';
 import * as S from './styles';
 
 const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
@@ -37,11 +38,11 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 	};
 
 	return (
-		<S.Form onSubmit={form.handleSubmit(handleSubmit)}>
-			<S.StepTitle>{activeStep.title}</S.StepTitle>
-			<S.StepSubtitle>{activeStep.subtitle}</S.StepSubtitle>
+		<Form onSubmit={form.handleSubmit(handleSubmit)}>
+			<StepTitle>{activeStep.title}</StepTitle>
+			<StepSubtitle>{activeStep.subtitle}</StepSubtitle>
 
-			<S.InputsWrapper>
+			<InputsWrapper>
 				<InputField
 					name="email"
 					form={form}
@@ -112,9 +113,9 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 						variant="rounded"
 					/>
 				</S.CheckboxWrapper>
-			</S.InputsWrapper>
+			</InputsWrapper>
 
-			<S.FloatingAction>
+			<FloatingAction>
 				<RectangularButton variant="round" colorVariant="green" type="submit">
 					Continuar
 					<FiArrowRight fontSize="2rem" />
@@ -128,8 +129,8 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 					<FiArrowLeft fontSize="2rem" />
 					Voltar
 				</RectangularButton>
-			</S.FloatingAction>
-		</S.Form>
+			</FloatingAction>
+		</Form>
 	);
 };
 
