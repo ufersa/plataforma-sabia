@@ -22,9 +22,15 @@ const StyledCheckBoxMark = styled.span`
 `;
 
 const StyledCheckBoxInput = styled.input`
-	width: 0px;
-	height: 0px;
-	position: relative;
+	${({ theme: { colors } }) => css`
+		width: 0px;
+		height: 0px;
+		position: relative;
+
+		&:focus + ${StyledCheckBoxMark} {
+			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+	`}
 `;
 
 const checkboxVariants = {
@@ -106,6 +112,7 @@ const CheckBoxField = ({
 	name,
 	value,
 	label,
+	ariaLabel,
 	required,
 	onChange,
 	noPadding,
@@ -127,8 +134,9 @@ const CheckBoxField = ({
 					id={name}
 					name={name}
 					type="checkbox"
-					aria-label={label}
+					aria-label={ariaLabel || label}
 					aria-required={required}
+					aria-hidden="true"
 					required={required}
 					onChange={handleOnChangeNoForm}
 					{...(!form && { checked: !!value })}
@@ -164,6 +172,7 @@ CheckBoxField.propTypes = {
 		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
 	}),
 	validation: PropTypes.shape({}),
+	ariaLabel: PropTypes.string,
 };
 
 CheckBoxField.defaultProps = {
@@ -180,6 +189,7 @@ CheckBoxField.defaultProps = {
 		register: () => {},
 	},
 	validation: {},
+	ariaLabel: '',
 };
 
 export default CheckBoxField;
