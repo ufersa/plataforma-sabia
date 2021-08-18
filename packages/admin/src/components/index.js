@@ -21,6 +21,7 @@ import statuses from './StatusForm/statuses';
 import StatusField from './StatusField';
 import BooleanNumField from './BooleanNumField';
 import BooleanNumInput from './BooleanNumInput';
+import CityInput from './CityInput';
 
 export {
 	AppBar,
@@ -46,4 +47,5 @@ export {
 	StatusField,
 	BooleanNumField,
 	BooleanNumInput,
+	CityInput,
 };
