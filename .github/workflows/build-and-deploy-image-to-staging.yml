@@ -62,7 +62,6 @@ jobs:
         run: |
           cd packages/web
           npm install
-          npm run jest:ci
           
       - name: Run WEB tests
         if: ${{ github.event.inputs.runTests == '' || github.event.inputs.runTests == 'true' }}
