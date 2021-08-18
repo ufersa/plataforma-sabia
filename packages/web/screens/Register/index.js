@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 import { FiArrowRight, FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 
@@ -6,8 +7,11 @@ import * as S from './styles';
 import { RectangularButton } from '../../components/Button/styles';
 import { steps } from '../../components/Register';
 
-const Register = () => {
-	const [activeStep, setActiveStep] = useState({ ...steps[0], index: 0 });
+const Register = ({ initialStepIndex }) => {
+	const [activeStep, setActiveStep] = useState({
+		...steps[initialStepIndex ?? 0],
+		index: initialStepIndex ?? 0,
+	});
 	const [userData, setUserData] = useState({});
 	const CurrentStepComponent = activeStep.component;
 	const isLastStep = activeStep.index === steps.length - 1;
@@ -92,6 +96,10 @@ const Register = () => {
 			</S.Content>
 		</S.Container>
 	);
+};
+
+Register.propTypes = {
+	initialStepIndex: PropTypes.number.isRequired,
 };
 
 export default Register;
