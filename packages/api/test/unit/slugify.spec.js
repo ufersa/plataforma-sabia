@@ -62,6 +62,17 @@ test('add the first suffix when does not have suffix', async ({ assert }) => {
 	assert.equal(mySlugWithouSuffix, 'new-slug-1');
 });
 
+test('remove special characters from slug property', async ({ assert }) => {
+	const mySlugWithSpecialCharacters = await createUniqueSlug(
+		new StubModel(),
+		'Technology with+ special #(@ characters *6m² and accents áéíóú',
+	);
+	assert.equal(
+		mySlugWithSpecialCharacters,
+		'technology-with-special-characters-6m2-and-accents-aeiou',
+	);
+});
+
 test('tests create unique term slug by taxonomy', async ({ assert }) => {
 	const taxonomy1 = await Taxonomy.create({
 		taxonomy: 'taxonomy1',

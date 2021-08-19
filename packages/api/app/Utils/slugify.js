@@ -1,6 +1,18 @@
 const slugify = require('slugify');
 
 const Hash = use('Hash');
+
+/** Extends slugify charMap: https://github.com/simov/slugify/blob/master/config/charmap.json */
+slugify.extend({ '¹': '1' });
+slugify.extend({ '²': '2' });
+slugify.extend({ '³': '3' });
+slugify.extend({ '⁴': '4' });
+slugify.extend({ '⁵': '5' });
+slugify.extend({ '⁶': '6' });
+slugify.extend({ '⁷': '7' });
+slugify.extend({ '⁸': '8' });
+slugify.extend({ '⁹': '9' });
+
 const Database = use('Database');
 
 const incrementSlugSuffix = (oldSlug) => {
@@ -26,7 +38,7 @@ const createUniqueSlug = async (
 	const slug = slugify(propertyToBeSlugfied, {
 		replacement,
 		lower: true,
-		remove: /[*+~.()'"!:@]/g,
+		strict: true,
 	});
 
 	const slugStoredPreviously = await model
