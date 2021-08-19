@@ -43,7 +43,7 @@
     "react-compound-slider": "^3.1.0",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.0.2",
-    "react-hook-form": "^5.6.3",
+    "react-hook-form": "^7.12.2",
     "react-icons": "^4.1.0",
     "react-input-mask": "^2.0.4",
     "react-instantsearch-dom": "^6.4.0",
@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@hookform/devtools": "^3.1.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "@storybook/addon-essentials": "^6.0.20",
     "@storybook/addon-links": "^6.0.20",

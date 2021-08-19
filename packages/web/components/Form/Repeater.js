@@ -43,6 +43,7 @@ const Repeater = ({
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name,
+		keyName: 'fieldArrayId',
 	});
 
 	useEffect(() => {
@@ -61,7 +62,7 @@ const Repeater = ({
 			</Row>
 			<RepeaterBody>
 				{fields.map((item, index) => (
-					<Fragment key={item.id}>
+					<Fragment key={item.fieldArrayId}>
 						{childsComponent({
 							item,
 							control,

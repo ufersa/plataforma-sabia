@@ -10,15 +10,10 @@ import { createTerm, getCNPQAreas } from '../../services';
 
 const AboutTechnology = ({ form, data }) => {
 	const { watch, setValue } = form;
-	const {
-		'knowledge_area_id[0]': greatArea,
-		'knowledge_area_id[1]': area,
-		'knowledge_area_id[2]': subArea,
-		intellectual_property: intellectualProperty,
-	} = watch([
-		'knowledge_area_id[0]',
-		'knowledge_area_id[1]',
-		'knowledge_area_id[2]',
+	const [greatArea, area, subArea, intellectualProperty] = watch([
+		'knowledge_area_id.0',
+		'knowledge_area_id.1',
+		'knowledge_area_id.2',
 		'intellectual_property',
 	]);
 
@@ -384,15 +379,15 @@ const AboutTechnology = ({ form, data }) => {
 
 					<SelectField
 						form={form}
-						name="knowledge_area_id[0]"
+						name="knowledge_area_id.0"
 						placeholder="Escolha a grande área da tecnologia"
 						label="Grande área da Tecnologia"
 						validation={{ required: true }}
 						options={mapArrayOfObjectToSelect(greatAreas, 'name', 'knowledge_area_id')}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[1]', null);
-							setValue('knowledge_area_id[2]', null);
-							setValue('knowledge_area_id[3]', null);
+						onChange={(selectedOption) => {
+							setValue('knowledge_area_id.1', null);
+							setValue('knowledge_area_id.2', null);
+							setValue('knowledge_area_id.3', null);
 
 							return selectedOption;
 						}}
@@ -400,15 +395,15 @@ const AboutTechnology = ({ form, data }) => {
 
 					<SelectField
 						form={form}
-						name="knowledge_area_id[1]"
+						name="knowledge_area_id.1"
 						placeholder="Escolha a área da tecnologia"
 						label="Área"
 						options={mapArrayOfObjectToSelect(rawAreas, 'name', 'knowledge_area_id')}
 						isHidden={!greatArea}
 						isLoading={isValidatingAreas}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[2]', null);
-							setValue('knowledge_area_id[3]', null);
+						onChange={(selectedOption) => {
+							setValue('knowledge_area_id.2', null);
+							setValue('knowledge_area_id.3', null);
 
 							return selectedOption;
 						}}
@@ -416,14 +411,14 @@ const AboutTechnology = ({ form, data }) => {
 
 					<SelectField
 						form={form}
-						name="knowledge_area_id[2]"
+						name="knowledge_area_id.2"
 						placeholder="Escolha a sub-área da tecnologia"
 						label="Sub-área"
 						options={mapArrayOfObjectToSelect(rawSubAreas, 'name', 'knowledge_area_id')}
 						isHidden={!area}
 						isLoading={isValidatingSubAreas}
-						onChange={([selectedOption]) => {
-							setValue('knowledge_area_id[3]', null);
+						onChange={(selectedOption) => {
+							setValue('knowledge_area_id.3', null);
 
 							return selectedOption;
 						}}
@@ -431,7 +426,7 @@ const AboutTechnology = ({ form, data }) => {
 
 					<SelectField
 						form={form}
-						name="knowledge_area_id[3]"
+						name="knowledge_area_id.3"
 						placeholder="Escolha a especialidade da tecnologia"
 						label="Especialidade"
 						options={mapArrayOfObjectToSelect(
@@ -457,25 +452,25 @@ AboutTechnology.propTypes = {
 	data: PropTypes.shape({
 		taxonomies: PropTypes.shape({
 			target_audience: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			biome: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			government_program: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			keywords: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			stage: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			classification: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 			dimension: PropTypes.shape({
-				terms: PropTypes.array,
+				terms: PropTypes.arrayOf(PropTypes.shape({})),
 			}),
 		}),
 		greatAreas: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

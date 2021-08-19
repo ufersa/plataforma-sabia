@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  * @returns {React.Component} render function from props
  */
 const Watcher = ({ form, property, index, render }) => {
-	const element = form.watch(index === null ? property : `${property}[${index}]`);
+	const element = form.watch(index === null ? property : `${property}.${index}`);
 	return render(element);
 };
 

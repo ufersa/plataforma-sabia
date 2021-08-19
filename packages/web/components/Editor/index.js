@@ -10,20 +10,27 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 	if (renderWithController) {
 		return (
 			<Controller
-				as={<CKEditor editor={ClassicEditor} config={config} />}
-				onChange={([, editor]) => {
-					const editorData = editor.getData();
-
-					if (onChange) {
-						onChange(editorData);
-					}
-
-					return editorData;
-				}}
-				control={control}
 				name={name}
+				render={({ field }) => (
+					<CKEditor
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...field}
+						editor={ClassicEditor}
+						config={config}
+						onChange={(_, editor) => {
+							const editorData = editor.getData();
+
+							if (onChange) {
+								onChange(editorData);
+							}
+
+							return field.onChange(editorData);
+						}}
+						data={defaultValue}
+					/>
+				)}
+				control={control}
 				disabled={disabled}
-				data={defaultValue}
 			/>
 		);
 	}
@@ -35,7 +42,7 @@ const Editor = ({ config, form, name, disabled, onChange, defaultValue, renderWi
 		timerOnChange = setTimeout(() => {
 			const editorData = editor.getData();
 
-			setValue(name, editorData);
+			setValue(name, editorData, { shouldDirty: true });
 
 			if (onChange) {
 				onChange(editorData);
