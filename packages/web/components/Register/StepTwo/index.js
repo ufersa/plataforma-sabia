@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
@@ -11,6 +11,7 @@ import { Form, StepTitle, StepSubtitle, InputsWrapper, Actions } from '../styles
 import * as S from './styles';
 
 const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
+	const [isFetching, setIsFetching] = useState(false);
 	const form = useForm({
 		defaultValues: {
 			email: '',
@@ -23,6 +24,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 	passwordField.current = form.watch('password');
 
 	const handleSubmit = async ({ email, password }) => {
+		setIsFetching(true);
 		const response = await register(email, password);
 
 		if (response.error) {
@@ -30,6 +32,7 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 				response.error.message[0].message ||
 					'Ocorreu um erro para efetuar seu registro. Recarregue a página e tente novamente...',
 			);
+			setIsFetching(false);
 			return;
 		}
 
@@ -118,7 +121,12 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 			</InputsWrapper>
 
 			<Actions>
-				<RectangularButton variant="round" colorVariant="green" type="submit">
+				<RectangularButton
+					variant="round"
+					colorVariant="green"
+					type="submit"
+					disabled={isFetching}
+				>
 					Continuar
 					<FiArrowRight fontSize="2rem" />
 				</RectangularButton>
