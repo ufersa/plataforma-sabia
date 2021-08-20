@@ -43,7 +43,7 @@ export const Sidebar = styled.aside`
 	`}
 `;
 
-export const LogoWrapper = styled.div`
+export const LogoWrapper = styled.a`
 	${({ theme: { screens } }) => css`
 		width: 100%;
 		margin: 0 auto;

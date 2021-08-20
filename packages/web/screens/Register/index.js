@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FiArrowRight, FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 
 import * as S from './styles';
 import { RectangularButton } from '../../components/Button/styles';
 import { steps } from '../../components/Register';
+import { internal as internalPages } from '../../utils/consts/pages';
 
 const Register = ({ initialStepIndex }) => {
 	const [activeStep, setActiveStep] = useState({
@@ -37,15 +39,17 @@ const Register = ({ initialStepIndex }) => {
 						</RectangularButton>
 					)}
 
-					<S.LogoWrapper>
-						<Image
-							src="/logo-mono.svg"
-							alt="Plataforma Sabiá"
-							width={215}
-							height={65}
-							layout="responsive"
-						/>
-					</S.LogoWrapper>
+					<Link href={internalPages.home} passHref>
+						<S.LogoWrapper>
+							<Image
+								src="/logo-mono.svg"
+								alt="Plataforma Sabiá"
+								width={215}
+								height={65}
+								layout="responsive"
+							/>
+						</S.LogoWrapper>
+					</Link>
 
 					<S.StepsWrapper>
 						<S.StepsTitle>Cadastro de Usuários</S.StepsTitle>
