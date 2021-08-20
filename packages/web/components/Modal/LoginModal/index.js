@@ -84,7 +84,12 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 			</Form>
 			<RegisterContainer>
 				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
-				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
+				<Button
+					onClick={() => {
+						router.push(internalPages.register);
+						closeModal();
+					}}
+				>
 					{t('common:registerYourUser')}
 				</Button>
 				<Link href={internalPages.confirm_account} passHref>

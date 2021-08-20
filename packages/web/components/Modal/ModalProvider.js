@@ -6,7 +6,6 @@ import { ModalOverlay, Modal, ModalCloseIcon } from './styles';
 import ModalContext from './ModalContext';
 import NeedToCompleteTheRegistration from './NeedToCompleteTheRegistration';
 import LoginModal from './LoginModal';
-import RegisterModal from './RegisterModal';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import ShareModal from './ShareModal';
 import AddReviewModal from './AddReviewModal';
@@ -62,7 +61,6 @@ const modalReducer = (state, action) => {
 
 const mapping = {
 	login: LoginModal,
-	register: RegisterModal,
 	forgotPassword: ForgotPasswordModal,
 	share: ShareModal,
 	addReview: AddReviewModal,
