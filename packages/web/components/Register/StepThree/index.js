@@ -1,75 +1,90 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import useTranslation from 'next-translate/useTranslation';
 import { RectangularButton } from '../../Button';
-import { VerificationCodeField } from '../../Form';
+import { InputField, VerificationCodeField } from '../../Form';
 import { toast } from '../../Toast';
 import { accountConfirmation, emailConfirmation } from '../../../services';
 
 import { Form, StepTitle, StepSubtitle, StepInfo, Actions } from '../styles';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import * as S from './styles';
 
-const verificationCodeFieldsNumber = 6;
-const verificationCodeDefaultValue = Array(verificationCodeFieldsNumber).fill('');
-
 const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
-	const [verificationCodeValues, setVerificationCodeValues] = useState(
-		verificationCodeDefaultValue,
-	);
-	const isVerificationCodeFilled = verificationCodeValues.every((value) => value.length);
 	const verificationCodeRef = useRef();
-	const formRef = useRef();
 	const [isFetching, setIsFetching] = useState(false);
+	const form = useForm({
+		defaultValues: { email: '', verificationCode: Array(6).fill('') },
+		reValidateMode: 'onSubmit',
+	});
+	const { t } = useTranslation(['error']);
+
+	const router = useRouter();
+	const shouldShowEmailField =
+		!userData.email && router.pathname === internalPages.confirm_account;
 
 	useEffect(() => {
-		if (verificationCodeRef.current) {
-			verificationCodeRef.current.focus();
-		}
-	}, []);
-
-	useEffect(() => {
-		if (isVerificationCodeFilled) {
-			formRef.current.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-		}
-	}, [isVerificationCodeFilled]);
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-
-		if (isVerificationCodeFilled) {
-			setIsFetching(true);
-			const verificationCode = verificationCodeValues?.join('');
-
-			const response = await accountConfirmation(verificationCode, userData.email);
-
-			if (response?.error) {
-				setVerificationCodeValues(verificationCodeDefaultValue);
-				const errorMessage =
-					typeof response.error.message === 'string'
-						? response.error.message
-						: response.error.message[0].message;
-
-				toast.error(
-					errorMessage ||
-						'Ocorreu um erro para validar seu registro. Tente novamente em alguns instantes...',
-				);
-				setIsFetching(false);
-				verificationCodeRef.current.focus();
-				return;
-			}
-
-			updateUserData(response);
-			setNextStep();
+		if (shouldShowEmailField) {
+			form.setFocus('email');
 			return;
 		}
 
-		toast.error('Preencha o código de verificação');
-		verificationCodeRef.current.focus();
+		if (verificationCodeRef.current) {
+			verificationCodeRef.current.focus();
+		}
+
+		// We only want this to run when component is mounted
+		// form funcs is already memoized
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const handleSubmit = async (values) => {
+		setIsFetching(true);
+
+		const response = await accountConfirmation(
+			values.verificationCode.join(''),
+			userData.email || values.email,
+		);
+
+		if (response?.error) {
+			const errorMessage =
+				typeof response.error.message === 'string'
+					? response.error.message
+					: response.error.message[0].message;
+
+			toast.error(
+				errorMessage ||
+					'Ocorreu um erro para validar seu registro. Tente novamente em alguns instantes...',
+			);
+			setIsFetching(false);
+			form.reset();
+
+			if (shouldShowEmailField) {
+				form.setFocus('email');
+			} else {
+				verificationCodeRef.current.focus();
+			}
+			return;
+		}
+
+		updateUserData(response);
+		setNextStep();
 	};
 
 	const handleResendEmailConfirmation = async () => {
+		const { email } = form.getValues();
+
+		if (!userData.email && !email) {
+			form.setError('email', { message: t('error:requiredField') });
+			return;
+		}
+
+		form.clearErrors();
 		setIsFetching(true);
-		const response = await emailConfirmation(userData.email);
+		const response = await emailConfirmation(userData.email || email);
 
 		if (response?.error) {
 			toast.error(
@@ -82,35 +97,77 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 
 		if (response.success) {
 			toast.success('E-mail de confirmação enviado com sucesso!');
+
+			if (!userData.email && !!email) updateUserData({ email });
 		}
 
 		setIsFetching(false);
 	};
 
 	return (
-		<Form ref={formRef} onSubmit={handleSubmit}>
+		<Form onSubmit={form.handleSubmit(handleSubmit)}>
 			<StepTitle>{activeStep.title}</StepTitle>
 			<StepSubtitle>{activeStep.subtitle}</StepSubtitle>
 			<StepInfo>
-				Digite abaixo o código de <strong>6 dígitos</strong> que enviamos para o seu e-mail.
+				{shouldShowEmailField ? (
+					<>
+						Digite abaixo seu e-mail e o código de <strong>6 dígitos</strong> para
+						validar sua conta
+					</>
+				) : (
+					<>
+						Digite abaixo o código de <strong>6 dígitos</strong> que enviamos para o seu
+						e-mail.
+					</>
+				)}
 			</StepInfo>
-			<S.VerificationCodeWrapper>
-				<VerificationCodeField
-					ref={verificationCodeRef}
-					fieldsNumber={verificationCodeFieldsNumber}
-					values={verificationCodeValues}
-					setValues={setVerificationCodeValues}
-				/>
-				<S.ResendEmailLink>
-					<RectangularButton
-						disabled={isFetching}
-						colorVariant="blue"
-						onClick={handleResendEmailConfirmation}
-					>
-						Enviar novamente
-					</RectangularButton>
-				</S.ResendEmailLink>
-			</S.VerificationCodeWrapper>
+			<S.InputsWrapper>
+				{shouldShowEmailField && (
+					<InputField
+						name="email"
+						label="E-mail"
+						placeholder="Digite seu e-mail"
+						variant="lightRounded"
+						form={form}
+						validation={{ required: true }}
+					/>
+				)}
+				<S.VerificationCodeWrapper>
+					<Controller
+						name="verificationCode"
+						control={form.control}
+						rules={{
+							validate: {
+								allFieldsFilled: (value) => {
+									return (
+										value.every((_val) => _val.length) ||
+										t('error:requiredField')
+									);
+								},
+							},
+						}}
+						render={({ field, fieldState }) => (
+							<VerificationCodeField
+								ref={verificationCodeRef}
+								value={field.value}
+								onChange={field.onChange}
+								label="Código de verificação"
+								error={fieldState.error}
+								required
+							/>
+						)}
+					/>
+					<S.ResendEmailLink>
+						<RectangularButton
+							disabled={isFetching}
+							colorVariant="blue"
+							onClick={handleResendEmailConfirmation}
+						>
+							Enviar novamente
+						</RectangularButton>
+					</S.ResendEmailLink>
+				</S.VerificationCodeWrapper>
+			</S.InputsWrapper>
 
 			<Actions>
 				<RectangularButton
@@ -134,7 +191,7 @@ StepThree.propTypes = {
 	}).isRequired,
 	setNextStep: PropTypes.func.isRequired,
 	userData: PropTypes.shape({
-		email: PropTypes.string.isRequired,
+		email: PropTypes.string,
 	}).isRequired,
 	updateUserData: PropTypes.func.isRequired,
 };
