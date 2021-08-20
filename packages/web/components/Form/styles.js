@@ -141,9 +141,11 @@ export const InputFieldWrapper = styled.div`
 `;
 
 export const VerificationCodeWrapper = styled.div`
-	${({ theme: { colors, metrics } }) => css`
+	${({ theme: { colors, metrics }, error }) => css`
 		display: flex;
+		flex-direction: column;
 		width: fit-content;
+		font-size: 1.4rem;
 
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
@@ -161,10 +163,22 @@ export const VerificationCodeWrapper = styled.div`
 			border-radius: ${metrics.baseRadius}rem;
 			text-align: center;
 			max-width: 4rem;
+			margin: 0.5rem 0;
 		}
 
 		input:focus {
 			border: 1px solid ${colors.lightGray2};
 		}
+
+		> div {
+			display: flex;
+		}
+
+		${!!error &&
+			css`
+				input {
+					border: 1px solid ${colors.red};
+				}
+			`}
 	`}
 `;

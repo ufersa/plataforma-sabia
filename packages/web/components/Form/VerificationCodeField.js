@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { RequiredIndicator } from '.';
 
-import { VerificationCodeWrapper } from './styles';
+import { InputError, InputLabel, VerificationCodeWrapper } from './styles';
 
 const KEY_CODE = {
 	BACKSPACE: 8,
@@ -9,16 +10,16 @@ const KEY_CODE = {
 	RIGHT: 39,
 };
 
-const VerificationCodeField = forwardRef(({ values, setValues }, ref) => {
+const VerificationCodeField = forwardRef(({ value, onChange, label, required, error }, ref) => {
 	const inputsRef = useRef([]);
 	useImperativeHandle(ref, () => ({
-		focus: () => inputsRef.current[0].focus(),
+		focus: () => inputsRef.current[0]?.focus(),
 	}));
 
-	const triggerValueChange = (index, value) => {
-		const newValues = [...values];
-		newValues[index] = value;
-		setValues(newValues);
+	const triggerValueChange = (index, _value) => {
+		const newValues = [...value];
+		newValues[index] = _value;
+		onChange(newValues);
 	};
 
 	const handleChange = (event) => {
@@ -28,18 +29,18 @@ const VerificationCodeField = forwardRef(({ values, setValues }, ref) => {
 
 		if (currentInputValue.length > 1 && nextElement) {
 			const pasteValues = currentInputValue.split('');
-			const newInputsValue = [...values];
+			const newInputsValue = [...value];
 
-			pasteValues.forEach((value, index) => {
+			pasteValues.forEach((_value, index) => {
 				const currentCursor = currentIndex + index;
 
 				if (inputsRef.current[currentCursor]) {
-					newInputsValue[currentCursor] = value;
+					newInputsValue[currentCursor] = _value;
 					inputsRef.current[currentCursor].focus();
 				}
 			});
 
-			setValues(newInputsValue);
+			onChange(newInputsValue);
 			return;
 		}
 
@@ -89,33 +90,50 @@ const VerificationCodeField = forwardRef(({ values, setValues }, ref) => {
 	};
 
 	return (
-		<VerificationCodeWrapper>
-			{values.map((value, index) => (
-				<input
-					// eslint-disable-next-line react/no-array-index-key
-					key={index}
-					ref={(el) => {
-						inputsRef.current[index] = el;
-					}}
-					data-id={index}
-					type="number"
-					value={value}
-					onChange={handleChange}
-					onFocus={handleFocus}
-					onKeyDown={handleKeyDown}
-				/>
-			))}
+		<VerificationCodeWrapper error={!!error.message}>
+			{!!label && (
+				<InputLabel id="verification-code-label" variant="lightRounded">
+					{label} {required && <RequiredIndicator />}
+				</InputLabel>
+			)}
+			<div>
+				{value.map((_value, index) => (
+					<input
+						// eslint-disable-next-line react/no-array-index-key
+						key={index}
+						ref={(el) => {
+							inputsRef.current[index] = el;
+						}}
+						data-id={index}
+						type="number"
+						value={_value}
+						onChange={handleChange}
+						onFocus={handleFocus}
+						onKeyDown={handleKeyDown}
+						aria-labelledby={label ? 'verification-code-label' : ''}
+					/>
+				))}
+			</div>
+			{!!error.message && <InputError>{error.message}</InputError>}
 		</VerificationCodeWrapper>
 	);
 });
 
 VerificationCodeField.propTypes = {
-	values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-	setValues: PropTypes.func.isRequired,
+	value: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+	onChange: PropTypes.func.isRequired,
+	label: PropTypes.string,
+	required: PropTypes.bool,
+	error: PropTypes.shape({
+		message: PropTypes.string,
+	}),
 };
 
 VerificationCodeField.defaultProps = {
-	values: null,
+	value: [],
+	label: '',
+	required: false,
+	error: {},
 };
 
 export default VerificationCodeField;
