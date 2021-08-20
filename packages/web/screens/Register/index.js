@@ -56,6 +56,9 @@ const Register = ({ initialStepIndex }) => {
 
 						<S.Steps>
 							{steps.map((step, index) => {
+								const isLast = index === steps.length - 1;
+								if (isLast) return null;
+
 								const isActive = step.title === activeStep.title;
 								const isCompleted = activeStep.index > index;
 
