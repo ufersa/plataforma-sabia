@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import useTranslation from 'next-translate/useTranslation';
 import { RectangularButton } from '../../Button';
 import { InputField, VerificationCodeField } from '../../Form';
@@ -20,8 +20,11 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 		defaultValues: { email: '', verificationCode: Array(6).fill('') },
 		reValidateMode: 'onSubmit',
 	});
+	const verificationCode = useWatch({
+		control: form.control,
+		name: 'verificationCode',
+	});
 	const { t } = useTranslation(['error']);
-
 	const router = useRouter();
 	const shouldShowEmailField =
 		!userData.email && router.pathname === internalPages.confirm_account;
@@ -37,7 +40,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 		}
 
 		// We only want this to run when component is mounted
-		// form funcs is already memoized
+		// react-hook-form funcs is already memoized
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -73,6 +76,17 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 		updateUserData(response);
 		setNextStep();
 	};
+
+	useEffect(() => {
+		const isAllFilled = verificationCode.every((code) => code.length > 0);
+
+		if (isAllFilled && !shouldShowEmailField) {
+			form.handleSubmit(handleSubmit)();
+		}
+		// react-hook-form funcs is already memoized
+		// Everytime `verificationCode` changes, `shouldShowEmailField` also change, so we don't need it here
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [verificationCode]);
 
 	const handleResendEmailConfirmation = async () => {
 		const { email } = form.getValues();
