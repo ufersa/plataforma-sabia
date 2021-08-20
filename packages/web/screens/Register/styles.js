@@ -35,7 +35,7 @@ export const Sidebar = styled.aside`
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
 			max-width: 33.5rem;
-			padding: 8rem 3.2rem;
+			padding: 6rem 3.2rem;
 			> button:first-child {
 				display: none;
 			}
@@ -105,7 +105,7 @@ export const Content = styled.div`
 		overflow-y: scroll;
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
-			padding: 8rem 5.4rem;
+			padding: 6rem 5.4rem;
 		}
 	`}
 `;
@@ -123,7 +123,7 @@ export const ProgressIndicator = styled.div`
 			display: block;
 			content: '';
 			width: calc((100% / ${stepsLength}) * ${activeStepIndex + 1});
-			height: 100%;
+			height: 0.4rem;
 			border-radius: 0.2rem;
 			background-color: ${colors.secondary};
 			transition: width 0.5s ease-out;

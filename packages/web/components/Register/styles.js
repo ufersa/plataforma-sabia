@@ -5,7 +5,6 @@ export const Form = styled.form`
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		max-height: 60rem;
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
 			max-width: 41.5rem;
@@ -39,7 +38,7 @@ export const Actions = styled.div`
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row-reverse;
-		margin: auto -3.2rem -3.2rem -3.2rem;
+		margin: 2.4rem -3.2rem -3.2rem -3.2rem;
 		padding-top: 1.6rem;
 
 		> button,
@@ -52,8 +51,7 @@ export const Actions = styled.div`
 		}
 
 		@media screen and (min-width: ${screens.medium - 1}px) {
-			margin: 0;
-			margin-top: auto;
+			margin: 2.4rem 0 0;
 			display: flex;
 			justify-content: ${justifyContent || 'space-between'};
 
