@@ -111,6 +111,7 @@ const VerificationCodeField = forwardRef(({ value, onChange, label, required, er
 						onFocus={handleFocus}
 						onKeyDown={handleKeyDown}
 						aria-labelledby={label ? 'verification-code-label' : ''}
+						aria-label={!label ? `Verification code input number ${index + 1}` : ''}
 					/>
 				))}
 			</div>
