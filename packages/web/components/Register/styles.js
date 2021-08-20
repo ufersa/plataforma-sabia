@@ -30,7 +30,7 @@ export const StepSubtitle = styled.p`
 
 export const InputsWrapper = styled.div`
 	> div:not(:last-child) {
-		margin-bottom: 2.4rem;
+		margin-bottom: 1.6rem;
 	}
 `;
 

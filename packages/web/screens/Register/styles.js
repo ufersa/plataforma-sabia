@@ -102,6 +102,7 @@ export const Content = styled.div`
 		flex-direction: column;
 		flex-grow: 1;
 		padding: 3.2rem;
+		overflow-y: scroll;
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
 			padding: 8rem 5.4rem;
