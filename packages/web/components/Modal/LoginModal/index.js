@@ -34,7 +34,8 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 		if (result.error) {
 			setError(true);
 			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
-				openModal('emailConfirmation');
+				router.push(internalPages.confirm_account);
+				closeModal();
 			} else {
 				setMessage(t('common:loginFailed'));
 			}
@@ -87,7 +88,7 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 					{t('common:registerYourUser')}
 				</Button>
 				<Link href={internalPages.confirm_account} passHref>
-					<StyledLink>Confirmar conta</StyledLink>
+					<StyledLink onClick={closeModal}>Confirmar conta</StyledLink>
 				</Link>
 			</RegisterContainer>
 		</StyledLoginModal>
