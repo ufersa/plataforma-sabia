@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,7 +14,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
-import { auth as authPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onSuccessLogin }) => {
@@ -85,7 +86,9 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
 					{t('common:registerYourUser')}
 				</Button>
-				<StyledLink href={authPages.confirmAccount}>Confirmar conta</StyledLink>
+				<Link href={internalPages.confirm_account} passHref>
+					<StyledLink>Confirmar conta</StyledLink>
+				</Link>
 			</RegisterContainer>
 		</StyledLoginModal>
 	);

@@ -48,7 +48,6 @@ export const internal = {
 
 export const auth = {
 	resetPassword: '/auth/reset-password',
-	confirmAccount: '/auth/confirm-account',
 };
 
 export default {
