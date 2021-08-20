@@ -151,7 +151,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 								ref={verificationCodeRef}
 								value={field.value}
 								onChange={field.onChange}
-								label="Código de verificação"
+								label={shouldShowEmailField ? 'Código de verificação' : ''}
 								error={fieldState.error}
 								required
 							/>
