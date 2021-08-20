@@ -76,7 +76,7 @@ export const FinishSubtitle = styled.p`
 export const Actions = styled(RootActions)`
 	${({ theme: { screens } }) => css`
 		@media screen and (min-width: ${screens.medium + 1}px) {
-			display: none;
+			display: none !important;
 		}
 	`}
 `;

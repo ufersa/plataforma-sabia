@@ -38,7 +38,7 @@ export const Actions = styled.div`
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row-reverse;
-		margin: 2.4rem -3.2rem -3.2rem -3.2rem;
+		margin: auto -3.2rem -3.2rem -3.2rem;
 		padding-top: 1.6rem;
 
 		> button,
