@@ -473,7 +473,6 @@ exports[`it renders MyAccount main page correctly 1`] = `
           </button>
           <a
             class="c12"
-            href="/auth/confirm-account"
           >
             Confirmar conta
           </a>

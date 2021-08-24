@@ -1764,7 +1764,6 @@ exports[`it render the review page 1`] = `
                   </button>
                   <a
                     class="c36"
-                    href="/auth/confirm-account"
                   >
                     Confirmar conta
                   </a>
