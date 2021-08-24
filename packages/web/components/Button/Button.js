@@ -77,7 +77,7 @@ Button.defaultProps = {
 	uppercase: true,
 	name: '',
 	as: 'button',
-	href: '',
+	href: undefined,
 };
 
 export default Button;
