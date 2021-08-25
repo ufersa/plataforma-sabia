@@ -35,13 +35,13 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
  */
 Cypress.Commands.add(
 	'register',
-	(options = { openWizard: true, name: '', phone: '', email: '', password: '' }) => {
-		if (options.openWizard) {
+	({ openWizard = true, name = '', phone = '', email = '', password = '' } = {}) => {
+		if (openWizard) {
 			cy.findByRole('button', { name: /utilizando o e-mail/i }).click();
 
-			cy.inputType({ name: 'email' }, options.email);
-			cy.inputType({ name: 'password' }, options.password);
-			cy.inputType({ name: 'passwordConfirm' }, options.password);
+			cy.inputType({ name: 'email' }, email);
+			cy.inputType({ name: 'password' }, password);
+			cy.inputType({ name: 'passwordConfirm' }, password);
 			cy.findByLabelText(
 				/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
 			).click({ force: true });
@@ -57,8 +57,8 @@ Cypress.Commands.add(
 				url: 'http://localhost:3334/auth/register',
 				body: {
 					scope: 'web',
-					email: options.email,
-					password: options.password,
+					email,
+					password,
 					disclaimers: Array.from(Array(10).keys()),
 				},
 			});
@@ -68,7 +68,7 @@ Cypress.Commands.add(
 				method: 'POST',
 				url: 'http://localhost:3334/auth/confirm-account',
 				body: {
-					email: options.email,
+					email,
 					token: verificationCode,
 				},
 			});
@@ -78,8 +78,8 @@ Cypress.Commands.add(
 				method: 'PUT',
 				url: `http://localhost:3334/users/${userId}`,
 				body: {
-					name: options.name,
-					phone: options.phone,
+					name,
+					phone,
 				},
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ Cypress.Commands.add(
 
 		registerRequest().then((registerResponse) => {
 			recurse(
-				() => cy.task('getLastEmail', options.email),
+				() => cy.task('getLastEmail', email),
 				(_email) => !!_email,
 				{
 					log: false,
