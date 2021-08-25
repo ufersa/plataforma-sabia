@@ -135,6 +135,7 @@ Cypress.Commands.add('getLastEmail', () => {
  * Command that types text in an input
  * It receives a selector that can be a string or an object
  * If it's an object it'll use the key as selector attribute and value as the selector value
+ * If the selector is a Regex, then it'll use testing-library findByLabelText method
  *
  * i.e. cy.inputType({ name: 'fieldname' }, 'text value') will try to find input with name 'fieldname' and type 'text value' into it
  * cy.inputType('[name="fieldname"]', 'text value) has the same output
