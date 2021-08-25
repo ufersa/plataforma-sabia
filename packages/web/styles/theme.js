@@ -53,6 +53,7 @@ const theme = {
 	screens: {
 		small: 450,
 		medium: 768,
+		xmedium: 1023.9,
 		large: 1170,
 		huge: 1530,
 	},

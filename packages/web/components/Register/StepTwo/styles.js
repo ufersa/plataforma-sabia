@@ -14,3 +14,7 @@ export const CheckboxWrapper = styled.div`
 		margin-bottom: 0.8rem;
 	}
 `;
+
+export const PasswordWrapper = styled.div`
+	position: relative;
+`;

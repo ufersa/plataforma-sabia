@@ -7,7 +7,7 @@ export const Form = styled.form`
 		height: 100%;
 
 		@media screen and (min-width: ${screens.medium + 1}px) {
-			max-width: 41.5rem;
+			max-width: 39rem;
 		}
 	`}
 `;
