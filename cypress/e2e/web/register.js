@@ -11,7 +11,7 @@ const getRandomUser = () => {
 	};
 };
 
-describe('user', () => {
+describe('User register', () => {
 	beforeEach(() => {
 		cy.task('resetEmails');
 	});
