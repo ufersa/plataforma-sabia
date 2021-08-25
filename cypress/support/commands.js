@@ -1,3 +1,5 @@
+import { recurse } from 'cypress-recurse';
+
 import technologyFixture from '../fixtures/technology.json';
 import * as locales from '../../packages/web/public/static/locales';
 
@@ -21,19 +23,96 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	cy.get('div[class*=Modal] button[type=submit]').click();
 });
 
-Cypress.Commands.add('register', (options = { email: '', password: '' }) => {
-	cy.findByRole('button', { name: /utilizando o e-mail/i }).click();
+/**
+ * Custom command to register a new user
+ *
+ * @param {object} options
+ * @param {string} options.email User e-mail
+ * @param {string} options.password User password
+ * @param {string} options.name User name
+ * @param {string} options.phone User phone
+ * @param {boolean} options.openWizard If true, will access register page and fill wizard form, otherwise will register using API requests
+ */
+Cypress.Commands.add(
+	'register',
+	(options = { openWizard: true, name: '', phone: '', email: '', password: '' }) => {
+		if (options.openWizard) {
+			cy.findByRole('button', { name: /utilizando o e-mail/i }).click();
 
-	cy.inputType({ name: 'email' }, options.email);
-	cy.inputType({ name: 'password' }, options.password);
-	cy.inputType({ name: 'passwordConfirm' }, options.password);
-	cy.findByLabelText(
-		/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
-	).click({ force: true });
-	cy.findAllByRole('button')
-		.eq(0)
-		.click();
-});
+			cy.inputType({ name: 'email' }, options.email);
+			cy.inputType({ name: 'password' }, options.password);
+			cy.inputType({ name: 'passwordConfirm' }, options.password);
+			cy.findByLabelText(
+				/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
+			).click({ force: true });
+			return cy
+				.findAllByRole('button')
+				.eq(0)
+				.click();
+		}
+
+		const registerRequest = () =>
+			cy.request({
+				method: 'POST',
+				url: 'http://localhost:3334/auth/register',
+				body: {
+					scope: 'web',
+					email: options.email,
+					password: options.password,
+					disclaimers: Array.from(Array(10).keys()),
+				},
+			});
+
+		const confirmAccountRequest = (verificationCode) =>
+			cy.request({
+				method: 'POST',
+				url: 'http://localhost:3334/auth/confirm-account',
+				body: {
+					email: options.email,
+					token: verificationCode,
+				},
+			});
+
+		const updateUserRequest = (userId, token) =>
+			cy.request({
+				method: 'PUT',
+				url: `http://localhost:3334/users/${userId}`,
+				body: {
+					name: options.name,
+					phone: options.phone,
+				},
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+		registerRequest().then((registerResponse) => {
+			recurse(
+				() => cy.task('getLastEmail', options.email),
+				(_email) => !!_email,
+				{
+					log: false,
+					delay: 1000,
+					timeout: 20000,
+				},
+			)
+				.then(cy.wrap)
+				.invoke('match', /(?<code>\w+) Siga-nos/i)
+				.its('groups.code')
+				.then((verificationCode) => {
+					confirmAccountRequest(verificationCode).then((verificationResponse) => {
+						cy.resetReceivedEmails();
+
+						return updateUserRequest(
+							registerResponse.body.id,
+							verificationResponse.body.token,
+						);
+					});
+				});
+		});
+		return null;
+	},
+);
 
 Cypress.Commands.add('authenticate', (options = {}) => {
 	const email = options.email ?? defaultUserEmail;
