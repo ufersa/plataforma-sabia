@@ -57,7 +57,7 @@ describe('user', () => {
 		cy.findByRole('heading', { name: /validação/i }).should('be.visible');
 	});
 
-	it.only('should be able to verify account by direct access through confirm account page', () => {
+	it('should be able to verify account by direct access through confirm account page', () => {
 		cy.intercept('POST', '**/auth/confirm-account').as('confirmAccount');
 
 		const { email, password } = getRandomUser();
