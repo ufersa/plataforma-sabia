@@ -164,26 +164,6 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 	}
 });
 
-Cypress.Commands.add('getAllEmails', () => {
-	// let's wait a couple of seconds so that there's enough time for the email to be sent
-	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(5000);
-	return cy.request('http://127.0.0.1:1080/messages');
-});
-
-Cypress.Commands.add('getLastEmail', () => {
-	// let's wait a couple of seconds so that there's enough time for the email to be sent
-	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(5000);
-	return cy.request('http://127.0.0.1:1080/messages').then((response) => {
-		const emails = response.body;
-
-		const lastEmail = emails[emails.length - 1];
-
-		cy.request(`http://127.0.0.1:1080/messages/${lastEmail.id}.html`);
-	});
-});
-
 /**
  * Command that types text in an input
  * It receives a selector that can be a string or an object
