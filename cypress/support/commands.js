@@ -45,10 +45,10 @@ Cypress.Commands.add(
 			cy.findByLabelText(
 				/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
 			).click({ force: true });
-			return cy
-				.findAllByRole('button')
+			cy.findAllByRole('button')
 				.eq(0)
 				.click();
+			return;
 		}
 
 		const registerRequest = () =>
@@ -103,14 +103,13 @@ Cypress.Commands.add(
 					confirmAccountRequest(verificationCode).then((verificationResponse) => {
 						cy.resetReceivedEmails();
 
-						return updateUserRequest(
+						updateUserRequest(
 							registerResponse.body.id,
 							verificationResponse.body.token,
 						);
 					});
 				});
 		});
-		return null;
 	},
 );
 
