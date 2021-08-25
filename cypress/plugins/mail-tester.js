@@ -1,3 +1,11 @@
+/**
+ * This plugin uses smpt-tester to receive e-mails and store in a variable
+ * So tests can consume the e-mails
+ *
+ * getLastEmail - Returns the last e-mail received
+ * resetEmails - Resets a given e-mail address or all e-mails
+ */
+
 const ms = require('smtp-tester');
 
 module.exports = (on) => {
