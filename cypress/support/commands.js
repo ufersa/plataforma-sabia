@@ -133,6 +133,10 @@ Cypress.Commands.add('inputType', (selector, text, options = { clearField: true 
 	return cy[getterMethod](selectorText).type(text);
 });
 
+Cypress.Commands.add('resetReceivedEmails', () => {
+	return cy.task('resetEmails');
+});
+
 /**
  * Returns translations from namespace and key
  *
