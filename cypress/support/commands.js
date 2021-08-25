@@ -140,17 +140,22 @@ Cypress.Commands.add('getLastEmail', () => {
  * cy.inputType('[name="fieldname"]', 'text value) has the same output
  */
 Cypress.Commands.add('inputType', (selector, text, options = { clearField: true }) => {
-	const selectorEntries = Object.entries(selector);
-	const selectorText =
-		typeof selector === 'string' || selector instanceof String
-			? selector
-			: `[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`;
+	let getterMethod = 'findByLabelText';
+	let selectorText = selector;
 
-	if (options.clearField) {
-		cy.get(selectorText).clear();
+	if (!(selector instanceof RegExp)) {
+		const selectorEntries = Object.entries(selector);
+		getterMethod = 'get';
+		selectorText =
+			typeof selector === 'string' || selector instanceof String
+				? selector
+				: `[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`;
 	}
 
-	return cy.get(selectorText).type(text);
+	if (options.clearField) {
+		cy[getterMethod](selectorText).clear();
+	}
+	return cy[getterMethod](selectorText).type(text);
 });
 
 /**
