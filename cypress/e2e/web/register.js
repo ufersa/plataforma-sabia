@@ -1,12 +1,13 @@
 import { recurse } from 'cypress-recurse';
 
 const getRandomUser = () => {
-	const randomInt = Math.floor(Math.random() * Math.floor(1000));
+	const uniqueSeed = Date.now().toString();
+	const getUniqueId = () => Cypress._.uniqueId(uniqueSeed);
 
 	return {
-		email: `test${randomInt}@test.com`,
+		email: `${getUniqueId()}@test.com`,
 		password: 'Abc1234567*',
-		name: randomInt,
+		name: 'Name',
 		phone: '1234567890',
 	};
 };
@@ -65,7 +66,7 @@ describe('User register', () => {
 		cy.findByRole('link', { href: '/' }).click();
 
 		cy.visit(`/confirmar-conta/`);
-		cy.task('resetEmails');
+		cy.resetReceivedEmails();
 		cy.inputType(/e-mail/i, email);
 		cy.findByRole('button', { name: /enviar novamente/i }).click();
 
