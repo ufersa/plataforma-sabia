@@ -78,10 +78,10 @@ describe('User register', () => {
 			cy.findByRole('link', { href: '/' }).click();
 
 			cy.visit(`/confirmar-conta/`);
-			cy.resetReceivedEmails();
 			cy.inputType(/e-mail/i, email);
 
 			if (test.requestNewToken) {
+				cy.resetReceivedEmails();
 				cy.findByRole('button', { name: /enviar novamente/i }).click();
 			}
 
@@ -98,7 +98,16 @@ describe('User register', () => {
 				.invoke('match', /(?<code>\w+) Siga-nos/i)
 				.its('groups.code')
 				.then((verificationCode) => {
-					cy.inputType(/Verification code input number 1/i, verificationCode);
+					if (test.requestNewToken) {
+						cy.inputType(/Verification code input number 1/i, verificationCode);
+					} else {
+						cy.findAllByLabelText(/código de verificação/i)
+							.eq(0)
+							.type(verificationCode);
+
+						cy.findByRole('button', { name: /validar/i }).click();
+					}
+
 					cy.wait('@confirmAccount')
 						.its('response.statusCode')
 						.should('eq', 200);
