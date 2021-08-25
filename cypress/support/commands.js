@@ -21,44 +21,18 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	cy.get('div[class*=Modal] button[type=submit]').click();
 });
 
-Cypress.Commands.add('register', (options = { openModal: true, email: '', password: '' }) => {
-	if (options.openModal) {
-		cy.findAllByText(/^(entrar|sign in)$/i)
-			.first()
-			.click();
-		cy.findByText(/^(cadastre seu usuário|register your user)$/i).click();
-	}
+Cypress.Commands.add('register', (options = { email: '', password: '' }) => {
+	cy.findByRole('button', { name: /utilizando o e-mail/i }).click();
 
-	cy.get('#fullname')
-		.type('Sabia Testing')
-		.get('#email')
-		.type(options.email)
-		.get('#password')
-		.type(options.password);
-
-	cy.get('input[name="terms_conditions"]')
-		.next()
+	cy.inputType({ name: 'email' }, options.email);
+	cy.inputType({ name: 'password' }, options.password);
+	cy.inputType({ name: 'passwordConfirm' }, options.password);
+	cy.findByLabelText(
+		/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
+	).click({ force: true });
+	cy.findAllByRole('button')
+		.eq(0)
 		.click();
-	cy.get('input[name="data_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="platform_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="services_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="channel_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="link_conditions"]')
-		.next()
-		.click();
-
-	cy.get('div[class*=Modal] button[type=submit]').click();
-	cy.findByText(
-		/^(cadastro realizado com sucesso. verifique seu e-mail para confirmá-lo.|successfully registration. check your email to confirm it.)/i,
-	).should('exist');
 });
 
 Cypress.Commands.add('authenticate', (options = {}) => {

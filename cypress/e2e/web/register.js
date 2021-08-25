@@ -1,33 +1,91 @@
-const getRandomEmail = () => {
+import { recurse } from 'cypress-recurse';
+
+const getRandomUser = () => {
 	const randomInt = Math.floor(Math.random() * Math.floor(1000));
-	return `newe2euser${randomInt}@gmail.com`;
+
+	return {
+		email: `test${randomInt}@test.com`,
+		password: 'Abc1234567*',
+		name: randomInt,
+		phone: '1234567890',
+	};
 };
 
 describe('user', () => {
-	it('can register ', () => {
-		const email = getRandomEmail();
-		const password = 'sabiatesting';
-
-		cy.visit('/').register({ openModal: true, email, password });
+	beforeEach(() => {
+		cy.task('resetEmails');
 	});
 
-	it.skip('can register and can not login until account is verified', () => {
-		const email = getRandomEmail();
-		const password = 'sabiatesting';
+	it('should be able to register, confirm account and fill personal data', () => {
+		const { email, password, name, phone } = getRandomUser();
 
-		cy.visit('/').register({ openModal: true, email, password });
+		cy.visit('/cadastrar').register({ email, password });
 
-		cy.signIn({ openModal: false, email, password });
-		cy.findByText(/^(entrar|sign in)$/i).should('exist');
-		cy.findByText(/^(confirmar email|confirm email)$/i).should('exist');
+		recurse(
+			() => cy.task('getLastEmail', email),
+			(_email) => !!_email,
+			{
+				log: false,
+				delay: 1000,
+				timeout: 20000,
+			},
+		)
+			.then(cy.wrap)
+			.invoke('match', /(?<code>\w+) Siga-nos/i)
+			.its('groups.code')
+			.then((verificationCode) => {
+				cy.findByLabelText(/Verification code input number 1/i).type(verificationCode);
 
-		cy.getLastEmail().then((response) => {
-			const { body } = response;
+				cy.findByLabelText(/nome/i).type(name);
+				cy.findByLabelText(/telefone/i).type(phone);
+				cy.select('state');
+				cy.select('city');
+				cy.findByRole('button').click();
+				cy.findByRole('heading', { name: /Cadastro concluído com sucesso!/i }).should(
+					'be.visible',
+				);
+			});
+	});
 
-			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
-		});
+	it('should not be able to access home without verifying account', () => {
+		const { email, password } = getRandomUser();
 
-		cy.signIn({ email, password });
+		cy.visit('/cadastrar').register({ email, password });
+		cy.findByRole('link', { href: '/' }).click();
+
+		cy.location('pathname').should('eq', '/cadastrar');
+		cy.findByRole('heading', { name: /validação/i }).should('be.visible');
+	});
+
+	it.only('should be able to verify account by direct access through confirm account page', () => {
+		cy.intercept('POST', '**/auth/confirm-account').as('confirmAccount');
+
+		const { email, password } = getRandomUser();
+		cy.visit('/cadastrar').register({ email, password });
+		cy.findByRole('link', { href: '/' }).click();
+
+		cy.visit(`/confirmar-conta/`);
+		cy.task('resetEmails');
+		cy.inputType(/e-mail/i, email);
+		cy.findByRole('button', { name: /enviar novamente/i }).click();
+
+		recurse(
+			() => cy.task('getLastEmail', email),
+			(_email) => !!_email,
+			{
+				log: false,
+				delay: 1000,
+				timeout: 20000,
+			},
+		)
+			.then(cy.wrap)
+			.invoke('match', /(?<code>\w+) Siga-nos/i)
+			.its('groups.code')
+			.then((verificationCode) => {
+				cy.inputType(/Verification code input number 1/i, verificationCode);
+				cy.wait('@confirmAccount')
+					.its('response.statusCode')
+					.should('eq', 200);
+			});
 	});
 });
