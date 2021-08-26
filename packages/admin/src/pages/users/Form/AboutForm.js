@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
+	BooleanInput,
 	DateTimeInput,
 	ReferenceInput,
 	required,
@@ -16,6 +17,8 @@ const AboutForm = ({ record, save, resource }) => {
 	const permissions = record?.permissions.map((permission) => permission.id);
 	const newRecord = {
 		...record,
+		city: record?.city.name,
+		state: record?.state.name,
 		permissions,
 	};
 	return (
@@ -53,6 +56,7 @@ const AboutForm = ({ record, save, resource }) => {
 			<ReferenceInput source="role" reference="roles" validate={[required()]} fullWidth>
 				<SelectInput optionText="role" />
 			</ReferenceInput>
+			<BooleanInput label="Incluir no banco de pesquisadores" source="researcher" />
 		</SimpleForm>
 	);
 };
@@ -61,6 +65,8 @@ AboutForm.propTypes = {
 	record: PropTypes.shape({
 		role: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
 		role_id: PropTypes.number,
+		city: PropTypes.string,
+		state: PropTypes.string,
 		permissions: PropTypes.arrayOf(PropTypes.number),
 	}),
 	resource: PropTypes.string,
