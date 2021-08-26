@@ -38,7 +38,7 @@ const RegisterIdea = () => {
 	 * @returns {void}
 	 */
 	const handleSubmit = async ({ title, description, keywords }, form) => {
-		const { reset, setValue } = form;
+		const { reset } = form;
 		setIsSubmitting(true);
 
 		const { data, success } = await createIdea(
@@ -57,8 +57,6 @@ const RegisterIdea = () => {
 			);
 		}
 
-		setValue('description', '');
-		setValue('keywords', null);
 		reset();
 		setIsSubmitting(false);
 	};
@@ -95,7 +93,11 @@ const RegisterIdea = () => {
 				alt="Ilustração de um rapaz de camiseta verde entregando uma lâmpada gigante à outro rapaz de blusa preta com uma forma laranja ao fundo."
 			/>
 			<S.Container>
-				<Form onSubmit={handleSubmit} onFocus={verifyAuthUser}>
+				<Form
+					onSubmit={handleSubmit}
+					onFocus={verifyAuthUser}
+					defaultValues={{ title: '', description: '', keywords: [] }}
+				>
 					<S.StyledTitle align="left" noPadding noMargin>
 						Conte sua ideia
 					</S.StyledTitle>
@@ -123,6 +125,7 @@ const RegisterIdea = () => {
 						options={mapArrayOfObjectToSelect(keywordsTerms, 'term', 'id')}
 						validation={{ required: true }}
 						wrapperCss={S.inputWrapperCss}
+						instanceId="select-new-idea"
 					/>
 					<Actions disableSubmit={isSubmitting} />
 				</Form>

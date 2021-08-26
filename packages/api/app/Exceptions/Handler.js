@@ -13,7 +13,8 @@ class ExceptionHandler extends BaseExceptionHandler {
 	errorCodeShouldReport(errorCode) {
 		const errorCodeReportMapping = {
 			E_ROUTE_NOT_FOUND: false,
-			E_USER_NOT_FOUND: true,
+			E_VALIDATION_FAILED: false,
+			E_USER_NOT_FOUND: false,
 			E_PASSWORD_MISMATCH: true,
 			E_ROW_NOT_FOUND: true,
 			E_MISSING_DATABASE_ROW: true,
@@ -101,18 +102,20 @@ class ExceptionHandler extends BaseExceptionHandler {
 	}
 
 	async report(error, { request }) {
-		if (Env.get('APP_ENV') === 'production') {
-			if (!this.errorCodeShouldReport(error.code)) {
-				return;
-			}
+		if (Env.get('APP_ENV') !== 'production') {
+			return;
+		}
 
-			try {
-				const eventId = await Sentry.captureException(error);
-				await Slack.notifyError(error, eventId, request);
-			} catch (err) {
-				// eslint-disable-next-line no-console
-				console.error(err);
-			}
+		if (!this.errorCodeShouldReport(error.code)) {
+			return;
+		}
+
+		try {
+			const eventId = await Sentry.captureException(error);
+			await Slack.notifyError(error, eventId, request);
+		} catch (err) {
+			// eslint-disable-next-line no-console
+			console.error(err);
 		}
 	}
 }

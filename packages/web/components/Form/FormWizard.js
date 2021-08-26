@@ -237,6 +237,9 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			formattedData.technologyCosts = {
 				...formData.technologyCosts,
 				costs: {
+					development_costs: parseCostValueToInt(
+						formData.technologyCosts?.costs?.development_costs,
+					),
 					implementation_costs: parseCostValueToInt(
 						formData.technologyCosts?.costs?.implementation_costs,
 					),
@@ -272,6 +275,12 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 			formattedData.locations = [...(whoDevelop || []), ...(whereIsImplemented || [])];
 		}
 
+		if (Array.isArray(formattedData.knowledge_area_id)) {
+			const filteredAreas = formattedData.knowledge_area_id.filter(Boolean);
+			formattedData.knowledge_area_id =
+				formattedData.knowledge_area_id[filteredAreas[filteredAreas.length - 1]];
+		}
+
 		onSubmit({ data: formattedData, step: currentStepSlug, nextStep }, form);
 	};
 
@@ -297,7 +306,7 @@ const FormWizard = ({ steps, currentStep, onSubmit, onPrev, data, defaultValues,
 						href={`${internalPages.editTechnology.replace(
 							':id',
 							data?.technology?.id,
-						)}${step.slug}`}
+						)}/${step.slug}`}
 					>
 						<div>
 							<StepNumber>{showIcon ? <Icon /> : index + 1}</StepNumber>

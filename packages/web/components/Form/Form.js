@@ -58,7 +58,7 @@ export const Actions = styled.div`
  * @returns {React.Element}
  */
 export const Form = ({ onSubmit, children, defaultValues, ...rest }) => {
-	const methods = useForm({ defaultValues });
+	const methods = useForm({ defaultValues, shouldUnregister: true });
 
 	return (
 		<StyledForm onSubmit={methods.handleSubmit((data) => onSubmit(data, methods))} {...rest}>

@@ -7,7 +7,7 @@ const HiddenInput = styled.input``;
 
 const InputHiddenField = ({ name, form, ...inputProps }) => {
 	const { register } = form;
-	return <HiddenInput id={name} type="hidden" name={name} ref={register()} {...inputProps} />;
+	return <HiddenInput id={name} type="hidden" name={name} {...inputProps} {...register(name)} />;
 };
 
 InputHiddenField.propTypes = {

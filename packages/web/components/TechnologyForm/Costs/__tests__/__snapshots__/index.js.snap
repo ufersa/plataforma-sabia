@@ -606,7 +606,7 @@ exports[`it add one row when clicking the add button 1`] = `
             class="c15"
           >
             <input
-              name="technologyCosts.costs.development_costs[0].id"
+              name="technologyCosts.costs.development_costs.0.id"
               type="hidden"
             />
             <div
@@ -617,7 +617,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <label
                   class="c5"
-                  for="technologyCosts.costs.development_costs[0].description"
+                  for="technologyCosts.costs.development_costs.0.description"
                 >
                   Descrição
                    
@@ -635,8 +635,8 @@ exports[`it add one row when clicking the add button 1`] = `
                     aria-label="Descrição"
                     aria-required="true"
                     class="c19"
-                    id="technologyCosts.costs.development_costs[0].description"
-                    name="technologyCosts.costs.development_costs[0].description"
+                    id="technologyCosts.costs.development_costs.0.description"
+                    name="technologyCosts.costs.development_costs.0.description"
                     placeholder="Descrição"
                     type="text"
                   />
@@ -651,7 +651,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <label
                   class="c5"
-                  for="technologyCosts.costs.development_costs[0].type"
+                  for="technologyCosts.costs.development_costs.0.type"
                 >
                   Tipo
                   <span
@@ -666,7 +666,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 >
                   <div
                     class="c21 react-select-container css-dyr6gj-container"
-                    id="technologyCosts.costs.development_costs[0].type"
+                    id="technologyCosts.costs.development_costs.0.type"
                   >
                     <div
                       class="react-select__control css-1b7oqde-control"
@@ -731,7 +731,7 @@ exports[`it add one row when clicking the add button 1`] = `
                       </div>
                     </div>
                     <input
-                      name="technologyCosts.costs.development_costs[0].type"
+                      name="technologyCosts.costs.development_costs.0.type"
                       type="hidden"
                       value=""
                     />
@@ -747,7 +747,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <label
                   class="c5"
-                  for="technologyCosts.costs.development_costs[0].quantity"
+                  for="technologyCosts.costs.development_costs.0.quantity"
                 >
                   Quantidade
                    
@@ -765,9 +765,9 @@ exports[`it add one row when clicking the add button 1`] = `
                     aria-label="Quantidade"
                     aria-required="true"
                     class="c19"
-                    id="technologyCosts.costs.development_costs[0].quantity"
+                    id="technologyCosts.costs.development_costs.0.quantity"
                     min="0"
-                    name="technologyCosts.costs.development_costs[0].quantity"
+                    name="technologyCosts.costs.development_costs.0.quantity"
                     placeholder="Quantidade"
                     type="number"
                   />
@@ -782,7 +782,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <label
                   class="c5"
-                  for="technologyCosts.costs.development_costs[0].value"
+                  for="technologyCosts.costs.development_costs.0.value"
                 >
                   Valor
                    
@@ -800,9 +800,9 @@ exports[`it add one row when clicking the add button 1`] = `
                     aria-label="Valor"
                     aria-required="true"
                     class="c22"
-                    id="technologyCosts.costs.development_costs[0].value"
+                    id="technologyCosts.costs.development_costs.0.value"
                     inputmode="numeric"
-                    name="technologyCosts.costs.development_costs[0].value"
+                    name="technologyCosts.costs.development_costs.0.value"
                     placeholder="Valor"
                     type="text"
                     value=""
@@ -819,7 +819,7 @@ exports[`it add one row when clicking the add button 1`] = `
               >
                 <label
                   class="c5"
-                  for="technologyCosts.costs.development_costs[0].measure_unit"
+                  for="technologyCosts.costs.development_costs.0.measure_unit"
                 >
                   Unidade de Medida
                   <span
@@ -834,7 +834,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 >
                   <div
                     class="c21 react-select-container css-dyr6gj-container"
-                    id="technologyCosts.costs.development_costs[0].measure_unit"
+                    id="technologyCosts.costs.development_costs.0.measure_unit"
                   >
                     <div
                       class="react-select__control css-1b7oqde-control"
@@ -899,7 +899,7 @@ exports[`it add one row when clicking the add button 1`] = `
                       </div>
                     </div>
                     <input
-                      name="technologyCosts.costs.development_costs[0].measure_unit"
+                      name="technologyCosts.costs.development_costs.0.measure_unit"
                       type="hidden"
                       value=""
                     />
@@ -927,7 +927,7 @@ exports[`it add one row when clicking the add button 1`] = `
                 class="c25"
                 color="hsla(0, 0%, 100%)"
                 height="1.75"
-                name="technologyCosts.costs.development_costs[0]_remove_button"
+                name="technologyCosts.costs.development_costs.0_remove_button"
                 title=""
                 type="button"
                 width="1.75"
@@ -1725,7 +1725,6 @@ exports[`it render the Costs page 1`] = `
                 </svg>
               </span>
             </div>
-            
           </div>
         </div>
       </div>

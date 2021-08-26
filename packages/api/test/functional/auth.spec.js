@@ -9,6 +9,7 @@ const Config = use('Config');
 const { ttl } = Config.get('app.token');
 
 trait('Test/ApiClient');
+trait('Auth/Client');
 trait('DatabaseTransactions');
 
 const disclaimers = Array.from(Array(30).keys());
@@ -190,6 +191,38 @@ test('/auth/register and /auth/login endpoints works together', async ({ client,
 	});
 
 	assert.exists(loginResponse.body.token);
+});
+
+test('/auth/register user register flow', async ({ client, assert }) => {
+	const { email, password, first_name, last_name } = userData;
+	// Register
+	const registerResponse = await client
+		.post('/auth/register')
+		.send({ email, password, disclaimers })
+		.end();
+
+	registerResponse.assertStatus(200);
+	const user = await User.findOrFail(registerResponse.body.id);
+
+	// Confirms account by token
+	const { token } = await user.generateToken('confirm-ac');
+	const confirmAcResponse = await client
+		.post('/auth/confirm-account')
+		.send({ email: user.email, token })
+		.end();
+	confirmAcResponse.assertStatus(200);
+	assert.exists(confirmAcResponse.body.token);
+
+	// Complete user register
+	const updateUserResponse = await client
+		.put(`users/${user.id}`)
+		.loginVia(user, 'jwt')
+		.send({ first_name, last_name })
+		.end();
+
+	updateUserResponse.assertStatus(200);
+	assert.equal(updateUserResponse.body.first_name, first_name);
+	assert.equal(updateUserResponse.body.last_name, last_name);
 });
 
 test('/auth/forgot-password', async ({ client, assert }) => {
@@ -381,4 +414,45 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 		.end();
 
 	loginResponse.assertStatus(401);
+});
+
+test('/auth/resend-confirmation-email should resend confirmation email to an unconfirmed user', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const { user } = await createUser({ append: { status: 'verified' } });
+
+	const response = await client
+		.post('/auth/resend-confirmation-email')
+		.send({ email: user.email })
+		.end();
+
+	const [bullCall] = Bull.spy.calls;
+
+	response.assertStatus(200);
+	assert.isTrue(response.body.success);
+	assert.isTrue(Bull.spy.called);
+	assert.equal('add', bullCall.funcName);
+	assert.equal(user.email, bullCall.args[1].email);
+});
+
+test('/auth/resend-confirmation-email should not resend the confirmation email if the user does not exist or is not verified', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const email = 'nonexistent@mail.com';
+
+	const response = await client
+		.post('/auth/resend-confirmation-email')
+		.send({ email })
+		.end();
+
+	response.assertStatus(200);
+	assert.isTrue(response.body.success);
+	assert.isFalse(Bull.spy.called);
+	assert.isEmpty(Bull.spy.calls);
 });

@@ -39,7 +39,7 @@ const fundingStatus = [
 
 const Costs = ({ form }) => {
 	const { watch } = form;
-	const { 'technologyCosts.is_seller': isSeller } = watch(['technologyCosts.is_seller']);
+	const isSeller = watch('technologyCosts.is_seller');
 	const emptyValue = {
 		description: '',
 		type: '',
