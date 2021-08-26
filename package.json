@@ -52,12 +52,10 @@
     "lint-staged": "^10.0.8",
     "nyc": "^15.1.0",
     "prettier": "^1.19.1",
+    "smtp-tester": "^1.2.0",
     "start-server-and-test": "^1.11.0"
   },
   "engines": {
     "node": ">=14.15.0"
-  },
-  "dependencies": {
-    "smtp-tester": "^1.2.0"
   }
 }
