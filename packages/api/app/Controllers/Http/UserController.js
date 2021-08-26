@@ -108,16 +108,9 @@ class UserController {
 	 */
 	async update({ auth, params, request }) {
 		const { id } = params;
-		const {
-			permissions,
-			status,
-			role,
-			institution_id,
-			city_id,
-			state_id,
-			areas,
-			...data
-		} = getFields(request);
+		const { permissions, status, role, institution_id, city_id, areas, ...data } = getFields(
+			request,
+		);
 		if (status) data.status = status;
 
 		const upUser = await User.findOrFail(id);
@@ -126,14 +119,13 @@ class UserController {
 			const institutionInst = await Institution.findOrFail(institution_id);
 			await upUser.institution().associate(institutionInst);
 		}
+
 		if (city_id) {
 			const cityInst = await City.findOrFail(city_id);
-			await upUser.city().associate(cityInst);
+			data.city_id = cityInst.id;
+			data.state_id = cityInst.state_id;
 		}
-		if (state_id) {
-			const stateInst = await State.findOrFail(state_id);
-			await upUser.state().associate(stateInst);
-		}
+
 		if (areas) {
 			await upUser.areas().detach();
 			const areasCollection = await KnowledgeArea.query()
@@ -163,6 +155,7 @@ class UserController {
 				await upUser.permissions().detach();
 				await upUser.permissions().attach(permissions);
 			}
+
 			if (status) {
 				data.status = status;
 			}
