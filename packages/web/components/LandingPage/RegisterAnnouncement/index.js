@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import { toast } from '../../Toast';
-import { useAuth, useModal } from '../../../hooks';
+import { useAuth } from '../../../hooks';
 import { formatCurrencyToInt, flattenSelectOptionsValue } from '../../../utils/helper';
 import FormWizard from './FormWizard';
 import StepOne from './StepOne';
@@ -10,6 +10,7 @@ import StepTwo from './StepTwo';
 
 import * as S from './styles';
 import { createAnnouncement } from '../../../services/announcement';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const institutionsFormSteps = [
 	{
@@ -29,12 +30,11 @@ const institutionsFormSteps = [
 ];
 
 const RegisterAnnouncement = () => {
-	const { t } = useTranslation(['common']);
 	const { user } = useAuth();
-	const { openModal } = useModal();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [currentStep, setCurrentStep] = useState(institutionsFormSteps[0].slug);
 	const [formData, setFormData] = useState({});
+	const router = useRouter();
 
 	/**
 	 * Handles submitting the announcement form.
@@ -83,9 +83,7 @@ const RegisterAnnouncement = () => {
 	 */
 	const verifyAuthUser = () => {
 		if (!user.email) {
-			openModal('login', {
-				message: t('common:signInToContinue'),
-			});
+			router.push(`${internalPages.signIn}?redirect=${router.asPath}`);
 		}
 	};
 
