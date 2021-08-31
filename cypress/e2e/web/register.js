@@ -1,5 +1,3 @@
-import { recurse } from 'cypress-recurse';
-
 const getRandomUser = () => {
 	const uniqueSeed = Date.now().toString();
 	const getUniqueId = () => Cypress._.uniqueId(uniqueSeed);
@@ -22,15 +20,11 @@ describe('User register', () => {
 
 		cy.visit('/cadastrar').register({ email, password });
 
-		recurse(
-			() => cy.task('getLastEmail', email),
-			(_email) => !!_email,
-			{
-				log: false,
-				delay: 1000,
-				timeout: 20000,
-			},
-		)
+		cy.waitUntil(() => cy.task('getLastEmail', email), {
+			errorMsg: 'Could not get last received e-mail',
+			interval: 1000,
+			timeout: 15000,
+		})
 			.then(cy.wrap)
 			.invoke('match', /(?<code>\w+) Siga-nos/i)
 			.its('groups.code')
@@ -85,28 +79,20 @@ describe('User register', () => {
 				cy.findByRole('button', { name: /enviar novamente/i }).click();
 			}
 
-			recurse(
-				() => cy.task('getLastEmail', email),
-				(_email) => !!_email,
-				{
-					log: false,
-					delay: 1000,
-					timeout: 20000,
-				},
-			)
+			cy.waitUntil(() => cy.task('getLastEmail', email), {
+				errorMsg: 'Could not get last received e-mail',
+				interval: 1000,
+				timeout: 15000,
+			})
 				.then(cy.wrap)
 				.invoke('match', /(?<code>\w+) Siga-nos/i)
 				.its('groups.code')
 				.then((verificationCode) => {
-					if (test.requestNewToken) {
-						cy.inputType(/Verification code input number 1/i, verificationCode);
-					} else {
-						cy.findAllByLabelText(/código de verificação/i)
-							.eq(0)
-							.type(verificationCode);
+					cy.findAllByLabelText(/código de verificação/i)
+						.eq(0)
+						.type(verificationCode);
 
-						cy.findByRole('button', { name: /validar/i }).click();
-					}
+					cy.findByRole('button', { name: /validar/i }).click();
 
 					cy.wait('@confirmAccount')
 						.its('response.statusCode')

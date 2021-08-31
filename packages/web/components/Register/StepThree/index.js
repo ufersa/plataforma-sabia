@@ -26,8 +26,7 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 	});
 	const { t } = useTranslation(['error']);
 	const router = useRouter();
-	const shouldShowEmailField =
-		!userData.email && router.pathname === internalPages.confirm_account;
+	const shouldShowEmailField = router.pathname === internalPages.confirm_account;
 
 	useEffect(() => {
 		if (shouldShowEmailField) {
@@ -110,7 +109,9 @@ const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {
 		}
 
 		if (response.success) {
-			toast.success('E-mail de confirmação enviado com sucesso!');
+			toast.success(
+				'Caso o e-mail informado corresponda a um usuário cadastrado, enviaremos o código de verificação para você',
+			);
 
 			if (!userData.email && !!email) updateUserData({ email });
 		}
