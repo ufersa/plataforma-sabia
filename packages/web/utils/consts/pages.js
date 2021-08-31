@@ -44,6 +44,7 @@ export const internal = {
 	revisions: '/revisions',
 	register: '/cadastrar',
 	confirm_account: '/confirmar-conta',
+	signIn: '/entrar',
 };
 
 export const auth = {

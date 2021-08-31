@@ -36,6 +36,7 @@ const getLayoutComponent = (pathname) =>
 		[landingPage.about]: LayoutLandingPage,
 		[internalPages.register]: React.Fragment,
 		[internalPages.confirm_account]: React.Fragment,
+		[internalPages.signIn]: React.Fragment,
 	}[pathname] || LayoutDefault);
 
 export class SabiaApp extends App {
