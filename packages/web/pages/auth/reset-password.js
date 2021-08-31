@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { MdMailOutline } from 'react-icons/md';
-import { useModal, useAuth, useTheme } from '../../hooks';
+import { useRouter } from 'next/router';
+import { useAuth, useTheme } from '../../hooks';
 import { ContentContainer, Title } from '../../components/Common';
 import { Form, InputField } from '../../components/Form';
 import { Button } from '../../components/Button';
+import { toast } from '../../components/Toast';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const ResetPassword = () => {
 	const [loading, setLoading] = useState(false);
@@ -12,8 +15,8 @@ const ResetPassword = () => {
 
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common']);
-	const { openModal } = useModal();
 	const { resetPassword } = useAuth();
+	const router = useRouter();
 
 	const handleSubmit = async ({ email, userCode, password }) => {
 		setLoading(true);
@@ -21,10 +24,8 @@ const ResetPassword = () => {
 		setLoading(false);
 
 		if (result.success) {
-			openModal('login', {
-				message: t('common:signInToContinue'),
-				redirectTo: '/',
-			});
+			toast.success('Senha alterada com sucesso!');
+			router.push(internalPages.signIn);
 		} else {
 			setMessage(result.error.message);
 		}
