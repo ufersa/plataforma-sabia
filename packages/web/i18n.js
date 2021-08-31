@@ -16,4 +16,5 @@ module.exports = {
 	},
 	loadLocaleFrom: (lang, ns) =>
 		import(`./public/static/locales/${lang}/${ns}.json`).then((m) => m.default),
+	logBuild: process.env.NODE_ENV === 'development',
 };
