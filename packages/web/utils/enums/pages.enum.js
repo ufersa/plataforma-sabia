@@ -15,6 +15,7 @@ export const landingPage = {
 	about: '#about',
 	contact: '#contact',
 	features: '#features',
+	resources: '#resources',
 };
 
 export const internal = {
@@ -46,6 +47,7 @@ export const internal = {
 	register: '/cadastrar',
 	confirm_account: '/confirmar-conta',
 	signIn: '/entrar',
+	myAccount: '/user/my-account',
 };
 
 export const auth = {
