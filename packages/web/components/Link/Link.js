@@ -14,11 +14,22 @@ const Link = ({
 	hover,
 	onClick,
 	target,
+	alignSelf,
+	variant,
+	color,
 	...linkProps
 }) => {
 	return (
 		<NextLink href={href} as={as} passHref={passHref} replace={replace} scroll={scroll}>
-			<StyledLink onClick={onClick} hover={hover} target={target} {...linkProps}>
+			<StyledLink
+				onClick={onClick}
+				hover={hover}
+				target={target}
+				alignSelf={alignSelf}
+				variant={variant}
+				color={color}
+				{...linkProps}
+			>
 				{children}
 			</StyledLink>
 		</NextLink>
@@ -35,6 +46,9 @@ Link.propTypes = {
 	hover: PropTypes.bool,
 	onClick: PropTypes.func,
 	target: PropTypes.string,
+	alignSelf: PropTypes.string,
+	variant: PropTypes.string,
+	color: PropTypes.string,
 };
 
 Link.defaultProps = {
@@ -45,6 +59,9 @@ Link.defaultProps = {
 	hover: false,
 	onClick: () => {},
 	target: '_self',
+	alignSelf: 'left',
+	variant: 'bold',
+	color: '',
 };
 
 export default Link;
