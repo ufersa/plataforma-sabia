@@ -42,11 +42,12 @@ export const internal = {
 	curatorProfile: '/curator-profile',
 	curateTechnologies: '/curate-technologies',
 	revisions: '/revisions',
+	register: '/cadastrar',
+	confirm_account: '/confirmar-conta',
 };
 
 export const auth = {
 	resetPassword: '/auth/reset-password',
-	confirmAccount: '/auth/confirm-account',
 };
 
 export default {

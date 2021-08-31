@@ -65,8 +65,9 @@ class AuthController {
 
 		user.status = 'verified';
 		await user.save();
+		const authData = await auth.generate(user);
 
-		return auth.generate(user);
+		return { ...authData, id: user.id };
 	}
 
 	/**
@@ -81,7 +82,7 @@ class AuthController {
 		const { email } = request.all();
 		const user = await User.findBy('email', email);
 
-		if (user && user?.isVerified()) {
+		if (user) {
 			await this.sendEmailConfirmation(request, user);
 		}
 

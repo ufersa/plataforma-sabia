@@ -21,45 +21,87 @@ Cypress.Commands.add('signIn', (options = { openModal: true }) => {
 	cy.get('div[class*=Modal] button[type=submit]').click();
 });
 
-Cypress.Commands.add('register', (options = { openModal: true, email: '', password: '' }) => {
-	if (options.openModal) {
-		cy.findAllByText(/^(entrar|sign in)$/i)
-			.first()
-			.click();
-		cy.findByText(/^(cadastre seu usuário|register your user)$/i).click();
-	}
+/**
+ * Custom command to register a new user
+ *
+ * @param {object} options
+ * @param {string} options.email User e-mail
+ * @param {string} options.password User password
+ * @param {string} options.name User name
+ * @param {string} options.phone User phone
+ * @param {boolean} options.openWizard If true, will access register page and fill wizard form, otherwise will register using API requests
+ */
+Cypress.Commands.add(
+	'register',
+	({ openWizard = true, name = '', phone = '', email = '', password = '' } = {}) => {
+		if (openWizard) {
+			cy.findByRole('button', { name: /utilizando o e-mail/i }).click();
 
-	cy.get('#fullname')
-		.type('Sabia Testing')
-		.get('#email')
-		.type(options.email)
-		.get('#password')
-		.type(options.password);
+			cy.inputType({ name: 'email' }, email);
+			cy.inputType({ name: 'password' }, password);
+			cy.inputType({ name: 'passwordConfirm' }, password);
+			cy.findByLabelText(
+				/Concordo com os termos de uso e política de privacidade da Plataforma Sabiá/i,
+			).click({ force: true });
+			cy.findAllByRole('button')
+				.eq(0)
+				.click();
+			return;
+		}
 
-	cy.get('input[name="terms_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="data_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="platform_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="services_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="channel_conditions"]')
-		.next()
-		.click();
-	cy.get('input[name="link_conditions"]')
-		.next()
-		.click();
+		const registerRequest = () =>
+			cy.request({
+				method: 'POST',
+				url: 'http://localhost:3334/auth/register',
+				body: {
+					scope: 'web',
+					email,
+					password,
+					disclaimers: Array.from(Array(10).keys()),
+				},
+			});
 
-	cy.get('div[class*=Modal] button[type=submit]').click();
-	cy.findByText(
-		/^(cadastro realizado com sucesso. verifique seu e-mail para confirmá-lo.|successfully registration. check your email to confirm it.)/i,
-	).should('exist');
-});
+		const confirmAccountRequest = (verificationCode) =>
+			cy.request({
+				method: 'POST',
+				url: 'http://localhost:3334/auth/confirm-account',
+				body: {
+					email,
+					token: verificationCode,
+				},
+			});
+
+		const updateUserRequest = (userId, token) =>
+			cy.request({
+				method: 'PUT',
+				url: `http://localhost:3334/users/${userId}`,
+				body: {
+					name,
+					phone,
+				},
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+		registerRequest().then((registerResponse) => {
+			cy.getLastReceivedEmail(email)
+				.then(cy.wrap)
+				.invoke('match', /(?<code>\w+) Siga-nos/i)
+				.its('groups.code')
+				.then((verificationCode) => {
+					confirmAccountRequest(verificationCode).then((verificationResponse) => {
+						cy.resetReceivedEmails();
+
+						updateUserRequest(
+							registerResponse.body.id,
+							verificationResponse.body.token,
+						);
+					});
+				});
+		});
+	},
+);
 
 Cypress.Commands.add('authenticate', (options = {}) => {
 	const email = options.email ?? defaultUserEmail;
@@ -111,46 +153,45 @@ Cypress.Commands.add('technologyFormFillInNResponsible', (parameters = { count: 
 	}
 });
 
-Cypress.Commands.add('getAllEmails', () => {
-	// let's wait a couple of seconds so that there's enough time for the email to be sent
-	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(5000);
-	return cy.request('http://127.0.0.1:1080/messages');
-});
-
-Cypress.Commands.add('getLastEmail', () => {
-	// let's wait a couple of seconds so that there's enough time for the email to be sent
-	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(5000);
-	return cy.request('http://127.0.0.1:1080/messages').then((response) => {
-		const emails = response.body;
-
-		const lastEmail = emails[emails.length - 1];
-
-		cy.request(`http://127.0.0.1:1080/messages/${lastEmail.id}.html`);
-	});
-});
-
 /**
  * Command that types text in an input
  * It receives a selector that can be a string or an object
  * If it's an object it'll use the key as selector attribute and value as the selector value
+ * If the selector is a Regex, then it'll use testing-library findByLabelText method
  *
  * i.e. cy.inputType({ name: 'fieldname' }, 'text value') will try to find input with name 'fieldname' and type 'text value' into it
  * cy.inputType('[name="fieldname"]', 'text value) has the same output
  */
 Cypress.Commands.add('inputType', (selector, text, options = { clearField: true }) => {
-	const selectorEntries = Object.entries(selector);
-	const selectorText =
-		typeof selector === 'string' || selector instanceof String
-			? selector
-			: `[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`;
+	let getterMethod = 'findByLabelText';
+	let selectorText = selector;
 
-	if (options.clearField) {
-		cy.get(selectorText).clear();
+	if (!(selector instanceof RegExp)) {
+		const selectorEntries = Object.entries(selector);
+		getterMethod = 'get';
+		selectorText =
+			typeof selector === 'string' || selector instanceof String
+				? selector
+				: `[${selectorEntries[0][0]}="${selectorEntries[0][1]}"]`;
 	}
 
-	return cy.get(selectorText).type(text);
+	if (options.clearField) {
+		cy[getterMethod](selectorText).clear();
+	}
+	return cy[getterMethod](selectorText).type(text);
+});
+
+Cypress.Commands.add('resetReceivedEmails', () => {
+	return cy.task('resetEmails');
+});
+
+Cypress.Commands.add('getLastReceivedEmail', (email, options = {}) => {
+	cy.waitUntil(() => cy.task('getLastEmail', email), {
+		errorMsg: 'Could not get last received e-mail',
+		interval: 1000,
+		timeout: 15000,
+		...options,
+	});
 });
 
 /**

@@ -265,6 +265,7 @@ const CommonDataForm = ({ form, user, message, loading }) => {
 						<S.ButtonChangeEmail
 							type="button"
 							onClick={() => openModal('updateEmail', {}, { customModal: true })}
+							aria-label="Change e-mail"
 						>
 							<FiEdit3 /> Alterar
 						</S.ButtonChangeEmail>

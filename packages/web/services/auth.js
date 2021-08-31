@@ -70,9 +70,8 @@ export async function getMe(token, params = {}) {
  * @param {string} email User email.
  * @param {string} password User password.
  */
-export async function register(fullname, email, password) {
+export async function register(email, password) {
 	return apiPost('auth/register', {
-		full_name: fullname,
 		scope: 'web',
 		email,
 		password,

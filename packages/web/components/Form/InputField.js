@@ -25,15 +25,16 @@ const InputField = ({
 	const { t } = useTranslation(['error']);
 	const { register, formState: { errors } = {} } = form;
 	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	return (
 		<InputFieldWrapper
-			hasError={typeof errorObject !== 'undefined'}
+			hasError={hasError}
 			labelPlacement={labelPlacement}
 			customCss={wrapperCss}
 		>
 			{label && (
-				<InputLabel htmlFor={id || name}>
+				<InputLabel htmlFor={id || name} variant={variant}>
 					{label} {validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
@@ -47,12 +48,13 @@ const InputField = ({
 					aria-required={validation.required}
 					placeholder={!label && validation.required ? `${placeholder} *` : placeholder}
 					variant={variant}
-					{...inputProps}
+					hasError={hasError}
 					{...register(name, validation)}
+					{...inputProps}
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>
@@ -79,7 +81,7 @@ InputField.propTypes = {
 	}),
 	labelPlacement: PropTypes.string,
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'gray', 'rounded']),
+	variant: PropTypes.oneOf(['default', 'gray', 'rounded', 'lightRounded']),
 };
 
 InputField.defaultProps = {

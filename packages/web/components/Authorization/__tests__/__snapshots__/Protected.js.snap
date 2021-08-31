@@ -571,7 +571,6 @@ exports[`Protected component should return the login modal if user is not logged
           </button>
           <a
             class="c12"
-            href="/auth/confirm-account"
           >
             Confirmar conta
           </a>
@@ -934,7 +933,6 @@ exports[`Protected component should show an inline login when inline props was p
         </button>
         <a
           class="c10"
-          href="/auth/confirm-account"
         >
           Confirmar conta
         </a>

@@ -1,3 +1,3 @@
-import InstitutionShowcasePage from '../../screens/Vitrine/Institution';
+import InstitutionShowcasePage from '../../screens/InstitutionShowcase';
 
 export default InstitutionShowcasePage;
