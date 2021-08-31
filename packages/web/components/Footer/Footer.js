@@ -120,7 +120,7 @@ const Footer = ({ isAbout }) => (
 								href={
 									isAbout
 										? landingPage.features
-										: `${landingPage.about}${landingPage.features}`
+										: `${landingPage.url}${landingPage.features}`
 								}
 							>
 								Para Inventores
@@ -131,7 +131,7 @@ const Footer = ({ isAbout }) => (
 								href={
 									isAbout
 										? landingPage.features
-										: `${landingPage.about}${landingPage.features}`
+										: `${landingPage.url}${landingPage.features}`
 								}
 							>
 								Para a Sociedade
@@ -142,7 +142,7 @@ const Footer = ({ isAbout }) => (
 								href={
 									isAbout
 										? landingPage.features
-										: `${landingPage.about}${landingPage.features}`
+										: `${landingPage.url}${landingPage.features}`
 								}
 							>
 								Para Financiadores
