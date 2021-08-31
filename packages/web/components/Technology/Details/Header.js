@@ -1,35 +1,35 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import useTranslation from 'next-translate/useTranslation';
 import { FiShoppingBag } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 import { Button } from '../../Button';
 import ButtonStyles from '../../Button/styles';
 import { useTechnology, useAuth, useModal } from '../../../hooks';
 import { Likes, Share } from '../../Card';
 import ImagesCarousel from './ImagesCarousel';
 import { formatMoney, getTechnologyOwner } from '../../../utils/helper';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const Header = () => {
 	const { technology } = useTechnology();
 	const { openModal } = useModal();
 	const { user } = useAuth();
-	const { t } = useTranslation(['common']);
+	const router = useRouter();
 
 	const handleClick = ({ target: { name } }) => {
 		if (!user.email) {
-			return openModal('login', {
-				message: t('common:signInToContinue'),
-				onSuccessLogin: () => openModal(name, { technology }),
-			});
+			router.push(`${internalPages.signIn}?redirect=${router.asPath}`);
+			return;
 		}
 
 		if (!user.operations.can_buy_technology) {
-			return openModal('pendingUserData', {
+			openModal('pendingUserData', {
 				message: 'Complete o seu cadastro para adquirir esta tecnologia.',
 			});
+			return;
 		}
 
-		return openModal(name, { technology });
+		openModal(name, { technology });
 	};
 
 	const ownerUser = getTechnologyOwner(technology);
