@@ -1,5 +1,3 @@
-import { recurse } from 'cypress-recurse';
-
 import technologyFixture from '../fixtures/technology.json';
 import * as locales from '../../packages/web/public/static/locales';
 
@@ -87,15 +85,7 @@ Cypress.Commands.add(
 			});
 
 		registerRequest().then((registerResponse) => {
-			recurse(
-				() => cy.task('getLastEmail', email),
-				(_email) => !!_email,
-				{
-					log: false,
-					delay: 1000,
-					timeout: 20000,
-				},
-			)
+			cy.getLastReceivedEmail(email)
 				.then(cy.wrap)
 				.invoke('match', /(?<code>\w+) Siga-nos/i)
 				.its('groups.code')
@@ -193,6 +183,15 @@ Cypress.Commands.add('inputType', (selector, text, options = { clearField: true 
 
 Cypress.Commands.add('resetReceivedEmails', () => {
 	return cy.task('resetEmails');
+});
+
+Cypress.Commands.add('getLastReceivedEmail', (email, options = {}) => {
+	cy.waitUntil(() => cy.task('getLastEmail', email), {
+		errorMsg: 'Could not get last received e-mail',
+		interval: 1000,
+		timeout: 15000,
+		...options,
+	});
 });
 
 /**

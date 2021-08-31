@@ -20,11 +20,7 @@ describe('User register', () => {
 
 		cy.visit('/cadastrar').register({ email, password });
 
-		cy.waitUntil(() => cy.task('getLastEmail', email), {
-			errorMsg: 'Could not get last received e-mail',
-			interval: 1000,
-			timeout: 15000,
-		})
+		cy.getLastReceivedEmail(email)
 			.then(cy.wrap)
 			.invoke('match', /(?<code>\w+) Siga-nos/i)
 			.its('groups.code')
@@ -79,11 +75,7 @@ describe('User register', () => {
 				cy.findByRole('button', { name: /enviar novamente/i }).click();
 			}
 
-			cy.waitUntil(() => cy.task('getLastEmail', email), {
-				errorMsg: 'Could not get last received e-mail',
-				interval: 1000,
-				timeout: 15000,
-			})
+			cy.getLastReceivedEmail()
 				.then(cy.wrap)
 				.invoke('match', /(?<code>\w+) Siga-nos/i)
 				.its('groups.code')
