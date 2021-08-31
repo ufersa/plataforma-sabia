@@ -1,10 +1,11 @@
+import { internal as internalPages } from '../../utils/enums/pages.enum';
+
 export const defaultLinks = [
 	{
 		label: 'Entrar',
-		openModalComponent: 'login',
 		dropdown: false,
 		showOnlyInHamburguer: true,
-		isButton: true,
+		href: internalPages.signIn,
 	},
 	{
 		id: 1,
