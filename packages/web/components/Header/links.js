@@ -96,10 +96,9 @@ export const defaultLinks = [
 export const aboutLinks = [
 	{
 		label: 'Entrar',
-		openModalComponent: 'login',
 		dropdown: false,
 		showOnlyInHamburguer: true,
-		isButton: true,
+		href: internalPages.signIn,
 	},
 	{
 		id: 1,
