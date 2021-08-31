@@ -211,6 +211,8 @@ export const RectangularButton = styled.button`
 		boxShadow,
 		capitalize,
 		round,
+		uppercase,
+		boldText,
 	}) => css`
 		position: relative;
 		border: 2px solid transparent;
@@ -255,6 +257,15 @@ export const RectangularButton = styled.button`
 
 		${!!variant &&
 			rectangularButtonVariants[variant](colors, colorVariant, metrics, backgroundUrl)};
+
+		${!!uppercase &&
+			css`
+				text-transform: uppercase;
+			`};
+		${!!boldText &&
+			css`
+				font-weight: bold;
+			`};
 	`}
 `;
 
