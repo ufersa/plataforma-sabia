@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,7 +14,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
-import { auth as authPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/consts/pages';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onSuccessLogin }) => {
@@ -33,7 +34,8 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 		if (result.error) {
 			setError(true);
 			if (result.error.error_code === 'UNVERIFIED_EMAIL') {
-				openModal('emailConfirmation');
+				router.push(internalPages.confirm_account);
+				closeModal();
 			} else {
 				setMessage(t('common:loginFailed'));
 			}
@@ -82,10 +84,17 @@ const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onS
 			</Form>
 			<RegisterContainer>
 				<StyledLabel>{t('common:areYouNewHere?')}</StyledLabel>
-				<Button onClick={() => openModal('register', undefined, { customModal: true })}>
+				<Button
+					onClick={() => {
+						router.push(internalPages.register);
+						closeModal();
+					}}
+				>
 					{t('common:registerYourUser')}
 				</Button>
-				<StyledLink href={authPages.confirmAccount}>Confirmar conta</StyledLink>
+				<Link href={internalPages.confirm_account} passHref>
+					<StyledLink onClick={closeModal}>Confirmar conta</StyledLink>
+				</Link>
 			</RegisterContainer>
 		</StyledLoginModal>
 	);

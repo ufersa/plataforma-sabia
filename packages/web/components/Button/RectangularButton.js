@@ -44,8 +44,8 @@ const RectangularButton = forwardRef(
 
 RectangularButton.propTypes = {
 	children: PropTypes.node.isRequired,
-	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green', 'blue']),
-	variant: PropTypes.oneOf(['text', 'outlined', 'filled', 'backgroundImage']),
+	colorVariant: PropTypes.oneOf(['grey', 'red', 'orange', 'green', 'blue', 'silver']),
+	variant: PropTypes.oneOf(['text', 'outlined', 'filled', 'backgroundImage', 'round']),
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 	type: PropTypes.string,

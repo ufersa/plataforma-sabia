@@ -1,9 +1,15 @@
 import styled, { css } from 'styled-components';
 
+const inputLabelColors = {
+	lightRounded: 'black',
+};
+
 export const InputLabel = styled.label`
-	color: ${({ theme }) => theme.colors.lightGray};
-	font-size: 1.4rem;
-	font-weight: 500;
+	${({ theme: { colors }, variant }) => css`
+		color: ${colors[inputLabelColors[variant]] || colors.lightGray};
+		font-size: 1.4rem;
+		font-weight: 500;
+	`}
 `;
 
 export const InputError = styled.span`
@@ -38,10 +44,26 @@ export const inputModifiers = {
 		border-radius: ${metrics.baseRadius}rem;
 		color: ${colors.lightGray};
 	`,
+	lightRounded: ({ colors, metrics, hasError }) => css`
+		background: ${colors.white};
+		border: 1px solid ${colors.lightGray4};
+		border-radius: ${metrics.baseRadius}rem;
+		color: ${colors.darkGray};
+
+		&::placeholder {
+			color: ${colors.lightGray3};
+			font-style: normal;
+		}
+
+		${!!hasError &&
+			css`
+				border: 1px solid ${colors.red};
+			`}
+	`,
 };
 
 export const StyledInput = styled.input`
-	${({ theme: { colors, metrics }, disabled, variant }) => css`
+	${({ theme: { colors, metrics }, disabled, variant, hasError }) => css`
 		width: 100%;
 		height: 4.4rem;
 		font-size: 1.4rem;
@@ -55,7 +77,7 @@ export const StyledInput = styled.input`
 			font-style: italic;
 		}
 
-		${!!variant && inputModifiers[variant]({ colors, metrics })}
+		${!!variant && inputModifiers[variant]({ colors, metrics, hasError })}
 	`}
 `;
 
@@ -115,5 +137,48 @@ export const InputFieldWrapper = styled.div`
 
 
 		${customCss}
+	`}
+`;
+
+export const VerificationCodeWrapper = styled.div`
+	${({ theme: { colors, metrics }, error }) => css`
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+		font-size: 1.4rem;
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input {
+			-moz-appearance: textfield;
+			caret-color: ${colors.secondary};
+			font-size: 1.6rem;
+			line-height: 2.4rem;
+			padding: 0.8rem 1.2rem;
+			border: 1px solid ${colors.lightGray4};
+			border-radius: ${metrics.baseRadius}rem;
+			text-align: center;
+			max-width: 4rem;
+			margin: 0.5rem 0;
+		}
+
+		input:focus {
+			border: 1px solid ${colors.lightGray2};
+		}
+
+		> div {
+			display: flex;
+		}
+
+		${!!error &&
+			css`
+				input {
+					border: 1px solid ${colors.red};
+				}
+			`}
 	`}
 `;

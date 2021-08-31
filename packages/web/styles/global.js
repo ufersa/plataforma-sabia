@@ -31,6 +31,9 @@ export default createGlobalStyle`
 			overflow: hidden;
 		}
 	}
+	#__next {
+		height: 100%;
+	}
 	a, button, p, span, li, input {
 		font-family: 'Montserrat';
 	}
@@ -49,9 +52,14 @@ export default createGlobalStyle`
 		font-size: 1.6rem;
 		cursor: pointer;
 	}
-	input{
+	input {
 		font-size: 1.4rem;
 	}
+	input:-webkit-autofill { 
+		background-clip: text;
+    -webkit-background-clip: text;
+	}
+
 	ul {
 		list-style: none;
 	}

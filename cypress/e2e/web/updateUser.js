@@ -1,9 +1,22 @@
+const getRandomUser = () => {
+	const uniqueSeed = Date.now().toString();
+	const getUniqueId = () => Cypress._.uniqueId(uniqueSeed);
+
+	return {
+		email: `${getUniqueId()}@test.com`,
+		password: 'Abc1234567*',
+		name: 'Name',
+		phone: '1234567890',
+	};
+};
+
 describe('User form validation', () => {
 	beforeEach(() => {
 		cy.authenticate({
 			email: 'sabiatestinge2eprofile@gmail.com',
 			password: 'sabiatesting',
 		}).visit('/user/my-account');
+		cy.resetReceivedEmails();
 	});
 
 	describe('Editing user information', () => {
@@ -54,6 +67,26 @@ describe('User form validation', () => {
 					userData.full_name.split(' ')[0],
 				);
 			});
+		});
+
+		it.only('should be able to request e-mail change', () => {
+			const user = getRandomUser();
+			const { email: newEmail } = getRandomUser();
+
+			cy.register({ openWizard: false, ...user })
+				.authenticate({
+					email: user.email,
+					password: user.password,
+				})
+				.visit('/user/my-account');
+
+			cy.findByRole('button', { name: /change e-mail/i }).click();
+			cy.inputType(/digite o seu novo email/i, newEmail);
+			cy.findByRole('button', { name: /confirmar/i }).click();
+
+			cy.getLastReceivedEmail(newEmail).then(() =>
+				cy.findByText(/enviamos um link de confirmação/i).should('be.visible'),
+			);
 		});
 	});
 

@@ -1,27 +1,29 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { useForm } from 'react-hook-form';
 
 const StyledForm = styled.form`
-	margin: 1rem auto;
-	padding: 2rem 1rem;
-	width: 100%;
-
-	button,
-	a {
-		padding-right: 3rem;
-		padding-left: 3rem;
-	}
-
-	> label {
+	${({ noMargin, noPadding }) => css`
+		margin: ${!noMargin && '1rem auto'};
+		padding: ${!noPadding && '2rem 1rem'};
 		width: 100%;
-		display: block;
-		font-weight: 700;
-		font-size: 1.7rem;
-	}
+
+		button,
+		a {
+			padding-right: 3rem;
+			padding-left: 3rem;
+		}
+
+		> label {
+			width: 100%;
+			display: block;
+			font-weight: 700;
+			font-size: 1.7rem;
+		}
+	`}
 `;
 
 export const Actions = styled.div`
@@ -57,11 +59,16 @@ export const Actions = styled.div`
  *
  * @returns {React.Element}
  */
-export const Form = ({ onSubmit, children, defaultValues, ...rest }) => {
+export const Form = ({ onSubmit, children, defaultValues, noMargin, noPadding, ...rest }) => {
 	const methods = useForm({ defaultValues, shouldUnregister: true });
 
 	return (
-		<StyledForm onSubmit={methods.handleSubmit((data) => onSubmit(data, methods))} {...rest}>
+		<StyledForm
+			onSubmit={methods.handleSubmit((data) => onSubmit(data, methods))}
+			noMargin={noMargin}
+			noPadding={noPadding}
+			{...rest}
+		>
 			{React.Children.map(children, (child) => {
 				return typeof child?.type === 'function'
 					? React.cloneElement(child, {
@@ -79,12 +86,16 @@ Form.propTypes = {
 	onSubmit: PropTypes.func,
 	defaultValues: PropTypes.shape({}),
 	testId: PropTypes.string,
+	noMargin: PropTypes.bool,
+	noPadding: PropTypes.bool,
 };
 
 Form.defaultProps = {
 	onSubmit: () => {},
 	defaultValues: {},
 	testId: '',
+	noMargin: false,
+	noPadding: false,
 };
 
 export default Form;

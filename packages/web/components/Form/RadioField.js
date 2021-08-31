@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import useTranslation from 'next-translate/useTranslation';
+import get from 'lodash.get';
 import { InputLabel, InputError, Row } from './styles';
 import Help from './Help';
 import RequiredIndicator from './Required/Indicator';
@@ -86,6 +87,8 @@ const RadioField = ({
 }) => {
 	const { t } = useTranslation(['error']);
 	const { register, formState: { errors } = {} } = form;
+	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	return (
 		<RadioContainer>
@@ -114,7 +117,7 @@ const RadioField = ({
 					</RadioWrapper>
 				))}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</RadioContainer>

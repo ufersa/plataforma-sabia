@@ -2,6 +2,7 @@
 
 exports[`SolutionCard component it should render a service card 1`] = `
 .c10 {
+  position: relative;
   border: 2px solid transparent;
   background: none;
   font-size: 1.4rem;
@@ -21,7 +22,6 @@ exports[`SolutionCard component it should render a service card 1`] = `
   justify-content: center;
   padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
-  text-transform: uppercase;
   text-align: center;
   color: hsl(166,100%,34%);
   color: hsla(0,0%,100%);
@@ -31,10 +31,6 @@ exports[`SolutionCard component it should render a service card 1`] = `
 .c10:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.c10 > svg {
-  margin-right: 0.8rem;
 }
 
 .c10:hover:not(:disabled) {

@@ -47,7 +47,7 @@ const ForgotPasswordModal = ({ closeModal }) => {
 					<InputField
 						icon={MdMailOutline}
 						name="email"
-						placeholder="Insira seu e-mail"
+						placeholder="Digite seu e-mail"
 						type="email"
 						validation={{ required: true }}
 					/>
