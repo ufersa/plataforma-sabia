@@ -17,7 +17,7 @@ export const defaultLinks = [
 	{
 		id: 2,
 		label: 'Sobre',
-		href: landingPage.about,
+		href: landingPage.url,
 		dropdown: false,
 		scrollLink: false,
 	},
