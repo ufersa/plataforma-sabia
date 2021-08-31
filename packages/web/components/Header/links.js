@@ -31,7 +31,7 @@ export const defaultLinks = [
 	{
 		id: 4,
 		label: 'Recursos',
-		href: `${landingPage.about}${landingPage.resources}`,
+		href: `${landingPage.url}${landingPage.resources}`,
 		dropdown: true,
 		scrollLink: false,
 		sublinks: [
