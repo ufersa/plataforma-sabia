@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Element, scroller } from 'react-scroll';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useModal, useAuth } from '../hooks';
+import { useAuth } from '../hooks';
 import { toast } from '../components/Toast';
 import { Intro, About, Features, Resources, Contact } from '../components/LandingPage';
 import Head from '../components/head';
 import { isRunningOnBrowser } from '../utils/helper';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 
 const headerHeightInPx = 65;
 
@@ -14,12 +15,11 @@ const Welcome = () => {
 	const router = useRouter();
 	const { t } = useTranslation(['common', 'pages']);
 	const { user } = useAuth();
-	const { openModal } = useModal();
 
 	const handleIntroButtonClick = (e) => {
 		e.preventDefault();
 		if (!user?.email) {
-			openModal('login', { message: t('common:signInToContinue'), redirectTo: '/' });
+			router.push(internalPages.signIn);
 		} else {
 			toast.info('Iremos te redirecionar para a página principal da plataforma');
 			router.push('/');
