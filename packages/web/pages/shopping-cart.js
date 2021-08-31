@@ -53,7 +53,7 @@ const ShoppingCart = () => {
 
 	const handleSubmit = async (values) => {
 		if (!user.id) {
-			router.push(internalPages.signIn);
+			router.push(`${internalPages.signIn}?redirect=${internalPages.shoppingCart}`);
 			return;
 		}
 
