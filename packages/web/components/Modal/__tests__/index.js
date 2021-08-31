@@ -8,7 +8,7 @@ describe('<ModalProvider />', () => {
 		render(
 			<ModalContext.Consumer>
 				{({ openModal }) => (
-					<button type="button" onClick={() => openModal('login')}>
+					<button type="button" onClick={() => openModal('share')}>
 						Open Modal
 					</button>
 				)}
@@ -24,7 +24,7 @@ describe('<ModalProvider />', () => {
 		render(
 			<ModalContext.Consumer>
 				{({ openModal }) => (
-					<button type="button" onClick={() => openModal('login')}>
+					<button type="button" onClick={() => openModal('share')}>
 						Open Modal
 					</button>
 				)}
@@ -41,7 +41,7 @@ describe('<ModalProvider />', () => {
 		render(
 			<ModalContext.Consumer>
 				{({ openModal }) => (
-					<button type="button" onClick={() => openModal('login')}>
+					<button type="button" onClick={() => openModal('share')}>
 						Open Modal
 					</button>
 				)}
@@ -75,7 +75,7 @@ describe('<ModalProvider />', () => {
 				{({ openModal }) => (
 					<button
 						type="button"
-						onClick={() => openModal('login', {}, { customModal: true })}
+						onClick={() => openModal('share', {}, { customModal: true })}
 					>
 						Open Modal
 					</button>
@@ -92,7 +92,7 @@ describe('<ModalProvider />', () => {
 		const { container } = render(
 			<ModalContext.Consumer>
 				{({ openModal }) => (
-					<button type="button" onClick={() => openModal('login', {})}>
+					<button type="button" onClick={() => openModal('share', {})}>
 						Open Modal
 					</button>
 				)}
@@ -110,7 +110,7 @@ describe('<ModalProvider />', () => {
 		render(
 			<ModalContext.Consumer>
 				{({ openModal }) => (
-					<button type="button" onClick={() => openModal('login', {})}>
+					<button type="button" onClick={() => openModal('share', {})}>
 						Open Modal
 					</button>
 				)}
