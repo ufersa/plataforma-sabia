@@ -75,7 +75,7 @@ describe('User register', () => {
 				cy.findByRole('button', { name: /enviar novamente/i }).click();
 			}
 
-			cy.getLastReceivedEmail()
+			cy.getLastReceivedEmail(email)
 				.then(cy.wrap)
 				.invoke('match', /(?<code>\w+) Siga-nos/i)
 				.its('groups.code')
