@@ -21,7 +21,7 @@ const Welcome = () => {
 		if (!user?.email) {
 			openModal('login', { message: t('common:signInToContinue'), redirectTo: '/' });
 		} else {
-			toast.info('Você está sendo redireciondo para o início');
+			toast.info('Iremos te redirecionar para a página principal da plataforma');
 			router.push('/');
 		}
 	};
