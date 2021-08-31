@@ -416,7 +416,6 @@ test('/auth/reset-password fails with invalid token', async ({ client }) => {
 	loginResponse.assertStatus(401);
 });
 
-// Check token
 test('/auth/check-token', async ({ client, assert }) => {
 	const { user } = await createUser({ append: { status: 'invited' } });
 	const token = await user.generateToken(tokenTypes.RESET_PASSWORD);
@@ -474,4 +473,45 @@ test('/auth/check-token fails with invalid token type', async ({ client }) => {
 			},
 		]),
 	);
+});
+
+test('/auth/resend-confirmation-email should resend confirmation email to an unconfirmed user', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const { user } = await createUser({ append: { status: 'verified' } });
+
+	const response = await client
+		.post('/auth/resend-confirmation-email')
+		.send({ email: user.email })
+		.end();
+
+	const [bullCall] = Bull.spy.calls;
+
+	response.assertStatus(200);
+	assert.isTrue(response.body.success);
+	assert.isTrue(Bull.spy.called);
+	assert.equal('add', bullCall.funcName);
+	assert.equal(user.email, bullCall.args[1].email);
+});
+
+test('/auth/resend-confirmation-email should not resend the confirmation email if the user does not exist or is not verified', async ({
+	client,
+	assert,
+}) => {
+	await Bull.reset();
+
+	const email = 'nonexistent@mail.com';
+
+	const response = await client
+		.post('/auth/resend-confirmation-email')
+		.send({ email })
+		.end();
+
+	response.assertStatus(200);
+	assert.isTrue(response.body.success);
+	assert.isFalse(Bull.spy.called);
+	assert.isEmpty(Bull.spy.calls);
 });

@@ -15,6 +15,14 @@ class City extends Model {
 		return ['id', 'name'];
 	}
 
+	static get createdAtColumn() {
+		return null;
+	}
+
+	static get updatedAtColumn() {
+		return null;
+	}
+
 	/**
 	 * Runs the query with the provided filters.
 	 *

@@ -12,6 +12,14 @@ class State extends Model {
 		return false;
 	}
 
+	static get createdAtColumn() {
+		return null;
+	}
+
+	static get updatedAtColumn() {
+		return null;
+	}
+
 	static get visible() {
 		return ['id', 'name', 'initials'];
 	}

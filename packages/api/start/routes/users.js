@@ -563,7 +563,6 @@ Route.get('users/:id', 'UserController.show').middleware([
  * @apiParam {String} [address2] User Address2
  * @apiParam {String} [district] User District
  * @apiParam {String} [city] User City
- * @apiParam {String} [state] User State
  * @apiParam {String} [country] User Country
  * @apiParam {String} [status] User Status
  * @apiParam {Number} [role] User Role
@@ -586,7 +585,6 @@ Route.get('users/:id', 'UserController.show').middleware([
  *		"address2": "AP 96",
  *		"district": "Teste",
  *		"city": "Mossoró",
- *		"state": "RN",
  *		"country": "Brasil",
  *		"status": "verified",
  *		"permissions":[1,2,3],

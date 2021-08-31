@@ -92,19 +92,14 @@ class AuthController {
 	 */
 
 	async resendConfirmationEmail({ request, response }) {
-		try {
-			const { email } = request.all();
-			const user = await User.findByOrFail('email', email);
+		const { email } = request.all();
+		const user = await User.findBy('email', email);
 
-			if (user.isVerified()) {
-				return response.status(200).send({ success: true });
-			}
-
+		if (user && user?.isVerified()) {
 			await this.sendEmailConfirmation(request, user);
-			return response.status(200).send({ success: true });
-		} catch (error) {
-			return response.status(400).send({ error: error.message });
 		}
+
+		return response.status(200).send({ success: true });
 	}
 
 	/**

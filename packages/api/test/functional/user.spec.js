@@ -4,6 +4,8 @@ const Role = use('App/Models/Role');
 const User = use('App/Models/User');
 const Technology = use('App/Models/Technology');
 const Permission = use('App/Models/Permission');
+const City = use('App/Models/City');
+const State = use('App/Models/State');
 const Service = use('App/Models/Service');
 const Token = use('App/Models/Token');
 const Factory = use('Factory');
@@ -306,32 +308,47 @@ test('PUT /users/:id endpoint admin user to try update status', async ({ client,
 	assert.equal(response.body.status, 'verified');
 });
 
-test('PUT /users/:id Update user details', async ({ client }) => {
-	const firstUser = await User.first();
+test('PUT /users/:id Update user details', async ({ client, assert }) => {
+	const userToUpdate = await User.first();
 
-	const updatedUser = {
-		email: 'updateduseremail@gmail.com',
-		password: '123123',
-		first_name: 'FirstName',
-		last_name: 'LastName',
+	const newUserState = await State.create({
+		id: 999,
+		name: 'random state',
+		initials: 'X',
+	});
+
+	const newUserCity = await City.create({
+		id: 998,
+		name: 'random city',
+		state_id: newUserState.id,
+	});
+
+	const payload = {
+		password: 'new_password',
+		first_name: 'Updated First Name',
+		last_name: 'Updated Last Name',
+		city_id: newUserCity.id,
 	};
 
-	const { user } = await createUser({ append: { role: roles.ADMIN } });
-
+	const { user: loggedUser } = await createUser({ append: { role: roles.ADMIN } });
 	const response = await client
-		.put(`/users/${firstUser.id}`)
-		.send(updatedUser)
-		.loginVia(user, 'jwt')
+		.put(`/users/${userToUpdate.id}`)
+		.send(payload)
+		.loginVia(loggedUser, 'jwt')
 		.end();
 
-	const upUser = await User.query()
+	const updatedUser = await User.query()
 		.with('role')
 		.with('permissions')
 		.where('id', response.body.id)
 		.first();
 
 	response.assertStatus(200);
-	response.assertJSONSubset(upUser.toJSON());
+	assert.equal(userToUpdate.email, updatedUser.email);
+	assert.equal(payload.first_name, updatedUser.first_name);
+	assert.equal(payload.last_name, updatedUser.last_name);
+	assert.equal(newUserState.id, updatedUser.state_id);
+	assert.equal(newUserCity.id, updatedUser.city_id);
 });
 
 test('POST users/:id/permissions Associates permissions to user', async ({ client }) => {
