@@ -61,7 +61,7 @@ Link.defaultProps = {
 	target: '_self',
 	alignSelf: 'left',
 	variant: 'bold',
-	color: '',
+	color: undefined,
 };
 
 export default Link;
