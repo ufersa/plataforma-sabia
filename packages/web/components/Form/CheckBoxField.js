@@ -1,100 +1,165 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useTranslation from 'next-translate/useTranslation';
+import get from 'lodash.get';
+import { validationErrorMessage } from '../../utils/helper';
+import { InputError } from './styles';
 
-const StyledCheckBox = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 1rem;
-	font: 1.2rem;
+const StyledCheckBoxMark = styled.span`
+	${({ theme: { colors } }) => css`
+		display: inline-block;
+		position: relative;
+		margin: -1px 0px 0 0;
+		margin-right: 8px;
+		vertical-align: middle;
+		background: ${colors.white};
+		border: 1px solid ${colors.mediumGray};
+		border-radius: 0.2rem;
+		cursor: pointer;
+		flex-shrink: 0;
+	`}
 `;
 
 const StyledCheckBoxInput = styled.input`
-	margin: 0rem;
-	width: 1px;
-	position: relative;
-	left: 2.5rem;
-	z-index: -1;
+	${({ theme: { colors } }) => css`
+		width: 0px;
+		height: 0px;
+		position: relative;
 
-	&:checked + span {
-		background: ${({ theme }) => theme.colors.blue} -19px top no-repeat;
-		border-color: ${({ theme }) => theme.colors.blue};
+		&:focus + ${StyledCheckBoxMark} {
+			box-shadow: 0px 0px 4px 2px ${colors.primary};
+		}
+	`}
+`;
 
-		&:before {
-			content: '';
-			position: absolute;
+const checkboxVariants = {
+	default: ({ colors }) => css`
+		${StyledCheckBoxMark} {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		& ${StyledCheckBoxInput}:checked + ${StyledCheckBoxMark}:before {
 			top: 16%;
-			right: 34%;
-			display: inline-block;
-			transform: rotate(45deg);
-			height: 12px;
-			width: 7px;
-			border-bottom: 3px solid ${({ theme }) => theme.colors.white};
-			border-right: 3px solid ${({ theme }) => theme.colors.white};
+			height: 1.2rem;
+			width: 0.7rem;
+			border-bottom: 3px solid ${colors.white};
+			border-right: 3px solid ${colors.white};
 		}
-	}
-`;
-
-const StyledCheckBoxLabel = styled.label.attrs(({ htmlFor }) => ({
-	htmlFor,
-}))`
-	width: 100%;
-	color: ${({ theme }) => theme.colors.lightGray};
-	cursor: pointer;
-
-	a {
-		color: ${({ theme }) => theme.colors.secondary};
-		padding: 0 !important;
-		transition: color 0.2s ease-in-out;
-
-		&:hover {
-			color: ${({ theme }) => theme.colors.darkGreen};
+	`,
+	rounded: ({ colors }) => css`
+		${StyledCheckBoxMark} {
+			width: 2rem;
+			height: 2rem;
 		}
-	}
+
+		& ${StyledCheckBoxInput}:checked + ${StyledCheckBoxMark}:before {
+			top: 15%;
+			height: 0.9rem;
+			width: 0.6rem;
+			border-bottom: 2px solid ${colors.white};
+			border-right: 2px solid ${colors.white};
+		}
+	`,
+};
+
+const StyledCheckBoxLabel = styled.label`
+	${({ theme: { colors }, noPadding, variant }) => css`
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: ${!noPadding ? '1rem' : '0'};
+		font: 1.2rem;
+		cursor: pointer;
+
+		& ${StyledCheckBoxInput}:checked + ${StyledCheckBoxMark} {
+			background: ${colors.blue} -19px top no-repeat;
+			border-color: ${colors.blue};
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 16%;
+				right: 34%;
+				display: inline-block;
+				transform: rotate(45deg);
+			}
+		}
+
+		a {
+			color: ${({ theme }) => theme.colors.secondary};
+			padding: 0 !important;
+			transition: color 0.2s ease-in-out;
+
+			&:hover {
+				color: ${({ theme }) => theme.colors.darkGreen};
+			}
+		}
+
+		${checkboxVariants[variant]({ colors })}
+	`}
 `;
 
-const StyledCheckBoxMark = styled.span`
-	display: inline-block;
-	position: relative;
-	top: -1px;
-	width: 2.5rem;
-	height: 2.5rem;
-	margin: -1px 0px 0 0;
-	margin-right: 8px;
-	vertical-align: middle;
-	background: ${({ theme }) => theme.colors.white};
-	border: 1px solid ${({ theme: { colors } }) => colors.mediumGray};
-	border-radius: 0.2rem;
-	cursor: pointer;
+const CheckboxWrapper = styled.div``;
+
+const StyledError = styled(InputError)`
+	font-size: 1.4rem;
+	margin-top: 0.5rem;
 `;
 
-const CheckBoxField = ({ name, value, label, required, onChange, ...rest }) => {
-	const handleOnChange = () => onChange((oldValue) => !oldValue);
+const CheckBoxField = ({
+	name,
+	value,
+	label,
+	ariaLabel,
+	required,
+	onChange,
+	noPadding,
+	variant,
+	form,
+	validation,
+	...rest
+}) => {
+	const { t } = useTranslation();
+	const handleOnChangeNoForm = () => onChange((oldValue) => !oldValue);
+	const {
+		formState: { errors },
+	} = form;
+	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
+
 	return (
-		<StyledCheckBox>
-			<StyledCheckBoxInput
-				id={name}
-				name={name}
-				type="checkbox"
-				aria-label={label}
-				aria-required={required}
-				required={required}
-				checked={value}
-				onChange={handleOnChange}
-				{...rest}
-			/>
-			<StyledCheckBoxMark
-				onClick={handleOnChange}
-				role="checkbox"
-				aria-label={label}
-				aria-required={required}
-				aria-checked={value}
-				tabindex="0"
-			/>
-			<StyledCheckBoxLabel htmlFor={name}>{label}</StyledCheckBoxLabel>
-		</StyledCheckBox>
+		<CheckboxWrapper>
+			<StyledCheckBoxLabel noPadding={noPadding} variant={variant} htmlFor={name}>
+				<StyledCheckBoxInput
+					id={name}
+					name={name}
+					type="checkbox"
+					aria-label={ariaLabel || label}
+					aria-required={required}
+					aria-hidden="true"
+					required={required}
+					onChange={handleOnChangeNoForm}
+					{...(!form && { checked: !!value })}
+					{...rest}
+					{...((!!form && form.register(name, validation)) || {})}
+				/>
+				<StyledCheckBoxMark
+					onClick={handleOnChangeNoForm}
+					role="checkbox"
+					aria-label={label}
+					aria-required={required}
+					aria-checked={value}
+					tabindex="0"
+				/>
+				{label}
+			</StyledCheckBoxLabel>
+			{hasError && Object.keys(errors).length ? (
+				<StyledError>{validationErrorMessage(errors, name, t)}</StyledError>
+			) : null}
+		</CheckboxWrapper>
 	);
 };
 CheckBoxField.propTypes = {
@@ -103,6 +168,14 @@ CheckBoxField.propTypes = {
 	label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 	required: PropTypes.bool,
 	onChange: PropTypes.func,
+	noPadding: PropTypes.bool,
+	variant: PropTypes.oneOf(['default', 'rounded']),
+	form: PropTypes.shape({
+		register: PropTypes.func,
+		formState: PropTypes.shape({ errors: PropTypes.shape({}) }),
+	}),
+	validation: PropTypes.shape({}),
+	ariaLabel: PropTypes.string,
 };
 
 CheckBoxField.defaultProps = {
@@ -110,6 +183,16 @@ CheckBoxField.defaultProps = {
 	label: '',
 	required: false,
 	onChange: () => {},
+	noPadding: false,
+	variant: 'default',
+	form: {
+		formState: {
+			errors: {},
+		},
+		register: () => {},
+	},
+	validation: {},
+	ariaLabel: '',
 };
 
 export default CheckBoxField;

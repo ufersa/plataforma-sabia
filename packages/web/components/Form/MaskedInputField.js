@@ -59,11 +59,12 @@ const MaskedInputField = ({
 	const { t } = useTranslation(['error']);
 	const { formState: { errors } = {}, control } = form;
 	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
 
 	return (
-		<InputFieldWrapper hasError={typeof errorObject !== 'undefined'} customCss={wrapperCss}>
+		<InputFieldWrapper hasError={hasError} customCss={wrapperCss}>
 			{label && (
-				<InputLabel htmlFor={name}>
+				<InputLabel htmlFor={name} variant={variant}>
 					{label} {validation.required && <RequiredIndicator />}
 				</InputLabel>
 			)}
@@ -98,7 +99,7 @@ const MaskedInputField = ({
 				/>
 				{help && <Help id={name} label={label} HelpComponent={help} />}
 			</Row>
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>
@@ -122,7 +123,7 @@ MaskedInputField.propTypes = {
 		required: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	}),
 	wrapperCss: PropTypes.arrayOf(PropTypes.string),
-	variant: PropTypes.oneOf(['default', 'gray', 'rounded']),
+	variant: PropTypes.oneOf(['default', 'gray', 'rounded', 'lightRounded']),
 };
 
 MaskedInputField.defaultProps = {

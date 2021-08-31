@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
-import { algoliaDefaultConfig } from '../../../components/Algolia/provider';
-import Head from '../../../components/head';
-import { findResultsState, searchStateToURL, urlToSearchState } from '../../../utils/algoliaHelper';
-import { getInstitution } from '../../../services';
+import { algoliaDefaultConfig } from '../../components/Algolia/provider';
+import Head from '../../components/head';
+import { findResultsState, searchStateToURL, urlToSearchState } from '../../utils/algoliaHelper';
+import { getInstitution } from '../../services';
 import SolutionList from './SolutionList';
-import ErrorPage from '../../../pages/_error';
+import ErrorPage from '../../pages/_error';
 import * as S from './styles';
 
 const InstitutionShowcasePage = ({ initialSearchState, resultsState, institution, notFound }) => {

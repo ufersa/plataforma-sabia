@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import useTranslation from 'next-translate/useTranslation';
+import get from 'lodash.get';
 import { InputFieldWrapper, InputLabel, InputError, Row } from './styles';
 import { validationErrorMessage } from '../../utils/helper';
 import Help from './Help';
@@ -61,6 +62,9 @@ const TextField = ({
 }) => {
 	const { t } = useTranslation(['error']);
 	const { register, formState: { errors } = {}, watch } = form;
+	const errorObject = get(errors, name);
+	const hasError = typeof errorObject !== 'undefined';
+
 	const selfValue = watch(name);
 	const [counterColor, setCounterColor] = useState('lightGray2');
 
@@ -99,7 +103,7 @@ const TextField = ({
 	});
 
 	return (
-		<InputFieldWrapper hasError={typeof errors[name] !== 'undefined'} customCss={wrapperCss}>
+		<InputFieldWrapper hasError={hasError} customCss={wrapperCss}>
 			<InputLabel htmlFor={name}>
 				{label}
 				{validation.required && <RequiredIndicator />}
@@ -128,7 +132,7 @@ const TextField = ({
 					counterColor={counterColor}
 				>{`${selfValue.length}/${maxLength}`}</CharCounter>
 			)}
-			{errors && Object.keys(errors).length ? (
+			{hasError && Object.keys(errors).length ? (
 				<InputError>{validationErrorMessage(errors, name, t)}</InputError>
 			) : null}
 		</InputFieldWrapper>

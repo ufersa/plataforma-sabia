@@ -9,16 +9,12 @@ import {
 	Configure,
 	ScrollTo,
 } from 'react-instantsearch-dom';
-import {
-	AlgoliaSearchProvider,
-	DebouncedSearchBox,
-	Pagination,
-} from '../../../../components/Algolia';
-import { algoliaDefaultConfig } from '../../../../components/Algolia/provider';
-import { ThemeProvider } from '../../../../styles';
+import { AlgoliaSearchProvider, DebouncedSearchBox, Pagination } from '../../../components/Algolia';
+import { algoliaDefaultConfig } from '../../../components/Algolia/provider';
+import { ThemeProvider } from '../../../styles';
 import * as S from './styles';
-import { SolutionCard, SolutionsWrapper } from '../../../../components/SolutionsSection';
-import { useTheme } from '../../../../hooks';
+import { SolutionCard, SolutionsWrapper } from '../../../components/SolutionsSection';
+import { useTheme } from '../../../hooks';
 
 const ITEMS_PER_PAGE = 8;
 

@@ -65,8 +65,9 @@ class AuthController {
 
 		user.status = 'verified';
 		await user.save();
+		const authData = await auth.generate(user);
 
-		return auth.generate(user);
+		return { ...authData, id: user.id };
 	}
 
 	/**

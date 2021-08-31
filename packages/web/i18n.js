@@ -11,6 +11,8 @@ module.exports = {
 		'/vitrine/[institution]': ['card'],
 		'/vitrines': ['card'],
 		'rgx:^/user/my-account/*': ['account', 'datagrid'],
+		'/cadastrar': ['account'],
+		'/confirmar-conta': ['account'],
 	},
 	loadLocaleFrom: (lang, ns) =>
 		import(`./public/static/locales/${lang}/${ns}.json`).then((m) => m.default),

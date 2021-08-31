@@ -1,3 +1,3 @@
-import ShowcasePage from '../screens/Vitrines';
+import ShowcasesPage from '../screens/Showcases';
 
-export default ShowcasePage;
+export default ShowcasesPage;

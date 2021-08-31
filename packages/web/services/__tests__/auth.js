@@ -17,13 +17,12 @@ beforeEach(() => {
 });
 
 const user = {
-	full_name: 'Fake User',
+	scope: 'web',
 	email: 'fakeuser@gmail.com',
 	password: 'fakepass',
-	scope: 'web',
 };
 
-const { email, password, full_name, scope } = user;
+const { email, password, scope } = user;
 
 describe('login/logout', () => {
 	const loginEndpoint = `${baseUrl}/auth/login`;
@@ -149,7 +148,7 @@ describe('register', () => {
 
 	it('registers the user successfully', async () => {
 		fetchMock.postOnce(registerEndpoint, registerReturnedData, 200);
-		const response = await register(full_name, email, password);
+		const response = await register(email, password);
 		expect(response).toEqual(registerReturnedData);
 		expect(fetchMock).toHaveFetched(registerEndpoint, {
 			method: 'POST',
