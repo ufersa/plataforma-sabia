@@ -23,6 +23,7 @@ export const internal = {
 	newTechnology: '/technology/new',
 	editTechnology: '/technology/:id/edit',
 	newService: '/service/new',
+	newSolution: '/solution/new',
 	ideas: '/ideias',
 	announcements: '/editais',
 	showcase: '/vitrines',
