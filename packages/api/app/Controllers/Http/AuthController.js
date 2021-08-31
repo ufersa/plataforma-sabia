@@ -82,7 +82,7 @@ class AuthController {
 		const { email } = request.all();
 		const user = await User.findBy('email', email);
 
-		if (user && user?.isVerified()) {
+		if (user) {
 			await this.sendEmailConfirmation(request, user);
 		}
 

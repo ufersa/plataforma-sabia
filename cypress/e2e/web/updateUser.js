@@ -1,5 +1,3 @@
-import { recurse } from 'cypress-recurse';
-
 const getRandomUser = () => {
 	const uniqueSeed = Date.now().toString();
 	const getUniqueId = () => Cypress._.uniqueId(uniqueSeed);
@@ -86,15 +84,9 @@ describe('User form validation', () => {
 			cy.inputType(/digite o seu novo email/i, newEmail);
 			cy.findByRole('button', { name: /confirmar/i }).click();
 
-			recurse(
-				() => cy.task('getLastEmail', newEmail),
-				(_email) => !!_email,
-				{
-					log: false,
-					delay: 1000,
-					timeout: 20000,
-				},
-			).then(() => cy.findByText(/enviamos um link de confirmação/i).should('be.visible'));
+			cy.getLastReceivedEmail(newEmail).then(() =>
+				cy.findByText(/enviamos um link de confirmação/i).should('be.visible'),
+			);
 		});
 	});
 
