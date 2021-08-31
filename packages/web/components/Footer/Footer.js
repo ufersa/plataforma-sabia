@@ -6,7 +6,7 @@ import {
 	internal as internalPages,
 	socialMedia as socialMediaPages,
 	landingPage,
-} from '../../utils/consts/pages';
+} from '../../utils/enums/pages.enum';
 import {
 	StyledFooter,
 	FooterHeader,

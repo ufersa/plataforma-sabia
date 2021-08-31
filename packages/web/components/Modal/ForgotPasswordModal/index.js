@@ -9,7 +9,7 @@ import { Form, InputField } from '../../Form';
 import { Button } from '../../Button';
 import { SafeHtml } from '../../SafeHtml';
 import * as S from './styles';
-import { auth as authPages } from '../../../utils/consts/pages';
+import { auth as authPages } from '../../../utils/enums/pages.enum';
 import { useModal, useAuth } from '../../../hooks';
 
 const ForgotPasswordModal = ({ closeModal }) => {

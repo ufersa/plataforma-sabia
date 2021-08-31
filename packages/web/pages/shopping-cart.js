@@ -15,7 +15,7 @@ import { formatMoney, getMeasureUnitLabel } from '../utils/helper';
 import { createServiceOrder } from '../services';
 import { toast } from '../components/Toast';
 import Head from '../components/head';
-import { internal as internalPages } from '../utils/consts/pages';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 
 const getItemChangeLabel = (value) =>
 	({

@@ -8,7 +8,7 @@ import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useModal, useTheme } from '../hooks';
-import { internal as internalPages } from '../utils/consts/pages';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 import AnnouncementBanner from '../components/AnnouncementBanner';
 

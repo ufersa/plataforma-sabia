@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FiShoppingCart } from 'react-icons/fi';
 
 import styled, { css } from 'styled-components';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 import { useShoppingCart } from '../../hooks';
 
 const ShoppingCart = () => {

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { RectangularButton } from '../../components/Button';
 import { Title } from '../../components/Common';
 import Head from '../../components/head';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const NewSolutionPage = () => {
 	const { colors } = useTheme();

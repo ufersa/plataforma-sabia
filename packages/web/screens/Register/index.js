@@ -7,7 +7,7 @@ import { FiArrowRight, FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 import * as S from './styles';
 import { RectangularButton } from '../../components/Button/styles';
 import { steps } from '../../components/Register';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const Register = ({ initialStepIndex }) => {
 	const [activeStep, setActiveStep] = useState({

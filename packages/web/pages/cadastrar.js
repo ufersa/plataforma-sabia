@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import RegisterPage from '../screens/Register';
-import { internal as internalPages } from '../utils/consts/pages';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 
 const Register = ({ initialStepIndex }) => {
 	return <RegisterPage initialStepIndex={initialStepIndex} />;

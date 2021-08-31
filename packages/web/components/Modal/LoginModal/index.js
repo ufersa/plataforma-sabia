@@ -14,7 +14,7 @@ import {
 	ErrorMessage,
 	SuccessMessage,
 } from './styles';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 import { useModal, useAuth } from '../../../hooks';
 
 const LoginModal = ({ message: incomingMessage, error: hasError, redirectTo, onSuccessLogin }) => {

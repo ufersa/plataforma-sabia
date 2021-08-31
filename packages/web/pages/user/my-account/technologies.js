@@ -17,7 +17,7 @@ import { SwitchField } from '../../../components/Form';
 import { SwitchContainer } from '../../../components/Form/SwitchField';
 import EmptyScreen from '../../../components/EmptyScreen';
 import { getTechnologyStatus } from '../../../utils/technology';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const MyTechnologies = ({ initialTechnologies, user }) => {
 	const { t } = useTranslation(['helper', 'account']);

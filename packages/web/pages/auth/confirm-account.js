@@ -5,7 +5,7 @@ import { ContentContainer, Title } from '../../components/Common';
 import { toast } from '../../components/Toast';
 import { Form, Actions, InputField } from '../../components/Form';
 import { Button } from '../../components/Button';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const ConfirmAccount = () => {
 	const [loading, setLoading] = useState(false);

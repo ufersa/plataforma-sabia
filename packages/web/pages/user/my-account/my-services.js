@@ -20,7 +20,7 @@ import { ORDERING as orderEnum } from '../../../utils/enums/api.enum';
 import { useModal } from '../../../hooks';
 import { Spinner } from '../../../components/Loading';
 import { formatMoney } from '../../../utils/helper';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const MyServices = ({
 	initialServices,

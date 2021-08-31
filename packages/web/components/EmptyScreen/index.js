@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { RectangularButton } from '../Button';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 import * as S from './styles';
 
 const EmptyScreen = ({ message, showHomeButton }) => {

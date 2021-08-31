@@ -16,7 +16,7 @@ import { getMe, setGlobalToken } from '../services';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
-import { internal as internalPages, landingPage } from '../utils/consts/pages';
+import { internal as internalPages, landingPage } from '../utils/enums/pages.enum';
 import { isAppEnvProduction } from '../utils/helper';
 
 import 'react-toastify/dist/ReactToastify.min.css';
