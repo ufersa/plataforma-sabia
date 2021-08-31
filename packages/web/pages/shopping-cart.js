@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import { FiAlertTriangle } from 'react-icons/fi';
@@ -46,20 +47,21 @@ const ShoppingCart = () => {
 	} = useShoppingCart();
 	const { openModal } = useModal();
 	const { user } = useAuth();
+	const router = useRouter();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [cartItemsUpdates, setCartItemsUpdates] = useState([]);
 
 	const handleSubmit = async (values) => {
 		if (!user.id) {
-			return openModal('login', {
-				message: t('common:signInToContinue'),
-			});
+			router.push(internalPages.signIn);
+			return;
 		}
 
 		if (!user.operations.can_create_service_order) {
-			return openModal('needToCompleteTheRegistration', null, {
+			openModal('needToCompleteTheRegistration', null, {
 				overlayClick: false,
 			});
+			return;
 		}
 
 		setIsSubmitting(true);
@@ -70,9 +72,10 @@ const ShoppingCart = () => {
 			setIsSubmitting(false);
 			setCartItemsUpdates(itemsUpdates);
 
-			return toast.info(
+			toast.info(
 				'Houve alterações nos itens do seu carrinho. Por favor verifique o card informativo e refaça a operação caso esteja de acordo.',
 			);
+			return;
 		}
 
 		const result = await createServiceOrder(
@@ -81,14 +84,13 @@ const ShoppingCart = () => {
 		);
 
 		if (!result) {
-			return toast.error(
-				'Ocorreu um erro ao finalizar seu pedido. Tente novamente em instantes.',
-			);
+			toast.error('Ocorreu um erro ao finalizar seu pedido. Tente novamente em instantes.');
+			return;
 		}
 
 		toast.success('Pedido enviado com sucesso!');
 		resetCart();
-		return setIsSubmitting(false);
+		setIsSubmitting(false);
 	};
 
 	if (!items.length) {
