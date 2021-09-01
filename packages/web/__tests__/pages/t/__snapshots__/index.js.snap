@@ -1834,7 +1834,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .c48 {
+.c20 .styles__StyledButton-sc-9okshb-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1848,7 +1848,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   line-height: 2.4rem;
 }
 
-.c20 .c48 svg {
+.c20 .styles__StyledButton-sc-9okshb-0 svg {
   margin-right: 0.4rem;
 }
 
@@ -2459,15 +2459,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0 auto;
 }
 
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
-
-}
-
-@media (max-width:768px) {
+@media screen and (min-width:768px) {
 
 }
 
@@ -2587,6 +2579,14 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
     margin: 0 3.2rem;
     padding: 3.2rem 0;
   }
+}
+
+@media screen and (max-width:1023.9px) {
+
+}
+
+@media screen and (max-width:1023.9px) {
+
 }
 
 @media (max-width:1170px) {

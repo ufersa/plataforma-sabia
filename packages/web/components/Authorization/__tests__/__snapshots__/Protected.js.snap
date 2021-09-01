@@ -132,13 +132,50 @@ exports[`Protected component should return only the inline message when onlyUnau
 
 exports[`Protected component should return the login modal if user is not logged in 1`] = `
 .c0 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1500;
-  background: rgba(1,1,1,0.5);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.c0 h1 {
+  color: hsla(0,0%,7%);
+  font-size: 3.6rem;
+  margin: auto;
+}
+
+<div>
+  <div
+    class="c0"
+    data-testid="notAuthorized"
+  >
+    <h1>
+      Você não possui autorização para acessar este conteúdo
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`Protected component should show an inline login when inline props was passed 1`] = `
+.c11 {
+  position: relative;
+  border: 2px solid transparent;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -151,56 +188,44 @@ exports[`Protected component should return the login modal if user is not logged
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  overflow: auto;
-}
-
-.c1 {
-  position: fixed;
-  min-width: 40rem;
-  max-height: 100vh;
-  z-index: 2000;
-  padding: 3.2rem;
-  background: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 20px -5px rgba(38,38,38,1);
-  overflow-y: auto;
-}
-
-.c2 {
-  background: 0;
-  border: 0;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.c2 svg {
-  height: 3rem;
-  width: 3rem;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
-.c2 svg:hover {
-  color: hsla(29,94%,62%);
-}
-
-.c11 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
+  padding: 0.2rem 0.8rem;
+  line-height: 2.4rem;
   text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
+  color: hsl(166,100%,34%);
+  text-transform: none;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  gap: 0.8rem;
+  color: hsla(0,0%,100%);
+  background-color: hsl(166,100%,34%);
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.c11:hover {
-  opacity: 0.8;
+.c11:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c11:hover:not(:disabled) {
+  color: hsla(0,0%,100%);
+  background-color: hsl(166,100%,34%);
+  border-color: hsl(166,100%,34%);
+}
+
+.c11:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c11:hover:not(:disabled) {
+  opacity: 0.74;
+}
+
+.c5 {
+  color: hsla(204,7%,15%);
+  font-size: 1.4rem;
+  font-weight: 500;
 }
 
 .c7 {
@@ -222,9 +247,9 @@ exports[`Protected component should return the login modal if user is not logged
   padding: 1.2rem;
   opacity: 1;
   background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,7%);
 }
 
 .c8::-webkit-input-placeholder {
@@ -251,409 +276,24 @@ exports[`Protected component should return the login modal if user is not logged
   font-style: italic;
 }
 
-.c6 {
-  font-size: 1.4rem;
-  line-height: 14px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+.c8::-webkit-input-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
 }
 
-.c6 > div.wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.c8::-moz-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
 }
 
-.c4 {
-  margin: 1rem auto;
-  padding: 2rem 1rem;
-  width: 100%;
+.c8:-ms-input-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
 }
 
-.c4 button,
-.c4 a {
-  padding-right: 3rem;
-  padding-left: 3rem;
-}
-
-.c4 > label {
-  width: 100%;
-  display: block;
-  font-weight: 700;
-  font-size: 1.7rem;
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c10 > a[href] {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  padding: 0 1rem;
-}
-
-.c10 > button {
-  margin-top: 0.5rem;
-  margin-left: 0rem;
-}
-
-.c3 {
-  width: 50rem;
-}
-
-.c3 form {
-  margin-top: 0rem;
-  padding-top: 0rem;
-}
-
-.c3 button {
-  width: 100%;
-  background-color: hsla(29,94%,62%);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.c3 a {
-  font-weight: 100;
-}
-
-.c5 {
-  display: block;
-  font-weight: 500;
-  font-size: 3rem;
-  color: hsla(0,0%,40%);
-  padding-bottom: 2rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c13 {
-  margin-top: 3rem;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c13 button {
-  width: 100%;
-  background-color: hsl(166,100%,34%);
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.c12 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: hsla(29,94%,62%);
-  font-weight: 500 !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
-}
-
-.c9 {
-  color: hsla(123,40%,59%);
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.c14 h1 {
-  color: hsla(0,0%,7%);
-  font-size: 3.6rem;
-  margin: auto;
-}
-
-@media (max-width:768px) {
-  .c1 {
-    min-width: 90%;
-    padding: 2rem;
-    margin: 1rem;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-}
-
-@media (max-width:768px) {
-  .c11 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c10 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .c10 > button {
-    margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c3 {
-    width: 100%;
-  }
-}
-
-<div>
-  <div
-    class="c0"
-  >
-    <div
-      class="c1"
-      data-testid="modal"
-    >
-      <button
-        aria-label="Close modal"
-        class="c2"
-      >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 1024 1024"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 0 1-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-          />
-        </svg>
-      </button>
-      <div
-        class="c3"
-      >
-        <form
-          class="c4"
-        >
-          <div
-            class="c5"
-          >
-            Já tem cadastro?
-          </div>
-          <div
-            class="c6"
-          >
-            
-            <div
-              class="c7"
-            >
-              <input
-                aria-label=""
-                aria-required="true"
-                class="c8"
-                id="email"
-                name="email"
-                placeholder="E-mail *"
-                type="email"
-              />
-            </div>
-          </div>
-          <div
-            class="c6"
-          >
-            
-            <div
-              class="c7"
-            >
-              <input
-                aria-label=""
-                aria-required="true"
-                class="c8"
-                id="password"
-                name="password"
-                placeholder="Senha *"
-                type="password"
-              />
-            </div>
-          </div>
-          <p
-            class="c9"
-          >
-            Faça login ou crie uma conta para continuar
-          </p>
-          <div
-            class="c10"
-          >
-            <button
-              class="c11"
-              color="hsla(0, 0%, 100%)"
-              name=""
-              title=""
-              type="submit"
-            >
-              Entrar
-            </button>
-            <a
-              class="c12"
-            >
-              Esqueci minha senha
-            </a>
-          </div>
-        </form>
-        <div
-          class="c13"
-        >
-          <div
-            class="c5"
-          >
-            Você é novo aqui?
-          </div>
-          <button
-            class="c11"
-            color="hsla(0, 0%, 100%)"
-            name=""
-            title=""
-            type="button"
-          >
-            CADASTRE SEU USUÁRIO
-          </button>
-          <a
-            class="c12"
-          >
-            Confirmar conta
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="c14"
-    data-testid="notAuthorized"
-  >
-    <h1>
-      Você não possui autorização para acessar este conteúdo
-    </h1>
-  </div>
-</div>
-`;
-
-exports[`Protected component should show an inline login when inline props was passed 1`] = `
-.c9 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
-  text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.c9:hover {
-  opacity: 0.8;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c6 {
-  width: 100%;
-  height: 4.4rem;
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  padding: 1.2rem;
-  opacity: 1;
-  background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
-}
-
-.c6::-webkit-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c6::-moz-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c6:-ms-input-placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
-}
-
-.c6::placeholder {
-  color: hsla(0,0%,52%);
-  font-weight: 300;
-  font-style: italic;
+.c8::placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
 }
 
 .c4 {
@@ -675,269 +315,265 @@ exports[`Protected component should show an inline login when inline props was p
   display: flex;
 }
 
-.c2 {
-  margin: 1rem auto;
-  padding: 2rem 1rem;
-  width: 100%;
-}
-
-.c2 button,
-.c2 a {
-  padding-right: 3rem;
-  padding-left: 3rem;
-}
-
-.c2 > label {
-  width: 100%;
-  display: block;
-  font-weight: 700;
-  font-size: 1.7rem;
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c8 > a[href] {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  padding: 0 1rem;
-}
-
-.c8 > button {
-  margin-top: 0.5rem;
-  margin-left: 0rem;
-}
-
-.c1 {
-  width: 50rem;
-}
-
-.c1 form {
-  margin-top: 0rem;
-  padding-top: 0rem;
-}
-
-.c1 button {
-  width: 100%;
-  background-color: hsla(29,94%,62%);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.c1 a {
-  font-weight: 100;
-}
-
-.c3 {
-  display: block;
-  font-weight: 500;
-  font-size: 3rem;
-  color: hsla(0,0%,40%);
-  padding-bottom: 2rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 {
-  margin-top: 3rem;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 button {
-  width: 100%;
-  background-color: hsl(166,100%,34%);
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
+.c6 {
+  color: hsla(0,79%,63%);
+  margin-left: 0.5rem;
+  display: inline-block;
 }
 
 .c10 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: hsla(29,94%,62%);
-  font-weight: 500 !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
+  color: hsla(204,70%,53%);
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-weight: 500;
 }
 
-.c7 {
-  color: hsla(123,40%,59%);
+.c10:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c10:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c13 {
+  color: hsla(204,70%,53%);
+  -webkit-align-self: left;
+  -ms-flex-item-align: left;
+  align-self: left;
+  font-weight: 700;
+}
+
+.c13:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c13:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c0 {
-  padding: 2rem 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c1 {
+  max-width: 100%;
+  width: 33rem;
+}
+
+.c2 {
+  line-height: 2.8rem;
+  margin-bottom: 3.2rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.c9 > a {
+  margin-bottom: 0.8rem;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  line-height: 2.4rem;
+  color: hsla(0,0%,31%);
+  margin-top: 4.8rem;
 }
 
-@media (max-width:768px) {
-  .c9 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
+.c12 > a {
+  font-size: 1.6rem;
+  margin-left: 0.4rem;
 }
 
-@media (max-width:768px) {
-  .c8 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .c8 > button {
-    margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c1 {
+@media screen and (min-width:768px) {
+  .c11 {
     width: 100%;
   }
 }
 
+@media screen and (max-width:1023.9px) {
+  .c0 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding-top: 3.2rem;
+  }
+}
+
+@media screen and (max-width:1023.9px) {
+  .c12 {
+    margin-top: 3.2rem;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c12 > a {
+    margin-left: 0;
+  }
+}
+
 <div>
-  <div
+  <form
     class="c0"
   >
     <div
       class="c1"
     >
-      <form
+      <h3
         class="c2"
       >
-        <div
-          class="c3"
-        >
-          Já tem cadastro?
-        </div>
+        Faça login com sua conta
+      </h3>
+      <div
+        class="c3"
+      >
         <div
           class="c4"
         >
-          
-          <div
+          <label
             class="c5"
+            for="email"
+          >
+            E-mail
+             
+            <span
+              aria-label="Indicador visual de campo obrigatório"
+              class="c6"
+            >
+              *
+            </span>
+          </label>
+          <div
+            class="c7"
           >
             <input
-              aria-label=""
+              aria-label="E-mail"
               aria-required="true"
-              class="c6"
+              class="c8"
               id="email"
               name="email"
-              placeholder="E-mail *"
-              type="email"
+              placeholder="Digite o seu e-mail"
+              type="text"
             />
           </div>
         </div>
         <div
           class="c4"
         >
-          
-          <div
+          <label
             class="c5"
+            for="password"
+          >
+            Senha
+             
+            <span
+              aria-label="Indicador visual de campo obrigatório"
+              class="c6"
+            >
+              *
+            </span>
+          </label>
+          <div
+            class="c7"
           >
             <input
-              aria-label=""
+              aria-label="Senha"
               aria-required="true"
-              class="c6"
+              class="c8"
               id="password"
               name="password"
-              placeholder="Senha *"
+              placeholder="Digite a sua senha"
               type="password"
             />
           </div>
         </div>
-        <p
-          class="c7"
-        />
-        <div
-          class="c8"
-        >
-          <button
-            class="c9"
-            color="hsla(0, 0%, 100%)"
-            name=""
-            title=""
-            type="submit"
-          >
-            Entrar
-          </button>
-          <a
-            class="c10"
-          >
-            Esqueci minha senha
-          </a>
-        </div>
-      </form>
+      </div>
       <div
-        class="c11"
+        class="c9"
       >
-        <div
-          class="c3"
-        >
-          Você é novo aqui?
-        </div>
-        <button
-          class="c9"
-          color="hsla(0, 0%, 100%)"
-          name=""
-          title=""
-          type="button"
-        >
-          CADASTRE SEU USUÁRIO
-        </button>
         <a
           class="c10"
+          color="blue"
+          target="_self"
         >
-          Confirmar conta
+          Esqueceu sua senha?
         </a>
+        <button
+          class="c11"
+          name=""
+          type="submit"
+        >
+          Entrar
+        </button>
       </div>
     </div>
-  </div>
+    <div
+      class="c12"
+    >
+      <span>
+        Não possui conta? 
+      </span>
+      <a
+        class="c13"
+        color="blue"
+        target="_self"
+      >
+        Cadastre-se agora mesmo
+      </a>
+    </div>
+  </form>
 </div>
 `;
