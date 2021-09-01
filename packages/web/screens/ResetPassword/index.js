@@ -31,12 +31,12 @@ const ResetPassword = () => {
 				<LogoWrapper>
 					<Link href={internalPages.home} passHref>
 						<LogoImage>
-							<Image src="/logo-color.svg" layout="fill" objectFit="cover" />
+							<Image src="/logo-color.svg" layout="fill" objectFit="cover" priority />
 						</LogoImage>
 					</Link>
 				</LogoWrapper>
 				<BackgroundImageWrapper>
-					<Image src="/wind-turbine.svg" layout="fill" objectFit="cover" />
+					<Image src="/wind-turbine.svg" layout="fill" objectFit="cover" priority />
 				</BackgroundImageWrapper>
 			</Aside>
 
