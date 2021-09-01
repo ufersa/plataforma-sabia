@@ -9,7 +9,7 @@ const State = use('App/Models/State');
 const Service = use('App/Models/Service');
 const Token = use('App/Models/Token');
 const Factory = use('Factory');
-const { antl, errors, errorPayload, roles } = require('../../app/Utils');
+const { antl, errors, errorPayload, roles, tokenTypes } = require('../../app/Utils');
 const { createUser } = require('../utils/Suts');
 
 trait('Test/ApiClient');
@@ -532,7 +532,7 @@ test('POST and PUT /auth/change-email endpoint works', async ({ client, assert }
 
 	// get the last token
 	const { token } = await Token.query()
-		.where({ type: 'new-email', is_revoked: false })
+		.where({ type: tokenTypes.CHANGE_EMAIL, is_revoked: false })
 		.last();
 
 	// confirming new email

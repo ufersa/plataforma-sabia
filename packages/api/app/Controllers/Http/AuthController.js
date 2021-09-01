@@ -7,9 +7,23 @@ const Token = use('App/Models/Token');
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
-const { errors, errorPayload } = require('../../Utils');
+const { errors, errorPayload, tokenTypes } = require('../../Utils');
 
 class AuthController {
+	async checkToken({ request, response }) {
+		const { email, token, tokenType } = request.only(['email', 'token', 'tokenType']);
+
+		const tokenObject = await Token.getTokenObjectFor(email, token, tokenType);
+
+		if (!tokenObject) {
+			return response
+				.status(401)
+				.send(errorPayload(errors.INVALID_TOKEN, request.antl('error.auth.invalidToken')));
+		}
+
+		return response.status(200).send({ success: true });
+	}
+
 	/**
 	 * Register an user.
 	 *
@@ -18,11 +32,11 @@ class AuthController {
 	 */
 	async sendEmailConfirmation(request, user) {
 		await user
-			.tokens('type', 'confirm_ac')
+			.tokens('type', tokenTypes.CONFIRM_ACCOUNT)
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
 
-		const { token } = await user.generateToken('confirm-ac');
+		const { token } = await user.generateToken(tokenTypes.CONFIRM_ACCOUNT);
 
 		const mailData = {
 			email: user.email,
@@ -51,7 +65,7 @@ class AuthController {
 	async confirmAccount({ auth, request, response }) {
 		const { email, token } = request.only(['email', 'token']);
 
-		const tokenObject = await Token.getTokenObjectFor(email, token, 'confirm-ac');
+		const tokenObject = await Token.getTokenObjectFor(email, token, tokenTypes.CONFIRM_ACCOUNT);
 
 		if (!tokenObject) {
 			return response
@@ -138,11 +152,11 @@ class AuthController {
 		}
 
 		await user
-			.tokens('type', 'reset-pw')
+			.tokens('type', tokenTypes.RESET_PASSWORD)
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
 
-		const { token } = await user.generateToken('reset-pw');
+		const { token } = await user.generateToken(tokenTypes.RESET_PASSWORD);
 
 		const mailData = {
 			email: user.email,
@@ -168,7 +182,7 @@ class AuthController {
 	async resetPassword({ request, response }) {
 		const { email, token, password } = request.all();
 
-		const tokenObject = await Token.getTokenObjectFor(email, token, 'reset-pw');
+		const tokenObject = await Token.getTokenObjectFor(email, token, tokenTypes.RESET_PASSWORD);
 
 		if (!tokenObject) {
 			return response

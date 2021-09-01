@@ -6,7 +6,7 @@ const Institution = use('App/Models/Institution');
 const City = use('App/Models/City');
 const State = use('App/Models/State');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
-const { errors, errorPayload, getTransaction } = require('../../Utils');
+const { errors, errorPayload, getTransaction, tokenTypes } = require('../../Utils');
 // get only useful fields
 const getFields = (request) =>
 	request.only([
@@ -266,11 +266,11 @@ class UserController {
 		// Send Email
 
 		await user
-			.tokens('type', 'new-email')
+			.tokens('type', tokenTypes.CHANGE_EMAIL)
 			.where('is_revoked', false)
 			.update({ is_revoked: true });
 
-		const { token } = await user.generateToken('new-email');
+		const { token } = await user.generateToken(tokenTypes.CHANGE_EMAIL);
 
 		const mailData = {
 			email: user.temp_email,
@@ -287,7 +287,7 @@ class UserController {
 	async confirmNewEmail({ request, response }) {
 		const { email, token } = request.only(['email', 'token']);
 
-		const tokenObject = await Token.getTokenObjectFor(email, token, 'new-email');
+		const tokenObject = await Token.getTokenObjectFor(email, token, tokenTypes.CHANGE_EMAIL);
 
 		if (!tokenObject) {
 			return response
