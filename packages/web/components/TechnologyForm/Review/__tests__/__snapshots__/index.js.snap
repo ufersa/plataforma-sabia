@@ -1714,6 +1714,7 @@ exports[`it render the review page 1`] = `
           >
             <form
               class="c26"
+              data-cy="signin-form"
             >
               <div
                 class="c27"
