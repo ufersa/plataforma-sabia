@@ -70,7 +70,7 @@ const SignInForm = ({ redirect, inline }) => {
 				</S.InputsWrapper>
 				<S.Actions>
 					<Link
-						href={internalPages.home}
+						href={internalPages.resetPassword}
 						alignSelf="flex-end"
 						variant="normal"
 						color="blue"
