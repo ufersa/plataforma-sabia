@@ -13,7 +13,7 @@ import ShoppingCart from './ShoppingCart';
 import NewSolutionButton from './NewSolutionButton';
 import Dropdown from './Dropdown';
 import { useAuth } from '../../hooks';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const Header = ({ isAbout }) => {
 	const { t } = useTranslation(['common']);

@@ -3,36 +3,23 @@ describe('user', () => {
 		cy.visit('/');
 	});
 
-	it('can login and log out', () => {
-		cy.signIn();
-		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 1);
-
-		cy.get('#email').should('not.exist');
-		cy.get('#password').should('not.exist');
-
+	it('should be able to login and logout', () => {
 		cy.visit('/user/my-account');
+		cy.signIn();
+
 		cy.get('button[class*=LogoutButton]').click();
-		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 2);
-	});
-
-	it('logging in with wrong credentials yields error in the login modal', () => {
-		cy.signIn({
-			openModal: true,
-			email: 'thismeaildoesnotexist@gmail.com',
-			password: '123123123',
-		});
-
-		cy.get('div[class*=LoginBox]').should('exist');
+		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 1);
 	});
 
 	it('cannot create a new technology without being logged in', () => {
 		cy.get('a[href="/solution/new"]').click();
 
-		// should see the login modal.
-		cy.get('#email').should('exist');
-		cy.get('#password').should('exist');
+		cy.location().should((location) => {
+			expect(location.search).to.eq('?redirect=/solution/new');
+			expect(location.pathname).to.eq('/entrar');
+		});
 
-		cy.signIn({ openModal: false });
+		cy.signIn();
 		cy.findByText(/que tipo de solução você irá cadastrar\?/i).should('exist');
 		cy.get('a[href="/technology/new"]').click();
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Likes } from '../../Card';
 import * as S from '../Common/hitCardStyles';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const TechnologyHitCard = ({
 	hit: { id, title, description, thumbnail, likes, slug, institution },

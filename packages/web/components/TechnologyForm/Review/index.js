@@ -25,7 +25,7 @@ import {
 import { getFundingLabelByValue } from './helpers';
 import { formatMoney } from '../../../utils/helper';
 import { STATUS as statusEnum } from '../../../utils/enums/technology.enums';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 import RadioField from '../../Form/RadioField';
 import { TechnologyProvider } from '../../Technology';
 

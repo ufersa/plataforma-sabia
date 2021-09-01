@@ -2,28 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import { useModal, useAuth } from '../../hooks';
+import { useRouter } from 'next/router';
+import { useAuth } from '../../hooks';
 import { SafeHtml } from '../SafeHtml';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const NewSolutionButton = () => {
 	const { t } = useTranslation(['common']);
-	const { openModal } = useModal();
 	const { user } = useAuth();
-
-	const url = '/solution/new';
+	const router = useRouter();
 
 	const handleClick = (e) => {
 		if (!user.email) {
 			e.preventDefault();
-			openModal('login', {
-				message: t('common:signInToContinue'),
-				redirectTo: url,
-			});
+			router.push(`${internalPages.signIn}?redirect=${internalPages.newSolution}`);
 		}
 	};
 
 	return (
-		<Link href={url} passHref>
+		<Link href={internalPages.newSolution} passHref>
 			<Button onClick={handleClick}>
 				<SafeHtml html={t('common:registerSolution')} />
 			</Button>

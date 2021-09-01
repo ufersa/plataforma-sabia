@@ -210,11 +210,19 @@ exports[`<Responsibles /> should render without crashing 1`] = `
 exports[`<Responsibles /> should render without crashing when the responsible are being passed throught 1`] = `
 .c2 {
   color: hsla(0,0%,7%);
+  -webkit-align-self: left;
+  -ms-flex-item-align: left;
+  align-self: left;
+  font-weight: 700;
 }
 
 .c2:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
+}
+
+.c2:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c0 {

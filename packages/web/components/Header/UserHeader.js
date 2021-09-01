@@ -2,22 +2,25 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { MdAccountCircle } from 'react-icons/md';
 import styled, { css, useTheme } from 'styled-components';
-import { useAuth, useModal, useVisibleComponent } from '../../hooks';
+import { useRouter } from 'next/router';
+import { useAuth, useVisibleComponent } from '../../hooks';
 import { UserProfileDropDown } from '../UserProfile';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const UserHeader = () => {
 	const { colors } = useTheme();
-	const { openModal } = useModal();
 	const { user } = useAuth();
 	const { t } = useTranslation(['common']);
 	const [ref, isDropDownVisible, setIsDropDownVisible] = useVisibleComponent();
 	const userFirstName = user.full_name && user.full_name.split(' ')[0];
+	const router = useRouter();
+
 	const toggleVisible = () => setIsDropDownVisible((prev) => !prev);
 
 	const handleToggleDropDown = (e) => {
 		e.preventDefault();
 		if (!user?.email) {
-			openModal('login');
+			router.push(internalPages.signIn);
 		} else {
 			toggleVisible();
 		}

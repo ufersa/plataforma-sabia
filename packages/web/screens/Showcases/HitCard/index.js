@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
 import { FiInbox, FiTool } from 'react-icons/fi';
 import { CardTitle } from '../../../components/Common';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 import * as S from './styles';
 

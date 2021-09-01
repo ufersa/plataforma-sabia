@@ -340,11 +340,19 @@ exports[`SolutionCard component it should render a service card 1`] = `
 exports[`SolutionCard component it should render a technology card 1`] = `
 .c1 {
   color: hsla(0,0%,7%);
+  -webkit-align-self: left;
+  -ms-flex-item-align: left;
+  align-self: left;
+  font-weight: 700;
 }
 
 .c1:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c1:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
 .c6 {

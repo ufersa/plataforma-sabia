@@ -16,7 +16,7 @@ import { getMe, setGlobalToken } from '../services';
 import config from '../config';
 import { pageview } from '../utils/googleAnalytics';
 import Head from '../components/head';
-import { internal as internalPages, landingPage } from '../utils/consts/pages';
+import { internal as internalPages, landingPage } from '../utils/enums/pages.enum';
 import { isAppEnvProduction } from '../utils/helper';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -30,13 +30,19 @@ Router.events.on('routeChangeComplete', (url) => {
 });
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const getLayoutComponent = (pathname) =>
-	({
-		[internalPages.ideas]: LayoutLandingPage,
-		[landingPage.about]: LayoutLandingPage,
-		[internalPages.register]: React.Fragment,
-		[internalPages.confirm_account]: React.Fragment,
-	}[pathname] || LayoutDefault);
+const getLayoutComponent = (pathname) => {
+	switch (pathname) {
+		case internalPages.ideas:
+		case landingPage.about:
+			return LayoutLandingPage;
+		case internalPages.register:
+		case internalPages.confirm_account:
+		case internalPages.signIn:
+			return React.Fragment;
+		default:
+			return LayoutDefault;
+	}
+};
 
 export class SabiaApp extends App {
 	static async getInitialProps(appContext) {

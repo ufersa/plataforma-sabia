@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import useTranslation from 'next-translate/useTranslation';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useAuth, useModal } from '../../../hooks';
+import { useRouter } from 'next/router';
+import { useAuth } from '../../../hooks';
 import { handleBookmark } from '../../../services';
 import { Container } from './styles';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const Likes = ({ id, count, colorVariant, type }) => {
 	const [filled, setFilled] = useState(null);
 	const [currentLikes, setCurrentLikes] = useState(count);
 	const [animation, setAnimation] = useState(null);
 
-	const { t } = useTranslation(['common']);
 	const { user, setUser } = useAuth();
-	const { openModal } = useModal();
+	const router = useRouter();
 
 	const userIsLoggedIn = !!user?.id;
 	const animationTimeInMilliseconds = 1500;
@@ -58,13 +58,12 @@ const Likes = ({ id, count, colorVariant, type }) => {
 		e.preventDefault();
 
 		if (!userIsLoggedIn) {
-			return openModal('login', {
-				message: t('common:signInToBookmarkSolution'),
-			});
+			router.push(`${internalPages.signIn}?redirect=${router.asPath}`);
+			return;
 		}
 
 		if (animation) {
-			return null;
+			return;
 		}
 
 		setAnimation(filled ? 'dislike' : 'like');
@@ -86,8 +85,7 @@ const Likes = ({ id, count, colorVariant, type }) => {
 		});
 
 		updateUser(filled);
-
-		return setFilled(!filled);
+		setFilled(!filled);
 	}
 
 	return (

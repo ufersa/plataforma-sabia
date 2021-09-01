@@ -1,31 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it render the review page 1`] = `
-.c35 {
-  background-color: hsla(29,94%,62%);
-  color: hsla(0,0%,100%);
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  padding: 1.8rem 6rem;
+.c38 {
+  position: relative;
+  border: 2px solid transparent;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0.2rem 0.8rem;
+  line-height: 2.4rem;
   text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: inline-block;
+  color: hsl(166,100%,34%);
+  text-transform: none;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  gap: 0.8rem;
+  color: hsla(0,0%,100%);
+  background-color: hsl(166,100%,34%);
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.c35:hover {
-  opacity: 0.8;
+.c38:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.c43 {
+.c38:hover:not(:disabled) {
+  color: hsla(0,0%,100%);
+  background-color: hsl(166,100%,34%);
+  border-color: hsl(166,100%,34%);
+}
+
+.c38:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c38:hover:not(:disabled) {
+  opacity: 0.74;
+}
+
+.c32 {
+  color: hsla(204,7%,15%);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.c45 {
   color: hsla(0,0%,40%);
   font-size: 1.4rem;
   font-weight: 500;
 }
 
-.c31 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -36,7 +77,7 @@ exports[`it render the review page 1`] = `
   align-items: flex-end;
 }
 
-.c47 {
+.c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -50,7 +91,7 @@ exports[`it render the review page 1`] = `
   align-items: flex-end;
 }
 
-.c32 {
+.c35 {
   width: 100%;
   height: 4.4rem;
   font-size: 1.4rem;
@@ -58,33 +99,53 @@ exports[`it render the review page 1`] = `
   padding: 1.2rem;
   opacity: 1;
   background: hsla(0,0%,100%);
-  border: 1px solid hsla(0,0%,80%);
-  border-radius: 0.2rem;
-  color: hsla(0,0%,40%);
+  border: 1px solid hsl(0,0%,93%);
+  border-radius: 0.5rem;
+  color: hsla(0,0%,7%);
 }
 
-.c32::-webkit-input-placeholder {
+.c35::-webkit-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c32::-moz-placeholder {
+.c35::-moz-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c32:-ms-input-placeholder {
+.c35:-ms-input-placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
 }
 
-.c32::placeholder {
+.c35::placeholder {
   color: hsla(0,0%,52%);
   font-weight: 300;
   font-style: italic;
+}
+
+.c35::-webkit-input-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
+}
+
+.c35::-moz-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
+}
+
+.c35:-ms-input-placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
+}
+
+.c35::placeholder {
+  color: hsl(0,0%,74%);
+  font-style: normal;
 }
 
 .c30 {
@@ -106,7 +167,7 @@ exports[`it render the review page 1`] = `
   display: flex;
 }
 
-.c46 {
+.c47 {
   width: 4rem;
   height: 4rem;
   margin: 0.6rem 0.5rem;
@@ -115,24 +176,24 @@ exports[`it render the review page 1`] = `
   transition: fill 0.2s;
 }
 
-.c46:hover {
+.c47:hover {
   cursor: pointer;
   fill: hsla(0,0%,7%);
 }
 
-.c45 {
+.c46 {
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.c44 {
+.c33 {
   color: hsla(0,79%,63%);
   margin-left: 0.5rem;
   display: inline-block;
 }
 
-.c41 .c42 {
+.c44 .c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -143,7 +204,7 @@ exports[`it render the review page 1`] = `
   align-items: center;
 }
 
-.c48 {
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,20 +218,20 @@ exports[`it render the review page 1`] = `
   position: relative;
 }
 
-.c48 input:checked + label .marker {
+.c49 input:checked + label .marker {
   border: 1px solid hsl(166,100%,34%);
   background-color: hsl(166,100%,34%);
 }
 
-.c48 input:checked + label .marker > div {
+.c49 input:checked + label .marker > div {
   background: hsla(0,0%,98%);
 }
 
-.c48:focus-within > label .marker {
+.c49:focus-within > label .marker {
   box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
 }
 
-.c49 {
+.c50 {
   margin-right: 1.2rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -178,7 +239,7 @@ exports[`it render the review page 1`] = `
   position: absolute;
 }
 
-.c50 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -193,7 +254,7 @@ exports[`it render the review page 1`] = `
   line-height: 2.1rem;
 }
 
-.c50 .marker {
+.c51 .marker {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,132 +267,11 @@ exports[`it render the review page 1`] = `
   background: hsla(0,0%,98%);
 }
 
-.c50 .marker > div {
+.c51 .marker > div {
   margin: auto;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-}
-
-.c28 {
-  margin: 1rem auto;
-  padding: 2rem 1rem;
-  width: 100%;
-}
-
-.c28 button,
-.c28 a {
-  padding-right: 3rem;
-  padding-left: 3rem;
-}
-
-.c28 > label {
-  width: 100%;
-  display: block;
-  font-weight: 700;
-  font-size: 1.7rem;
-}
-
-.c34 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c34 > a[href] {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  padding: 0 1rem;
-}
-
-.c34 > button {
-  margin-top: 0.5rem;
-  margin-left: 0rem;
-}
-
-.c27 {
-  width: 50rem;
-}
-
-.c27 form {
-  margin-top: 0rem;
-  padding-top: 0rem;
-}
-
-.c27 button {
-  width: 100%;
-  background-color: hsla(29,94%,62%);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.c27 a {
-  font-weight: 100;
-}
-
-.c29 {
-  display: block;
-  font-weight: 500;
-  font-size: 3rem;
-  color: hsla(0,0%,40%);
-  padding-bottom: 2rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c37 {
-  margin-top: 3rem;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c37 button {
-  width: 100%;
-  background-color: hsl(166,100%,34%);
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.c36 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: hsla(29,94%,62%);
-  font-weight: 500 !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
-}
-
-.c33 {
-  color: hsla(123,40%,59%);
 }
 
 .c24 {
@@ -373,7 +313,7 @@ exports[`it render the review page 1`] = `
   text-align: left;
 }
 
-.c40 {
+.c43 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -623,7 +563,41 @@ exports[`it render the review page 1`] = `
   text-align: center;
 }
 
-.c38 {
+.c37 {
+  color: hsla(204,70%,53%);
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-weight: 500;
+}
+
+.c37:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c37:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c40 {
+  color: hsla(204,70%,53%);
+  -webkit-align-self: left;
+  -ms-flex-item-align: left;
+  align-self: left;
+  font-weight: 700;
+}
+
+.c40:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c40:focus {
+  box-shadow: 0px 0px 4px 2px hsla(29,94%,62%);
+}
+
+.c41 {
   width: 100%;
   height: 100%;
   background: hsla(0,0%,100%);
@@ -631,7 +605,7 @@ exports[`it render the review page 1`] = `
   background: transparent;
 }
 
-.c38 section {
+.c41 section {
   padding: 0.8rem;
   width: 100%;
   height: 100%;
@@ -640,46 +614,107 @@ exports[`it render the review page 1`] = `
   overflow-y: hidden;
 }
 
-.c39 {
+.c42 {
   border-collapse: collapse;
   width: 100%;
   color: hsla(204,7%,15%);
 }
 
-.c39 th,
-.c39 td {
+.c42 th,
+.c42 td {
   padding: 0.8rem 0.5rem;
   border-bottom: 0.1rem solid hsl(0,0%,74%);
 }
 
-.c39 th:not(:first-child),
-.c39 td:not(:first-child) {
+.c42 th:not(:first-child),
+.c42 td:not(:first-child) {
   text-align: center;
 }
 
-.c39 thead th {
+.c42 thead th {
   font-weight: 500;
   border-bottom: 0.2rem solid hsl(0,0%,74%);
 }
 
-.c39 tbody tr:nth-child(odd) {
+.c42 tbody tr:nth-child(odd) {
   background-color: hsl(0,0%,93%);
 }
 
 .c26 {
-  padding: 2rem 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c27 {
+  max-width: 100%;
+  width: 33rem;
+}
+
+.c28 {
+  line-height: 2.8rem;
+  margin-bottom: 3.2rem;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.c36 > a {
+  margin-bottom: 0.8rem;
+}
+
+.c39 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 2.4rem;
+  color: hsla(0,0%,31%);
+  margin-top: 4.8rem;
+}
+
+.c39 > a {
+  font-size: 1.6rem;
+  margin-left: 0.4rem;
 }
 
 .c22 {
@@ -806,31 +841,8 @@ exports[`it render the review page 1`] = `
   margin-top: 1rem;
 }
 
-@media (max-width:768px) {
-  .c35 {
-    font-size: 1.6rem;
-    padding: 1.4rem 6rem;
-  }
-}
-
-@media (max-width:768px) {
-  .c34 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-  .c34 > button {
-    margin-left: 0;
-  }
-}
-
-@media (max-width:768px) {
-  .c27 {
+@media screen and (min-width:768px) {
+  .c38 {
     width: 100%;
   }
 }
@@ -874,14 +886,14 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c40 {
+  .c43 {
     max-width: initial;
     margin: 0 0 1rem 0;
   }
 }
 
 @media (max-width:768px) {
-  .c40 {
+  .c43 {
     margin: 0;
   }
 }
@@ -906,15 +918,42 @@ exports[`it render the review page 1`] = `
 }
 
 @media (max-width:1170px) {
-  .c38 {
+  .c41 {
     max-width: 80rem;
   }
 }
 
 @media (max-width:768px) {
-  .c38 {
+  .c41 {
     max-width: 65rem;
     margin: auto;
+  }
+}
+
+@media screen and (max-width:1023.9px) {
+  .c26 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding-top: 3.2rem;
+  }
+}
+
+@media screen and (max-width:1023.9px) {
+  .c39 {
+    margin-top: 3.2rem;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .c39 > a {
+    margin-left: 0;
   }
 }
 
@@ -1673,103 +1712,116 @@ exports[`it render the review page 1`] = `
           <div
             class="c25"
           >
-            <div
+            <form
               class="c26"
+              data-cy="signin-form"
             >
               <div
                 class="c27"
               >
-                <form
+                <h3
                   class="c28"
                 >
-                  <div
-                    class="c29"
-                  >
-                    Já tem cadastro?
-                  </div>
+                  Faça login com sua conta
+                </h3>
+                <div
+                  class="c29"
+                >
                   <div
                     class="c30"
                   >
-                    
+                    <label
+                      class="c31 c32"
+                      for="email"
+                    >
+                      E-mail
+                       
+                      <span
+                        aria-label="Indicador visual de campo obrigatório"
+                        class="c33"
+                      >
+                        *
+                      </span>
+                    </label>
                     <div
-                      class="c31"
+                      class="c34"
                     >
                       <input
-                        aria-label=""
+                        aria-label="E-mail"
                         aria-required="true"
-                        class="c32"
+                        class="c35"
                         id="email"
                         name="email"
-                        placeholder="E-mail *"
-                        type="email"
+                        placeholder="Digite o seu e-mail"
+                        type="text"
                       />
                     </div>
                   </div>
                   <div
                     class="c30"
                   >
-                    
+                    <label
+                      class="c31 c32"
+                      for="password"
+                    >
+                      Senha
+                       
+                      <span
+                        aria-label="Indicador visual de campo obrigatório"
+                        class="c33"
+                      >
+                        *
+                      </span>
+                    </label>
                     <div
-                      class="c31"
+                      class="c34"
                     >
                       <input
-                        aria-label=""
+                        aria-label="Senha"
                         aria-required="true"
-                        class="c32"
+                        class="c35"
                         id="password"
                         name="password"
-                        placeholder="Senha *"
+                        placeholder="Digite a sua senha"
                         type="password"
                       />
                     </div>
                   </div>
-                  <p
-                    class="c33"
-                  />
-                  <div
-                    class="c34"
-                  >
-                    <button
-                      class="c35"
-                      color="hsla(0, 0%, 100%)"
-                      name=""
-                      title=""
-                      type="submit"
-                    >
-                      Entrar
-                    </button>
-                    <a
-                      class="c36"
-                    >
-                      Esqueci minha senha
-                    </a>
-                  </div>
-                </form>
+                </div>
                 <div
-                  class="c37"
+                  class="c36"
                 >
-                  <div
-                    class="c29"
-                  >
-                    Você é novo aqui?
-                  </div>
-                  <button
-                    class="c35"
-                    color="hsla(0, 0%, 100%)"
-                    name=""
-                    title=""
-                    type="button"
-                  >
-                    CADASTRE SEU USUÁRIO
-                  </button>
                   <a
-                    class="c36"
+                    class="c37"
+                    color="blue"
+                    target="_self"
                   >
-                    Confirmar conta
+                    Esqueceu sua senha?
                   </a>
+                  <button
+                    class="c38"
+                    name=""
+                    type="submit"
+                  >
+                    Entrar
+                  </button>
                 </div>
               </div>
-            </div>
+              <div
+                class="c39"
+              >
+                <span>
+                  Não possui conta? 
+                </span>
+                <a
+                  class="c40"
+                  color="blue"
+                  target="_self"
+                >
+                  Cadastre-se agora mesmo
+                </a>
+              </div>
+            </form>
           </div>
         </div>
         <div
@@ -1784,11 +1836,11 @@ exports[`it render the review page 1`] = `
             </h4>
           </div>
           <div
-            class="c38"
+            class="c41"
           >
             <section>
               <table
-                class="c39"
+                class="c42"
               >
                 <thead>
                   <tr>
@@ -1876,7 +1928,7 @@ exports[`it render the review page 1`] = `
       class="c1"
     >
       <div
-        class="c40 c3"
+        class="c43 c3"
       >
         <div
           class="c4"
@@ -1890,25 +1942,25 @@ exports[`it render the review page 1`] = `
             </h4>
           </div>
           <div
-            class="c41"
+            class="c44"
           >
             <label
-              class="c42 c43"
+              class="c31 c45"
             >
               Finalizar edição da tecnologia e enviar para análise do curador?
               <span
                 aria-label="Indicador visual de campo obrigatório"
-                class="c44"
+                class="c33"
               >
                 *
               </span>
               <span
-                class="c45"
+                class="c46"
                 name="help_button"
                 tabindex="0"
               >
                 <svg
-                  class="c46"
+                  class="c47"
                   fill="currentColor"
                   height="1em"
                   id="sendToReviewer"
@@ -1925,20 +1977,20 @@ exports[`it render the review page 1`] = `
               </span>
             </label>
             <div
-              class="c47"
+              class="c48"
             >
               <div
-                class="c48"
+                class="c49"
               >
                 <input
-                  class="c49"
+                  class="c50"
                   id="sendToReviewer_Sim"
                   name="sendToReviewer"
                   type="radio"
                   value="true"
                 />
                 <label
-                  class="c50"
+                  class="c51"
                   for="sendToReviewer_Sim"
                 >
                   <div
@@ -1950,17 +2002,17 @@ exports[`it render the review page 1`] = `
                 </label>
               </div>
               <div
-                class="c48"
+                class="c49"
               >
                 <input
-                  class="c49"
+                  class="c50"
                   id="sendToReviewer_Não"
                   name="sendToReviewer"
                   type="radio"
                   value="false"
                 />
                 <label
-                  class="c50"
+                  class="c51"
                   for="sendToReviewer_Não"
                 >
                   <div

@@ -12,7 +12,7 @@ import { getTaxonomyTerms, requestToBeReviewer } from '../../../services';
 import { theme } from '../../../styles';
 import { mapArrayOfObjectToSelect } from '../../../utils/helper';
 import { useAuth, useModal } from '../../../hooks';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 import * as S from './styles';
 
 const customSelectStyles = {

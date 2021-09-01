@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import { Form, InputField, SelectField, TextField } from '../../Form';
 import Actions from './Actions';
 import { toast } from '../../Toast';
-import { useAuth, useModal } from '../../../hooks';
+import { useAuth } from '../../../hooks';
 import { getTaxonomies, createTerm } from '../../../services';
 import { createIdea } from '../../../services/ideas';
 import { flattenSelectOptionsValue, mapArrayOfObjectToSelect } from '../../../utils/helper';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 import * as S from './styles';
 
 const RegisterIdea = () => {
-	const { t } = useTranslation(['common']);
 	const { user } = useAuth();
-	const { openModal } = useModal();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [keywordsTerms, setKeywordsTerms] = useState([]);
+	const router = useRouter();
 
 	useEffect(() => {
 		const fetchTerms = async () => {
@@ -80,9 +80,7 @@ const RegisterIdea = () => {
 	 */
 	const verifyAuthUser = () => {
 		if (!user.email) {
-			openModal('login', {
-				message: t('common:signInToContinue'),
-			});
+			router.push(`${internalPages.signIn}?redirect=${router.asPath}`);
 		}
 	};
 

@@ -5,7 +5,7 @@ import { Link } from '../Link';
 import { formatMoney } from '../../utils/helper';
 import { ROLES as rolesEnum } from '../../utils/enums/api.enum';
 import { TYPES as typesEnum } from '../../utils/enums/technology.enums';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 import Likes from './Likes';
 

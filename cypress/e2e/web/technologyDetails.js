@@ -13,9 +13,7 @@ describe('technology details', () => {
 	it('should list details', () => {
 		Cypress.on('uncaught:exception', () => false);
 
-		cy.visit(`/t/${technology.slug}`);
-
-		cy.signIn();
+		cy.signIn({ redirectTo: `/t/${technology.slug}` });
 
 		cy.findAllByText(new RegExp(technology.title, 'i')).should('exist');
 		cy.findAllByText(new RegExp(technology.description, 'im')).should('exist');
@@ -83,7 +81,7 @@ describe('technology details', () => {
 
 		cy.findAllByText(/^(entrar|sign in)$/i).should('be.visible');
 
-		cy.signIn({ openModal: false });
+		cy.signIn({ inline: true });
 
 		cy.findAllByText(/custos de implantação/i).should('be.visible');
 		cy.findAllByText(/custos de manutenção/i).should('be.visible');
@@ -101,8 +99,7 @@ describe('technology details', () => {
 
 	describe('add review', () => {
 		beforeEach(() => {
-			cy.visit(`/t/${technology.slug}`);
-			cy.signIn();
+			cy.signIn({ redirectTo: `/t/${technology.slug}` });
 
 			cy.findAllByText(/avaliação/i)
 				.should('exist')
@@ -191,8 +188,7 @@ describe('technology details', () => {
 
 	describe('new question', () => {
 		beforeEach(() => {
-			cy.visit(`/t/${technology.slug}`);
-			cy.signIn();
+			cy.signIn({ redirectTo: `/t/${technology.slug}` });
 
 			cy.findAllByText(/perguntas e respostas/i)
 				.should('exist')

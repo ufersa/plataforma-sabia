@@ -17,7 +17,7 @@ import {
 	LOCATIONS as technologyLocationsEnum,
 } from '../../utils/enums/technology.enums';
 import { SafeHtml } from '../SafeHtml';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 const FormWizardContainer = styled.div``;
 

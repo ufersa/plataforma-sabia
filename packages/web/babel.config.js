@@ -1,5 +1,5 @@
 module.exports = (api) => {
-	const cypress = api.env('cypress');
+	api.cache.using(() => process.env.APP_ENV);
 
 	return {
 		presets: ['next/babel'],
@@ -10,7 +10,7 @@ module.exports = (api) => {
 					ssr: true,
 				},
 			],
-			cypress
+			process.env.APP_ENV === 'cypress'
 				? [
 						'istanbul',
 						{
@@ -21,6 +21,7 @@ module.exports = (api) => {
 								'/stories/',
 								'/.storybook/',
 								'/tests/',
+								'/__tests__/',
 								'config.js',
 								'server.js',
 								'stories.js',

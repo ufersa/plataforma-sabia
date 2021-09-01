@@ -8,7 +8,7 @@
 
 const ms = require('smtp-tester');
 
-module.exports = (on) => {
+module.exports = (on, config) => {
 	const port = 1025;
 	const mailServer = ms.init(port);
 	let lastEmail = {};
@@ -31,4 +31,6 @@ module.exports = (on) => {
 			return lastEmail[email] || null;
 		},
 	});
+
+	return config;
 };

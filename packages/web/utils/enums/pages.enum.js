@@ -15,6 +15,7 @@ export const landingPage = {
 	about: '#about',
 	contact: '#contact',
 	features: '#features',
+	resources: '#resources',
 };
 
 export const internal = {
@@ -23,6 +24,7 @@ export const internal = {
 	newTechnology: '/technology/new',
 	editTechnology: '/technology/:id/edit',
 	newService: '/service/new',
+	newSolution: '/solution/new',
 	ideas: '/ideias',
 	announcements: '/editais',
 	showcase: '/vitrines',
@@ -44,6 +46,8 @@ export const internal = {
 	revisions: '/revisions',
 	register: '/cadastrar',
 	confirm_account: '/confirmar-conta',
+	signIn: '/entrar',
+	myAccount: '/user/my-account',
 };
 
 export const auth = {

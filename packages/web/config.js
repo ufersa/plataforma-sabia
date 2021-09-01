@@ -3,7 +3,11 @@ import indexes from './algoliaIndexes';
 // eslint-disable-next-line import/no-mutable-exports
 let config;
 
-if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
+if (
+	typeof window === 'undefined' ||
+	process.env.APP_ENV === 'testing' ||
+	process.env.APP_ENV === 'cypress'
+) {
 	const production = {
 		ALGOLIA_SEARCH_KEY: '8ea4ffa0588206bb0c0751294097e875',
 		ALGOLIA_APPLICATION_ID: 'GC7K0ETHXB',
@@ -95,6 +99,7 @@ if (typeof window === 'undefined' || process.env.APP_ENV === 'testing') {
 	config = {
 		...development,
 		...(process.env.APP_ENV === 'testing' ? testing : {}),
+		...(process.env.APP_ENV === 'cypress' ? testing : {}),
 		...(process.env.APP_ENV === 'staging' ? staging : {}),
 		...(process.env.APP_ENV === 'production' ? production : {}),
 	};

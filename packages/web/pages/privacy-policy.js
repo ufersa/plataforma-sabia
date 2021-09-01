@@ -4,7 +4,7 @@ import theme from '../styles/theme';
 import { ContentContainer } from '../components/Common';
 import { PageTitle, Box } from '../components/TermsAndPolicies/styles';
 import Head from '../components/head';
-import { landingPage, internal as internalPages } from '../utils/consts/pages';
+import { landingPage, internal as internalPages } from '../utils/enums/pages.enum';
 
 const PrivacyPolicy = () => {
 	const { t } = useTranslation(['pages']);

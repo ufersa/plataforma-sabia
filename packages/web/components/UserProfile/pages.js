@@ -11,7 +11,7 @@ import {
 	Search,
 	List,
 } from './icons';
-import { internal as internalPages } from '../../utils/consts/pages';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
 
 /**
  * Translates profile sections and pages.

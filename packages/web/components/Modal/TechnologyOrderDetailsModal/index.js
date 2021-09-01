@@ -9,7 +9,7 @@ import { InputField } from '../../Form';
 import { getOrder } from '../../../services';
 import Loading from '../../Loading';
 import { getFundingLabelText, getUseLabelText } from '../../../utils/technologyOrders';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 
 const TechnologyOrderDetailsModal = ({ closeModal, id }) => {
 	const { data: order, isValidating } = useSwr(

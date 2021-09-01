@@ -10,7 +10,7 @@ import { toast } from '../../Toast';
 import { accountConfirmation, emailConfirmation } from '../../../services';
 
 import { Form, StepTitle, StepSubtitle, StepInfo, Actions } from '../styles';
-import { internal as internalPages } from '../../../utils/consts/pages';
+import { internal as internalPages } from '../../../utils/enums/pages.enum';
 import * as S from './styles';
 
 const StepThree = ({ activeStep, setNextStep, userData, updateUserData }) => {

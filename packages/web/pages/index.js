@@ -3,27 +3,31 @@ import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Head from '../components/head';
 import { RectangularButton } from '../components/Button';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
-import { useModal, useTheme } from '../hooks';
-import { internal as internalPages } from '../utils/consts/pages';
+import { useTheme } from '../hooks';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 import AnnouncementBanner from '../components/AnnouncementBanner';
+import { toast } from '../components/Toast';
 
 const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common', 'pages']);
-	const { openModal } = useModal();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (emailConfirmation) {
-			openModal('login', { message: t('common:verifiedEmail') });
+			toast.success(t('common:verifiedEmail'));
+			router.push(internalPages.signIn);
 		} else if (changeEmail) {
-			openModal('login', { message: t('common:updatedEmail') });
+			toast.success(t('common:updatedEmail'));
+			router.push(internalPages.signIn);
 		}
-	}, [emailConfirmation, changeEmail, openModal, t]);
+	}, [emailConfirmation, changeEmail, t, router]);
 
 	return (
 		<>
