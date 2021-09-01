@@ -56,6 +56,7 @@ const SignInForm = ({ redirect, inline }) => {
 						label="E-mail"
 						placeholder="Digite o seu e-mail"
 						variant="lightRounded"
+						validation={{ required: true }}
 					/>
 					<InputField
 						form={form}
@@ -64,6 +65,7 @@ const SignInForm = ({ redirect, inline }) => {
 						label="Senha"
 						placeholder="Digite a sua senha"
 						variant="lightRounded"
+						validation={{ required: true }}
 					/>
 				</S.InputsWrapper>
 				<S.Actions>
