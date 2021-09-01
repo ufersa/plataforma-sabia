@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "test-utils": ["tests/test-utils"]
+    },
+  },
+  "exclude": ["node_modules"]
+}
