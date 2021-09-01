@@ -20,7 +20,7 @@ export const StepTitle = styled.h3`
 export const StepSubtitle = styled.p`
 	${({ theme: { colors }, smallFontSize }) => css`
 		color: ${colors.silver};
-		margin-bottom: 2.4rem;
+		margin-bottom: 4rem;
 		font-size: ${smallFontSize ? '1.4rem' : '1.6rem'};
 		line-height: 2.4rem;
 	`}
@@ -30,6 +30,7 @@ export const InputsWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 3.2rem;
+	gap: 1.6rem;
 `;
 
 export const Actions = styled.div`
