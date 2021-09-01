@@ -30,7 +30,7 @@ const Protected = ({
 		}
 
 		if (!isAuthenticated && !inline) {
-			router.push(`${internalPages.signIn}?redirect=${router.pathname}`);
+			router.push(`${internalPages.signIn}?redirect=${router.asPath}`);
 		}
 
 		if (!isAuthorized && redirectTo) {
