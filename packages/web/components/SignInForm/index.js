@@ -18,6 +18,7 @@ const SignInForm = ({ redirect, inline }) => {
 	const form = useForm();
 	const router = useRouter();
 	const { login } = useAuth();
+
 	const handleSubmit = async ({ email, password }) => {
 		setIsSubmitting(true);
 		setError(null);
