@@ -75,3 +75,7 @@ export const ResendEmailLink = styled.div`
 		font-weight: 500;
 	}
 `;
+
+export const PasswordWrapper = styled.div`
+	position: relative;
+`;

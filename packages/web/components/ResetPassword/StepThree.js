@@ -5,6 +5,7 @@ import { RectangularButton } from '../Button';
 import { Error, InputField } from '../Form';
 import { useAuth } from '../../hooks';
 import * as S from './styles';
+import PasswordStrength from '../PasswordStrength';
 
 const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,15 +46,18 @@ const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 				{!!error && <Error message={error} />}
 
 				<S.InputsWrapper>
-					<InputField
-						form={form}
-						validation={{ required: true }}
-						name="password"
-						label="Informe a sua nova senha"
-						placeholder="Digite sua nova senha"
-						variant="lightRounded"
-						type="password"
-					/>
+					<S.PasswordWrapper>
+						<InputField
+							form={form}
+							validation={{ required: true }}
+							name="password"
+							label="Informe a sua nova senha"
+							placeholder="Digite sua nova senha"
+							variant="lightRounded"
+							type="password"
+						/>
+						<PasswordStrength form={form} inputToWatch="password" />
+					</S.PasswordWrapper>
 					<InputField
 						form={form}
 						validation={{
