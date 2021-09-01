@@ -88,7 +88,7 @@ Cypress.Commands.add(
 				method: 'PUT',
 				url: `http://localhost:3334/users/${userId}`,
 				body: {
-					name,
+					full_name: name,
 					phone,
 				},
 				headers: {
