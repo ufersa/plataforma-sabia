@@ -50,13 +50,8 @@ export const internal = {
 	myAccount: '/user/my-account',
 };
 
-export const auth = {
-	resetPassword: '/auth/reset-password',
-};
-
 export default {
 	socialMedia,
 	landingPage,
 	internal,
-	auth,
 };
