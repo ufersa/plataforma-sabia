@@ -1,19 +1,7 @@
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.div`
-	${({ theme: { screens }, mobileBreakpoint }) => css`
-		position: absolute;
-		right: -55%;
-		top: 1.6rem;
-
-		@media screen and (max-width: ${mobileBreakpoint || screens.xmedium}px) {
-			position: static;
-		}
-	`}
-`;
-
 export const Container = styled.div`
-	${({ theme: { colors, metrics, screens } }) => css`
+	${({ theme: { colors, metrics } }) => css`
 		padding: 1.6rem;
 		border: 1.5px solid ${colors.red};
 		border-radius: ${metrics.baseRadius}rem;
@@ -32,10 +20,22 @@ export const Container = styled.div`
 			transform: rotate(135deg);
 			background-color: ${colors.lightGray6};
 		}
+	`}
+`;
 
-		@media screen and (max-width: ${screens.xmedium}px) {
-			&:before {
-				display: none;
+export const Wrapper = styled.div`
+	${({ theme: { screens }, mobileBreakpoint }) => css`
+		position: absolute;
+		right: -55%;
+		top: 1.6rem;
+
+		@media screen and (max-width: ${mobileBreakpoint || screens.xmedium}px) {
+			position: static;
+
+			& ${Container} {
+				&:before {
+					display: none;
+				}
 			}
 		}
 	`}
