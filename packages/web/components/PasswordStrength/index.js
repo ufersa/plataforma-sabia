@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect, useMemo } from 'react';
 import { useWatch } from 'react-hook-form';
 import * as S from './styles';
 
@@ -62,7 +63,20 @@ const PasswordStrength = ({ form, inputToWatch, mobileBreakpoint }) => {
 		control: form.control,
 		name: inputToWatch,
 	});
-	const strength = checkStrength(inputValue);
+	const strength = useMemo(() => checkStrength(inputValue), [inputValue]);
+
+	useEffect(() => {
+		const hasError = Object.values(strength).some((item) => !item);
+
+		if (hasError) {
+			form.setError(inputToWatch);
+		} else {
+			form.clearErrors(inputToWatch);
+		}
+
+		// Form is already memoized by hook-form
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [inputValue, strength]);
 
 	return (
 		<S.Wrapper mobileBreakpoint={mobileBreakpoint}>
@@ -81,7 +95,11 @@ const PasswordStrength = ({ form, inputToWatch, mobileBreakpoint }) => {
 };
 
 PasswordStrength.propTypes = {
-	form: PropTypes.shape({ control: PropTypes.shape({}) }).isRequired,
+	form: PropTypes.shape({
+		control: PropTypes.shape({}),
+		setError: PropTypes.func,
+		clearErrors: PropTypes.func,
+	}).isRequired,
 	inputToWatch: PropTypes.string.isRequired,
 	mobileBreakpoint: PropTypes.number,
 };
