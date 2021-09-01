@@ -4,22 +4,24 @@ import * as locales from '../../packages/web/public/static/locales';
 const defaultUserEmail = 'sabiatestinge2e@gmail.com';
 const defaultUserPassword = 'sabiatesting';
 
-Cypress.Commands.add('signIn', (options = { openModal: true }) => {
-	if (options.openModal) {
-		cy.findAllByText(/^(entrar|sign in)$/i)
-			.first()
-			.click();
-	}
-	const email = options.email ?? defaultUserEmail;
-	const password = options.password ?? defaultUserPassword;
+Cypress.Commands.add(
+	'signIn',
+	({ email = defaultUserEmail, password = defaultUserPassword } = {}) => {
+		cy.intercept('POST', '**/auth/login').as('signIn');
+		cy.location().then((location) => {
+			if (location.pathname !== '/entrar') cy.visit(`/entrar`);
+		});
+		cy.get('#email')
+			.type(email)
+			.get('#password')
+			.type(password);
 
-	cy.get('#email')
-		.type(email)
-		.get('#password')
-		.type(password);
-
-	cy.get('div[class*=Modal] button[type=submit]').click();
-});
+		cy.findByRole('button').click();
+		cy.wait('@signIn')
+			.its('response.statusCode')
+			.should('eq', 200);
+	},
+);
 
 /**
  * Custom command to register a new user
