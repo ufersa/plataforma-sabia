@@ -47,6 +47,7 @@ export const internal = {
 	register: '/cadastrar',
 	confirm_account: '/confirmar-conta',
 	signIn: '/entrar',
+	resetPassword: '/resetar-senha',
 	myAccount: '/user/my-account',
 };
 
