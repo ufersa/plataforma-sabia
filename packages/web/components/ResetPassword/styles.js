@@ -1,11 +1,18 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	flex-grow: 1;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
+
+		@media screen and (max-width: ${screens.xmedium}px) {
+			padding-top: 3.2rem;
+			justify-content: flex-start;
+		}
+	`}
 `;
 
 export const Form = styled.form`
