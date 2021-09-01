@@ -40,7 +40,7 @@ const SignInForm = ({ redirect, inline }) => {
 	};
 
 	return (
-		<S.FormWrapper onSubmit={form.handleSubmit(handleSubmit)}>
+		<S.FormWrapper onSubmit={form.handleSubmit(handleSubmit)} data-cy="signin-form">
 			<S.FormContent>
 				<S.Title>Faça login com sua conta</S.Title>
 				{!!error && (

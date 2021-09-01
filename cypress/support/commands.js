@@ -6,17 +6,27 @@ const defaultUserPassword = 'sabiatesting';
 
 Cypress.Commands.add(
 	'signIn',
-	({ email = defaultUserEmail, password = defaultUserPassword } = {}) => {
+	({
+		email = defaultUserEmail,
+		password = defaultUserPassword,
+		redirectTo = '',
+		inline = false,
+	} = {}) => {
 		cy.intercept('POST', '**/auth/login').as('signIn');
 		cy.location().then((location) => {
-			if (location.pathname !== '/entrar') cy.visit(`/entrar`);
+			if (location.pathname !== '/entrar' && !inline)
+				cy.visit(`/entrar${redirectTo ? `?redirect=${redirectTo}` : ''}`);
 		});
+
 		cy.get('#email')
 			.type(email)
 			.get('#password')
 			.type(password);
 
-		cy.findByRole('button').click();
+		cy.get('[data-cy="signin-form"]').within(() => {
+			cy.findByRole('button', { name: /entrar/i }).click();
+		});
+
 		cy.wait('@signIn')
 			.its('response.statusCode')
 			.should('eq', 200);
