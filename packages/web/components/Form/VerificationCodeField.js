@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { RequiredIndicator } from '.';
+import RequiredIndicator from './Required/Indicator';
 
 import { InputError, InputLabel, VerificationCodeWrapper } from './styles';
 
