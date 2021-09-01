@@ -1,26 +1,34 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
-import { render } from 'test-utils';
+import { render, screen } from 'test-utils';
 import * as Router from 'next/router';
 import { Protected } from '..';
 import * as useAuth from '../../../hooks/useAuth';
 
+jest.mock('../../SignInForm', () => ({
+	__esModule: true,
+	default: () => <div data-testid="sign-in-form" />,
+}));
+
 describe('Protected component', () => {
-	it('should return the login modal if user is not logged in', () => {
+	it('should redirect to login if user is logged out', () => {
+		const mockPush = jest.fn();
+		jest.spyOn(Router, 'useRouter').mockReturnValue({
+			push: mockPush,
+			asPath: 'redirecting',
+		});
 		const childrenText = 'children';
 
-		const { container, queryByTestId } = render(
+		const { container } = render(
 			<Protected>
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
 
 		expect(container).toMatchSnapshot();
-		expect(container.querySelector('h1').textContent).not.toEqual(childrenText);
-		expect(queryByTestId('modal')).toBeTruthy();
-		expect(container.querySelector('form input[type=email]')).toBeTruthy();
-		expect(container.querySelector('form input[type=password]')).toBeTruthy();
-		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
+		expect(screen.queryByText(childrenText)).not.toBeInTheDocument();
+		expect(mockPush).toHaveBeenCalledTimes(1);
+		expect(mockPush).toHaveBeenCalledWith('/entrar?redirect=redirecting');
 	});
 
 	it('should render children if user is logged in and the component does not require a role', () => {
@@ -119,17 +127,14 @@ describe('Protected component', () => {
 
 		const childrenText = 'children';
 
-		const { container, queryByTestId } = render(
+		const { container } = render(
 			<Protected inline>
 				<h1>{childrenText}</h1>
 			</Protected>,
 		);
 
 		expect(container).toMatchSnapshot();
-		expect(queryByTestId('modal')).toBeNull();
-		expect(container.querySelector('form input[type=email]')).toBeTruthy();
-		expect(container.querySelector('form input[type=password]')).toBeTruthy();
-		expect(container.querySelector('form button[type=submit]')).toBeTruthy();
+		expect(screen.getByTestId(/sign-in-form/i)).toBeInTheDocument();
 	});
 
 	it('should return only the inline message when onlyUnauthorizedMessage is provided', () => {
