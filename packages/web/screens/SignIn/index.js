@@ -9,15 +9,16 @@ import { Link } from '../../components/Link';
 import { InputField } from '../../components/Form';
 import { RectangularButton } from '../../components/Button';
 import { internal as internalPages } from '../../utils/enums/pages.enum';
-import { login } from '../../services';
 import { toast } from '../../components/Toast';
 import * as S from './styles';
+import { useAuth } from '../../hooks';
 
 const SignIn = ({ redirect }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState(null);
 	const form = useForm();
 	const router = useRouter();
+	const { login } = useAuth();
 
 	const handleSubmit = async ({ email, password }) => {
 		setIsSubmitting(true);
