@@ -13,7 +13,6 @@ const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 	const [error, setError] = useState('');
 	const form = useForm({
 		defaultValues: { password: '', confirmPassword: '' },
-		reValidateMode: 'onSubmit',
 	});
 	const { resetPassword } = useAuth();
 	const passwordValue = useWatch({
