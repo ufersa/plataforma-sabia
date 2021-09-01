@@ -3,7 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useState } from 'react';
 import { RectangularButton } from '../Button';
 import { Error, InputField } from '../Form';
-import { useAuth } from '../../hooks';
+import { useAuth, useTheme } from '../../hooks';
 import * as S from './styles';
 import PasswordStrength from '../PasswordStrength';
 
@@ -16,6 +16,7 @@ const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 		control: form.control,
 		name: 'password',
 	});
+	const theme = useTheme();
 
 	const handleSubmit = async ({ password }) => {
 		setIsSubmitting(true);
@@ -56,7 +57,11 @@ const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 							variant="lightRounded"
 							type="password"
 						/>
-						<PasswordStrength form={form} inputToWatch="password" />
+						<PasswordStrength
+							form={form}
+							inputToWatch="password"
+							mobileBreakpoint={theme.screens.large}
+						/>
 					</S.PasswordWrapper>
 					<InputField
 						form={form}

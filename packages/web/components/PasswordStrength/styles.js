@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-	${({ theme: { screens } }) => css`
+	${({ theme: { screens }, mobileBreakpoint }) => css`
 		position: absolute;
 		right: -55%;
 		top: 1.6rem;
 
-		@media screen and (max-width: ${screens.xmedium}px) {
+		@media screen and (max-width: ${mobileBreakpoint || screens.xmedium}px) {
 			position: static;
 		}
 	`}

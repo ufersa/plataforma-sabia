@@ -57,7 +57,7 @@ const strengthList = [
 	},
 ];
 
-const PasswordStrength = ({ form, inputToWatch }) => {
+const PasswordStrength = ({ form, inputToWatch, mobileBreakpoint }) => {
 	const inputValue = useWatch({
 		control: form.control,
 		name: inputToWatch,
@@ -65,7 +65,7 @@ const PasswordStrength = ({ form, inputToWatch }) => {
 	const strength = checkStrength(inputValue);
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper mobileBreakpoint={mobileBreakpoint}>
 			<S.Container>
 				<S.Title>Sua senha deve conter:</S.Title>
 				<S.StrengthList>
@@ -83,6 +83,11 @@ const PasswordStrength = ({ form, inputToWatch }) => {
 PasswordStrength.propTypes = {
 	form: PropTypes.shape({ control: PropTypes.shape({}) }).isRequired,
 	inputToWatch: PropTypes.string.isRequired,
+	mobileBreakpoint: PropTypes.number,
+};
+
+PasswordStrength.defaultProps = {
+	mobileBreakpoint: undefined,
 };
 
 export default PasswordStrength;
