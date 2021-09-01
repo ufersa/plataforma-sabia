@@ -58,7 +58,7 @@ This project has been documented by using the [apiDoc](https://apidocjs.com/) li
 npm run apidoc
 ```
 
-After generating the documentation files, you can start the API server and visit `http://localhost:3333/apidoc` to see the documentation.
+After generating the documentation files, you can start the API server and visit `http://localhost:3333/docs` to see the documentation.
 
 ## Using Fake Values
 
