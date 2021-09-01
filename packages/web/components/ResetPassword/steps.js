@@ -8,7 +8,7 @@ const steps = [
 		title: 'Esqueceu sua senha?',
 		subtitle: (
 			<span>
-				Digite o email cadastrado, enviaremos um <strong>link</strong> de recuperação para
+				Digite o email cadastrado, enviaremos um <strong>código</strong> de verificação para
 				você.
 			</span>
 		),
