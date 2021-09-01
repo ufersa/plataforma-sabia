@@ -10,7 +10,7 @@ import PasswordStrength from '../PasswordStrength';
 const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState('');
-	const form = useForm();
+	const form = useForm({ defaultValues: { password: '', confirmPassword: '' } });
 	const { resetPassword } = useAuth();
 	const passwordValue = useWatch({
 		control: form.control,
