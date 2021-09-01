@@ -1,39 +1,7 @@
 import PropTypes from 'prop-types';
-import { useEffect, useMemo } from 'react';
 import { useWatch } from 'react-hook-form';
 import * as S from './styles';
-
-const checkStrength = (password) => {
-	const strong = {
-		length: false,
-		uppercase: false,
-		lowercase: false,
-		number: false,
-		special: false,
-	};
-
-	if (password.length >= 8) {
-		strong.length = true;
-	}
-
-	if (/[A-Z]/.test(password)) {
-		strong.uppercase = true;
-	}
-
-	if (/[a-z]/.test(password)) {
-		strong.lowercase = true;
-	}
-
-	if (/[0-9]/.test(password)) {
-		strong.number = true;
-	}
-
-	if (/[!@#$%^&*()\-_+'"`~=[\];{}?/\\]/.test(password)) {
-		strong.special = true;
-	}
-
-	return strong;
-};
+import { checkPasswordStrength } from '../../utils/helper';
 
 const strengthList = [
 	{
@@ -63,20 +31,7 @@ const PasswordStrength = ({ form, inputToWatch, mobileBreakpoint }) => {
 		control: form.control,
 		name: inputToWatch,
 	});
-	const strength = useMemo(() => checkStrength(inputValue), [inputValue]);
-
-	useEffect(() => {
-		const hasError = Object.values(strength).some((item) => !item);
-
-		if (hasError) {
-			form.setError(inputToWatch);
-		} else {
-			form.clearErrors(inputToWatch);
-		}
-
-		// Form is already memoized by hook-form
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [inputValue, strength]);
+	const strength = checkPasswordStrength(inputValue);
 
 	return (
 		<S.Wrapper mobileBreakpoint={mobileBreakpoint}>

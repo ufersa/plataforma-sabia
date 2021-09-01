@@ -10,6 +10,7 @@ import { toast } from '../../Toast';
 import { Form, StepTitle, StepSubtitle, InputsWrapper, Actions } from '../styles';
 import * as S from './styles';
 import PasswordStrength from '../../PasswordStrength';
+import { checkPasswordStrength } from '../../../utils/helper';
 
 const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 	const [isFetching, setIsFetching] = useState(false);
@@ -64,7 +65,18 @@ const StepTwo = ({ activeStep, setNextStep, setPrevStep, updateUserData }) => {
 						placeholder="Digite sua senha"
 						variant="lightRounded"
 						type="password"
-						validation={{ required: true }}
+						validation={{
+							required: true,
+							validate: {
+								passwordStrength: (value) => {
+									const strength = checkPasswordStrength(value);
+
+									const isValid = Object.values(strength).every((item) => !!item);
+
+									return isValid || '';
+								},
+							},
+						}}
 					/>
 					<PasswordStrength form={form} inputToWatch="password" />
 				</S.PasswordWrapper>

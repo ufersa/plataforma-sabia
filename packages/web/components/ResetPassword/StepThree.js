@@ -6,11 +6,15 @@ import { Error, InputField } from '../Form';
 import { useAuth, useTheme } from '../../hooks';
 import * as S from './styles';
 import PasswordStrength from '../PasswordStrength';
+import { checkPasswordStrength } from '../../utils/helper';
 
 const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState('');
-	const form = useForm({ defaultValues: { password: '', confirmPassword: '' } });
+	const form = useForm({
+		defaultValues: { password: '', confirmPassword: '' },
+		reValidateMode: 'onSubmit',
+	});
 	const { resetPassword } = useAuth();
 	const passwordValue = useWatch({
 		control: form.control,
@@ -50,7 +54,20 @@ const StepThree = ({ activeStep, setNextStep, updateUserData, userData }) => {
 					<S.PasswordWrapper>
 						<InputField
 							form={form}
-							validation={{ required: true }}
+							validation={{
+								required: true,
+								validate: {
+									passwordStrength: (value) => {
+										const strength = checkPasswordStrength(value);
+
+										const isValid = Object.values(strength).every(
+											(item) => !!item,
+										);
+
+										return isValid || '';
+									},
+								},
+							}}
 							name="password"
 							label="Informe a sua nova senha"
 							placeholder="Digite sua nova senha"

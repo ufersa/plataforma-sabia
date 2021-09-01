@@ -425,3 +425,41 @@ export const stripHTML = (html, trim = true) => {
  */
 export const getTechnologyOwner = (technology) =>
 	technology.users?.find((user) => user?.pivot?.role === rolesEnum.OWNER);
+
+/**
+ * Returns if a given password matches with predefined stregnth
+ *
+ * @param {string} password The password
+ * @returns {object} Object containing password strength. True if passes, false otherwise
+ */
+export const checkPasswordStrength = (password) => {
+	const strong = {
+		length: false,
+		uppercase: false,
+		lowercase: false,
+		number: false,
+		special: false,
+	};
+
+	if (password.length >= 8) {
+		strong.length = true;
+	}
+
+	if (/[A-Z]/.test(password)) {
+		strong.uppercase = true;
+	}
+
+	if (/[a-z]/.test(password)) {
+		strong.lowercase = true;
+	}
+
+	if (/[0-9]/.test(password)) {
+		strong.number = true;
+	}
+
+	if (/[!@#$%^&*()\-_+'"`~=[\];{}?/\\]/.test(password)) {
+		strong.special = true;
+	}
+
+	return strong;
+};
