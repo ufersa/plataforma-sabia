@@ -10,7 +10,7 @@ module.exports = (api) => {
 					ssr: true,
 				},
 			],
-			process.env.APP_ENV === 'testing'
+			process.env.APP_ENV === 'cypress'
 				? [
 						'istanbul',
 						{
