@@ -178,6 +178,12 @@ const technologyLocationsTypes = {
 	WHERE_CAN_BE_APPLIED: 'where_can_be_applied',
 };
 
+const tokenTypes = {
+	CONFIRM_ACCOUNT: 'confirm-account',
+	CHANGE_EMAIL: 'change-email',
+	RESET_PASSWORD: 'reset-password',
+};
+
 module.exports = {
 	technologyStatuses,
 	reviewerStatuses,
@@ -202,4 +208,5 @@ module.exports = {
 	costsMeasureUnit,
 	ordersTypes,
 	technologyLocationsTypes,
+	tokenTypes,
 };
