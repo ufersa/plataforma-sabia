@@ -41,7 +41,7 @@ describe('user', () => {
 			.should('exist');
 	});
 
-	it.only('should be able to reset password and login with new password', () => {
+	it('should be able to reset password and login with new password', () => {
 		const user = getRandomUser();
 		cy.register({ openWizard: false, ...user });
 		cy.authenticate({ email: user.email, password: user.password }).visit('/resetar-senha');
