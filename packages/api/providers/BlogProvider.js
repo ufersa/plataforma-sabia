@@ -28,7 +28,17 @@ const blogMethods = {
 					}`,
 			variables: { start: Number(params?.start) || 0, limit: Number(params?.limit) || 5 },
 		});
-		return response?.data?.posts || [];
+
+		const Config = use('Config');
+		const posts = response?.data?.posts || [];
+
+		return posts.map((post) => ({
+			id: post.id,
+			title: post.title,
+			subtitle: post.subtitle,
+			published_at: post.published_at,
+			url: `${Config.get('blog.url')}/${post.slug}`,
+		}));
 	},
 };
 
