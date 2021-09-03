@@ -27,8 +27,9 @@ const providers = [
 	'adonis-sentry/providers/Sentry',
 	'@adonisjs/drive/providers/DriveProvider',
 	path.join(__dirname, '..', 'providers', 'AlgoliaProvider'),
-	path.join(__dirname, '..', 'providers', 'RequestProvider'),
+	path.join(__dirname, '..', 'providers', 'BlogProvider'),
 	path.join(__dirname, '..', 'providers', 'GoogleProvider'),
+	path.join(__dirname, '..', 'providers', 'RequestProvider'),
 ];
 
 /*
