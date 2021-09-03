@@ -38,6 +38,7 @@ const getLayoutComponent = (pathname) => {
 		case internalPages.register:
 		case internalPages.confirm_account:
 		case internalPages.signIn:
+		case internalPages.resetPassword:
 			return React.Fragment;
 		default:
 			return LayoutDefault;

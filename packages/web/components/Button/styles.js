@@ -189,7 +189,6 @@ const rectangularButtonVariants = {
 		font-weight: 500;
 		border-radius: ${metrics.baseRadius}rem;
 		padding: 0.8rem;
-		gap: 0.8rem;
 
 		color: ${colors.white};
 		background-color: ${colors[rectangularColorsToTheme[colorVariant]]};
@@ -224,6 +223,7 @@ export const RectangularButton = styled.button`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		gap: 0.8rem;
 
 		padding: 0.2rem 0.8rem;
 		line-height: 2.4rem;

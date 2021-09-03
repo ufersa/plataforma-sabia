@@ -66,7 +66,6 @@ export async function getMe(token, params = {}) {
 /**
  * Calls the register endpoint.
  *
- * @param {string} fullname The full name of the user.
  * @param {string} email User email.
  * @param {string} password User password.
  */
@@ -145,6 +144,25 @@ export function accountConfirmation(token, email) {
 	return apiPost('auth/confirm-account', {
 		token,
 		email,
+	})
+		.then((response) => response.data)
+		.catch(() => false);
+}
+
+/**
+ * Verify if the provided token is valid.
+ *
+ * @param {object} options The request options.
+ * @param {string} [options.token] The token to be verified.
+ * @param {string} [options.email] User email.
+ * @param {string} [options.tokenType] The token type, i.e `reset-pw`.
+ * @returns {object} The api response.
+ */
+export function checkVerificationCode({ email, token, tokenType }) {
+	return apiPost('auth/check-token', {
+		email,
+		token,
+		tokenType,
 	})
 		.then((response) => response.data)
 		.catch(() => false);

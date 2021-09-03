@@ -50,7 +50,7 @@ export const LogoWrapper = styled.div`
 	justify-content: center;
 `;
 
-export const LogoImage = styled.a`
+export const LogoImage = styled.div`
 	${({ theme: { screens } }) => css`
 		position: relative;
 		max-width: 100%;
