@@ -1,6 +1,7 @@
 const { hooks } = require('@adonisjs/ignitor');
 
 const AlgoliaFakeProvider = require('../test/utils/AlgoliaFakeService');
+const BlogFakeService = require('../test/utils/BlogFakeService');
 
 hooks.before.providersRegistered(() => {
 	if (process.env.NODE_ENV === 'testing') {
@@ -13,10 +14,8 @@ hooks.before.providersRegistered(() => {
 		|
 		*/
 		const { ioc } = use('@adonisjs/fold');
-
-		ioc.singletonFake('App/Services/AlgoliaSearch', () => {
-			return AlgoliaFakeProvider;
-		});
+		ioc.singletonFake('App/Services/AlgoliaSearch', () => AlgoliaFakeProvider);
+		ioc.singletonFake('App/Services/Blog', () => BlogFakeService);
 	}
 });
 
