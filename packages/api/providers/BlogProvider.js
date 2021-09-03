@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 const request = {
 	setup: (url) => {
-		this.url = url;
+		this.url = `${url}/graphql`;
 	},
 	make: async (body) => {
 		const response = await fetch(this.url, {
