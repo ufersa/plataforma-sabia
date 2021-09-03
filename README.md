@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://sabia-testing.herokuapp.com">
+  <a href="https://plataformasabia.com" target="_blank">
     <img alt="Sabia Platform" src="https://user-images.githubusercontent.com/12154623/89719334-9f10e980-d99d-11ea-9f57-c80e8a422a0f.png" width="200" />
   </a>
 </p>
@@ -43,7 +43,7 @@ The Sabia Platform has been developed in order to share technologies built to ac
 
 ## :file_folder: How This Repository is Organized
 
-This project codebase is organized in a monorepo:
+This project codebase is organized in a monorepo using [Lerna](https://lerna.js.org/):
 
 - [admin](packages/admin): it contains the project for the frontend of the platform's administrative system (built with [React Admin](https://marmelab.com/react-admin/) framework).
 - [api](packages/api): includes the code for the Rest API of the platform (built with [Adonis](https://adonisjs.com/) framework).
@@ -59,14 +59,14 @@ You can run this project on your local environment by following the steps below:
      git clone git@github.com:ufersa/plataforma-sabia.git
    ```
 
-2. **Install the dependencies listed on each one of the application packages and link them in the repo together.**
+2. **Run install command in the root folder so Lerna will handle all packages dependencies**
 
    ```shell
      cd plataforma-sabia
      npm install
    ```
 
-3. **Follow the instructions included in each one of the package folders.**
+3. **Follow the instructions included in each one of the packages folders.**
 
    - [admin](packages/admin)
    - [api](packages/api)
@@ -76,7 +76,7 @@ You can run this project on your local environment by following the steps below:
 
 4. **Open the source code and start editing!**
 
-   The site is now running on `http://localhost:8000`. Use your code editor of choice and edit the files to see. Save your changes, and the browser will update in real time!
+   The site is now running on `http://localhost:8000`. Use your code editor of choice and start editing files. Save your changes, and the browser will update in real time!
 
 ### Additional commands
 
@@ -95,25 +95,19 @@ You can find additional commands in the [package.json](package.json) file:
 
 ### Unit Tests
 
-You cand find information on how to run the unit tests in the README files inside each one of the packages of the project.
+You can find information about how to run the unit tests in README files inside each one of the project packages.
 
 ### E2E Tests
 
-The project uses Cypress for running the e2e tests. The main purpose is testing the whole application, by simulating the user's behavior.
+This project uses [Cypress](https://cypress.io) for running e2e tests. The main purpose is testing the whole application, by simulating the user's behavior.
 
-In order to run the cypress tests, you need to make sure both the API and web server are up (you can use the `start:ci` script to achieve this). Once they are both running, run `npm run test:e2e` and wait the cypress GUI pops up and the tests starts. You can also open the GUI and start the tests manually by running `npx cypress open`.
+In order to run Cypress tests, you need to make sure both the API and web server are up (you can use the `start:ci` script to achieve this). Once they are both running, run `npm run test:e2e` and wait the Cypress GUI pops up and the tests starts. You can also open the GUI and start the tests manually by running `npx cypress open`.
 
 Alternatively, you can run `npm run test:e2e:run` to run both the api and web server and run the tests in headless mode. Be aware that this script is going to throw an error in case the API or web server are already running.
 
-You also need to make sure [mailcatcher](https://mailcatcher.me/) is running, since the tests depend on it. Follow the steps below:
+This project uses a custom Cypress plugin to handle received e-mails, with [smtp-tester](https://www.npmjs.com/package/smtp-tester) dependency. All emails should be sent to `smtp://localhost:1025`. Therefore, you need to set the `SMTP_HOST` and `SMTP_PORT` variables in the [API .env file](packages/api/.env.example) so that the emails are catch by Cypress.
 
-1. Pre requirements for installation: `ruby`, `ruby-dev`, `libsqlite3-0`, `libsqlite3-dev`
-  - You can install this by running `apt install ruby ruby-dev libsqlite3-0 libsqlite3-dev`
-2. Install `mailcatcher` by running: `gem install mailcatcher`.
-3. Run `mailcatcher` to start the tool.
-4. Visit `http://localhost:1080/` to see the web interface.
-
-All of the emails should be sent to `smtp://localhost:1025`. Therefore, you need to set the `SMTP_HOST` and`SMTP_PORT` variables in the [API .env file] (packages / api / .env.example) so that the emails are catch by MailCatcher.
+When running `npm run start:ci` command, the `.env-ci` file will be loaded.
 
 ## :handshake: Contributing
 
