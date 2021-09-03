@@ -1,23 +1,26 @@
 const { ServiceProvider } = require('@adonisjs/fold');
 const fetch = require('node-fetch');
 
-async function request(body) {
-	const baseUrl = 'https://blog-api.plataformasabia.com/graphql';
+const request = {
+	setup: (url) => {
+		this.url = url;
+	},
+	make: async (body) => {
+		const response = await fetch(this.url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		});
 
-	const response = await fetch(baseUrl, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(body),
-	});
-
-	return response.json();
-}
+		return response.json();
+	},
+};
 
 const blogMethods = {
 	async getPosts(params = {}) {
-		const response = await request({
+		const response = await request.make({
 			query: `query getPosts($start: Int!, $limit: Int!) {
 						posts(sort: "published_at:desc", start: $start, limit: $limit) {
 							id, title, subtitle, published_at, slug
@@ -31,7 +34,11 @@ const blogMethods = {
 
 class BlogProvider extends ServiceProvider {
 	register() {
-		this.app.singleton('App/Services/Blog', () => blogMethods);
+		this.app.singleton('App/Services/Blog', () => {
+			const Config = this.app.use('Config');
+			request.setup(Config.get('blog.url'));
+			return blogMethods;
+		});
 	}
 
 	boot() {
