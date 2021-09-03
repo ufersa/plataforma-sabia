@@ -37,7 +37,7 @@ const blogMethods = {
 			title: post.title,
 			subtitle: post.subtitle,
 			published_at: post.published_at,
-			url: `${Config.get('blog.url')}/${post.slug}`,
+			url: `${Config.get('blog.clientUrl')}/${post.slug}`,
 		}));
 	},
 };
@@ -46,7 +46,7 @@ class BlogProvider extends ServiceProvider {
 	register() {
 		this.app.singleton('App/Services/Blog', () => {
 			const Config = this.app.use('Config');
-			request.setup(Config.get('blog.url'));
+			request.setup(Config.get('blog.apiUrl'));
 			return blogMethods;
 		});
 	}
