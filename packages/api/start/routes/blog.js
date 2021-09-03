@@ -5,36 +5,40 @@ const Route = use('Route');
 
 /** Contact routes */
 /**
- * @api {post} /contact Send mail
- * @apiGroup Contact
- * @apiParam {String} name User name
- * @apiParam {String} email User mail
- * @apiParam {String} phone User phone
- * @apiParam {String} subject Mail subject
- * @apiParam {String} message Mail message
+ * @api {get} /blog/posts Get blog posts
+ * @apiGroup Blog
+ * @apiParam {Number} limit Posts limit
  * @apiParamExample  {json} Request sample:
- *    {
- *		"name": "any name",
- *		"email": "any@mail.com",
- *		"phone": "any number",
- *		"subject": "any subject",
- *		"message": "any message"
- *    }
+ * {
+ *   "limit": 3
+ * }
+ * @apiSuccess {String} id Post ID
+ * @apiSuccess {String} title Post title
+ * @apiSuccess {String} subtitle Post subitle
+ * @apiSuccess {String} published_at Post publication date
+ * @apiSuccess {String} url Post url
  * @apiSuccessExample {json} Success
- * HTTP/1.1 204 OK
- * @apiErrorExample {json} Validation Error: Message Required
+ * HTTP/1.1 200 OK
+ * {
+ *   "id": "1",
+ *   "title": "Post title",
+ *   "subtitle": "Post subtitle",
+ *   "published_at": "2021-01-01T00:00:00.000Z",
+ *   "slug": "post-slug"
+ * }
+ * @apiErrorExample {json} Validation Error
  * HTTP/1.1 400 Bad Request
  * {
  *   "error": {
  *     "error_code": "VALIDATION_ERROR",
  *     "message": [
  *       {
- *         "message": "The message is required.",
- *         "field": "message",
- *         "validation": "required"
+ *         "message": "The limit should be an NUMBER.",
+ *         "field": "limit",
+ *         "validation": "number"
  *       }
  *     ]
  *   }
  * }
  */
-Route.get('blog/posts', 'BlogController.getPosts').validator('GetBlogPosts');
+Route.get('/blog/posts', 'BlogController.getPosts').validator('GetBlogPosts');
