@@ -20,6 +20,7 @@ exports[`it render the review page 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  gap: 0.8rem;
   padding: 0.2rem 0.8rem;
   line-height: 2.4rem;
   text-align: center;
@@ -28,7 +29,6 @@ exports[`it render the review page 1`] = `
   font-weight: 500;
   border-radius: 0.5rem;
   padding: 0.8rem;
-  gap: 0.8rem;
   color: hsla(0,0%,100%);
   background-color: hsl(166,100%,34%);
   text-transform: uppercase;

@@ -1,45 +1,61 @@
-const data = {
-	email: 'sabiatestinge2eresetpw@gmail.com',
-	password: 'sabiatesting',
-	pages: {
-		home: '/',
-		reset: '/auth/reset-password',
-	},
+const getRandomUser = () => {
+	const uniqueSeed = Date.now().toString();
+	const getUniqueId = () => Cypress._.uniqueId(uniqueSeed);
+
+	return {
+		email: `${getUniqueId()}@test.com`,
+		password: 'Abc1234567*',
+		name: `${getUniqueId()}-UserName`,
+		phone: '1234567890',
+	};
 };
 
 describe('reset password', () => {
-	it.skip('can request password reset ', () => {
-		cy.visit(data.pages.home);
-		cy.findByText(/^(entrar|sign in)$/i).click();
-		cy.findByText(/^(esqueci minha senha|forgot the password)$/i).click();
-		cy.get('form input[name=email]').type(data.email);
-		cy.get('div[class*=Modal] form button[type=submit]')
-			.click()
-			.should('be.visible');
-		cy.findByText(
-			/^(Verifique se chegou mensagem no email {{email}} com o código para resetar a senha. Você só receberá esse email se existir uma conta associada a esse endereço.|Check to see if a message arrived in the email {{email}} with the code to reset the password. You will only receive this email if there is an account associated with that address)/i,
-		).should('exist');
+	it('should be able to reset password and login with new password', () => {
+		const user = getRandomUser();
+		cy.register({ openWizard: false, ...user });
+		cy.visit('/resetar-senha');
 
-		cy.getLastEmail().then((response) => {
-			const { body } = response;
+		cy.findByLabelText(/e-mail/i).type(user.email);
+		cy.findByRole('button', { name: /enviar e-mail/i }).click();
 
-			const link = body.match(/href="([^"]*)/)[1].replace('localhost', '127.0.0.1');
-			cy.visit(link);
+		cy.getLastReceivedEmail(user.email)
+			.then(cy.wrap)
+			.invoke('match', /(?<code>\w+) Caso você/i)
+			.its('groups.code')
+			.then((verificationCode) => {
+				cy.findByLabelText(/Verification code input number 1/i).type(verificationCode);
+			});
 
-			cy.get('form input[name=password]').type('newpassword');
-			cy.get('form button').click();
+		cy.findByLabelText(/informe a sua nova senha/i).type(user.password);
+		cy.findByLabelText(/confirme a sua nova senha/i).type(user.password);
+		cy.findByRole('button').click();
+		cy.findByRole('heading', { name: /senha alterada com sucesso!/i }).should('be.visible');
+		cy.findByRole('link', { name: /ir para a página principal/i }).click();
+		cy.findByRole('button', { name: user.name }).should('be.visible');
 
-			cy.signIn({ email: data.email, password: 'newpassword' });
+		cy.visit('/entrar');
+		cy.findByLabelText(/e-mail/i).type(user.email);
+		cy.findByLabelText(/senha/i).type(user.password);
+		cy.findByRole('button', { name: /entrar/i }).click();
+		cy.location().should((location) => {
+			expect(location.pathname).to.eq('/');
 		});
+		cy.findByRole('button', { name: user.name }).should('be.visible');
 	});
 
-	it('trying to reset password with an invalid token fails', () => {
-		cy.visit(data.pages.reset);
-		cy.findByText(/^(recuperação de senha|password recovery)$/i);
-		cy.get('#email').type(data.email);
-		cy.get('#userCode').type('123456');
-		cy.get('#password').type(data.password);
-		cy.get('form button[type=submit]').click();
-		cy.findByText(/^(O token é inválido|the token is invalid)/).should('be.visible');
+	it('should not be able to reset password with wrong token', () => {
+		cy.intercept('POST', '**/auth/check-token').as('checkToken');
+		const user = getRandomUser();
+		cy.register({ openWizard: false, ...user });
+		cy.visit('/resetar-senha');
+
+		cy.findByLabelText(/e-mail/i).type(user.email);
+		cy.findByRole('button', { name: /enviar e-mail/i }).click();
+
+		cy.findByLabelText(/Verification code input number 1/i).type('123456');
+		cy.wait('@checkToken')
+			.its('response.statusCode')
+			.should('eq', 401);
 	});
 });

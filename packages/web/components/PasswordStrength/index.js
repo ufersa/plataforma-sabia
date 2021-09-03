@@ -1,38 +1,7 @@
 import PropTypes from 'prop-types';
 import { useWatch } from 'react-hook-form';
 import * as S from './styles';
-
-const checkStrength = (password) => {
-	const strong = {
-		length: false,
-		uppercase: false,
-		lowercase: false,
-		number: false,
-		special: false,
-	};
-
-	if (password.length >= 8) {
-		strong.length = true;
-	}
-
-	if (/[A-Z]/.test(password)) {
-		strong.uppercase = true;
-	}
-
-	if (/[a-z]/.test(password)) {
-		strong.lowercase = true;
-	}
-
-	if (/[0-9]/.test(password)) {
-		strong.number = true;
-	}
-
-	if (/[!@#$%^&*()\-_+'"`~=[\];{}?/\\]/.test(password)) {
-		strong.special = true;
-	}
-
-	return strong;
-};
+import { checkPasswordStrength } from '../../utils/helper';
 
 const strengthList = [
 	{
@@ -57,15 +26,15 @@ const strengthList = [
 	},
 ];
 
-const PasswordStrength = ({ form, inputToWatch }) => {
+const PasswordStrength = ({ form, inputToWatch, mobileBreakpoint }) => {
 	const inputValue = useWatch({
 		control: form.control,
 		name: inputToWatch,
 	});
-	const strength = checkStrength(inputValue);
+	const strength = checkPasswordStrength(inputValue);
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper mobileBreakpoint={mobileBreakpoint}>
 			<S.Container>
 				<S.Title>Sua senha deve conter:</S.Title>
 				<S.StrengthList>
@@ -81,8 +50,17 @@ const PasswordStrength = ({ form, inputToWatch }) => {
 };
 
 PasswordStrength.propTypes = {
-	form: PropTypes.shape({ control: PropTypes.shape({}) }).isRequired,
+	form: PropTypes.shape({
+		control: PropTypes.shape({}),
+		setError: PropTypes.func,
+		clearErrors: PropTypes.func,
+	}).isRequired,
 	inputToWatch: PropTypes.string.isRequired,
+	mobileBreakpoint: PropTypes.number,
+};
+
+PasswordStrength.defaultProps = {
+	mobileBreakpoint: undefined,
 };
 
 export default PasswordStrength;

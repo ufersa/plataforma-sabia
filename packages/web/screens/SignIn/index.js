@@ -13,12 +13,12 @@ const SignIn = ({ redirect }) => {
 				<S.LogoWrapper>
 					<Link href={internalPages.home} passHref>
 						<S.LogoImage>
-							<Image src="/logo-color.svg" layout="fill" objectFit="cover" />
+							<Image src="/logo-color.svg" layout="fill" objectFit="cover" priority />
 						</S.LogoImage>
 					</Link>
 				</S.LogoWrapper>
 				<S.BackgroundImageWrapper>
-					<Image src="/wind-turbine.svg" layout="fill" objectFit="cover" />
+					<Image src="/wind-turbine.svg" layout="fill" objectFit="cover" priority />
 				</S.BackgroundImageWrapper>
 			</S.Aside>
 			<SignInForm redirect={redirect} />

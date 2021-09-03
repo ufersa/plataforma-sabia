@@ -47,16 +47,12 @@ export const internal = {
 	register: '/cadastrar',
 	confirm_account: '/confirmar-conta',
 	signIn: '/entrar',
+	resetPassword: '/resetar-senha',
 	myAccount: '/user/my-account',
-};
-
-export const auth = {
-	resetPassword: '/auth/reset-password',
 };
 
 export default {
 	socialMedia,
 	landingPage,
 	internal,
-	auth,
 };

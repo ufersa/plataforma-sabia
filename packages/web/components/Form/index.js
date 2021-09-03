@@ -16,4 +16,5 @@ export { default as HtmlViewField } from './HtmlViewField';
 export { default as QuantityField } from './QuantityField';
 export { default as RadioField } from './RadioField';
 export { default as VerificationCodeField } from './VerificationCodeField';
+export { default as Error } from './Error';
 export * from './Form';

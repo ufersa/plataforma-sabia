@@ -2,10 +2,9 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { RiErrorWarningLine } from 'react-icons/ri';
 
 import { Link } from '../Link';
-import { InputField } from '../Form';
+import { InputField, Error } from '../Form';
 import { RectangularButton } from '../Button';
 import { internal as internalPages } from '../../utils/enums/pages.enum';
 import { toast } from '../Toast';
@@ -43,12 +42,7 @@ const SignInForm = ({ redirect, inline }) => {
 		<S.FormWrapper onSubmit={form.handleSubmit(handleSubmit)} data-cy="signin-form">
 			<S.FormContent>
 				<S.Title>Faça login com sua conta</S.Title>
-				{!!error && (
-					<S.Error>
-						<RiErrorWarningLine />
-						{error}
-					</S.Error>
-				)}
+				{!!error && <Error message={error} />}
 				<S.InputsWrapper>
 					<InputField
 						form={form}
@@ -70,7 +64,7 @@ const SignInForm = ({ redirect, inline }) => {
 				</S.InputsWrapper>
 				<S.Actions>
 					<Link
-						href={internalPages.home}
+						href={internalPages.resetPassword}
 						alignSelf="flex-end"
 						variant="normal"
 						color="blue"
