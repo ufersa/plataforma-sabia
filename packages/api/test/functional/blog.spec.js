@@ -15,7 +15,7 @@ test('GET /blog/posts return blog posts', async ({ client, assert }) => {
 });
 
 test('GET /blog/posts return blog posts limited by query', async ({ client, assert }) => {
-	const payload = { limit: 3 };
+	const payload = { start: 1, limit: 3 };
 
 	const response = await client
 		.get('/blog/posts')
@@ -23,5 +23,10 @@ test('GET /blog/posts return blog posts limited by query', async ({ client, asse
 		.end();
 
 	response.assertStatus(200);
-	assert.isTrue(Blog.getPosts.withArgs({ limit: payload.limit }).calledOnce);
+	assert.isTrue(
+		Blog.getPosts.withArgs({
+			start: payload.start,
+			limit: payload.limit,
+		}).calledOnce,
+	);
 });

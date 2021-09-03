@@ -9,7 +9,7 @@ class BlogController {
 		this.cacheKeys = {
 			blogPosts: 'blog:posts',
 		};
-		this.allowedFilters = ['limit'];
+		this.allowedFilters = ['start', 'limit'];
 		this.oneMinuteInSeconds = 60;
 	}
 

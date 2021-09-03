@@ -7,9 +7,11 @@ const Route = use('Route');
 /**
  * @api {get} /blog/posts Get blog posts
  * @apiGroup Blog
+ * @apiParam {Number} start Posts start
  * @apiParam {Number} limit Posts limit
- * @apiParamExample  {json} Request sample:
+ * @apiParamExample {json} Request sample:
  * {
+ *   "start": 1,
  *   "limit": 3
  * }
  * @apiSuccess {String} id Post ID
