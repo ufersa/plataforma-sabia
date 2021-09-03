@@ -1,4 +1,4 @@
-const { test, trait, beforeEach } = use('Test/Suite')('Contact');
+const { test, trait, beforeEach } = use('Test/Suite')('Blog');
 const Blog = use('Blog');
 
 trait('Test/ApiClient');
