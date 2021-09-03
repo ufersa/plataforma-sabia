@@ -5,7 +5,7 @@ const LIMIT_NUMBER = 10;
 class GetBlogPosts extends BaseValidator {
 	get rules() {
 		return {
-			limit: `number|max:${LIMIT_NUMBER}`,
+			limit: `max:${LIMIT_NUMBER}`,
 		};
 	}
 
