@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
-import { RouterContext } from 'next/dist/next-server/lib/router-context';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { ThemeProvider, GlobalStyle } from '../styles';
 import { ModalProvider } from '../components/Modal';
 import { UserProvider } from '../components/User';
