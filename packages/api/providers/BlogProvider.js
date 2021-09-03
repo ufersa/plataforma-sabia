@@ -16,14 +16,14 @@ async function request(body) {
 }
 
 const blogMethods = {
-	async getPosts({ start = 0, limit = 5 } = {}) {
+	async getPosts(params = {}) {
 		const response = await request({
 			query: `query getPosts($start: Int!, $limit: Int!) {
 						posts(sort: "published_at:desc", start: $start, limit: $limit) {
 							id, title, subtitle, published_at, slug
 						}
 					}`,
-			variables: { start, limit },
+			variables: { start: Number(params?.start) || 0, limit: Number(params?.limit) || 5 },
 		});
 		return response?.data?.posts || [];
 	},
