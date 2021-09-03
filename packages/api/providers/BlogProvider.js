@@ -25,7 +25,7 @@ const blogMethods = {
 					}`,
 			variables: { start, limit },
 		});
-		return response.data.posts;
+		return response?.data?.posts || [];
 	},
 };
 
