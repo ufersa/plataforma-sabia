@@ -6,7 +6,7 @@ const AnnouncementBanner = () => {
 	return (
 		<Wrapper>
 			<Link
-				href="https://blog.plataformasabia.com/prorrogadas-as-inscricoes-para-o-edital-de-projetos-de-inovacao-e-empreendedorismo-tecnologico"
+				href="https://blog.plataformasabia.com/divulgado-resultado-preliminar-do-edital-de-selecao-de-projetos-de-inovacao-e-empreendedorismo"
 				target="_blank"
 			>
 				<Banner
