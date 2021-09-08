@@ -28,7 +28,7 @@ const UserHeader = () => {
 
 	return (
 		<LoginBox ref={ref}>
-			<UserButton type="button" onClick={handleToggleDropDown}>
+			<UserButton type="button" onClick={handleToggleDropDown} data-cy="user-dropdown-button">
 				<MdAccountCircle color={colors.secondary} />
 				<span>{userFirstName || t('common:login')}</span>
 			</UserButton>
