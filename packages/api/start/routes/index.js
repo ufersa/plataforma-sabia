@@ -28,6 +28,7 @@ const Route = use('Route');
 require('./announcements');
 require('./auth');
 require('./bookmarks');
+require('./blog');
 require('./chat');
 require('./contact');
 require('./deviceTokens');
