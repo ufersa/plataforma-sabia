@@ -7,7 +7,8 @@ describe('user', () => {
 		cy.visit('/user/my-account');
 		cy.signIn();
 
-		cy.get('button[class*=LogoutButton]').click();
+		cy.getByDataCy('user-dropdown-button').click();
+		cy.findByRole('button', { name: /sair/i }).click();
 		cy.findAllByText(/^(entrar|sign in)$/i).should('have.length', 1);
 	});
 

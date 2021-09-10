@@ -206,6 +206,10 @@ Cypress.Commands.add('getLastReceivedEmail', (email, options = {}) => {
 	});
 });
 
+Cypress.Commands.add('getByDataCy', (selector, ...args) => {
+	cy.get(`[data-cy="${selector}"]`, ...args);
+});
+
 /**
  * Returns translations from namespace and key
  *
