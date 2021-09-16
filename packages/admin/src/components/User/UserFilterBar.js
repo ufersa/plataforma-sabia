@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Filter, TextInput } from 'react-admin';
+import { Filter, TextInput, SelectInput } from 'react-admin';
+import statuses from '../StatusForm/statuses';
 
 const UserFilterBar = ({
 	context,
@@ -24,9 +25,10 @@ const UserFilterBar = ({
 			setFilters={setFilters}
 		>
 			<TextInput source="name" alwaysOn />
-			<TextInput source="status" alwaysOn />
+			<TextInput label="E-mail" source="email" alwaysOn />
+			<SelectInput source="status" choices={statuses.users} alwaysOn />
 			<TextInput label="Sigla" source="initials" alwaysOn />
-			<TextInput source="role" alwaysOn />
+			<SelectInput source="role" choices={statuses.user_roles} alwaysOn />
 		</Filter>
 	);
 };

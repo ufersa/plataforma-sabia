@@ -67,6 +67,12 @@ export const statuses_en = {
 
 	verified: 'Verified',
 	invited: 'Invited',
+
+	default_user: 'Default user',
+	researcher: 'Researcher',
+	investor: 'Investor',
+	reviewer: 'Reviewer',
+	admin: 'Admin',
 };
 
 export const statuses_ptBr = {
@@ -144,6 +150,12 @@ export const statuses_ptBr = {
 
 	verified: 'Verificado',
 	invited: 'Convidado',
+
+	default_user: 'Usuário Comum',
+	researcher: 'Pesquisador',
+	investor: 'Investidor',
+	reviewer: 'Revisor',
+	admin: 'Administrador',
 };
 const statuses = {
 	statuses_en,
