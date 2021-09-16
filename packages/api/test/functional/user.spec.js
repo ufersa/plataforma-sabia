@@ -411,7 +411,7 @@ test('PUT /user/change-password changes user password', async ({ client, assert 
 	await Bull.reset();
 
 	const currentPassword = 'old_password';
-	const newPassword = 'new_password';
+	const newPassword = '123456aB!';
 
 	const { user: loggedUser } = await createUser({
 		append: { status: 'verified', password: currentPassword },

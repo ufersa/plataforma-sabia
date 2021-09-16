@@ -7,6 +7,8 @@ const Token = use('App/Models/Token');
 const Bull = use('Rocketseat/Bull');
 const SendMailJob = use('App/Jobs/SendMail');
 
+const PasswordValidator = require('password-validator');
+
 const { errors, errorPayload, tokenTypes } = require('../../Utils');
 
 class AuthController {
@@ -47,9 +49,36 @@ class AuthController {
 		Bull.add(SendMailJob.key, mailData, { attempts: 3 });
 	}
 
-	async register({ request }) {
+	async register({ request, response }) {
 		const { disclaimers } = request.only(['disclaimers']);
 		const data = request.only(['email', 'password']);
+
+		const schema = new PasswordValidator();
+		schema.is().min(8);
+		schema.has().lowercase(1);
+		schema.has().uppercase(1);
+		schema.has().digits(1);
+		schema.has().symbols(1);
+
+		const validationErrors = {
+			min: 'error.user.passwordLength',
+			lowercase: 'error.user.passwordLowercaseChar',
+			uppercase: 'error.user.passwordUppercaseChar',
+			digits: 'error.user.passwordNumbers',
+			symbols: 'error.user.passwordEspecialChar',
+		};
+
+		const errorList = schema.validate(data.password, { list: true });
+
+		if (errorList.length) {
+			const messages = errorList.reduce((acc, error, idx) => {
+				return idx
+					? `${acc}. ${request.antl(validationErrors[error])}`
+					: `${request.antl(validationErrors[error])}`;
+			}, '');
+
+			return response.status(400).send(errorPayload(errors.PASSWORD_VALIDATION, messages));
+		}
 
 		const user = await User.create(data);
 		await user.load('role');
