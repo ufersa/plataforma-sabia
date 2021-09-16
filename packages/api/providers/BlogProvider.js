@@ -23,7 +23,14 @@ const blogMethods = {
 		const response = await request.make({
 			query: `query getPosts($start: Int!, $limit: Int!) {
 						posts(sort: "published_at:desc", start: $start, limit: $limit) {
-							id, title, subtitle, published_at, slug
+							id,
+							title,
+							subtitle,
+							slug,
+							published_at,
+							thumbnail {
+								url
+							}
 						}
 					}`,
 			variables: { start: Number(params?.start) || 0, limit: Number(params?.limit) || 5 },
@@ -36,8 +43,9 @@ const blogMethods = {
 			id: post.id,
 			title: post.title,
 			subtitle: post.subtitle,
-			published_at: post.published_at,
 			url: `${Config.get('blog.clientUrl')}/${post.slug}`,
+			thumbnail: post.thumbnail?.url || null,
+			published_at: post.published_at,
 		}));
 	},
 };
