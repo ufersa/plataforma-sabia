@@ -16,7 +16,7 @@ const disclaimers = Array.from(Array(30).keys());
 
 const userData = {
 	email: 'sabiatestingemail@gmail.com',
-	password: '123123',
+	password: '123123aB!',
 	first_name: 'FirstName',
 	last_name: 'LastName',
 };

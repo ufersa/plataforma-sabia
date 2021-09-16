@@ -6,7 +6,9 @@ const Institution = use('App/Models/Institution');
 const City = use('App/Models/City');
 const State = use('App/Models/State');
 const KnowledgeArea = use('App/Models/KnowledgeArea');
+const PasswordValidator = require('password-validator');
 const { errors, errorPayload, getTransaction, tokenTypes } = require('../../Utils');
+
 // get only useful fields
 const getFields = (request) =>
 	request.only([
@@ -232,6 +234,44 @@ class UserController {
 	async changePassword({ auth, request, response }) {
 		const { currentPassword, newPassword } = request.only(['currentPassword', 'newPassword']);
 		const user = await auth.getUser();
+
+		const schema = new PasswordValidator();
+		schema.is().min(8);
+		schema.has().lowercase(1);
+		schema.has().uppercase(1);
+		schema.has().digits(1);
+		schema.has().symbols(1);
+
+		const validationErrors = {
+			min: 'error.user.passwordLength',
+			lowercase: 'error.user.passwordLowercaseChar',
+			uppercase: 'error.user.passwordUppercaseChar',
+			digits: 'error.user.passwordNumbers',
+			symbols: 'error.user.passwordEspecialChar',
+		};
+
+		if (currentPassword === newPassword) {
+			return response
+				.status(400)
+				.send(
+					errorPayload(
+						errors.PASSWORD_VALIDATION,
+						request.antl('error.user.samePassword'),
+					),
+				);
+		}
+
+		const errorList = schema.validate(newPassword, { list: true });
+
+		if (errorList.length) {
+			const messages = errorList.reduce((acc, error, idx) => {
+				return idx
+					? `${acc}. ${request.antl(validationErrors[error])}`
+					: `${request.antl(validationErrors[error])}`;
+			}, '');
+
+			return response.status(400).send(errorPayload(errors.PASSWORD_VALIDATION, messages));
+		}
 
 		const verifyPassword = await Hash.verify(currentPassword, user.password);
 		if (!verifyPassword) {
