@@ -396,6 +396,9 @@ class User extends Model {
 				.where('first_name', 'LIKE', `%${filters.name}%`)
 				.orWhere('last_name', 'LIKE', `%${filters.name}%`);
 		}
+		if (filters.email) {
+			query.where('email', 'LIKE', `%${filters.email}%`);
+		}
 		if (filters.institution) {
 			query.whereHas('institution', (builder) => {
 				builder.where('name', 'LIKE', `%${filters.institution}%`);

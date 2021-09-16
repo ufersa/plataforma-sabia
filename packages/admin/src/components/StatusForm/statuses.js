@@ -222,6 +222,13 @@ const statuses = {
 		{ id: 'OWNER', name: 'Proprietário da Tecnologia' },
 		{ id: 'DEFAULT_USER', name: 'Responsável' },
 	],
+	user_roles: [
+		{ id: 'DEFAULT_USER', name: 'statuses.default_user' },
+		{ id: 'RESEARCHER', name: 'statuses.researcher' },
+		{ id: 'INVESTOR', name: 'statuses.investor' },
+		{ id: 'REVIEWER', name: 'statuses.reviewer' },
+		{ id: 'ADMIN', name: 'statuses.admin' },
+	],
 };
 
 export default statuses;
