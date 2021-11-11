@@ -27,13 +27,6 @@ class DisclaimerSeeder {
 			},
 			{
 				description:
-					'Concordo com o processamento dos meus dados pessoais com o objetivo de receber publicidade da Plataforma Sabiá e de terceiros parceiros. ',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
 					'Declaro ciência de que devo fornecer apenas informações verdadeiras no cadastro das tecnologias. ',
 				required: true,
 				type: 'technology',
