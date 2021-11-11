@@ -69,7 +69,7 @@ Cypress.Commands.add(
 					scope: 'web',
 					email,
 					password,
-					disclaimers: Array.from(Array(10).keys()),
+					disclaimers: Array.from(Array(1).keys()),
 				},
 			});
 

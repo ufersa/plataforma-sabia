@@ -27,41 +27,6 @@ class DisclaimerSeeder {
 			},
 			{
 				description:
-					'Concordo com o processamento dos meus dados pessoais para fins de fornecimento dos serviços da Plataforma Sabiá.  ',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
-					'Concordo em respeitar a legislação brasileira vigente no conteúdo que eu venha a disponibilizar na Plataforma Sabiá, sendo de minha exclusiva responsabilidade.  ',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
-					'Estou ciente de que posso revogar o consentimento de uso dos meus dados pessoais a qualquer momento. Todavia, não poderei mais utilizar os serviços da plataforma que necessitam do uso e da coleta de dados pessoais.  ',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
-					'Estou ciente quanto ao canal de suporte da Plataforma Sabiá, que estará à disposição para sanar eventual dúvida que possa surgir.',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
-					'Estou ciente que em hipótese alguma será constituído vínculo cooperativo, associativo, societário ou empregatício entre a plataforma, os usuários cadastrados e os parceiros. ',
-				required: true,
-				type: 'register',
-				version: '1',
-			},
-			{
-				description:
 					'Concordo com o processamento dos meus dados pessoais com o objetivo de receber publicidade da Plataforma Sabiá e de terceiros parceiros. ',
 				required: true,
 				type: 'register',
