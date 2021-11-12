@@ -11,7 +11,6 @@ import { SolutionsSection } from '../components/SolutionsSection';
 import { useTheme } from '../hooks';
 import { internal as internalPages } from '../utils/enums/pages.enum';
 import { getServices, apiPost, apiPut, getTechnologies } from '../services';
-import AnnouncementBanner from '../components/AnnouncementBanner';
 import { toast } from '../components/Toast';
 
 const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
@@ -73,8 +72,6 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 					</Link>
 				</ButtonsContainer>
 			</ButtonsWrapper>
-
-			<AnnouncementBanner />
 
 			{!!technologies?.length && (
 				<TechnologiesSection>
