@@ -27,7 +27,7 @@ const items = [
 			href: '/editais',
 			label: 'Ver  editais',
 		},
-		buttonDisabled: false,
+		buttonDisabled: true,
 	},
 	{
 		title: (
@@ -48,7 +48,7 @@ const items = [
 			href: '/ideias',
 			label: 'Ver  ideias',
 		},
-		buttonDisabled: false,
+		buttonDisabled: true,
 	},
 	{
 		title: (
