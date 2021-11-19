@@ -67,9 +67,11 @@ const Welcome = () => {
 			<Element id="features" name="features" className="element">
 				<Features />
 			</Element>
-			<Element id="resources" name="resources" className="element">
-				<Resources />
-			</Element>
+			{false && (
+				<Element id="resources" name="resources" className="element">
+					<Resources />
+				</Element>
+			)}
 			<Element id="contact" name="contact" className="element">
 				<Contact />
 			</Element>
