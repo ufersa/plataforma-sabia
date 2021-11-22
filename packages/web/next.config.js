@@ -24,4 +24,18 @@ module.exports = nextTranslate({
 			'api.plataformasabia.com',
 		],
 	},
+	redirects: async () => {
+		return [
+			{
+				source: '/ideias',
+				destination: '/',
+				permanent: false,
+			},
+			{
+				source: '/editais',
+				destination: '/',
+				permanent: false,
+			},
+		];
+	},
 });

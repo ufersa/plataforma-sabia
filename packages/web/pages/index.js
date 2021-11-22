@@ -36,42 +36,46 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 				keywords={t('pages:home.keywords')}
 			/>
 			<Hero heroImage={heroImage} />
-			<ButtonsWrapper>
-				<ButtonsContainer>
-					<Link href={internalPages.announcements} passHref>
-						<RectangularButton
-							as="a"
-							variant="backgroundImage"
-							backgroundUrl="/buttons/papers-background.png"
-							colorVariant="green"
-						>
-							Banco de editais
-						</RectangularButton>
-					</Link>
-					<Link href={internalPages.ideas} passHref>
-						<RectangularButton
-							as="a"
-							variant="backgroundImage"
-							backgroundUrl="/buttons/paper-light.png"
-							colorVariant="orange"
-						>
-							Banco de ideias
-						</RectangularButton>
-					</Link>
-					<Link href={internalPages.researchers} passHref>
-						<RectangularButton
-							// as="a"
-							variant="backgroundImage"
-							backgroundUrl="/buttons/notebook-writing.png"
-							colorVariant="blue"
-							disabled
-							fullWidth
-						>
-							Banco de pesquisadores
-						</RectangularButton>
-					</Link>
-				</ButtonsContainer>
-			</ButtonsWrapper>
+
+			{false && (
+				<ButtonsWrapper>
+					<ButtonsContainer>
+						<Link href={internalPages.announcements} passHref>
+							<RectangularButton
+								variant="backgroundImage"
+								backgroundUrl="/buttons/papers-background.png"
+								colorVariant="green"
+								disabled
+								fullWidth
+							>
+								Banco de editais
+							</RectangularButton>
+						</Link>
+						<Link href={internalPages.ideas} passHref>
+							<RectangularButton
+								variant="backgroundImage"
+								backgroundUrl="/buttons/paper-light.png"
+								colorVariant="orange"
+								disabled
+								fullWidth
+							>
+								Banco de ideias
+							</RectangularButton>
+						</Link>
+						<Link href={internalPages.researchers} passHref>
+							<RectangularButton
+								variant="backgroundImage"
+								backgroundUrl="/buttons/notebook-writing.png"
+								colorVariant="blue"
+								disabled
+								fullWidth
+							>
+								Banco de pesquisadores
+							</RectangularButton>
+						</Link>
+					</ButtonsContainer>
+				</ButtonsWrapper>
+			)}
 
 			{!!technologies?.length && (
 				<TechnologiesSection>
