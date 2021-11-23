@@ -206,6 +206,7 @@ export const RectangularButton = styled.button`
 		colorVariant,
 		backgroundUrl,
 		fullWidth,
+		width,
 		autoX,
 		boxShadow,
 		capitalize,
@@ -239,9 +240,23 @@ export const RectangularButton = styled.button`
 			cursor: not-allowed;
 		}
 
-		@media screen and (min-width: ${screens.medium}px) {
-			width: ${fullWidth ? '100%' : 'fit-content'};
+		@media screen and (min-width: ${screens.small}px) {
+			width: ${!!width || '100%'};
 		}
+
+		${
+			width
+				? `@media screen and (min-width: ${screens.medium}px) {
+			width: ${width};
+		}`
+				: `@media screen and (min-width: ${screens.medium}px) {
+			width: ${fullWidth ? '100%' : 'fit-content'};
+		}`
+		}
+
+		
+
+		
 
 		color: ${colors[rectangularColorsToTheme[colorVariant]]};
 
@@ -255,8 +270,7 @@ export const RectangularButton = styled.button`
 			box-shadow: 0px 0px 4px 2px ${colors.primary};
 		}
 
-		${!!variant &&
-			rectangularButtonVariants[variant](colors, colorVariant, metrics, backgroundUrl)};
+		${!!variant && rectangularButtonVariants[variant](colors, colorVariant, metrics, backgroundUrl)};
 
 		${!!uppercase &&
 			css`

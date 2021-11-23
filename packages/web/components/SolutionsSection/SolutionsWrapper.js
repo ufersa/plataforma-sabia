@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { ContentContainer, SectionTitle, Title } from '../Common';
-import { CardsWrapper } from './styles';
+import { CardsWrapper, SolutionFooter } from './styles';
+import { internal as internalPages } from '../../utils/enums/pages.enum';
+import { RectangularButton } from '../Button';
 
 const headerComponents = {
 	title: Title,
@@ -13,6 +16,8 @@ const SolutionsWrapper = ({
 	children,
 	containerPadding,
 	header,
+	footer,
+	redirectTo,
 	headerProps,
 	headerComponent,
 	bgColor,
@@ -35,6 +40,19 @@ const SolutionsWrapper = ({
 			>
 				{children}
 			</CardsWrapper>
+			<SolutionFooter>
+				<Link href={internalPages[redirectTo]} passHref>
+					<RectangularButton
+						as="a"
+						variant="outlined"
+						uppercase
+						width="27.8rem"
+						colorVariant="green"
+					>
+						{footer}
+					</RectangularButton>
+				</Link>
+			</SolutionFooter>
 		</ContentContainer>
 	);
 };
@@ -42,7 +60,9 @@ const SolutionsWrapper = ({
 SolutionsWrapper.propTypes = {
 	children: PropTypes.node.isRequired,
 	header: PropTypes.string,
+	footer: PropTypes.string,
 	bgColor: PropTypes.string,
+	redirectTo: PropTypes.string,
 	overwriteAlgoliaStyles: PropTypes.bool,
 	headerProps: PropTypes.shape({}),
 	algoliaCustomCss: PropTypes.arrayOf(PropTypes.func),
@@ -56,6 +76,8 @@ SolutionsWrapper.defaultProps = {
 	overwriteAlgoliaStyles: false,
 	headerProps: {},
 	algoliaCustomCss: [() => {}],
+	footer: null,
+	redirectTo: 'home',
 	headerComponent: 'sectionTitle',
 	containerPadding: '3.2rem 5%',
 };

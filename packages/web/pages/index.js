@@ -81,6 +81,8 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 				<TechnologiesSection>
 					<SolutionsSection
 						header={t('common:featuredTechnologies')}
+						footer={t('common:moreTechnologies')}
+						redirectTo="search"
 						data={technologies}
 						bgColor={colors.lightGray4}
 						type="technology"
@@ -92,6 +94,8 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 			{!!services.length && (
 				<SolutionsSection
 					header={t('common:featuredServices')}
+					footer={t('common:moreServices')}
+					redirectTo="search"
 					data={services}
 					bgColor={colors.lightGray4}
 					type="service"

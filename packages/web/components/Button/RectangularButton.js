@@ -15,6 +15,7 @@ const RectangularButton = forwardRef(
 			name,
 			backgroundUrl,
 			fullWidth,
+			width,
 			autoX,
 			boxShadow,
 			uppercase,
@@ -33,6 +34,7 @@ const RectangularButton = forwardRef(
 				name={name}
 				backgroundUrl={backgroundUrl}
 				fullWidth={fullWidth}
+				width={width}
 				autoX={autoX}
 				boxShadow={boxShadow}
 				ref={ref}
@@ -56,6 +58,7 @@ RectangularButton.propTypes = {
 	name: PropTypes.string,
 	backgroundUrl: PropTypes.string,
 	fullWidth: PropTypes.bool,
+	width: PropTypes.string,
 	autoX: PropTypes.bool,
 	boxShadow: PropTypes.bool,
 	uppercase: PropTypes.bool,
@@ -71,6 +74,7 @@ RectangularButton.defaultProps = {
 	name: '',
 	backgroundUrl: '',
 	fullWidth: false,
+	width: null,
 	autoX: false,
 	boxShadow: false,
 	uppercase: false,

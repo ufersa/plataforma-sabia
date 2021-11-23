@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import CardComponent from './SolutionCard';
 import SolutionsWrapper from './SolutionsWrapper';
 
-const SolutionsSection = ({ header, data, type, bgColor }) => {
+const SolutionsSection = ({ header, footer, redirectTo, data, type, bgColor }) => {
 	return (
-		<SolutionsWrapper header={header} bgColor={bgColor}>
+		<SolutionsWrapper header={header} footer={footer} redirectTo={redirectTo} bgColor={bgColor}>
 			{data.map((solution) => (
 				<CardComponent key={solution.id} type={type} data={solution} />
 			))}
@@ -17,11 +17,15 @@ SolutionsSection.propTypes = {
 	header: PropTypes.string,
 	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	bgColor: PropTypes.string,
+	footer: PropTypes.string,
+	redirectTo: PropTypes.string,
 	type: PropTypes.string.isRequired,
 };
 
 SolutionsSection.defaultProps = {
 	header: null,
+	footer: null,
+	redirectTo: 'home',
 	bgColor: '',
 };
 

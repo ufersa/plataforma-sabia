@@ -28,3 +28,12 @@ export const CardsWrapper = styled.div`
 		${!!algoliaCustomCss && algoliaCustomCss};
 	`}
 `;
+
+// eslint-disable-next-line import/prefer-default-export
+export const SolutionFooter = styled.div`
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: 3rem 0;
+`;
