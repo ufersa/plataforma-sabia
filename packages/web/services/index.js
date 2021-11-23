@@ -13,3 +13,4 @@ export * from './chat';
 export * from './service';
 export * from './messages';
 export * from './locations';
+export * from './blogPosts';

@@ -17,15 +17,15 @@ export const CardContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-	${({ theme: { metrics } }) => css`
+	${({ theme: { metrics }, short }) => css`
 		width: 100%;
-		height: 25.4rem;
+		height: ${short ? '18.5rem' : '25.4rem'};
 
 		position: relative;
 
 		img {
 			width: 100%;
-			height: 100%;
+			height: ${short ? '18.5rem' : '100%'};
 			object-fit: cover;
 			border-radius: ${metrics.baseRadius}rem;
 		}
@@ -74,6 +74,17 @@ export const MainTitle = styled.h3`
 	line-height: 2.4rem;
 `;
 
+export const ShortTitle = styled.h3`
+	font-family: 'Montserrat';
+	font-weight: 500;
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+`;
+
 export const TextContainer = styled.div`
 	display: flex;
 	align-items: center;
@@ -93,6 +104,17 @@ export const InstitutionText = styled.span`
 		text-transform: uppercase;
 		margin-top: 0.4rem;
 		margin-bottom: 1.6rem;
+	`}
+`;
+
+export const PublishedDate = styled.span`
+	${({ theme: { colors } }) => css`
+		display: flex;
+		font-weight: 700;
+		font-size: 1rem;
+		color: ${colors.lightGray2};
+		text-transform: uppercase;
+		margin-top: 1.4rem;
 	`}
 `;
 

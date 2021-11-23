@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { ContentContainer, SectionTitle, Title } from '../Common';
 import { CardsWrapper, SolutionFooter } from './styles';
-import { internal as internalPages } from '../../utils/enums/pages.enum';
+import { internal as internalPages, socialMedia } from '../../utils/enums/pages.enum';
 import { RectangularButton } from '../Button';
 
 const headerComponents = {
@@ -41,7 +41,7 @@ const SolutionsWrapper = ({
 				{children}
 			</CardsWrapper>
 			<SolutionFooter>
-				<Link href={internalPages[redirectTo]} passHref>
+				<Link href={internalPages[redirectTo] || socialMedia[redirectTo]} passHref>
 					<RectangularButton
 						as="a"
 						variant="outlined"
