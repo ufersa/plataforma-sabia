@@ -9,6 +9,7 @@ export const CardContainer = styled.div`
 		background-color: ${colors.white};
 		transition: all 0.3s ease 0s;
 		padding: 0.8rem;
+		height: 100%;
 
 		:hover {
 			transform: translateY(-0.7rem);

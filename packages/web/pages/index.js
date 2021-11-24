@@ -87,6 +87,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, blogPost
 						bgColor={colors.lightGray4}
 						type="technology"
 						padding="0rem 5%"
+						mobileSlider
 					/>
 				</TechnologiesSection>
 			)}
@@ -99,6 +100,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, blogPost
 					data={services}
 					bgColor={colors.lightGray4}
 					type="service"
+					mobileSlider
 				/>
 			)}
 
@@ -110,6 +112,7 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, blogPost
 					data={blogPosts.length > 4 ? blogPosts.slice(0, 4) : blogPosts}
 					bgColor={colors.lightGray4}
 					type="blogPost"
+					mobileSlider
 				/>
 			)}
 		</>

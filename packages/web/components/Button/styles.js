@@ -241,7 +241,7 @@ export const RectangularButton = styled.button`
 		}
 
 		@media screen and (min-width: ${screens.small}px) {
-			width: ${!!width || '100%'};
+			width: ${width || '100%'};
 		}
 
 		${
