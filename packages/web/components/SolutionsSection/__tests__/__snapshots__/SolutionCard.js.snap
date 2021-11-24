@@ -102,6 +102,7 @@ exports[`SolutionCard component it should render a service card 1`] = `
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   padding: 0.8rem;
+  height: 100%;
 }
 
 .c0:hover {
@@ -221,6 +222,12 @@ exports[`SolutionCard component it should render a service card 1`] = `
 
 .c11 svg {
   margin-right: 0.4rem;
+}
+
+@media screen and (min-width:450px) {
+  .c10 {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width:768px) {
@@ -410,6 +417,7 @@ exports[`SolutionCard component it should render a technology card 1`] = `
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   padding: 0.8rem;
+  height: 100%;
 }
 
 .c0:hover {

@@ -803,7 +803,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>
@@ -878,7 +878,7 @@ exports[`it renders Profile page and empty Specialties 1`] = `
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>
@@ -1828,7 +1828,7 @@ exports[`it renders Profile page correctly 1`] = `
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>
@@ -1903,7 +1903,7 @@ exports[`it renders Profile page correctly 1`] = `
                             value=""
                           />
                           <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                           />
                         </div>
                       </div>

@@ -287,24 +287,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   justify-content: center;
 }
 
-.c20 .c48 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
-}
-
-.c20 .c48 svg {
-  margin-right: 0.4rem;
-}
-
 .c11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -431,11 +413,6 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
   border-radius: 0.5rem;
   right: 0;
   left: 0;
-}
-
-.c5 .styles__StyledStats-sc-1ybieaz-2 {
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
 }
 
 .c4 {
@@ -1296,7 +1273,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
       </div>
       <div
         class="c22 c23"
-        data-tabs="true"
+        data-rttabs="true"
       >
         <ul
           class="c24 c25"
@@ -1307,6 +1284,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="about"
             id="react-tabs-0"
             role="tab"
@@ -1318,6 +1296,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="description"
             id="react-tabs-2"
             role="tab"
@@ -1329,6 +1308,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="geolocation"
             id="react-tabs-4"
             role="tab"
@@ -1340,6 +1320,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="costs"
             id="react-tabs-6"
             role="tab"
@@ -1351,6 +1332,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="review"
             id="react-tabs-8"
             role="tab"
@@ -1362,6 +1344,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="true"
             class="c28 c29 react-tabs__tab--selected"
+            data-rttab="true"
             data-testid="attachments"
             id="react-tabs-10"
             role="tab"
@@ -1374,6 +1357,7 @@ exports[`Technology Details Page render correctly when user is logged in 1`] = `
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="faq"
             id="react-tabs-12"
             role="tab"
@@ -1834,24 +1818,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   justify-content: center;
 }
 
-.c20 .styles__StyledButton-sc-9okshb-0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
-}
-
-.c20 .styles__StyledButton-sc-9okshb-0 svg {
-  margin-right: 0.4rem;
-}
-
 .c11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1978,11 +1944,6 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   border-radius: 0.5rem;
   right: 0;
   left: 0;
-}
-
-.c5 .styles__StyledStats-sc-1ybieaz-2 {
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
 }
 
 .c4 {
@@ -2459,6 +2420,10 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
   margin: 0 auto;
 }
 
+@media screen and (min-width:450px) {
+
+}
+
 @media screen and (min-width:768px) {
 
 }
@@ -2823,7 +2788,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
       </div>
       <div
         class="c22 c23"
-        data-tabs="true"
+        data-rttabs="true"
       >
         <ul
           class="c24 c25"
@@ -2834,6 +2799,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="about"
             id="react-tabs-14"
             role="tab"
@@ -2845,6 +2811,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="description"
             id="react-tabs-16"
             role="tab"
@@ -2856,6 +2823,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="geolocation"
             id="react-tabs-18"
             role="tab"
@@ -2867,6 +2835,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="costs"
             id="react-tabs-20"
             role="tab"
@@ -2878,6 +2847,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="review"
             id="react-tabs-22"
             role="tab"
@@ -2889,6 +2859,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="true"
             class="c28 c29 react-tabs__tab--selected"
+            data-rttab="true"
             data-testid="attachments"
             id="react-tabs-24"
             role="tab"
@@ -2901,6 +2872,7 @@ exports[`Technology Details Page render correctly when user is not logged in 1`]
             aria-disabled="false"
             aria-selected="false"
             class="c26 c27"
+            data-rttab="true"
             data-testid="faq"
             id="react-tabs-26"
             role="tab"

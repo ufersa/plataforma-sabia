@@ -107,7 +107,7 @@ exports[`CheckBoxField works as expected 1`] = `
     class="c0"
   >
     <div
-      class="CheckBoxField__CheckboxWrapper-vw1j4b-3"
+      class="CheckBoxField__CheckboxWrapper-sc-vw1j4b-3"
     >
       <label
         class="c1"
@@ -565,7 +565,7 @@ exports[`SelectField does not trigger validation if not required 1`] = `
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
@@ -777,7 +777,7 @@ exports[`SelectField renders properly and on submit shows validation errors 1`] 
                     value=""
                   />
                   <div
-                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: 1.4rem; font-family: 'Montserrat'; font-weight: 400; letter-spacing: normal; text-transform: none;"
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                   />
                 </div>
               </div>
