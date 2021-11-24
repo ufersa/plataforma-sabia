@@ -37,7 +37,7 @@ export const SolutionFooter = styled.div`
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-	padding: 3rem 0;
+	padding: 3rem 0 1rem 0;
 `;
 
 export const CarouselContainer = styled.div`
@@ -45,7 +45,6 @@ export const CarouselContainer = styled.div`
 	width: 100%;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 3rem 0;
 `;
 
 export const Carousel = styled(Slider)`
@@ -67,7 +66,7 @@ export const Carousel = styled(Slider)`
     }
     .slick-track {
         display: flex;
-		padding: 2rem 0;
+		padding: 1rem 0;
         align-itens: stretch;
     }
 
