@@ -10,10 +10,10 @@ import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
 import { useTheme } from '../hooks';
 import { internal as internalPages } from '../utils/enums/pages.enum';
-import { getServices, apiPost, apiPut, getTechnologies } from '../services';
+import { getServices, apiPost, apiPut, getTechnologies, getBlogPosts } from '../services';
 import { toast } from '../components/Toast';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
+const Home = ({ emailConfirmation, changeEmail, technologies, services, blogPosts, heroImage }) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common', 'pages']);
 	const router = useRouter();
@@ -81,10 +81,13 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 				<TechnologiesSection>
 					<SolutionsSection
 						header={t('common:featuredTechnologies')}
+						footer={t('common:moreTechnologies')}
+						redirectTo="search"
 						data={technologies}
 						bgColor={colors.lightGray4}
 						type="technology"
 						padding="0rem 5%"
+						mobileSlider
 					/>
 				</TechnologiesSection>
 			)}
@@ -92,9 +95,24 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 			{!!services.length && (
 				<SolutionsSection
 					header={t('common:featuredServices')}
+					footer={t('common:moreServices')}
+					redirectTo="search"
 					data={services}
 					bgColor={colors.lightGray4}
 					type="service"
+					mobileSlider
+				/>
+			)}
+
+			{!!blogPosts.length && (
+				<SolutionsSection
+					header={t('common:blogPosts')}
+					footer={t('common:goToBlog')}
+					redirectTo="blog"
+					data={blogPosts.length > 4 ? blogPosts.slice(0, 4) : blogPosts}
+					bgColor={colors.lightGray4}
+					type="blogPost"
+					mobileSlider
 				/>
 			)}
 		</>
@@ -143,6 +161,11 @@ Home.getInitialProps = async ({ req }) => {
 		order: 'DESC',
 	});
 
+	const blogPosts = await getBlogPosts({
+		perPage: 4,
+		order: 'DESC',
+	});
+
 	const heroImgs = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
 	const heroIndexImg = Math.floor(Math.random() * heroImgs.length);
 
@@ -151,6 +174,7 @@ Home.getInitialProps = async ({ req }) => {
 		changeEmail,
 		technologies,
 		services,
+		blogPosts,
 		heroImage: `/hero/${heroImgs[heroIndexImg]}`,
 	};
 };
@@ -159,6 +183,7 @@ Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
 	technologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
+	blogPosts: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
 	heroImage: PropTypes.string.isRequired,
 };
@@ -167,6 +192,7 @@ Home.defaultProps = {
 	emailConfirmation: false,
 	technologies: [],
 	services: [],
+	blogPosts: [],
 	changeEmail: false,
 };
 

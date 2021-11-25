@@ -317,11 +317,23 @@ exports[`<BuyTechnologyModal /> should render correctly 1`] = `
   box-shadow: 0 0 0 1.5pt hsl(166,100%,34%);
 }
 
+@media screen and (min-width:450px) {
+  .c7 {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width:768px) {
   .c7 {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+  }
+}
+
+@media screen and (min-width:450px) {
+  .c8 {
+    width: 100%;
   }
 }
 

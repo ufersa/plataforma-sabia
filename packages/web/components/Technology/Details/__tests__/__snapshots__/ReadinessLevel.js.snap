@@ -10,14 +10,6 @@ exports[`<ReadinessLevel /> should render without crashing 1`] = `
   padding-left: 2rem;
 }
 
-.c0 .styles__Marker-vc3k4-0 {
-  border-top: 0px solid transparent;
-  border-bottom: 0px solid transparent;
-  border-left: 0px solid hsla(29,94%,62%);
-  bottom: 0px;
-  margin-right: calc(100% - 0px);
-}
-
 .c0 > img {
   border-radius: 0.5rem;
 }

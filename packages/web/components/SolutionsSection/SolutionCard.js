@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ServiceCard, TechnologyCard } from '../Card';
+import { ServiceCard, TechnologyCard, BlogPostCard } from '../Card';
 
 const cardsMap = {
 	technology: TechnologyCard,
 	service: ServiceCard,
+	blogPost: BlogPostCard,
 };
 
 const SolutionCard = ({ data, type }) => {
