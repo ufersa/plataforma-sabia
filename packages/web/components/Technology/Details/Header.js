@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FiShoppingBag } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Button } from '../../Button';
 import ButtonStyles from '../../Button/styles';
 import { useTechnology, useAuth, useModal } from '../../../hooks';
@@ -50,9 +51,11 @@ const Header = () => {
 						<p>Descrição</p>
 						{technology.description}
 						{!!ownerUser?.institution && (
-							<p>
-								{ownerUser.institution.initials} - {ownerUser.institution.name}
-							</p>
+							<Link href={`/vitrine/${ownerUser.institution.slug}`}>
+								<Institution>
+									{ownerUser.institution.initials} - {ownerUser.institution.name}
+								</Institution>
+							</Link>
 						)}
 					</DescriptionText>
 					<ActionsContainer>
@@ -129,6 +132,14 @@ const DescriptionContentWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+`;
+
+const Institution = styled.p`
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 export const DescriptionTitle = styled.h2`
