@@ -24,7 +24,6 @@ export const Container = styled.div`
 			top: 5rem;
 			right: ${reversed ? 'auto' : 'calc(-100% - 3rem)'};
 			left: ${reversed ? '-100%' : 'auto'};
-			position: absolute;
 
 			@media (max-width: ${screens.large}px) {
 				position: static;
