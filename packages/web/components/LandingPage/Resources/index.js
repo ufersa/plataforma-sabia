@@ -27,7 +27,7 @@ const items = [
 			href: '/editais',
 			label: 'Ver  editais',
 		},
-		buttonDisabled: true,
+		buttonDisabled: false,
 	},
 	{
 		title: (

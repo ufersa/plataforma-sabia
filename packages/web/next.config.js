@@ -31,11 +31,6 @@ module.exports = nextTranslate({
 				destination: '/',
 				permanent: false,
 			},
-			{
-				source: '/editais',
-				destination: '/',
-				permanent: false,
-			},
 		];
 	},
 });
