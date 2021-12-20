@@ -164,7 +164,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [11.x]
         os: ["ubuntu-latest"]
     services:
       plataforma-sabia-redis:
