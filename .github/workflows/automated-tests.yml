@@ -164,7 +164,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [11.x]
+        node-version: [14.x]
         os: ["ubuntu-latest"]
     services:
       plataforma-sabia-redis:
@@ -199,9 +199,9 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install project dependencies
-        if: steps.project_dependencies.outputs.cache-hit != 'true'
-        run: npm ci
+      # - name: Install project dependencies
+      #   if: steps.project_dependencies.outputs.cache-hit != 'true'
+      #   run: npm ci
 
       - name: Prepare API for e2e tests
         working-directory: packages/api
