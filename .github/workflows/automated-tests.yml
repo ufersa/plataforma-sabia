@@ -200,7 +200,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install project dependencies
-        if: steps.project_dependencies.outputs.cache-hit != 'false'
+        if: steps.project_dependencies.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Prepare API for e2e tests
