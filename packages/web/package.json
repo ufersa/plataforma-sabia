@@ -18,7 +18,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.1.0",
     "@ckeditor/ckeditor5-react": "^3.0.0",
-    "@storybook/addon-storyshots-puppeteer": "5.3.21",
+    "@storybook/addon-storyshots-puppeteer": "6.4.9",
     "@svgr/webpack": "^6.1.2",
     "algoliasearch": "^4.1.0",
     "dotenv": "^8.2.0",
