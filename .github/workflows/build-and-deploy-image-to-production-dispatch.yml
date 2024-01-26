@@ -52,7 +52,7 @@ jobs:
           npm run jest:ci
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

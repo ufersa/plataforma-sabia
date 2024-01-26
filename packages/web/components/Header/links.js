@@ -91,6 +91,13 @@ export const defaultLinks = [
 		dropdown: false,
 		showOnlyInHamburguer: true,
 	},
+	{
+		id: 8,  
+		label: 'SICAP',
+		href: '/sicap',
+		dropdown: false,
+		scrollLink: false,
+	  },
 ];
 
 export const aboutLinks = [
@@ -185,4 +192,11 @@ export const aboutLinks = [
 		dropdown: false,
 		showOnlyInHamburguer: true,
 	},
+	{
+		id: 8,  
+		label: 'SICAP',
+		href: '/sicap',
+		dropdown: false,
+		scrollLink: false,
+	  },
 ];
