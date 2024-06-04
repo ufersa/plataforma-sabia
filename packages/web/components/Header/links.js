@@ -57,11 +57,11 @@ export const defaultLinks = [
 			// 	label: 'Banco de Ideias',
 			// 	href: internalPages.ideas,
 			// },
-			// {
-			// 	id: 5,
-			// 	label: 'Banco de Editais',
-			// 	href: internalPages.announcements,
-			// },
+			{
+			 	id: 5,
+			 	label: 'Banco de Editais',
+			 	href: internalPages.announcements,
+			},
 			{
 				id: 6,
 				label: 'Vitrines tecnológicas',
@@ -158,11 +158,11 @@ export const aboutLinks = [
 			// 	label: 'Banco de Ideias',
 			// 	href: internalPages.ideas,
 			// },
-			// {
-			// 	id: 5,
-			// 	label: 'Banco de Editais',
-			// 	href: internalPages.announcements,
-			// },
+			{
+			 	id: 5,
+			 	label: 'Banco de Editais',
+			 	href: internalPages.announcements,
+			},
 			{
 				id: 6,
 				label: 'Vitrines tecnológicas',
