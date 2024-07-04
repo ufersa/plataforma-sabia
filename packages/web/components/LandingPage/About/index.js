@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as S from './styles';
 
 const About = () => {
@@ -32,11 +30,11 @@ const About = () => {
 					</S.TextContent>
 					<S.TextContent>
 						Além da Ufersa, a Plataforma Sabiá recebe a assinatura e a credibilidade do
-						Ministério do Desenvolvimento Regional (MDR), por meio do projeto Rotas da
-						Integração Nacional. Nessa iniciativa, as Rotas se transformam em redes de
-						Arranjos Produtivos Locais (APLs) voltadas para a promoção da inovação,
-						diferenciação, competitividade e lucratividade dos empreendimentos
-						associados, com foco no desenvolvimento regional.
+						Ministério da Integração e do Desenvolvimento Regional (MIDR), por meio do
+						projeto Rotas da Integração Nacional. Nessa iniciativa, as Rotas se
+						transformam em redes de Arranjos Produtivos Locais (APLs) voltadas para a
+						promoção da inovação, diferenciação, competitividade e lucratividade dos
+						empreendimentos associados, com foco no desenvolvimento regional.
 					</S.TextContent>
 					<S.TextContent>
 						Atualmente, o MDR conta com as rotas do Cordeiro, do Mel, do Peixe, das
@@ -47,6 +45,10 @@ const About = () => {
 				</S.TextContainer>
 				<S.LogosContainer>
 					<img
+						src="/logo-mdir.svg"
+						alt="Logo do Ministério do Desenvolvimento Regional"
+					/>
+					<img
 						src="/logo-ufersa.png"
 						alt="Logo da Universidade Federal Rural do Semi-Árido"
 					/>
@@ -54,7 +56,6 @@ const About = () => {
 						src="/logo-rotas-integracao-nacional.png"
 						alt="Logo das Rotas de Integração Nacional"
 					/>
-					<img src="/logo-gov.svg" alt="Logo do Ministério do Desenvolvimento Regional" />
 				</S.LogosContainer>
 			</S.Container>
 			<S.TopImage src="/lp-top-about.svg" alt="Forma laranjada" />
