@@ -176,10 +176,10 @@ const Footer = ({ isAbout }) => (
 						</SiteInfoListItem>
 						{/* <SiteInfoListItem>
 							<Link href={internalPages.ideas}>Banco de Ideias</Link>
-						</SiteInfoListItem>
+						</SiteInfoListItem>*/}
 						<SiteInfoListItem>
 							<Link href={internalPages.announcements}>Banco de Editais</Link>
-						</SiteInfoListItem> */}
+						</SiteInfoListItem> 
 						<SiteInfoListItem>
 							<Link href={internalPages.showcase}>Vitrines tecnológicas</Link>
 						</SiteInfoListItem>

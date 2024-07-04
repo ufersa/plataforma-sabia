@@ -57,11 +57,11 @@ export const defaultLinks = [
 			// 	label: 'Banco de Ideias',
 			// 	href: internalPages.ideas,
 			// },
-			// {
-			// 	id: 5,
-			// 	label: 'Banco de Editais',
-			// 	href: internalPages.announcements,
-			// },
+			{
+			 	id: 5,
+			 	label: 'Banco de Editais',
+			 	href: internalPages.announcements,
+			},
 			{
 				id: 6,
 				label: 'Vitrines tecnológicas',
@@ -91,6 +91,13 @@ export const defaultLinks = [
 		dropdown: false,
 		showOnlyInHamburguer: true,
 	},
+	{
+		id: 8,  
+		label: 'SICAP',
+		href: '/sicap',
+		dropdown: false,
+		scrollLink: false,
+	  },
 ];
 
 export const aboutLinks = [
@@ -151,11 +158,11 @@ export const aboutLinks = [
 			// 	label: 'Banco de Ideias',
 			// 	href: internalPages.ideas,
 			// },
-			// {
-			// 	id: 5,
-			// 	label: 'Banco de Editais',
-			// 	href: internalPages.announcements,
-			// },
+			{
+			 	id: 5,
+			 	label: 'Banco de Editais',
+			 	href: internalPages.announcements,
+			},
 			{
 				id: 6,
 				label: 'Vitrines tecnológicas',
@@ -185,4 +192,11 @@ export const aboutLinks = [
 		dropdown: false,
 		showOnlyInHamburguer: true,
 	},
+	{
+		id: 8,  
+		label: 'SICAP',
+		href: '/sicap',
+		dropdown: false,
+		scrollLink: false,
+	  },
 ];
