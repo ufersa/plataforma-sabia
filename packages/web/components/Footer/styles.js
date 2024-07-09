@@ -181,7 +181,7 @@ export const SiteInfoListItem = styled.li`
 
 export const SiteSocket = styled.div`
 	color: ${({ theme }) => theme.colors.secondary};
-	background-color: ${({ theme }) => theme.colors.border};
+	background-color: ${({ theme }) => theme.colors.white};
 	width: 100%;
 	padding: 6rem 3rem;
 	font-size: 1.4rem;
@@ -193,31 +193,32 @@ export const SiteSocket = styled.div`
 `;
 
 export const SiteSocketContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	${({ theme: { screens } }) => css`
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
-	max-width: ${({ theme }) => theme.metrics.containerWidth}rem;
-	width: 100%;
-	margin: 0 auto;
+		max-width: ${`${screens.large}px`};
+		margin: 0 auto;
 
-	> div {
-		width: 50%;
-	}
-
-	span {
-		font-weight: bold;
-	}
-
-	@media (max-width: ${({ theme }) => theme.screens.large}px) {
-		flex-direction: column;
-
-		div {
-			text-align: center;
-			margin-bottom: 3rem;
-			width: 100%;
+		> div {
+			width: 50%;
 		}
-	}
+
+		span {
+			font-weight: bold;
+		}
+
+		@media (max-width: ${({ theme }) => theme.screens.large}px) {
+			flex-direction: column;
+
+			div {
+				text-align: center;
+				margin-bottom: 3rem;
+				width: 100%;
+			}
+		}
+	`}
 `;
 
 export const SiteSocketList = styled.ul`
@@ -247,5 +248,19 @@ export const SiteSocketListItem = styled.li`
 
 	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
 		margin: 2rem 0;
+	}
+`;
+
+export const LogosContainer = styled.div`
+	img {
+		display: block;
+	}
+
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+
+	@media (max-width: ${({ theme }) => theme.screens.medium}px) {
+		flex-direction: column;
 	}
 `;

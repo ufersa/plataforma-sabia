@@ -1,4 +1,3 @@
-import React from 'react';
 import Proptypes from 'prop-types';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Link } from '../Link';
@@ -22,6 +21,7 @@ import {
 	SiteSocketContainer,
 	SiteSocketList,
 	SiteSocketListItem,
+	LogosContainer,
 } from './styles';
 
 const Footer = ({ isAbout }) => (
@@ -176,10 +176,10 @@ const Footer = ({ isAbout }) => (
 						</SiteInfoListItem>
 						{/* <SiteInfoListItem>
 							<Link href={internalPages.ideas}>Banco de Ideias</Link>
-						</SiteInfoListItem>*/}
+						</SiteInfoListItem> */}
 						<SiteInfoListItem>
 							<Link href={internalPages.announcements}>Banco de Editais</Link>
-						</SiteInfoListItem> 
+						</SiteInfoListItem>
 						<SiteInfoListItem>
 							<Link href={internalPages.showcase}>Vitrines tecnológicas</Link>
 						</SiteInfoListItem>
@@ -205,11 +205,17 @@ const Footer = ({ isAbout }) => (
 		</SiteInfo>
 		<SiteSocket>
 			<SiteSocketContainer>
-				<div>
-					<span>Orgulhosamente</span> desenvolvido pela equipe da
-					<span> Plataforma Sabiá</span> na{' '}
-					<span>UNIVERSIDADE FEDERAL RURAL DO SEMI-ÁRIDO - UFERSA</span>.
-				</div>
+				<LogosContainer>
+					<img
+						src="/logo-ufersa-color.png"
+						alt="Logo da Universidade Federal Rural do Semi-Árido"
+					/>
+					<img
+						src="/logo-mdir-color.jpg"
+						alt="Logo do Ministério do Desenvolvimento Regional"
+					/>
+				</LogosContainer>
+
 				<SiteSocketList>
 					<SiteSocketListItem>
 						<Link href={internalPages.privacyPolicy}>Política de Privacidade</Link>
