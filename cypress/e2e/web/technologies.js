@@ -11,7 +11,7 @@ describe('technologies', () => {
 		const technologiesFromDom = [];
 
 		cy.findAllByTestId('cards-wrapper')
-			.first()
+			.eq(1)
 			.within(() => {
 				cy.get('[data-testid="card-title"]')
 					.parent()

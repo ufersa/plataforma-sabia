@@ -24,7 +24,7 @@ describe('services', () => {
 		const servicesFromDom = [];
 
 		cy.findAllByTestId('cards-wrapper')
-			.eq(1)
+			.eq(2)
 			.within(() => {
 				cy.get('[data-testid="card-title"]').then((servicesTitle) =>
 					servicesTitle.map((index, serviceTitle) => {
