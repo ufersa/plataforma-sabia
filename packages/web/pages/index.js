@@ -230,10 +230,6 @@ const ButtonsContainer = styled.div`
 	`}
 `;
 
-const TechnologiesSection = styled.div`
-	> div {
-		margin-top: -48px;
-	}
-`;
+const TechnologiesSection = styled.div``;
 
 export default Home;
