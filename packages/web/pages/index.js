@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import useTranslation from 'next-translate/useTranslation';
-import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Head from '../components/head';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import { RectangularButton } from '../components/Button';
+import Head from '../components/head';
 import { Hero } from '../components/Hero';
 import { SolutionsSection } from '../components/SolutionsSection';
-import { useTheme } from '../hooks';
-import { internal as internalPages } from '../utils/enums/pages.enum';
-import { getServices, apiPost, apiPut, getTechnologies } from '../services';
 import { toast } from '../components/Toast';
+import { useTheme } from '../hooks';
+import { apiPost, apiPut, getServices, getTechnologies } from '../services';
+import { internal as internalPages } from '../utils/enums/pages.enum';
 
-const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImage }) => {
+const Home = ({
+	emailConfirmation,
+	changeEmail,
+	technologies,
+	lastTechnologies,
+	services,
+	heroImage,
+}) => {
 	const { colors } = useTheme();
 	const { t } = useTranslation(['common', 'pages']);
 	const router = useRouter();
@@ -77,6 +84,18 @@ const Home = ({ emailConfirmation, changeEmail, technologies, services, heroImag
 				</ButtonsWrapper>
 			)}
 
+			{!!lastTechnologies?.length && (
+				<TechnologiesSection>
+					<SolutionsSection
+						header={t('common:lastTechnologies')}
+						data={lastTechnologies}
+						bgColor={colors.lightGray4}
+						type="technology"
+						padding="0rem 5%"
+					/>
+				</TechnologiesSection>
+			)}
+
 			{!!technologies?.length && (
 				<TechnologiesSection>
 					<SolutionsSection
@@ -130,8 +149,17 @@ Home.getInitialProps = async ({ req }) => {
 
 	const technologies = await getTechnologies({
 		embed: true,
-		perPage: 4,
+		perPage: 8,
 		orderBy: 'likes',
+		order: 'DESC',
+		status: 'published',
+		taxonomy: 'category',
+	});
+
+	const lastTechnologies = await getTechnologies({
+		embed: true,
+		perPage: 4,
+		orderBy: 'created_at',
 		order: 'DESC',
 		status: 'published',
 		taxonomy: 'category',
@@ -150,6 +178,7 @@ Home.getInitialProps = async ({ req }) => {
 		emailConfirmation,
 		changeEmail,
 		technologies,
+		lastTechnologies,
 		services,
 		heroImage: `/hero/${heroImgs[heroIndexImg]}`,
 	};
@@ -158,6 +187,7 @@ Home.getInitialProps = async ({ req }) => {
 Home.propTypes = {
 	emailConfirmation: PropTypes.bool,
 	technologies: PropTypes.arrayOf(PropTypes.object),
+	lastTechnologies: PropTypes.arrayOf(PropTypes.object),
 	services: PropTypes.arrayOf(PropTypes.object),
 	changeEmail: PropTypes.bool,
 	heroImage: PropTypes.string.isRequired,
@@ -166,6 +196,7 @@ Home.propTypes = {
 Home.defaultProps = {
 	emailConfirmation: false,
 	technologies: [],
+	lastTechnologies: [],
 	services: [],
 	changeEmail: false,
 };
