@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-	AutocompleteInput,
 	AutocompleteArrayInput,
-	CheckboxGroupInput,
+	AutocompleteInput,
+	BooleanInput,
 	DateTimeInput,
+	FormDataConsumer,
 	ReferenceInput,
 	required,
 	SelectInput,
@@ -12,9 +13,8 @@ import {
 	TextField,
 	TextInput,
 	useQuery,
-	FormDataConsumer,
 } from 'react-admin';
-import { ReferenceArrayInput, statuses, CityInput } from '../../../components';
+import { CityInput, statuses } from '../../../components';
 
 const AboutForm = ({ record, save, resource }) => {
 	record.role = record?.role_id;
@@ -119,10 +119,7 @@ const AboutForm = ({ record, save, resource }) => {
 			<ReferenceInput source="role" reference="roles" validate={[required()]} fullWidth>
 				<SelectInput optionText="role" />
 			</ReferenceInput>
-
-			<ReferenceArrayInput source="permissions" reference="permissions">
-				<CheckboxGroupInput optionText="description" />
-			</ReferenceArrayInput>
+			<BooleanInput label="Incluir no banco de pesquisadores" source="researcher" />
 		</SimpleForm>
 	);
 };
